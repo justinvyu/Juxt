@@ -1,0 +1,6 @@
+framework module FlatUIKit {
+  umbrella header "Pods-Juxt-FlatUIKit-umbrella.h"
+
+  export *
+  module * { export * }
+}
