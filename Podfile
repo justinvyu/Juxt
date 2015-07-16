@@ -12,6 +12,7 @@ target 'Juxt' do
 	pod 'FBSDKCoreKit'
 	pod 'FBSDKLoginKit'
 	pod 'FBSDKShareKit'
+	pod 'Fabric'
 
 end
 

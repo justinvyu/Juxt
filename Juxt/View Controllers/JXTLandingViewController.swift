@@ -9,6 +9,9 @@
 import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
+import TwitterKit
+import FlatUIKit
+import Parse
 
 class JXTLandingViewController: UIViewController {
 
@@ -17,10 +20,25 @@ class JXTLandingViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        let loginButton = FBSDKLoginButton()
-        loginButton.frame = CGRectMake(0, 0, self.view.frame.size.width - 100, 40)
-        loginButton.center = self.view.center
-        self.view.addSubview(loginButton)
+        self.view.backgroundColor = UIColor.wetAsphaltColor()
+        
+        let fbLogin = FBSDKLoginButton()
+        fbLogin.frame = CGRectMake(0, 0, self.view.frame.width - 100, 40)
+        fbLogin.center = self.view.center
+        
+        fbLogin.frame.origin.y += 50
+        
+        self.view.addSubview(fbLogin)
+        
+        let twitterLogin = TWTRLogInButton(logInCompletion: {
+            (session: TWTRSession!, error: NSError!) in
+            // play with Twitter session
+        })
+        twitterLogin.frame = CGRectMake(0, 0, self.view.frame.width - 100, 40)
+        twitterLogin.center = self.view.center
+        
+        twitterLogin.frame.origin.y += 100
+        self.view.addSubview(twitterLogin)
         
     }
 

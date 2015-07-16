@@ -5,6 +5,9 @@ PODS:
   - Bolts/AppLinks (1.2.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.2.0)
+  - Fabric (1.3.2):
+    - Fabric/Core (= 1.3.2)
+  - Fabric/Core (1.3.2)
   - FBSDKCoreKit (4.4.0):
     - Bolts (~> 1.1)
     - FBSDKCoreKit/arc (= 4.4.0)
@@ -16,6 +19,8 @@ PODS:
     - FBSDKCoreKit/arc
   - FBSDKLoginKit (4.4.0):
     - FBSDKCoreKit
+  - FBSDKShareKit (4.4.0):
+    - FBSDKCoreKit
   - FlatUIKit (1.6.2)
   - Parse (1.7.5):
     - Bolts/Tasks (>= 1.2.0)
@@ -24,8 +29,10 @@ PODS:
   - TPKeyboardAvoiding (1.2.8)
 
 DEPENDENCIES:
+  - Fabric
   - FBSDKCoreKit
   - FBSDKLoginKit
+  - FBSDKShareKit
   - FlatUIKit
   - Parse
   - ParseUI
@@ -33,8 +40,10 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Bolts: d176cb1e0012175589e389a9db49b85e27787576
+  Fabric: e5260ce9f0635f49d41b8d21ec7cde2f4b0f7e92
   FBSDKCoreKit: 75bdd75c980e811db218488d99dd93b7740f4474
   FBSDKLoginKit: 02a9254a4c132412fa03577b0d53e936d068a7fb
+  FBSDKShareKit: a42865f20ba2d1cc548c4d0f73ad22cff6377ddb
   FlatUIKit: 1b41f0d4952ce8d970d8479ce79df54a960242c4
   Parse: 7c0f115eff3e0cea3fac08d50bda47154edb8832
   ParseUI: d1228541b02a36a7354c8f47747f5f7a89cf1ff0

@@ -7,7 +7,11 @@
 //
 
 import UIKit
+import Fabric
+import TwitterKit
 import FBSDKCoreKit
+import Parse
+import Bolts
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,9 +20,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+
+        UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: false)
+        UITabBar.appearance().tintColor = UIColor.whiteColor()
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.whiteColor()], forState: .Normal)
         
+        // Initialize Parse.
+        Parse.setApplicationId("HIXqAn876G6WymYy8YQvMtu1uBxGC6zhgMc2EmYn",
+            clientKey: "s1k0Zvy6lpiwCAexjHwd3JeZxEh0U3ApTguMFVXF")
         
+        // [Optional] Track statistics around application opens.
+        PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+        
+        Fabric.with([Twitter()])
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     

@@ -7,13 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A9258765FAB9C7A0B428C5FD /* Pods_Juxt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACEAF34CB09005E79E5771EE /* Pods_Juxt.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		D0092D371B581FFD00769490 /* JXTJuxtTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0092D361B581FFD00769490 /* JXTJuxtTableViewCell.swift */; };
+		D0092D391B582DAA00769490 /* JXTAddJuxtViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0092D381B582DAA00769490 /* JXTAddJuxtViewController.swift */; };
+		D00B09391B56ED9900870D4D /* JXTHomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00B09381B56ED9900870D4D /* JXTHomeTableViewController.swift */; };
 		D0AFDC821B556E630097228E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AFDC811B556E630097228E /* AppDelegate.swift */; };
 		D0AFDC871B556E630097228E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0AFDC851B556E630097228E /* Main.storyboard */; };
 		D0AFDC891B556E630097228E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0AFDC881B556E630097228E /* Images.xcassets */; };
 		D0AFDC8C1B556E630097228E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0AFDC8A1B556E630097228E /* LaunchScreen.xib */; };
 		D0AFDC981B556E630097228E /* JuxtTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AFDC971B556E630097228E /* JuxtTests.swift */; };
 		D0AFDCA61B556F7E0097228E /* JXTLandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AFDCA51B556F7E0097228E /* JXTLandingViewController.swift */; };
+		D0AFDCAC1B55769A0097228E /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0AFDCA81B55769A0097228E /* Fabric.framework */; };
+		D0AFDCAD1B55769A0097228E /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0AFDCA91B55769A0097228E /* TwitterKit.framework */; };
+		D0AFDCAE1B55769A0097228E /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D0AFDCAA1B55769A0097228E /* TwitterKitResources.bundle */; };
+		D0AFDCAF1B55769A0097228E /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0AFDCAB1B55769A0097228E /* TwitterCore.framework */; };
+		D0AFDCB11B56D3960097228E /* JXTConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AFDCB01B56D3960097228E /* JXTConstants.swift */; };
+		FECBDD0038D362C2E55CAE0F /* Pods_Juxt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7219618C4A5AA4482001067C /* Pods_Juxt.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,8 +36,11 @@
 
 /* Begin PBXFileReference section */
 		499E54B84FAF82B3EFF8429C /* Pods-Juxt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Juxt.release.xcconfig"; path = "Pods/Target Support Files/Pods-Juxt/Pods-Juxt.release.xcconfig"; sourceTree = "<group>"; };
+		7219618C4A5AA4482001067C /* Pods_Juxt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Juxt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7931DB76583F9A98551C49FA /* Pods-Juxt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Juxt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Juxt/Pods-Juxt.debug.xcconfig"; sourceTree = "<group>"; };
-		ACEAF34CB09005E79E5771EE /* Pods_Juxt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Juxt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0092D361B581FFD00769490 /* JXTJuxtTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JXTJuxtTableViewCell.swift; path = Views/JXTJuxtTableViewCell.swift; sourceTree = "<group>"; };
+		D0092D381B582DAA00769490 /* JXTAddJuxtViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTAddJuxtViewController.swift; sourceTree = "<group>"; };
+		D00B09381B56ED9900870D4D /* JXTHomeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTHomeTableViewController.swift; sourceTree = "<group>"; };
 		D0AFDC7C1B556E630097228E /* Juxt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Juxt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0AFDC801B556E630097228E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0AFDC811B556E630097228E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -40,6 +51,11 @@
 		D0AFDC961B556E630097228E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0AFDC971B556E630097228E /* JuxtTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JuxtTests.swift; sourceTree = "<group>"; };
 		D0AFDCA51B556F7E0097228E /* JXTLandingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTLandingViewController.swift; sourceTree = "<group>"; };
+		D0AFDCA81B55769A0097228E /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		D0AFDCA91B55769A0097228E /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
+		D0AFDCAA1B55769A0097228E /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = "<group>"; };
+		D0AFDCAB1B55769A0097228E /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterCore.framework; sourceTree = "<group>"; };
+		D0AFDCB01B56D3960097228E /* JXTConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,7 +63,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9258765FAB9C7A0B428C5FD /* Pods_Juxt.framework in Frameworks */,
+				D0AFDCAC1B55769A0097228E /* Fabric.framework in Frameworks */,
+				D0AFDCAF1B55769A0097228E /* TwitterCore.framework in Frameworks */,
+				D0AFDCAD1B55769A0097228E /* TwitterKit.framework in Frameworks */,
+				FECBDD0038D362C2E55CAE0F /* Pods_Juxt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +107,8 @@
 				D0AFDCA31B556F520097228E /* Views */,
 				D0AFDC811B556E630097228E /* AppDelegate.swift */,
 				D0AFDC851B556E630097228E /* Main.storyboard */,
+				D0092D361B581FFD00769490 /* JXTJuxtTableViewCell.swift */,
+				D0AFDCB01B56D3960097228E /* JXTConstants.swift */,
 				D0AFDC881B556E630097228E /* Images.xcassets */,
 				D0AFDC8A1B556E630097228E /* LaunchScreen.xib */,
 				D0AFDC7F1B556E630097228E /* Supporting Files */,
@@ -124,6 +145,8 @@
 			isa = PBXGroup;
 			children = (
 				D0AFDCA51B556F7E0097228E /* JXTLandingViewController.swift */,
+				D00B09381B56ED9900870D4D /* JXTHomeTableViewController.swift */,
+				D0092D381B582DAA00769490 /* JXTAddJuxtViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -138,7 +161,11 @@
 		DA7A36412FF8B21CCDC73CFE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				ACEAF34CB09005E79E5771EE /* Pods_Juxt.framework */,
+				D0AFDCA81B55769A0097228E /* Fabric.framework */,
+				D0AFDCA91B55769A0097228E /* TwitterKit.framework */,
+				D0AFDCAA1B55769A0097228E /* TwitterKitResources.bundle */,
+				D0AFDCAB1B55769A0097228E /* TwitterCore.framework */,
+				7219618C4A5AA4482001067C /* Pods_Juxt.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -165,6 +192,7 @@
 				D0AFDC7A1B556E630097228E /* Resources */,
 				6850756DBEB048C41E2990DF /* Embed Pods Frameworks */,
 				B18105D8762C711D23496DE0 /* Copy Pods Resources */,
+				D0AFDCA71B55763C0097228E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -204,6 +232,7 @@
 				TargetAttributes = {
 					D0AFDC7B1B556E630097228E = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = UWSMUE6KT8;
 					};
 					D0AFDC901B556E630097228E = {
 						CreatedOnToolsVersion = 6.4;
@@ -235,6 +264,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0AFDCAE1B55769A0097228E /* TwitterKitResources.bundle in Resources */,
 				D0AFDC871B556E630097228E /* Main.storyboard in Resources */,
 				D0AFDC8C1B556E630097228E /* LaunchScreen.xib in Resources */,
 				D0AFDC891B556E630097228E /* Images.xcassets in Resources */,
@@ -296,6 +326,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Juxt/Pods-Juxt-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		D0AFDCA71B55763C0097228E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run fdc171f023f673b190f8afa8a10bf47cb0e6ff5d 40c6b73e8499b6af81eb393684ca821f6cf586b6fbe65d0505caba06c9147047";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -304,6 +347,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0AFDCA61B556F7E0097228E /* JXTLandingViewController.swift in Sources */,
+				D0092D371B581FFD00769490 /* JXTJuxtTableViewCell.swift in Sources */,
+				D0092D391B582DAA00769490 /* JXTAddJuxtViewController.swift in Sources */,
+				D0AFDCB11B56D3960097228E /* JXTConstants.swift in Sources */,
+				D00B09391B56ED9900870D4D /* JXTHomeTableViewController.swift in Sources */,
 				D0AFDC821B556E630097228E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -434,7 +481,13 @@
 			baseConfigurationReference = 7931DB76583F9A98551C49FA /* Pods-Juxt.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Juxt/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -445,7 +498,13 @@
 			baseConfigurationReference = 499E54B84FAF82B3EFF8429C /* Pods-Juxt.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Juxt/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
