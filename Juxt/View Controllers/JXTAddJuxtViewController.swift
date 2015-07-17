@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ConvenienceKit
 
 class JXTAddJuxtViewController: UIViewController {
 
@@ -14,7 +15,11 @@ class JXTAddJuxtViewController: UIViewController {
     
     @IBOutlet weak var descriptionTextView: UITextView!
     
+    @IBOutlet weak var nextBottomSpace: NSLayoutConstraint! // Default bottom space = 20
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var descriptionHeight: NSLayoutConstraint!
+    
+    var keyboardNotificationHandler : KeyboardNotificationHandler?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,18 +28,43 @@ class JXTAddJuxtViewController: UIViewController {
         titleTextField.becomeFirstResponder()
         
         titleTextField.returnKeyType = .Next
-        descriptionTextView.returnKeyType = .Done
         descriptionTextView.delegate = self
         titleTextField.delegate = self
         
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        
+        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
+        
+        keyboardNotificationHandler = KeyboardNotificationHandler()
+        
+        keyboardNotificationHandler!.keyboardWillBeHiddenHandler = { (height: CGFloat) in
+            UIView.animateWithDuration(0.3) {
+                self.descriptionHeight.constant -= height
+                self.nextBottomSpace.constant = 20
+//                self.view.layoutIfNeeded()
+            }
+        }
+        
+        keyboardNotificationHandler!.keyboardWillBeShownHandler = { (height: CGFloat) in
+            UIView.animateWithDuration(0.3) {
+                self.descriptionHeight.constant += height
+                self.nextBottomSpace.constant = height + 10
+//                self.view.layoutIfNeeded()
+            }
+        }
+        
     }
     
-
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
+        
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -45,6 +75,13 @@ class JXTAddJuxtViewController: UIViewController {
     }
     */
 
+
+    @IBAction func dismissButtonTapped(sender: UIBarButtonItem) {
+        
+        titleTextField.resignFirstResponder()
+        descriptionTextView.resignFirstResponder()
+        dismissViewControllerAnimated(true, completion: nil)
+    }
 }
 
 extension JXTAddJuxtViewController: UITextFieldDelegate {
@@ -60,5 +97,12 @@ extension JXTAddJuxtViewController: UITextFieldDelegate {
 }
 
 extension JXTAddJuxtViewController: UITextViewDelegate {
+    
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            return false
+        }
+        return true
+    }
     
 }

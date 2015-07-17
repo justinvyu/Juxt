@@ -7,11 +7,27 @@
 //
 
 import UIKit
+import RealmSwift
+import GTScrollNavigationBar
 
 class JXTHomeTableViewController: UITableViewController {
 
+    // MARK: Properties
+    
+//    var juxts: Results<Juxt>! {
+//        didSet {
+//            tableView?.reloadData()
+//        }
+//    }
+    
+    // MARK: VC Methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.scrollNavigationBar.scrollView = self.tableView
+        
+        UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
         
         let searchBar = UISearchBar(frame: CGRectMake(-5, 0, 320, 44))
         searchBar.autoresizingMask = .FlexibleWidth
@@ -21,6 +37,18 @@ class JXTHomeTableViewController: UITableViewController {
         self.navigationItem.titleView = searchBar
         
         tableView.contentInset = UIEdgeInsetsZero
+        tableView.separatorInset = UIEdgeInsetsZero
+        
+//        let myJuxt = Juxt()
+//        myJuxt.title = "Building a quadcopter"
+//        myJuxt.desc = "I’ll be making a Mini H Quadcopter using pieces I buy myself"
+////        myJuxt.images = [JXTImage(image: UIImage(named: "test1")!), JXTImage(image: UIImage(named: "test2")!), JXTImage(image: UIImage(named: "test3")!)]
+//        let realm = Realm()
+//        realm.write() {
+//            realm.add(myJuxt)
+//        }
+//        
+//        juxts = realm.objects(Juxt)
         
     }
 
@@ -28,31 +56,61 @@ class JXTHomeTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func viewWillLayoutSubviews() {
+        if tableView.respondsToSelector(Selector("setSeparatorInset:")) {
+            tableView.separatorInset = UIEdgeInsetsZero
+        }
+        if tableView.respondsToSelector(Selector("setLayoutMargins:")) {
+            tableView.layoutMargins = UIEdgeInsetsZero
+        }
+    }
 
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
         // Return the number of sections.
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 3
+        return 4
+        //return Int(juxts?.count ?? 0)
     }
 
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("JuxtCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("JuxtCell", forIndexPath: indexPath) as! JXTJuxtTableViewCell
 
-        // Configure the cell...
+        let row = indexPath.row
+//        let juxt = juxts[row] as Juxt
+//        cell.juxt = juxt
+//        cell.galleryScrollView.images = juxt.images
 
         return cell
     }
     
-
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if cell.respondsToSelector(Selector("setSeparatorInset:")) {
+            cell.separatorInset = UIEdgeInsetsZero
+        }
+        if cell.respondsToSelector(Selector("setLayoutMargins:")) {
+            cell.layoutMargins = UIEdgeInsetsZero
+        }
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+    }
+    
+    override func scrollViewDidScrollToTop(scrollView: UIScrollView) {
+        self.navigationController?.scrollNavigationBar.resetToDefaultPositionWithAnimation(true)
+    }
+    
+    
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {

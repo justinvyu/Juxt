@@ -12,6 +12,8 @@ import TwitterKit
 import FBSDKCoreKit
 import Parse
 import Bolts
+//import Realm
+//import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,9 +23,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
+        // REALM stuff
+//        setSchemaVersion(1, Realm.defaultPath, { migration, oldSchemaVersion in
+//            // We haven’t migrated anything yet, so oldSchemaVersion == 0
+//            if oldSchemaVersion < 1 {
+//                migration.enumerate(Juxt.className()) { oldObject, newObject in
+//                    println("enumerating")
+//                    println(oldObject!["title"])
+//                    //newObject!["images"] = [] as [JXTImage]
+//                }
+//            }
+//        })
+//        
+//        let realm = Realm()
+        
         UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: false)
         UITabBar.appearance().tintColor = UIColor.whiteColor()
         UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.whiteColor()], forState: .Normal)
+        UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName : JXTConstants.fontWithSize(18)!]
+        UINavigationBar.appearance().shadowImage = UIImage()
         
         // Initialize Parse.
         Parse.setApplicationId("HIXqAn876G6WymYy8YQvMtu1uBxGC6zhgMc2EmYn",

@@ -24,6 +24,12 @@
 #define COCOAPODS_VERSION_MINOR_Bolts_Tasks 2
 #define COCOAPODS_VERSION_PATCH_Bolts_Tasks 0
 
+// ConvenienceKit
+#define COCOAPODS_POD_AVAILABLE_ConvenienceKit
+#define COCOAPODS_VERSION_MAJOR_ConvenienceKit 0
+#define COCOAPODS_VERSION_MINOR_ConvenienceKit 1
+#define COCOAPODS_VERSION_PATCH_ConvenienceKit 0
+
 // FBSDKCoreKit
 #define COCOAPODS_POD_AVAILABLE_FBSDKCoreKit
 #define COCOAPODS_VERSION_MAJOR_FBSDKCoreKit 4
@@ -54,23 +60,17 @@
 #define COCOAPODS_VERSION_MINOR_FBSDKShareKit 4
 #define COCOAPODS_VERSION_PATCH_FBSDKShareKit 0
 
-// Fabric
-#define COCOAPODS_POD_AVAILABLE_Fabric
-#define COCOAPODS_VERSION_MAJOR_Fabric 1
-#define COCOAPODS_VERSION_MINOR_Fabric 3
-#define COCOAPODS_VERSION_PATCH_Fabric 2
-
-// Fabric/Core
-#define COCOAPODS_POD_AVAILABLE_Fabric_Core
-#define COCOAPODS_VERSION_MAJOR_Fabric_Core 1
-#define COCOAPODS_VERSION_MINOR_Fabric_Core 3
-#define COCOAPODS_VERSION_PATCH_Fabric_Core 2
-
 // FlatUIKit
 #define COCOAPODS_POD_AVAILABLE_FlatUIKit
 #define COCOAPODS_VERSION_MAJOR_FlatUIKit 1
 #define COCOAPODS_VERSION_MINOR_FlatUIKit 6
 #define COCOAPODS_VERSION_PATCH_FlatUIKit 2
+
+// GTScrollNavigationBar
+#define COCOAPODS_POD_AVAILABLE_GTScrollNavigationBar
+#define COCOAPODS_VERSION_MAJOR_GTScrollNavigationBar 0
+#define COCOAPODS_VERSION_MINOR_GTScrollNavigationBar 1
+#define COCOAPODS_VERSION_PATCH_GTScrollNavigationBar 3
 
 // Parse
 #define COCOAPODS_POD_AVAILABLE_Parse
@@ -83,6 +83,24 @@
 #define COCOAPODS_VERSION_MAJOR_ParseUI 1
 #define COCOAPODS_VERSION_MINOR_ParseUI 1
 #define COCOAPODS_VERSION_PATCH_ParseUI 4
+
+// Realm
+#define COCOAPODS_POD_AVAILABLE_Realm
+#define COCOAPODS_VERSION_MAJOR_Realm 0
+#define COCOAPODS_VERSION_MINOR_Realm 93
+#define COCOAPODS_VERSION_PATCH_Realm 2
+
+// Realm/Headers
+#define COCOAPODS_POD_AVAILABLE_Realm_Headers
+#define COCOAPODS_VERSION_MAJOR_Realm_Headers 0
+#define COCOAPODS_VERSION_MINOR_Realm_Headers 93
+#define COCOAPODS_VERSION_PATCH_Realm_Headers 2
+
+// RealmSwift
+#define COCOAPODS_POD_AVAILABLE_RealmSwift
+#define COCOAPODS_VERSION_MAJOR_RealmSwift 0
+#define COCOAPODS_VERSION_MINOR_RealmSwift 93
+#define COCOAPODS_VERSION_PATCH_RealmSwift 2
 
 // TPKeyboardAvoiding
 #define COCOAPODS_POD_AVAILABLE_TPKeyboardAvoiding

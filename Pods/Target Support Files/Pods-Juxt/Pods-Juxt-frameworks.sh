@@ -49,21 +49,29 @@ code_sign() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Bolts.framework'
+  install_framework 'ConvenienceKit.framework'
   install_framework 'FBSDKCoreKit.framework'
   install_framework 'FBSDKLoginKit.framework'
   install_framework 'FBSDKShareKit.framework'
   install_framework 'FlatUIKit.framework'
+  install_framework 'GTScrollNavigationBar.framework'
   install_framework 'Parse.framework'
   install_framework 'ParseUI.framework'
+  install_framework 'Realm.framework'
+  install_framework 'RealmSwift.framework'
   install_framework 'TPKeyboardAvoiding.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Bolts.framework'
+  install_framework 'ConvenienceKit.framework'
   install_framework 'FBSDKCoreKit.framework'
   install_framework 'FBSDKLoginKit.framework'
   install_framework 'FBSDKShareKit.framework'
   install_framework 'FlatUIKit.framework'
+  install_framework 'GTScrollNavigationBar.framework'
   install_framework 'Parse.framework'
   install_framework 'ParseUI.framework'
+  install_framework 'Realm.framework'
+  install_framework 'RealmSwift.framework'
   install_framework 'TPKeyboardAvoiding.framework'
 fi

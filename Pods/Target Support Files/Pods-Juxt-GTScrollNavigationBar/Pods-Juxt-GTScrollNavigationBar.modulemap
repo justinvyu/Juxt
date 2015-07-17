@@ -1,0 +1,6 @@
+framework module GTScrollNavigationBar {
+  umbrella header "Pods-Juxt-GTScrollNavigationBar-umbrella.h"
+
+  export *
+  module * { export * }
+}
