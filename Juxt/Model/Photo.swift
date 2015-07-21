@@ -11,11 +11,49 @@ import Parse
 
 class Photo: PFObject, PFSubclassing {
    
-    var title: String = ""
-    var desc: String = ""
-    var fromJuxt: Juxt?
+    // MARK: Properties
     
+    var image: UIImage?
+    var photoUploadTask: UIBackgroundTaskIdentifier?
+    
+    @NSManaged var title: String?
+    @NSManaged var desc: String?
+    @NSManaged var fromJuxt: Juxt?
     @NSManaged var imageFile: PFFile?
+    
+    // MARK: Parse Functions
+    
+    func uploadPhoto() {
+        
+        let imageData = UIImageJPEGRepresentation(image, 0.8)
+        let imageFile = PFFile(data: imageData)
+        
+        photoUploadTask = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler { () -> Void in
+            
+            UIApplication.sharedApplication().endBackgroundTask(self.photoUploadTask!)
+            
+        }
+        
+        imageFile.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+            
+            UIApplication.sharedApplication().endBackgroundTask(self.photoUploadTask!)
+            
+        }
+        self.imageFile = imageFile
+        saveInBackgroundWithBlock(nil)
+        
+    }
+    
+    func downloadImage() {
+        if image == nil {
+            imageFile?.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) -> Void in
+                if let data = data {
+                    let image = UIImage(data: data, scale: 1.0)
+                    self.image = image
+                }
+            })
+        }
+    }
     
     // MARK: PFSubclassing
     

@@ -24,7 +24,8 @@ class PhotoTakingHelper : NSObject {
         
         super.init()
         
-        showPhotoSourceSelection()
+        showImagePickerController(.PhotoLibrary)
+        // showImagePickerController(.Camera) // switch after download to phone
     }
     
     func showImagePickerController(sourceType: UIImagePickerControllerSourceType) {

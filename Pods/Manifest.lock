@@ -6,6 +6,7 @@ PODS:
     - Bolts/Tasks
   - Bolts/Tasks (1.2.0)
   - ConvenienceKit (0.1.0)
+  - DOFavoriteButton (0.0.2)
   - FBSDKCoreKit (4.4.0):
     - Bolts (~> 1.1)
     - FBSDKCoreKit/arc (= 4.4.0)
@@ -21,6 +22,7 @@ PODS:
     - FBSDKCoreKit
   - FlatUIKit (1.6.2)
   - GTScrollNavigationBar (0.1.3)
+  - LLSimpleCamera (3.0.0)
   - Parse (1.7.5):
     - Bolts/Tasks (>= 1.2.0)
   - ParseUI (1.1.4):
@@ -34,11 +36,13 @@ PODS:
 
 DEPENDENCIES:
   - ConvenienceKit
+  - DOFavoriteButton
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
   - FlatUIKit
   - GTScrollNavigationBar
+  - LLSimpleCamera (~> 3.0)
   - Parse
   - ParseUI
   - RealmSwift
@@ -47,11 +51,13 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Bolts: d176cb1e0012175589e389a9db49b85e27787576
   ConvenienceKit: 083548558dedc22a586c1e1fbf3aa217728715af
+  DOFavoriteButton: d34827428accfb396b036e4d4b8b3606b9f0f431
   FBSDKCoreKit: 75bdd75c980e811db218488d99dd93b7740f4474
   FBSDKLoginKit: 02a9254a4c132412fa03577b0d53e936d068a7fb
   FBSDKShareKit: a42865f20ba2d1cc548c4d0f73ad22cff6377ddb
   FlatUIKit: 1b41f0d4952ce8d970d8479ce79df54a960242c4
   GTScrollNavigationBar: 2fee3124c458393eca1d6d68ebf759051280f475
+  LLSimpleCamera: 3c41b46917f9ca53b91ef9c0cf24a75ce0ab4cd8
   Parse: 7c0f115eff3e0cea3fac08d50bda47154edb8832
   ParseUI: d1228541b02a36a7354c8f47747f5f7a89cf1ff0
   Realm: 2fdd0ae74f730e190384e0338d8a0d3654df8220

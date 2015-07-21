@@ -9,10 +9,13 @@
 import UIKit
 
 class JXTConstants: NSObject {
-   
-    let defaultBlueColor = UIColor(red: 99/255, green: 195/255, blue: 251/255, alpha: 1.0)
+       
+    static func defaultBlueColor() -> UIColor {
+        return UIColor(red: 99/255, green: 195/255, blue: 251/255, alpha: 1.0)
+    }
     
     static func fontWithSize(size: CGFloat) -> UIFont? {
         return UIFont(name: "Avenir Next", size: size)
     }
+
 }

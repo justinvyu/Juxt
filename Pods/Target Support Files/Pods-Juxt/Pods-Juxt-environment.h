@@ -30,6 +30,12 @@
 #define COCOAPODS_VERSION_MINOR_ConvenienceKit 1
 #define COCOAPODS_VERSION_PATCH_ConvenienceKit 0
 
+// DOFavoriteButton
+#define COCOAPODS_POD_AVAILABLE_DOFavoriteButton
+#define COCOAPODS_VERSION_MAJOR_DOFavoriteButton 0
+#define COCOAPODS_VERSION_MINOR_DOFavoriteButton 0
+#define COCOAPODS_VERSION_PATCH_DOFavoriteButton 2
+
 // FBSDKCoreKit
 #define COCOAPODS_POD_AVAILABLE_FBSDKCoreKit
 #define COCOAPODS_VERSION_MAJOR_FBSDKCoreKit 4
@@ -71,6 +77,12 @@
 #define COCOAPODS_VERSION_MAJOR_GTScrollNavigationBar 0
 #define COCOAPODS_VERSION_MINOR_GTScrollNavigationBar 1
 #define COCOAPODS_VERSION_PATCH_GTScrollNavigationBar 3
+
+// LLSimpleCamera
+#define COCOAPODS_POD_AVAILABLE_LLSimpleCamera
+#define COCOAPODS_VERSION_MAJOR_LLSimpleCamera 3
+#define COCOAPODS_VERSION_MINOR_LLSimpleCamera 0
+#define COCOAPODS_VERSION_PATCH_LLSimpleCamera 0
 
 // Parse
 #define COCOAPODS_POD_AVAILABLE_Parse

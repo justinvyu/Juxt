@@ -15,6 +15,8 @@ target 'Juxt' do
 	pod 'ConvenienceKit'
 	pod 'RealmSwift'
 	pod 'GTScrollNavigationBar'
+	pod 'LLSimpleCamera', '~> 3.0'
+	pod 'DOFavoriteButton'
 
 end
 

@@ -23,7 +23,7 @@ class JXTAddJuxtViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         nextButton.layer.cornerRadius = 5.0
         titleTextField.becomeFirstResponder()
         
@@ -57,6 +57,7 @@ class JXTAddJuxtViewController: UIViewController {
             }
         }
         
+        
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -64,6 +65,8 @@ class JXTAddJuxtViewController: UIViewController {
         UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
         
     }
+    
+    
     
     /*
     // MARK: - Navigation
@@ -75,6 +78,32 @@ class JXTAddJuxtViewController: UIViewController {
     }
     */
 
+    @IBAction func takePictureButtonTapped(sender: UIButton) {
+        
+        if titleTextField.text == "" || titleTextField == nil {
+            let alert = UIAlertView()
+            alert.title = "Add a title"
+            alert.message = "Show the world what you're doing"
+            alert.addButtonWithTitle("Dismiss")
+            alert.show()
+            return
+        }
+        
+        // Upload juxt
+        let juxt = Juxt()
+        juxt.title = self.titleTextField.text
+        juxt.desc = self.descriptionTextView.text
+        juxt.date = NSDate()
+        sender.enabled = false
+        juxt.uploadJuxt { (finished, error) -> Void in
+            if error != nil {
+                println("error: \(error?.localizedDescription)")
+            }
+            self.titleTextField.resignFirstResponder()
+            self.descriptionTextView.resignFirstResponder()
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+    }
 
     @IBAction func dismissButtonTapped(sender: UIBarButtonItem) {
         

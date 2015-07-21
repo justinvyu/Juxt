@@ -10,7 +10,20 @@ import UIKit
 
 class JXTJuxtViewController: UIViewController {
    
+    // MARK: Properties
+    
     @IBOutlet weak var tableView: UITableView!
+    
+    // MARK: Helper Funcs
+    
+    @IBAction func addPhotoButtonPressed(sender: UIBarButtonItem) {
+        
+        let cameraViewController = JXTCameraViewController()
+        self.presentViewController(cameraViewController, animated: true, completion: nil)
+        
+    }
+    
+    // MARK: VC Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,14 +32,8 @@ class JXTJuxtViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         tableView.delegate = self
         tableView.dataSource = self
-    }
-    
-    @IBAction func addButtonTapped(sender: UIBarButtonItem) {
-        
-        
         
     }
-    
 }
 
 extension JXTJuxtViewController: UITableViewDelegate {

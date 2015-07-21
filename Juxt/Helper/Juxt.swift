@@ -10,9 +10,18 @@ import UIKit
 import Parse
 
 class Juxt: PFObject, PFSubclassing {
-   
-    var title: String = ""
-    var desc: String = ""
+    
+    @NSManaged var title: String?
+    @NSManaged var desc: String?
+    @NSManaged var date: NSDate?
+    
+    // MARK: Parse Functions
+    
+    func uploadJuxt(completion: PFBooleanResultBlock) {
+        
+        saveInBackgroundWithBlock(completion)
+        
+    }
     
     // MARK: PFSubclassing
     

@@ -7,9 +7,10 @@
 //
 
 import UIKit
-import RealmSwift
+import Parse
+import ParseUI
 
-class JXTJuxtTableViewCell: UITableViewCell {
+class JXTJuxtTableViewCell: PFTableViewCell {
 
     // MARK: Properties
     
@@ -19,19 +20,23 @@ class JXTJuxtTableViewCell: UITableViewCell {
         return formatter
     }()
     
-//    var juxt: Juxt? {
-//        didSet {
-//            if let juxt = juxt, titleLabel = titleLabel, dateLabel = dateLabel, galleryScrollView = galleryScrollView {
-//                titleLabel.text = juxt.title
-//                dateLabel.text = JXTJuxtTableViewCell.dateFormatter.stringFromDate(juxt.createdAt)
-//                galleryScrollView.images = juxt.images
-//            }
-//        }
-//    }
+    var juxt: Juxt? {
+        didSet {
+            if let juxt = juxt, titleLabel = titleLabel, dateLabel = dateLabel {
+                titleLabel.text = juxt.title
+                var dateFormatter = NSDateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                dateLabel.text = dateFormatter.stringFromDate(juxt.date!)
+                
+                // Setup gallery view
+            }
+        }
+    }
     
     @IBOutlet weak var imageScrollView: UIScrollView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var galleryScrollView: JXTImageGalleryScrollView!
+    @IBOutlet weak var profilePictureImageView: UIImageView!
     
 }

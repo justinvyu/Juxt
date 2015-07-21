@@ -7,19 +7,20 @@
 //
 
 import UIKit
+import Parse
 
 class JXTImageGalleryScrollView: UIScrollView {
 
     let imagePadding: CGFloat = 10.0
     let imageSize: CGSize = CGSizeMake(80.0, 80.0) // 100x100 - 20 = 80x80
     
-    var images: [JXTImage]? {
+    var images: [PFFile]? {
         didSet {
             displayGallery(images)
         }
     }
     
-    func displayGallery(images: [JXTImage]?) {
+    func displayGallery(images: [PFFile]?) {
         println("Displaying Gallery")
         
         if let images = images {

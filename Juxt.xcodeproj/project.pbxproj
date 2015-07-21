@@ -12,6 +12,9 @@
 		D0092D3C1B585B1200769490 /* JXTTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0092D3B1B585B1200769490 /* JXTTabBarController.swift */; };
 		D00B09391B56ED9900870D4D /* JXTHomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00B09381B56ED9900870D4D /* JXTHomeTableViewController.swift */; };
 		D08978221B59C2C4009FB6A2 /* PhotoTakingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08978211B59C2C4009FB6A2 /* PhotoTakingHelper.swift */; };
+		D08978241B5C25D8009FB6A2 /* JXTCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08978231B5C25D8009FB6A2 /* JXTCameraViewController.swift */; };
+		D08978261B5C261A009FB6A2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D08978251B5C261A009FB6A2 /* AVFoundation.framework */; };
+		D08978281B5D589B009FB6A2 /* ParseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08978271B5D589B009FB6A2 /* ParseHelper.swift */; };
 		D0AFDC821B556E630097228E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AFDC811B556E630097228E /* AppDelegate.swift */; };
 		D0AFDC871B556E630097228E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0AFDC851B556E630097228E /* Main.storyboard */; };
 		D0AFDC891B556E630097228E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0AFDC881B556E630097228E /* Images.xcassets */; };
@@ -26,7 +29,6 @@
 		D0F7C5EF1B596496004E2F3E /* JXTImageGalleryScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F7C5EE1B596496004E2F3E /* JXTImageGalleryScrollView.swift */; };
 		D0F7C5F31B596F48004E2F3E /* Juxt.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F7C5F11B596F48004E2F3E /* Juxt.swift */; };
 		D0F7C5F41B596F48004E2F3E /* JXTConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F7C5F21B596F48004E2F3E /* JXTConstants.swift */; };
-		D0F7C5F61B596F91004E2F3E /* JXTImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F7C5F51B596F91004E2F3E /* JXTImage.swift */; };
 		D0F7C5FC1B59A4B7004E2F3E /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F7C5FB1B59A4B7004E2F3E /* Photo.swift */; };
 		D0F7C5FE1B59AC73004E2F3E /* JXTJuxtViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F7C5FD1B59AC73004E2F3E /* JXTJuxtViewController.swift */; };
 		FECBDD0038D362C2E55CAE0F /* Pods_Juxt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7219618C4A5AA4482001067C /* Pods_Juxt.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -51,6 +53,9 @@
 		D0092D3B1B585B1200769490 /* JXTTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTTabBarController.swift; sourceTree = "<group>"; };
 		D00B09381B56ED9900870D4D /* JXTHomeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTHomeTableViewController.swift; sourceTree = "<group>"; };
 		D08978211B59C2C4009FB6A2 /* PhotoTakingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoTakingHelper.swift; sourceTree = "<group>"; };
+		D08978231B5C25D8009FB6A2 /* JXTCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTCameraViewController.swift; sourceTree = "<group>"; };
+		D08978251B5C261A009FB6A2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		D08978271B5D589B009FB6A2 /* ParseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseHelper.swift; sourceTree = "<group>"; };
 		D0AFDC7C1B556E630097228E /* Juxt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Juxt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0AFDC801B556E630097228E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0AFDC811B556E630097228E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -69,7 +74,6 @@
 		D0F7C5EE1B596496004E2F3E /* JXTImageGalleryScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTImageGalleryScrollView.swift; sourceTree = "<group>"; };
 		D0F7C5F11B596F48004E2F3E /* Juxt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Juxt.swift; path = ../Helper/Juxt.swift; sourceTree = "<group>"; };
 		D0F7C5F21B596F48004E2F3E /* JXTConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTConstants.swift; sourceTree = "<group>"; };
-		D0F7C5F51B596F91004E2F3E /* JXTImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTImage.swift; sourceTree = "<group>"; };
 		D0F7C5FB1B59A4B7004E2F3E /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Photo.swift; path = Juxt/Model/Photo.swift; sourceTree = SOURCE_ROOT; };
 		D0F7C5FD1B59AC73004E2F3E /* JXTJuxtViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTJuxtViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -79,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D08978261B5C261A009FB6A2 /* AVFoundation.framework in Frameworks */,
 				D0AFDCAC1B55769A0097228E /* Fabric.framework in Frameworks */,
 				D0AFDCAF1B55769A0097228E /* TwitterCore.framework in Frameworks */,
 				D0AFDCAD1B55769A0097228E /* TwitterKit.framework in Frameworks */,
@@ -162,10 +167,11 @@
 			children = (
 				D0AFDCA51B556F7E0097228E /* JXTLandingViewController.swift */,
 				D00B09381B56ED9900870D4D /* JXTHomeTableViewController.swift */,
-				D0092D381B582DAA00769490 /* JXTAddJuxtViewController.swift */,
 				D0092D3B1B585B1200769490 /* JXTTabBarController.swift */,
-				D0F7C5E81B586949004E2F3E /* JXTAddPhotoViewController.swift */,
 				D0F7C5FD1B59AC73004E2F3E /* JXTJuxtViewController.swift */,
+				D0092D381B582DAA00769490 /* JXTAddJuxtViewController.swift */,
+				D08978231B5C25D8009FB6A2 /* JXTCameraViewController.swift */,
+				D0F7C5E81B586949004E2F3E /* JXTAddPhotoViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -183,8 +189,8 @@
 			isa = PBXGroup;
 			children = (
 				D08978211B59C2C4009FB6A2 /* PhotoTakingHelper.swift */,
-				D0F7C5F51B596F91004E2F3E /* JXTImage.swift */,
 				D0F7C5F21B596F48004E2F3E /* JXTConstants.swift */,
+				D08978271B5D589B009FB6A2 /* ParseHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -201,6 +207,7 @@
 		DA7A36412FF8B21CCDC73CFE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D08978251B5C261A009FB6A2 /* AVFoundation.framework */,
 				D0AFDCA81B55769A0097228E /* Fabric.framework */,
 				D0AFDCA91B55769A0097228E /* TwitterKit.framework */,
 				D0AFDCAA1B55769A0097228E /* TwitterKitResources.bundle */,
@@ -389,11 +396,12 @@
 				D0F7C5FC1B59A4B7004E2F3E /* Photo.swift in Sources */,
 				D0F7C5FE1B59AC73004E2F3E /* JXTJuxtViewController.swift in Sources */,
 				D0AFDCA61B556F7E0097228E /* JXTLandingViewController.swift in Sources */,
+				D08978241B5C25D8009FB6A2 /* JXTCameraViewController.swift in Sources */,
 				D0092D371B581FFD00769490 /* JXTJuxtTableViewCell.swift in Sources */,
 				D08978221B59C2C4009FB6A2 /* PhotoTakingHelper.swift in Sources */,
 				D0F7C5E91B586949004E2F3E /* JXTAddPhotoViewController.swift in Sources */,
+				D08978281B5D589B009FB6A2 /* ParseHelper.swift in Sources */,
 				D0F7C5EF1B596496004E2F3E /* JXTImageGalleryScrollView.swift in Sources */,
-				D0F7C5F61B596F91004E2F3E /* JXTImage.swift in Sources */,
 				D0F7C5F41B596F48004E2F3E /* JXTConstants.swift in Sources */,
 				D0092D391B582DAA00769490 /* JXTAddJuxtViewController.swift in Sources */,
 				D00B09391B56ED9900870D4D /* JXTHomeTableViewController.swift in Sources */,

@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: false)
         UITabBar.appearance().tintColor = UIColor.whiteColor()
         UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.whiteColor()], forState: .Normal)
-        UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName : JXTConstants.fontWithSize(18)!]
+        UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName : UIFont.systemFontOfSize(18)]
         UINavigationBar.appearance().shadowImage = UIImage()
         
         // Initialize Parse.
