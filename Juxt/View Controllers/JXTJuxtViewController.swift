@@ -7,18 +7,24 @@
 //
 
 import UIKit
+import APParallaxHeader
 
 class JXTJuxtViewController: UIViewController {
    
     // MARK: Properties
     
+    var juxt: Juxt?
+    
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var parallaxView: UIView!
     
     // MARK: Helper Funcs
     
     @IBAction func addPhotoButtonPressed(sender: UIBarButtonItem) {
         
         let cameraViewController = JXTCameraViewController()
+        cameraViewController.juxt = self.juxt
         self.presentViewController(cameraViewController, animated: true, completion: nil)
         
     }
@@ -32,6 +38,10 @@ class JXTJuxtViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         tableView.delegate = self
         tableView.dataSource = self
+
+        if let juxt = juxt {
+            titleLabel.text = juxt.title
+        }
         
     }
 }

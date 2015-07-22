@@ -8,36 +8,48 @@
 
 import UIKit
 import Parse
+import ParseUI
 
 class JXTImageGalleryScrollView: UIScrollView {
 
     let imagePadding: CGFloat = 10.0
-    let imageSize: CGSize = CGSizeMake(80.0, 80.0) // 100x100 - 20 = 80x80
+    let imageSize: CGSize = CGSizeMake(95, 95) // 100x100 - 20 = 80x80
     
-    var images: [PFFile]? {
+    var photos: [Photo]? {
         didSet {
-            displayGallery(images)
+            displayGallery(photos)
         }
     }
     
-    func displayGallery(images: [PFFile]?) {
-        println("Displaying Gallery")
+    func displayGallery(photos: [Photo]?) {
         
-        if let images = images {
-            let paddingWidth = CGFloat(images.count + 1) * imagePadding
-            let imageWidth = CGFloat(images.count) * imageSize.width
-            let contentHeight = imageSize.height + imagePadding
+        self.subviews.map { $0.removeFromSuperview() }
+        
+        dispatch_async(dispatch_get_main_queue()) {
             
-            self.contentSize = CGSizeMake(paddingWidth + imageWidth, contentHeight)
-            
-            for var i = 0; i < images.count; i++ {
-                let xPos = paddingWidth + CGFloat(i) * imageWidth
+            if let photos = photos {
+                let paddingWidth = CGFloat(photos.count + 1) * self.imagePadding
+                let imageWidth = CGFloat(photos.count) * self.imageSize.width
+                let contentHeight = self.imageSize.height + self.imagePadding
                 
-                var imageView = UIImageView(frame: CGRectMake(xPos, imagePadding, imageSize.width, imageSize.height))
-                self.addSubview(imageView)
+                self.contentSize = CGSizeMake(paddingWidth + imageWidth, contentHeight)
+                
+                for var i = 0; i < photos.count; i++ {
+                    let xPos = self.imagePadding * CGFloat(i) + CGFloat(i) * self.imageSize.width
+                    //println(xPos)
+                    
+                    var imageView = PFImageView(frame: CGRectMake(xPos, 0, self.imageSize.width, self.imageSize.height))
+                    imageView.contentMode = .ScaleAspectFill
+                    imageView.image = UIImage(named: "default-placeholder")
+                    self.addSubview(imageView)
+                    
+                    imageView.file = photos[i].imageFile
+                    imageView.layer.cornerRadius = 5.0
+                    imageView.clipsToBounds = true
+                    imageView.loadInBackground()
+                }
             }
         }
-        
     }
-
+        
 }

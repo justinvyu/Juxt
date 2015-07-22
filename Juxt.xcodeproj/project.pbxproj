@@ -166,8 +166,8 @@
 			isa = PBXGroup;
 			children = (
 				D0AFDCA51B556F7E0097228E /* JXTLandingViewController.swift */,
-				D00B09381B56ED9900870D4D /* JXTHomeTableViewController.swift */,
 				D0092D3B1B585B1200769490 /* JXTTabBarController.swift */,
+				D00B09381B56ED9900870D4D /* JXTHomeTableViewController.swift */,
 				D0F7C5FD1B59AC73004E2F3E /* JXTJuxtViewController.swift */,
 				D0092D381B582DAA00769490 /* JXTAddJuxtViewController.swift */,
 				D08978231B5C25D8009FB6A2 /* JXTCameraViewController.swift */,

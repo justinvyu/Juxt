@@ -48,6 +48,7 @@ code_sign() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework 'APParallaxHeader.framework'
   install_framework 'Bolts.framework'
   install_framework 'ConvenienceKit.framework'
   install_framework 'DOFavoriteButton.framework'
@@ -64,6 +65,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'TPKeyboardAvoiding.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework 'APParallaxHeader.framework'
   install_framework 'Bolts.framework'
   install_framework 'ConvenienceKit.framework'
   install_framework 'DOFavoriteButton.framework'

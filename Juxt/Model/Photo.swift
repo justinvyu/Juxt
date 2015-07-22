@@ -23,7 +23,7 @@ class Photo: PFObject, PFSubclassing {
     
     // MARK: Parse Functions
     
-    func uploadPhoto() {
+    func uploadPhoto(completion: PFBooleanResultBlock) {
         
         let imageData = UIImageJPEGRepresentation(image, 0.8)
         let imageFile = PFFile(data: imageData)
@@ -40,7 +40,7 @@ class Photo: PFObject, PFSubclassing {
             
         }
         self.imageFile = imageFile
-        saveInBackgroundWithBlock(nil)
+        saveInBackgroundWithBlock(completion)
         
     }
     

@@ -10,7 +10,7 @@ import UIKit
 import Parse
 
 class Juxt: PFObject, PFSubclassing {
-    
+        
     @NSManaged var title: String?
     @NSManaged var desc: String?
     @NSManaged var date: NSDate?

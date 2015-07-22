@@ -17,6 +17,7 @@ target 'Juxt' do
 	pod 'GTScrollNavigationBar'
 	pod 'LLSimpleCamera', '~> 3.0'
 	pod 'DOFavoriteButton'
+	pod 'APParallaxHeader'
 
 end
 

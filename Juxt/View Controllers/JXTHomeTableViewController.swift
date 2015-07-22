@@ -27,6 +27,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
 //    let additionalRangeSize = 5
     
     var searchBar: UISearchBar?
+    var imageLoadQueue: dispatch_queue_t?
     
     // MARK: Init
     
@@ -68,6 +69,13 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         
     }
     
+    func loadImagesInBackground(juxt: Juxt, cell: JXTJuxtTableViewCell) {
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            cell.galleryScrollView.photos = ParseHelper.retrieveImagesFromJuxt(juxt)
+        }
+    }
+    
     // MARK: VC Methods
     
     override func viewDidLayoutSubviews() {
@@ -94,11 +102,23 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         tableView.contentInset = UIEdgeInsetsZero
         tableView.separatorInset = UIEdgeInsetsZero
         
+        self.loadObjects()
+        imageLoadQueue = dispatch_queue_create("imageLoad", DISPATCH_QUEUE_SERIAL)
+        
+        tableView.estimatedRowHeight = 170
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.loadObjects()
+        self.tableView.reloadData()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
     }
 
     override func viewWillLayoutSubviews() {
@@ -121,10 +141,37 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         
         cell.profilePictureImageView.layer.cornerRadius = 5.0
         
-        if let juxt = object as? Juxt {
-            cell?.juxt = juxt
-            let photos = ParseHelper.retrieveImagesFromJuxt(juxt)
-            println(photos)
+        if let juxt = object as? Juxt, cell = cell {
+            cell.juxt = juxt
+//            dispatch_async(self.imageLoadQueue!) {
+//                let photos = ParseHelper.retrieveImagesFromJuxt(juxt)
+//                if photos?.count != 0 {
+//                    dispatch_async(dispatch_get_main_queue()) {
+//                        var juxtCell = tableView.cellForRowAtIndexPath(indexPath) as? JXTJuxtTableViewCell
+//                        juxtCell?.galleryScrollView.photos = photos
+//                    }
+//                }
+//            }
+            //if cell.galleryScrollView.photos == nil {
+                let juxtQuery = PFQuery(className: "Photo")
+                juxtQuery.cachePolicy = .CacheThenNetwork
+                juxtQuery.whereKey("fromJuxt", equalTo: juxt)
+                juxtQuery.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+                    
+                    if error == nil {
+                        
+                        if cell.galleryScrollView.photos?.count != objects?.count {
+                            cell.galleryScrollView.photos = objects as? [Photo]
+                        }
+                    }
+                })
+            //}
+            
+            
+//            cell.galleryScrollView.photos = ParseHelper.retrieveImagesFromJuxt(juxt)
+            
+            //self.loadImagesInBackground(juxt, cell: cell)
+            
         }
         
         return cell
@@ -147,6 +194,15 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         
         self.searchBar?.resignFirstResponder()
         self.navigationController?.scrollNavigationBar.resetToDefaultPositionWithAnimation(true)
+        
+        if segue.identifier == "ShowJuxt" {
+            if let juxtCell = sender as? JXTJuxtTableViewCell {
+                if let juxtViewController = segue.destinationViewController as? JXTJuxtViewController {
+                    juxtViewController.juxt = juxtCell.juxt
+                }
+            }
+        }
+        
     }
 
 }

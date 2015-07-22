@@ -6,6 +6,12 @@
 // project.
 
 
+// APParallaxHeader
+#define COCOAPODS_POD_AVAILABLE_APParallaxHeader
+#define COCOAPODS_VERSION_MAJOR_APParallaxHeader 0
+#define COCOAPODS_VERSION_MINOR_APParallaxHeader 1
+#define COCOAPODS_VERSION_PATCH_APParallaxHeader 6
+
 // Bolts
 #define COCOAPODS_POD_AVAILABLE_Bolts
 #define COCOAPODS_VERSION_MAJOR_Bolts 1

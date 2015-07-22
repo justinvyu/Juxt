@@ -14,6 +14,9 @@ class JXTCameraViewController: UIViewController {
 
     // MARK: PROPERTIES
     
+    var juxt: Juxt? // Juxt holder to tell the addPhotoVC what Juxt the photo is for
+    
+    
     var camera: LLSimpleCamera?
     
     var snapButton: UIButton?
@@ -155,6 +158,8 @@ class JXTCameraViewController: UIViewController {
             flashButton?.backgroundColor = UIColor.clearColor()
         }
         
+        
+        
     }
     
     func snapButtonPressed(button: UIButton) {
@@ -167,6 +172,8 @@ class JXTCameraViewController: UIViewController {
                 
                 // Present VC   
                 let addPhotoController = JXTAddPhotoViewController()
+                addPhotoController.delegate = self
+                addPhotoController.juxt = self.juxt
                 let navigationController = UINavigationController(rootViewController: addPhotoController)
                 addPhotoController.image = image
                 self.presentViewController(navigationController, animated: true, completion: nil)
@@ -211,4 +218,12 @@ class JXTCameraViewController: UIViewController {
         dismissViewControllerAnimated(true, completion: nil)
     }
 
+}
+
+extension JXTCameraViewController: JXTAddPhotoViewControllerDelegate {
+    
+    func retakePicture() {        
+        self.camera?.start()
+    }
+    
 }

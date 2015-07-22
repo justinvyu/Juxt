@@ -8,9 +8,20 @@
 
 import UIKit
 import TPKeyboardAvoiding
+import ConvenienceKit
+
+protocol JXTAddPhotoViewControllerDelegate {
+    
+    func retakePicture()
+    
+}
 
 class JXTAddPhotoViewController: UIViewController {
 
+    var delegate: JXTAddPhotoViewControllerDelegate?
+    
+    var juxt: Juxt?
+    
     var photoView: UIImageView?
     
     var confirmLabel: UILabel?
@@ -26,6 +37,8 @@ class JXTAddPhotoViewController: UIViewController {
     
     var image: UIImage?
     
+    var keyboardNotificationHandler: KeyboardNotificationHandler?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -34,6 +47,20 @@ class JXTAddPhotoViewController: UIViewController {
         self.view.backgroundColor = UIColor.whiteColor()
         
         setupPhotoUI()
+        
+        keyboardNotificationHandler = KeyboardNotificationHandler()
+        
+        keyboardNotificationHandler?.keyboardWillBeHiddenHandler = { (height: CGFloat) in
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                self.doneButton?.frame.origin.y += height
+            })
+        }
+        
+        keyboardNotificationHandler?.keyboardWillBeShownHandler = { (height: CGFloat) in
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                self.doneButton?.frame.origin.y -= height
+            })
+        }
         
     }
 
@@ -53,11 +80,6 @@ class JXTAddPhotoViewController: UIViewController {
         
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     // MARK: Helper Funcs
     
     func setupPhotoUI() {
@@ -67,9 +89,9 @@ class JXTAddPhotoViewController: UIViewController {
         scrollView?.pagingEnabled = true
         scrollView?.directionalLockEnabled = true
         scrollView?.contentSize = CGSizeMake(self.view.frame.size.width * 2, scrollView!.frame.size.height - 20 - self.navigationController!.navigationBar.frame.size.height)
-        scrollView?.bounces = true
+        scrollView?.bounces = false
+        scrollView?.delegate = self
         self.view.addSubview(scrollView!)
-        
         
         photoView = UIImageView(frame: CGRectMake(10, 10, scrollView!.frame.size.width - 20, scrollView!.frame.size.width - 20))
         photoView?.image = self.image
@@ -81,7 +103,7 @@ class JXTAddPhotoViewController: UIViewController {
         confirmLabel = UILabel(frame: CGRectMake(10, 20 + photoView!.frame.size.height, scrollView!.frame.size.width - 20, 44))
         confirmLabel?.text = "are you okay with this photo?"
         confirmLabel?.textAlignment = .Center
-        confirmLabel?.font = JXTConstants.fontWithSize(18.0)
+        confirmLabel?.font = UIFont.systemFontOfSize(18.0)
         scrollView!.addSubview(confirmLabel!)
         
         takeAgainButton = UIButton(frame: CGRectMake(20, self.view.frame.size.height - self.navigationController!.navigationBar.frame.size.height - 44 - 20 - 20, scrollView!.frame.size.width - 40, 44))
@@ -91,7 +113,8 @@ class JXTAddPhotoViewController: UIViewController {
         takeAgainButton?.backgroundColor = UIColor.whiteColor()
         takeAgainButton?.setTitleColor(JXTConstants.defaultBlueColor(), forState: .Normal)
         takeAgainButton?.setTitle("take again", forState: .Normal)
-        takeAgainButton?.titleLabel?.font = JXTConstants.fontWithSize(18)
+        takeAgainButton?.titleLabel?.font = UIFont.systemFontOfSize(18.0)
+        takeAgainButton?.addTarget(self, action: Selector("takeAgainButtonPressed:"), forControlEvents: .TouchUpInside)
         scrollView!.addSubview(takeAgainButton!)
         
         nextButton = UIButton(frame: CGRectMake(20, takeAgainButton!.frame.origin.y - 44 - 20, scrollView!.frame.size.width - 40, 44))
@@ -101,20 +124,83 @@ class JXTAddPhotoViewController: UIViewController {
         nextButton?.backgroundColor = JXTConstants.defaultBlueColor()
         nextButton?.titleLabel?.textColor = UIColor.whiteColor()
         nextButton?.setTitle("next", forState: .Normal)
-        nextButton?.titleLabel?.font = JXTConstants.fontWithSize(18)
+        nextButton?.titleLabel?.font = UIFont.systemFontOfSize(18.0)
         
         nextButton?.addTarget(self, action: Selector("nextButtonPressed:"), forControlEvents: .TouchUpInside)
         scrollView!.addSubview(nextButton!)
+        
+        let secondPageX = self.view.frame.size.width
+        
+        titleLabel = UILabel(frame: CGRectMake(secondPageX + 10, 20, self.view.frame.size.width - 20, 44))
+        titleLabel?.text = "what is it?"
+        titleLabel?.textAlignment = .Center
+        titleLabel?.font = UIFont.systemFontOfSize(18.0)
+        titleLabel?.textColor = UIColor.lightGrayColor()
+        scrollView!.addSubview(titleLabel!)
+        
+        titleTextField = UITextField(frame: CGRectMake(secondPageX + 20, 20 + 44, self.view.frame.size.width - 40, 44))
+        titleTextField?.textAlignment = .Center
+        titleTextField?.font = UIFont.systemFontOfSize(18.0)
+        scrollView!.addSubview(titleTextField!)
+        
+        doneButton = UIButton(frame: CGRectMake(secondPageX + 20, self.view.frame.size.height - self.navigationController!.navigationBar.frame.size.height - 44 - 20 - 20, self.view.frame.size.width - 40, 44))
+        doneButton?.backgroundColor = JXTConstants.defaultBlueColor()
+        doneButton?.setTitle("share", forState: .Normal)
+        doneButton?.layer.cornerRadius = 5.0
+        doneButton?.titleLabel?.textColor = UIColor.whiteColor()
+        doneButton?.titleLabel?.font = UIFont.systemFontOfSize(18)
+        doneButton?.addTarget(self, action: Selector("doneButtonPressed:"), forControlEvents: .TouchUpInside)
+        scrollView!.addSubview(doneButton!)
+        
+    }
+    
+    func takeAgainButtonPressed(button: UIButton) {
+        
+        dismissViewControllerAnimated(true, completion: { () -> Void in
+            UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Slide)
+            self.delegate?.retakePicture()
+        })
         
     }
     
     func nextButtonPressed(button: UIButton) {
         UIView.animateWithDuration(0.5, animations: { () -> Void in
-            scrollView?.contentOffset.x += self.view.frame.size.width
+            self.scrollView?.contentOffset.x += self.view.frame.size.width
+            self.titleTextField?.becomeFirstResponder()
         })
     }
     
     func dismissToJuxt(button: UIButton) {
         self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    func doneButtonPressed(button: UIButton) {
+        println("Done button pressed")
+
+        if let juxt = juxt, titleTextField = titleTextField, image = image {
+            println("inside done")
+            let photo = Photo()
+            photo.title = titleTextField.text
+            photo.fromJuxt = juxt
+            photo.image = image
+            
+            photo.uploadPhoto { (finished, error) -> Void in
+                self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+            }
+        }
+        
+        
+    }
+}
+
+extension JXTAddPhotoViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if scrollView.contentOffset == CGPointMake(0, scrollView.contentOffset.y) {
+            self.titleTextField?.resignFirstResponder()
+        } else if scrollView.contentOffset == CGPointMake(self.view.frame.size.width, scrollView.contentOffset.y) {
+            self.titleTextField?.becomeFirstResponder()
+        }
+    }
+    
 }

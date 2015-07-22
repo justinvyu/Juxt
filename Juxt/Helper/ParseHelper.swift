@@ -14,12 +14,11 @@ class ParseHelper: NSObject {
     static func retrieveImagesFromJuxt(juxt: Juxt) -> [Photo]? {
         
         let juxtQuery = PFQuery(className: "Photo")
+        juxtQuery.cachePolicy = PFCachePolicy.NetworkElseCache
         juxtQuery.whereKey("fromJuxt", equalTo: juxt)
-        var photos: [Photo]? = nil
-        juxtQuery.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
-            photos = objects as? [Photo]
-        }
+        var photos: [Photo]? = juxtQuery.findObjects() as? [Photo]
         
+        println(photos?.count)
         return photos
         
     }

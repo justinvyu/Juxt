@@ -18,6 +18,7 @@ class JXTAddJuxtViewController: UIViewController {
     @IBOutlet weak var nextBottomSpace: NSLayoutConstraint! // Default bottom space = 20
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var descriptionHeight: NSLayoutConstraint!
+    @IBOutlet weak var uploadActivityIndicator: UIActivityIndicatorView!
     
     var keyboardNotificationHandler : KeyboardNotificationHandler?
     
@@ -66,8 +67,6 @@ class JXTAddJuxtViewController: UIViewController {
         
     }
     
-    
-    
     /*
     // MARK: - Navigation
 
@@ -79,7 +78,7 @@ class JXTAddJuxtViewController: UIViewController {
     */
 
     @IBAction func takePictureButtonTapped(sender: UIButton) {
-        
+         
         if titleTextField.text == "" || titleTextField == nil {
             let alert = UIAlertView()
             alert.title = "Add a title"
@@ -88,6 +87,8 @@ class JXTAddJuxtViewController: UIViewController {
             alert.show()
             return
         }
+        uploadActivityIndicator.startAnimating()
+
         
         // Upload juxt
         let juxt = Juxt()
@@ -101,6 +102,7 @@ class JXTAddJuxtViewController: UIViewController {
             }
             self.titleTextField.resignFirstResponder()
             self.descriptionTextView.resignFirstResponder()
+            self.uploadActivityIndicator.stopAnimating()
             self.dismissViewControllerAnimated(true, completion: nil)
         }
     }
