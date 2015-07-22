@@ -202,7 +202,6 @@ class JXTHomeTableViewController: PFQueryTableViewController {
                 }
             }
         }
-        
     }
 
 }
