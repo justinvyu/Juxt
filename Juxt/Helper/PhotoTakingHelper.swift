@@ -15,17 +15,28 @@ class PhotoTakingHelper : NSObject {
     /** View controller on which AlertViewController and UIImagePickerController are presented */
     weak var viewController: UIViewController!
     
-    var callback: PhotoTakingHelperCallback
+    var juxt: Juxt?
+    
+    //var callback: PhotoTakingHelperCallback
     var imagePickerController: UIImagePickerController?
     
-    init(viewController: UIViewController, callback: PhotoTakingHelperCallback) {
+    init(viewController: UIViewController, juxt: Juxt/*, callback: PhotoTakingHelperCallback*/) {
         self.viewController = viewController
-        self.callback = callback
+        //self.callback = callback
+        self.juxt = juxt
         
         super.init()
         
-        showImagePickerController(.PhotoLibrary)
+        showPhotoSourceSelection()
         // showImagePickerController(.Camera) // switch after download to phone
+    }
+    
+    func presentCamera() {
+        
+        let cameraViewController = JXTCameraViewController()
+        
+        viewController.presentViewController(cameraViewController, animated: true, completion: nil)
+        
     }
     
     func showImagePickerController(sourceType: UIImagePickerControllerSourceType) {
@@ -48,7 +59,7 @@ class PhotoTakingHelper : NSObject {
         
         if (UIImagePickerController.isCameraDeviceAvailable(.Rear)) {
             let cameraAction = UIAlertAction(title: "Photo from Camera", style: .Default, handler: { (action) in // action is the param
-                self.showImagePickerController(.Camera)
+                self.presentCamera()
             })
             
             alertController.addAction(cameraAction)
@@ -68,8 +79,13 @@ extension PhotoTakingHelper: UIImagePickerControllerDelegate, UINavigationContro
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         
-        viewController.dismissViewControllerAnimated(false, completion: nil)
-        callback(image)
+        let addPhotoVC = JXTAddPhotoViewController()
+        let navController = UINavigationController(rootViewController: addPhotoVC)
+        addPhotoVC.image = image
+        addPhotoVC.juxt = self.juxt
+        picker.presentViewController(navController, animated: true, completion: nil)
+        
+        //callback(image)
     }
     
     

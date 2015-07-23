@@ -29,6 +29,7 @@ class JXTAddPhotoViewController: UIViewController {
     var takeAgainButton: UIButton?
     
     var doneButton: UIButton?
+    var uploadActivityIndicator: UIActivityIndicatorView?
     
     var titleLabel: UILabel?
     var titleTextField: UITextField?
@@ -112,7 +113,7 @@ class JXTAddPhotoViewController: UIViewController {
         takeAgainButton?.layer.borderWidth = 1.0
         takeAgainButton?.backgroundColor = UIColor.whiteColor()
         takeAgainButton?.setTitleColor(JXTConstants.defaultBlueColor(), forState: .Normal)
-        takeAgainButton?.setTitle("take again", forState: .Normal)
+        takeAgainButton?.setTitle("get another picture", forState: .Normal)
         takeAgainButton?.titleLabel?.font = UIFont.systemFontOfSize(18.0)
         takeAgainButton?.addTarget(self, action: Selector("takeAgainButtonPressed:"), forControlEvents: .TouchUpInside)
         scrollView!.addSubview(takeAgainButton!)
@@ -152,12 +153,16 @@ class JXTAddPhotoViewController: UIViewController {
         doneButton?.addTarget(self, action: Selector("doneButtonPressed:"), forControlEvents: .TouchUpInside)
         scrollView!.addSubview(doneButton!)
         
+        uploadActivityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 20, 20))
+        uploadActivityIndicator?.center = doneButton!.center
+        uploadActivityIndicator?.frame.origin.y += doneButton!.frame.size.width - 30
+        uploadActivityIndicator?.hidesWhenStopped = true
+        doneButton!.addSubview(uploadActivityIndicator!)
     }
     
     func takeAgainButtonPressed(button: UIButton) {
         
         dismissViewControllerAnimated(true, completion: { () -> Void in
-            UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Slide)
             self.delegate?.retakePicture()
         })
         
@@ -175,17 +180,30 @@ class JXTAddPhotoViewController: UIViewController {
     }
     
     func doneButtonPressed(button: UIButton) {
-        println("Done button pressed")
-
+        
         if let juxt = juxt, titleTextField = titleTextField, image = image {
-            println("inside done")
+            
+            if titleTextField.text == "" || titleTextField.text == nil {
+                let alert = UIAlertView()
+                alert.title = "Add a title"
+                alert.message = "Tell the world what this picture is about"
+                alert.addButtonWithTitle("Dismiss")
+                alert.show()
+                return
+            }
+            
+            uploadActivityIndicator?.startAnimating()
+            button.enabled = false
+            
             let photo = Photo()
             photo.title = titleTextField.text
             photo.fromJuxt = juxt
             photo.image = image
             
             photo.uploadPhoto { (finished, error) -> Void in
-                self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+                
+                    self.uploadActivityIndicator?.stopAnimating()
+                    self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
             }
         }
         

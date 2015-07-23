@@ -22,11 +22,13 @@ class JXTJuxtTableViewCell: PFTableViewCell {
     
     var juxt: Juxt? {
         didSet {
-            if let juxt = juxt, titleLabel = titleLabel, dateLabel = dateLabel, galleryScrollView = galleryScrollView {
+            if let juxt = juxt, titleLabel = titleLabel, dateLabel = dateLabel {
                 titleLabel.text = juxt.title
                 var dateFormatter = NSDateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd"
-                dateLabel.text = dateFormatter.stringFromDate(juxt.date!)
+                if let date = juxt.date {
+                    dateLabel.text = dateFormatter.stringFromDate(date)
+                }
                 // Setup gallery view
             }
         }

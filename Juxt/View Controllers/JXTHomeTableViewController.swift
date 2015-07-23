@@ -59,6 +59,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         }
 
         return query
+        
     }
     
     // MARK: Other Funcs 
@@ -67,13 +68,6 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         
         searchBar?.resignFirstResponder()
         
-    }
-    
-    func loadImagesInBackground(juxt: Juxt, cell: JXTJuxtTableViewCell) {
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-            cell.galleryScrollView.photos = ParseHelper.retrieveImagesFromJuxt(juxt)
-        }
     }
     
     // MARK: VC Methods
@@ -107,7 +101,6 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         
         tableView.estimatedRowHeight = 170
         tableView.rowHeight = UITableViewAutomaticDimension
-        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -162,11 +155,13 @@ class JXTHomeTableViewController: PFQueryTableViewController {
                         
                         if cell.galleryScrollView.photos?.count != objects?.count {
                             cell.galleryScrollView.photos = objects as? [Photo]
+                            
+                            cell.juxt?.photos = objects as? [Photo]
                         }
+                        
                     }
                 })
             //}
-            
             
 //            cell.galleryScrollView.photos = ParseHelper.retrieveImagesFromJuxt(juxt)
             

@@ -16,7 +16,6 @@ class JXTCameraViewController: UIViewController {
     
     var juxt: Juxt? // Juxt holder to tell the addPhotoVC what Juxt the photo is for
     
-    
     var camera: LLSimpleCamera?
     
     var snapButton: UIButton?
@@ -68,7 +67,7 @@ class JXTCameraViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
+        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Slide)
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -143,7 +142,7 @@ class JXTCameraViewController: UIViewController {
         
         cancelButton = UIButton.buttonWithType(.Custom) as? UIButton
         cancelButton?.frame = CGRectMake(5, 4, 44, 44)
-        cancelButton?.tintColor = UIColor.whiteColor()
+        cancelButton?.tintColor = JXTConstants.defaultBlueColor()
         cancelButton?.setImage(UIImage(named: "cancel"), forState: .Normal)
         cancelButton?.imageEdgeInsets = UIEdgeInsetsMake(12, 12, 12, 12)
         cancelButton?.addTarget(self, action: Selector("cancelButtonPressed:"), forControlEvents: .TouchUpInside)
@@ -157,8 +156,6 @@ class JXTCameraViewController: UIViewController {
             flashButton?.selected = false
             flashButton?.backgroundColor = UIColor.clearColor()
         }
-        
-        
         
     }
     
