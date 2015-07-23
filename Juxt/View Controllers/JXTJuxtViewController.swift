@@ -20,6 +20,7 @@ class JXTJuxtViewController: UIViewController {
     var imageLoadQueue: dispatch_queue_t?
     
     @IBOutlet weak var tableView: UITableView!
+    var compareView: JXTCompareView?
     
     var photoTakingHelper: PhotoTakingHelper?
     
@@ -39,17 +40,18 @@ class JXTJuxtViewController: UIViewController {
     
     @IBAction func compareButtonTapped(sender: UIButton) {
         
-        let testView = UIView(frame: CGRectMake(0, 0, UIScreen.mainScreen().applicationFrame.size.width, UIScreen.mainScreen().applicationFrame.size.height))
-        testView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
-        self.view.addSubview(testView)
-        
+        compareView = JXTCompareView(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, UIScreen.mainScreen().bounds.size.height), photos: self.photos!)
+        compareView?.delegate = self
+        self.tableView.userInteractionEnabled = false
+        self.navigationController?.view.addSubview(compareView!)
+        JXTConstants.fadeInWidthDuration(compareView!, duration: 0.3)
     }
     
     // MARK: VC Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-            
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.estimatedRowHeight = 315
@@ -62,16 +64,6 @@ class JXTJuxtViewController: UIViewController {
         self.navigationItem.titleView?.tintColor = UIColor.whiteColor()
         imageLoadQueue = dispatch_queue_create("imageLoad", DISPATCH_QUEUE_SERIAL)
         
-        if let juxt = juxt {
-            dispatch_async(self.imageLoadQueue!) {
-                self.photos = ParseHelper.retrieveImagesFromJuxt(juxt)
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.tableView.reloadData()
-                }
-                
-            }
-        }
-        
         
     }
     
@@ -80,6 +72,13 @@ class JXTJuxtViewController: UIViewController {
         super.viewWillAppear(animated)
         
         if let juxt = juxt {
+            dispatch_async(self.imageLoadQueue!) {
+                self.photos = ParseHelper.retrieveImagesFromJuxt(juxt, mostRecent: true)
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tableView.reloadData()
+                }
+                
+            }
         }
         
         UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
@@ -99,6 +98,15 @@ class JXTJuxtViewController: UIViewController {
     }
 }
 
+extension JXTJuxtViewController: JXTCompareViewDelegate {
+    
+    func compareViewDidCancel(button: UIButton) {
+        JXTConstants.fadeOutWithDuration(self.compareView!, duration: 0.3)
+        self.tableView.userInteractionEnabled = true
+    }
+    
+}
+
 extension JXTJuxtViewController: UITableViewDelegate {
     
 }
@@ -106,7 +114,15 @@ extension JXTJuxtViewController: UITableViewDelegate {
 extension JXTJuxtViewController: UITableViewDataSource {
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        
+        if self.photos != nil {
+            return 1
+        } else {
+            
+            
+        }
+        
+        return 0
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

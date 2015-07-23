@@ -18,4 +18,23 @@ class JXTConstants: NSObject {
         return UIFont(name: "Avenir Next", size: size)
     }
 
+    static func fadeInWidthDuration(view: UIView, duration: NSTimeInterval) {
+        
+        view.alpha = 0.0
+        UIView.animateWithDuration(duration, animations: { () -> Void in
+            view.alpha = 1.0
+        })
+        
+    }
+    
+    static func fadeOutWithDuration(view: UIView, duration: NSTimeInterval) {
+        
+        UIView.animateWithDuration(duration, animations: { () -> Void in
+            view.alpha = 0.0
+        }) { (finished) -> Void in
+            view.removeFromSuperview()
+        }
+        
+    }
+    
 }

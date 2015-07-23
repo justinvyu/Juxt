@@ -147,7 +147,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
 //            }
             //if cell.galleryScrollView.photos == nil {
                 let juxtQuery = PFQuery(className: "Photo")
-                juxtQuery.cachePolicy = .CacheThenNetwork
+                juxtQuery.cachePolicy = PFCachePolicy.CacheThenNetwork
                 juxtQuery.whereKey("fromJuxt", equalTo: juxt)
                 juxtQuery.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
                     

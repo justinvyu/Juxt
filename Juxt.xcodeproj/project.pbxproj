@@ -15,6 +15,7 @@
 		D08978241B5C25D8009FB6A2 /* JXTCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08978231B5C25D8009FB6A2 /* JXTCameraViewController.swift */; };
 		D08978261B5C261A009FB6A2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D08978251B5C261A009FB6A2 /* AVFoundation.framework */; };
 		D08978281B5D589B009FB6A2 /* ParseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08978271B5D589B009FB6A2 /* ParseHelper.swift */; };
+		D09B81211B6173E500C87FC5 /* JXTCompareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B81201B6173E500C87FC5 /* JXTCompareView.swift */; };
 		D0AFDC821B556E630097228E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AFDC811B556E630097228E /* AppDelegate.swift */; };
 		D0AFDC871B556E630097228E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0AFDC851B556E630097228E /* Main.storyboard */; };
 		D0AFDC891B556E630097228E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0AFDC881B556E630097228E /* Images.xcassets */; };
@@ -57,6 +58,7 @@
 		D08978231B5C25D8009FB6A2 /* JXTCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTCameraViewController.swift; sourceTree = "<group>"; };
 		D08978251B5C261A009FB6A2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D08978271B5D589B009FB6A2 /* ParseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseHelper.swift; sourceTree = "<group>"; };
+		D09B81201B6173E500C87FC5 /* JXTCompareView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTCompareView.swift; sourceTree = "<group>"; };
 		D0AFDC7C1B556E630097228E /* Juxt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Juxt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0AFDC801B556E630097228E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0AFDC811B556E630097228E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				D0BD46521B602EAA0007943E /* JXTPhotoTableViewCell.swift */,
 				D0092D361B581FFD00769490 /* JXTJuxtTableViewCell.swift */,
 				D0F7C5EE1B596496004E2F3E /* JXTImageGalleryScrollView.swift */,
+				D09B81201B6173E500C87FC5 /* JXTCompareView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 				D0F7C5EF1B596496004E2F3E /* JXTImageGalleryScrollView.swift in Sources */,
 				D0BD46531B602EAA0007943E /* JXTPhotoTableViewCell.swift in Sources */,
 				D0F7C5F41B596F48004E2F3E /* JXTConstants.swift in Sources */,
+				D09B81211B6173E500C87FC5 /* JXTCompareView.swift in Sources */,
 				D0092D391B582DAA00769490 /* JXTAddJuxtViewController.swift in Sources */,
 				D00B09391B56ED9900870D4D /* JXTHomeTableViewController.swift in Sources */,
 				D0AFDC821B556E630097228E /* AppDelegate.swift in Sources */,
