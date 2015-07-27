@@ -31,6 +31,8 @@ class JXTImageGalleryScrollView: UIScrollView {
         
         self.imageSize = self.imageSize ?? CGSizeMake(95, 95)
         
+        self.pagingEnabled = true
+        
         self.subviews.map { $0.removeFromSuperview() }
         
         dispatch_async(dispatch_get_main_queue()) {
@@ -52,7 +54,7 @@ class JXTImageGalleryScrollView: UIScrollView {
                     var xPos: CGFloat = 0.0
                     var yPos: CGFloat = 0.0
                     
-                    let padding = self.imagePadding * CGFloat(i)
+                    let padding = self.imagePadding * CGFloat(i + 1)
                     if self.direction == .Horizontal {
                         xPos = CGFloat(padding) + CGFloat(i) * self.imageSize!.width
                     } else  if self.direction == .Vertical {
@@ -63,7 +65,7 @@ class JXTImageGalleryScrollView: UIScrollView {
                     imageView.contentMode = .ScaleAspectFill
                     imageView.image = UIImage(named: "default-placeholder")
                     self.addSubview(imageView)
-                    
+                    JXTConstants.fadeInWidthDuration(imageView, duration: 0.3)
                     imageView.file = photos[i].imageFile
                     imageView.layer.cornerRadius = 5.0
                     imageView.clipsToBounds = true

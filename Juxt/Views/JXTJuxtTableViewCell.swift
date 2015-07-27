@@ -9,25 +9,20 @@
 import UIKit
 import Parse
 import ParseUI
+import DOFavoriteButton
 
 class JXTJuxtTableViewCell: PFTableViewCell {
 
     // MARK: Properties
     
-    static var dateFormatter: NSDateFormatter = {
-        var formatter = NSDateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter
-    }()
+    var currentPage: Int?
     
     var juxt: Juxt? {
         didSet {
             if let juxt = juxt, titleLabel = titleLabel, dateLabel = dateLabel {
                 titleLabel.text = juxt.title
-                var dateFormatter = NSDateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd"
                 if let date = juxt.date {
-                    dateLabel.text = dateFormatter.stringFromDate(date)
+                    dateLabel.text = JXTConstants.stringFromDate(date)
                 }
                 // Setup gallery view
             }
@@ -38,5 +33,11 @@ class JXTJuxtTableViewCell: PFTableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var galleryScrollView: JXTImageGalleryScrollView!
     @IBOutlet weak var profilePictureImageView: UIImageView!
+
+    override func prepareForReuse() {
+        self.galleryScrollView.photos = nil
+        self.galleryScrollView.subviews.map { $0.removeFromSuperview() }
+        
+    }
     
 }

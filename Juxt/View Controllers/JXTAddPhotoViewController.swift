@@ -13,7 +13,7 @@ import ConvenienceKit
 protocol JXTAddPhotoViewControllerDelegate {
     
     func retakePicture()
-    
+
 }
 
 class JXTAddPhotoViewController: UIViewController {
@@ -68,11 +68,12 @@ class JXTAddPhotoViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-
         UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
         self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
         self.navigationController?.navigationItem.leftBarButtonItem?.tintColor = UIColor.blackColor()
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: Selector("dismissToJuxt:"))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: Selector("dismissToJuxt"))
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.blackColor()
+
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -155,7 +156,7 @@ class JXTAddPhotoViewController: UIViewController {
         
         uploadActivityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 20, 20))
         uploadActivityIndicator?.center = doneButton!.center
-        uploadActivityIndicator?.frame.origin.y += doneButton!.frame.size.width - 30
+        uploadActivityIndicator?.frame.origin.y = doneButton!.frame.size.width - 30
         uploadActivityIndicator?.hidesWhenStopped = true
         doneButton!.addSubview(uploadActivityIndicator!)
     }
@@ -175,14 +176,17 @@ class JXTAddPhotoViewController: UIViewController {
         })
     }
     
-    func dismissToJuxt(button: UIButton) {
+    func dismissToJuxt() {
+    
+        self.presentingViewController?.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
         self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+        
     }
     
     func doneButtonPressed(button: UIButton) {
         
         if let juxt = juxt, titleTextField = titleTextField, image = image {
-            
+            println("inside")
             if titleTextField.text == "" || titleTextField.text == nil {
                 let alert = UIAlertView()
                 alert.title = "Add a title"
@@ -203,7 +207,8 @@ class JXTAddPhotoViewController: UIViewController {
             photo.uploadPhoto { (finished, error) -> Void in
                 
                     self.uploadActivityIndicator?.stopAnimating()
-                    self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+                    //self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+                    self.dismissToJuxt()
             }
         }
         

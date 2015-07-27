@@ -20,6 +20,7 @@ class JXTAddJuxtViewController: UIViewController {
     @IBOutlet weak var descriptionHeight: NSLayoutConstraint!
     @IBOutlet weak var uploadActivityIndicator: UIActivityIndicatorView!
     
+    var photoTakingHelper: PhotoTakingHelper?
     var keyboardNotificationHandler : KeyboardNotificationHandler?
     
     override func viewDidLoad() {
@@ -103,7 +104,10 @@ class JXTAddJuxtViewController: UIViewController {
             self.titleTextField.resignFirstResponder()
             self.descriptionTextView.resignFirstResponder()
             self.uploadActivityIndicator.stopAnimating()
-            self.dismissViewControllerAnimated(true, completion: nil)
+
+            self.photoTakingHelper = PhotoTakingHelper(viewController: self, juxt: juxt)
+            
+            //self.dismissViewControllerAnimated(true, completion: nil)
         }
     }
 

@@ -17,12 +17,12 @@ class PhotoTakingHelper : NSObject {
     
     var juxt: Juxt?
     
-    //var callback: PhotoTakingHelperCallback
+//    var callback: PhotoTakingHelperCallback
     var imagePickerController: UIImagePickerController?
     
     init(viewController: UIViewController, juxt: Juxt/*, callback: PhotoTakingHelperCallback*/) {
         self.viewController = viewController
-        //self.callback = callback
+//        self.callback = callback
         self.juxt = juxt
         
         super.init()
@@ -34,7 +34,7 @@ class PhotoTakingHelper : NSObject {
     func presentCamera() {
         
         let cameraViewController = JXTCameraViewController()
-        
+        cameraViewController.juxt = self.juxt
         viewController.presentViewController(cameraViewController, animated: true, completion: nil)
         
     }

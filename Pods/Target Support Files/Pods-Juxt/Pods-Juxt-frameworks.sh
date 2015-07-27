@@ -48,10 +48,8 @@ code_sign() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework 'APParallaxHeader.framework'
   install_framework 'Bolts.framework'
   install_framework 'ConvenienceKit.framework'
-  install_framework 'DOFavoriteButton.framework'
   install_framework 'FBSDKCoreKit.framework'
   install_framework 'FBSDKLoginKit.framework'
   install_framework 'FBSDKShareKit.framework'
@@ -62,13 +60,12 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'ParseUI.framework'
   install_framework 'Realm.framework'
   install_framework 'RealmSwift.framework'
+  install_framework 'TGCameraViewController.framework'
   install_framework 'TPKeyboardAvoiding.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework 'APParallaxHeader.framework'
   install_framework 'Bolts.framework'
   install_framework 'ConvenienceKit.framework'
-  install_framework 'DOFavoriteButton.framework'
   install_framework 'FBSDKCoreKit.framework'
   install_framework 'FBSDKLoginKit.framework'
   install_framework 'FBSDKShareKit.framework'
@@ -79,5 +76,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'ParseUI.framework'
   install_framework 'Realm.framework'
   install_framework 'RealmSwift.framework'
+  install_framework 'TGCameraViewController.framework'
   install_framework 'TPKeyboardAvoiding.framework'
 fi

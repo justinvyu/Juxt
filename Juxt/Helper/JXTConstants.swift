@@ -9,7 +9,13 @@
 import UIKit
 
 class JXTConstants: NSObject {
-       
+    
+    static var dateFormatter: NSDateFormatter = {
+        var formatter = NSDateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
+    
     static func defaultBlueColor() -> UIColor {
         return UIColor(red: 99/255, green: 195/255, blue: 251/255, alpha: 1.0)
     }
@@ -35,6 +41,10 @@ class JXTConstants: NSObject {
             view.removeFromSuperview()
         }
         
+    }
+    
+    static func stringFromDate(date: NSDate) -> String {
+        return dateFormatter.stringFromDate(date)
     }
     
 }

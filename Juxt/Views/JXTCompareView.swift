@@ -19,6 +19,9 @@ class JXTCompareView: UIView {
     var cancelButton: UIButton?
     var compareLabel: UILabel?
     
+    var topBlurView: UIVisualEffectView?
+    var bottomBlurView: UIVisualEffectView?
+    
     var delegate: JXTCompareViewDelegate?
     
     init(frame: CGRect, photos: [Photo]) {
@@ -53,7 +56,7 @@ class JXTCompareView: UIView {
         leftCompareView = JXTImageGalleryScrollView(frame: CGRectMake(imagePadding, imagePadding + 10 + cancelButton!.frame.size.height, frame.size.width / 2, frame.size.height - cancelButton!.frame.size.height - 10 - (5 * imagePadding)))
         leftCompareView?.direction = .Vertical
         leftCompareView?.imageSize = imageSize
-        leftCompareView?.photos = photos
+        leftCompareView?.photos = photos.reverse()
         leftCompareView?.clipsToBounds = true
         self.addSubview(leftCompareView!)
         
@@ -63,6 +66,13 @@ class JXTCompareView: UIView {
         rightCompareView?.photos = photos
         rightCompareView?.clipsToBounds = true
         self.addSubview(rightCompareView!)
+        
+        topBlurView = UIVisualEffectView(effect: blur)
+        topBlurView?.frame = CGRectMake(0, imagePadding + cancelButton!.frame.size.height, self.frame.size.width, imageSize.height)
+        self.addSubview(topBlurView!)
+        
+        
+        bottomBlurView = UIVisualEffectView(effect: blur)
         
     }
     

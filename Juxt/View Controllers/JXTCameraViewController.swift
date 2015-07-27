@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import LLSimpleCamera
+import TGCameraViewController
 
 class JXTCameraViewController: UIViewController {
 

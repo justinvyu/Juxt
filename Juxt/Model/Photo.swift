@@ -20,6 +20,7 @@ class Photo: PFObject, PFSubclassing {
     @NSManaged var desc: String?
     @NSManaged var fromJuxt: Juxt?
     @NSManaged var imageFile: PFFile?
+    @NSManaged var date: NSDate?
     
     // MARK: Parse Functions
     
@@ -40,6 +41,7 @@ class Photo: PFObject, PFSubclassing {
             
         }
         self.imageFile = imageFile
+        self.date = NSDate()
         saveInBackgroundWithBlock(completion)
         
     }

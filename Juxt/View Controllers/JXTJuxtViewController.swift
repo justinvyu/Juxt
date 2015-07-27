@@ -22,6 +22,7 @@ class JXTJuxtViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var compareView: JXTCompareView?
     
+    @IBOutlet weak var compareButton: UIButton!
     var photoTakingHelper: PhotoTakingHelper?
     
     // MARK: Helper Funcs
@@ -29,6 +30,7 @@ class JXTJuxtViewController: UIViewController {
     @IBAction func addPhotoButtonPressed(sender: UIBarButtonItem) {
         
         if let juxt = juxt {
+            
             photoTakingHelper = PhotoTakingHelper(viewController: self, juxt: juxt)
         }
         
@@ -45,6 +47,7 @@ class JXTJuxtViewController: UIViewController {
         self.tableView.userInteractionEnabled = false
         self.navigationController?.view.addSubview(compareView!)
         JXTConstants.fadeInWidthDuration(compareView!, duration: 0.3)
+        
     }
     
     // MARK: VC Lifecycle
@@ -60,11 +63,12 @@ class JXTJuxtViewController: UIViewController {
         self.navigationItem.hidesBackButton = false
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
-        self.navigationItem.title = juxt?.title
+        self.navigationController?.navigationItem.title = juxt?.title
+        
         self.navigationItem.titleView?.tintColor = UIColor.whiteColor()
         imageLoadQueue = dispatch_queue_create("imageLoad", DISPATCH_QUEUE_SERIAL)
         
-        
+
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -85,17 +89,6 @@ class JXTJuxtViewController: UIViewController {
         
         tableView.reloadData()
     }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if segue.identifier == "compare" {
-            let destination = segue.destinationViewController as! UIViewController
-            destination.view.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
-            self.modalPresentationStyle = .CurrentContext
-            destination.modalPresentationStyle = .CurrentContext
-        }
-        
-    }
 }
 
 extension JXTJuxtViewController: JXTCompareViewDelegate {
@@ -113,13 +106,27 @@ extension JXTJuxtViewController: UITableViewDelegate {
 
 extension JXTJuxtViewController: UITableViewDataSource {
     
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        
+        
+        return UITableViewAutomaticDimension
+    }
+    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
-        if self.photos != nil {
+        if self.photos?.count != 0 {
+            tableView.backgroundView?.removeFromSuperview()
+            tableView.backgroundView = nil
             return 1
         } else {
+            var label = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
+            label.text = "Looks like there's nothing here!\nClick the '+' button to get started or swipe to refresh."
+            label.numberOfLines = 0
+            label.textAlignment = .Center
+            label.font = UIFont.systemFontOfSize(18.0)
+            label.sizeToFit()
             
-            
+            tableView.backgroundView = label
         }
         
         return 0
@@ -134,13 +141,7 @@ extension JXTJuxtViewController: UITableViewDataSource {
         
         let photo = photos?[indexPath.row]
         
-        cell.photoView.file = photo?.imageFile
-        cell.photoView.layer.cornerRadius = 5.0
-        cell.photoView.contentMode = .ScaleAspectFill
-        cell.photoView.clipsToBounds = true
-        cell.photoView.image = UIImage(named: "default-placeholder")
-        cell.titleLabel.text = photo?.title
-        cell.photoView.loadInBackground()
+        cell.photo = photo
         
         return cell
     }

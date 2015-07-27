@@ -6,12 +6,6 @@
 // project.
 
 
-// APParallaxHeader
-#define COCOAPODS_POD_AVAILABLE_APParallaxHeader
-#define COCOAPODS_VERSION_MAJOR_APParallaxHeader 0
-#define COCOAPODS_VERSION_MINOR_APParallaxHeader 1
-#define COCOAPODS_VERSION_PATCH_APParallaxHeader 6
-
 // Bolts
 #define COCOAPODS_POD_AVAILABLE_Bolts
 #define COCOAPODS_VERSION_MAJOR_Bolts 1
@@ -35,12 +29,6 @@
 #define COCOAPODS_VERSION_MAJOR_ConvenienceKit 0
 #define COCOAPODS_VERSION_MINOR_ConvenienceKit 1
 #define COCOAPODS_VERSION_PATCH_ConvenienceKit 0
-
-// DOFavoriteButton
-#define COCOAPODS_POD_AVAILABLE_DOFavoriteButton
-#define COCOAPODS_VERSION_MAJOR_DOFavoriteButton 0
-#define COCOAPODS_VERSION_MINOR_DOFavoriteButton 0
-#define COCOAPODS_VERSION_PATCH_DOFavoriteButton 2
 
 // FBSDKCoreKit
 #define COCOAPODS_POD_AVAILABLE_FBSDKCoreKit
@@ -119,6 +107,12 @@
 #define COCOAPODS_VERSION_MAJOR_RealmSwift 0
 #define COCOAPODS_VERSION_MINOR_RealmSwift 93
 #define COCOAPODS_VERSION_PATCH_RealmSwift 2
+
+// TGCameraViewController
+#define COCOAPODS_POD_AVAILABLE_TGCameraViewController
+#define COCOAPODS_VERSION_MAJOR_TGCameraViewController 2
+#define COCOAPODS_VERSION_MINOR_TGCameraViewController 2
+#define COCOAPODS_VERSION_PATCH_TGCameraViewController 1
 
 // TPKeyboardAvoiding
 #define COCOAPODS_POD_AVAILABLE_TPKeyboardAvoiding

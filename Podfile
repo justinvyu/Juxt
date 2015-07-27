@@ -16,8 +16,7 @@ target 'Juxt' do
 	pod 'RealmSwift'
 	pod 'GTScrollNavigationBar'
 	pod 'LLSimpleCamera', '~> 3.0'
-	pod 'DOFavoriteButton'
-	pod 'APParallaxHeader'
+	pod 'TGCameraViewController'
 
 end
 

@@ -1,5 +1,4 @@
 PODS:
-  - APParallaxHeader (0.1.6)
   - Bolts (1.2.0):
     - Bolts/AppLinks (= 1.2.0)
     - Bolts/Tasks (= 1.2.0)
@@ -7,7 +6,6 @@ PODS:
     - Bolts/Tasks
   - Bolts/Tasks (1.2.0)
   - ConvenienceKit (0.1.0)
-  - DOFavoriteButton (0.0.2)
   - FBSDKCoreKit (4.4.0):
     - Bolts (~> 1.1)
     - FBSDKCoreKit/arc (= 4.4.0)
@@ -33,12 +31,11 @@ PODS:
   - Realm/Headers (0.93.2)
   - RealmSwift (0.93.2):
     - Realm (= 0.93.2)
+  - TGCameraViewController (2.2.1)
   - TPKeyboardAvoiding (1.2.8)
 
 DEPENDENCIES:
-  - APParallaxHeader
   - ConvenienceKit
-  - DOFavoriteButton
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
@@ -48,13 +45,12 @@ DEPENDENCIES:
   - Parse
   - ParseUI
   - RealmSwift
+  - TGCameraViewController
   - TPKeyboardAvoiding
 
 SPEC CHECKSUMS:
-  APParallaxHeader: 854bc48a2487ca12c702f8a236fec0d89cdac5c3
   Bolts: d176cb1e0012175589e389a9db49b85e27787576
   ConvenienceKit: 083548558dedc22a586c1e1fbf3aa217728715af
-  DOFavoriteButton: d34827428accfb396b036e4d4b8b3606b9f0f431
   FBSDKCoreKit: 75bdd75c980e811db218488d99dd93b7740f4474
   FBSDKLoginKit: 02a9254a4c132412fa03577b0d53e936d068a7fb
   FBSDKShareKit: a42865f20ba2d1cc548c4d0f73ad22cff6377ddb
@@ -65,6 +61,7 @@ SPEC CHECKSUMS:
   ParseUI: d1228541b02a36a7354c8f47747f5f7a89cf1ff0
   Realm: 2fdd0ae74f730e190384e0338d8a0d3654df8220
   RealmSwift: 231b064da9f98b1c4f325fe1f1cb8756aae2b8d6
+  TGCameraViewController: 06bc4b742f2524fbf60f92cade61df595e8b8678
   TPKeyboardAvoiding: f1ef0028fe9ba98ef2871cf55b4bbc39cae0267b
 
 COCOAPODS: 0.37.2

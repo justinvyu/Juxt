@@ -70,6 +70,12 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         
     }
     
+    func presentAddJuxtViewController(button: UIButton) {
+        
+        self.performSegueWithIdentifier("AddJuxt", sender: nil)
+        
+    }
+    
     // MARK: VC Methods
     
     override func viewDidLayoutSubviews() {
@@ -85,13 +91,23 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         
         UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
         
-        let searchBar = UISearchBar(frame: CGRectMake(-5, 0, 320, 44))
-        searchBar.autoresizingMask = .FlexibleWidth
-        let searchView = UIView(frame: CGRectMake(0, 0, 310, 44))
-        searchBar.delegate = self
-        searchView.addSubview(searchBar)
-        self.searchBar = searchBar
-        self.navigationItem.titleView = searchBar
+//        let searchBar = UISearchBar(frame: CGRectMake(-5, 0, 320, 44))
+//        searchBar.autoresizingMask = .FlexibleWidth
+//        let searchView = UIView(frame: CGRectMake(0, 0, 310, 44))
+//        searchBar.delegate = self
+//        searchView.addSubview(searchBar)
+//        self.searchBar = searchBar
+//        self.navigationItem.titleView = searchBar
+        
+        var profileButton = UIBarButtonItem()
+        profileButton.tintColor = UIColor.whiteColor()
+        profileButton.image = UIImage(named: "profile")
+        profileButton.imageInsets = UIEdgeInsetsMake(3, 3, 3, 3)
+        
+        var addJuxtButton = UIBarButtonItem(barButtonSystemItem: .Compose, target: self, action: "presentAddJuxtViewController:")
+        addJuxtButton.tintColor = UIColor.whiteColor()
+        
+        self.navigationItem.rightBarButtonItems = [addJuxtButton, profileButton]
         
         tableView.contentInset = UIEdgeInsetsZero
         tableView.separatorInset = UIEdgeInsetsZero
@@ -99,7 +115,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         self.loadObjects()
         imageLoadQueue = dispatch_queue_create("imageLoad", DISPATCH_QUEUE_SERIAL)
         
-        tableView.estimatedRowHeight = 170
+        tableView.estimatedRowHeight = 184
         tableView.rowHeight = UITableViewAutomaticDimension
     }
     
@@ -136,6 +152,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         
         if let juxt = object as? Juxt, cell = cell {
             cell.juxt = juxt
+            
 //            dispatch_async(self.imageLoadQueue!) {
 //                let photos = ParseHelper.retrieveImagesFromJuxt(juxt)
 //                if photos?.count != 0 {
@@ -158,7 +175,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
                             
                             cell.juxt?.photos = objects as? [Photo]
                         }
-                        
+                                                
                     }
                 })
             //}
@@ -193,13 +210,13 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         if segue.identifier == "ShowJuxt" {
             if let juxtCell = sender as? JXTJuxtTableViewCell {
                 if let juxtViewController = segue.destinationViewController as? JXTJuxtViewController {
-                    juxtViewController.juxt = juxtCell.juxt
+                        juxtViewController.juxt = juxtCell.juxt
                 }
             }
         }
     }
-
 }
+
 
 extension JXTHomeTableViewController: UISearchBarDelegate {
     
