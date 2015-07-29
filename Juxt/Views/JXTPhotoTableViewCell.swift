@@ -10,9 +10,17 @@ import UIKit
 import Parse
 import ParseUI
 
+protocol JXTPhotoTableViewCellDelegate {
+    
+    func imageViewWasPressedWithImage(image: UIImage)
+    
+}
+
 class JXTPhotoTableViewCell: UITableViewCell {
 
     @IBOutlet weak var photoView: PFImageView!
+    
+    var delegate: JXTPhotoTableViewCellDelegate?
     
     var photo: Photo? {
         
@@ -24,6 +32,11 @@ class JXTPhotoTableViewCell: UITableViewCell {
                 photoView.contentMode = .ScaleAspectFill
                 photoView.clipsToBounds = true
                 photoView.image = UIImage(named: "default-placeholder")
+                
+                let tapGesture = UITapGestureRecognizer(target: self, action: "photoTapped:")
+                photoView.addGestureRecognizer(tapGesture)
+                photoView.userInteractionEnabled = true
+                
                 titleLabel.text = photo.title
                 if let date = photo.date {
                     dateLabel.text = JXTConstants.stringFromDate(date)
@@ -33,7 +46,13 @@ class JXTPhotoTableViewCell: UITableViewCell {
             }
             
         }
-        
+    }
+    
+    func photoTapped(gesture: UITapGestureRecognizer) {
+        println("tapped")
+        if let image = self.photoView.image {
+            self.delegate?.imageViewWasPressedWithImage(image)
+        }
     }
     
     @IBOutlet weak var titleLabel: UILabel!

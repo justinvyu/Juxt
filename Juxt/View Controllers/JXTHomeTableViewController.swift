@@ -41,7 +41,8 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         // Configure the PFQueryTableView
         self.parseClassName = "Juxt"
         self.pullToRefreshEnabled = true
-        self.paginationEnabled = false
+        self.paginationEnabled = true
+        self.objectsPerPage = 8
         self.loadingViewEnabled = false
         
     }
@@ -70,7 +71,14 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         
     }
     
-    func presentAddJuxtViewController(button: UIButton) {
+    func presentProfileViewController(button: UIBarButtonItem) {
+        
+        let profileViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileVC") as! UIViewController
+        self.presentViewController(profileViewController, animated: true, completion: nil)
+        
+    }
+    
+    func presentAddJuxtViewController(button: UIBarButtonItem) {
         
         self.performSegueWithIdentifier("AddJuxt", sender: nil)
         
@@ -86,9 +94,8 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         super.viewDidLoad()
         
 //        timelineComponent = TimelineComponent(target: self)
-        
         self.navigationController?.scrollNavigationBar.scrollView = self.tableView
-        
+
         UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
         
 //        let searchBar = UISearchBar(frame: CGRectMake(-5, 0, 320, 44))
@@ -99,9 +106,13 @@ class JXTHomeTableViewController: PFQueryTableViewController {
 //        self.searchBar = searchBar
 //        self.navigationItem.titleView = searchBar
         
-        var profileButton = UIBarButtonItem()
+//        self.tabBarController?.tabBar.hidden = true
+        
+        var profileButton = UIBarButtonItem(image: UIImage(named: "profile"), landscapeImagePhone: nil, style: .Plain, target: self, action: "presentProfileViewController:")
+        
+//        var profileButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: "presentProfileViewController:")
         profileButton.tintColor = UIColor.whiteColor()
-        profileButton.image = UIImage(named: "profile")
+//        profileButton.image = UIImage(named: "profile")
         profileButton.imageInsets = UIEdgeInsetsMake(3, 3, 3, 3)
         
         var addJuxtButton = UIBarButtonItem(barButtonSystemItem: .Compose, target: self, action: "presentAddJuxtViewController:")
@@ -121,6 +132,10 @@ class JXTHomeTableViewController: PFQueryTableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.hidden = true
+
+        //self.view.layoutIfNeeded()
+        
         self.loadObjects()
         self.tableView.reloadData()
     }
@@ -131,6 +146,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
     }
 
     override func viewWillLayoutSubviews() {
+        
         if tableView.respondsToSelector(Selector("setSeparatorInset:")) {
             tableView.separatorInset = UIEdgeInsetsZero
         }
@@ -208,10 +224,16 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         self.navigationController?.scrollNavigationBar.resetToDefaultPositionWithAnimation(true)
         
         if segue.identifier == "ShowJuxt" {
+            println("showing juxt")
             if let juxtCell = sender as? JXTJuxtTableViewCell {
                 if let juxtViewController = segue.destinationViewController as? JXTJuxtViewController {
                         juxtViewController.juxt = juxtCell.juxt
                 }
+//                if let navController = segue.destinationViewController as? UINavigationController {
+//                    if let tabBarViewController = navController.viewControllers?[0] as? JXTTabBarViewController {
+//                        tabBarViewController.juxt = juxtCell.juxt
+//                    }
+//                }
             }
         }
     }

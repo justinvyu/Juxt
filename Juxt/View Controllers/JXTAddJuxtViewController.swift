@@ -65,18 +65,7 @@ class JXTAddJuxtViewController: UIViewController {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
-        
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     @IBAction func takePictureButtonTapped(sender: UIButton) {
          
@@ -105,8 +94,9 @@ class JXTAddJuxtViewController: UIViewController {
             self.descriptionTextView.resignFirstResponder()
             self.uploadActivityIndicator.stopAnimating()
 
-            self.photoTakingHelper = PhotoTakingHelper(viewController: self, juxt: juxt)
+            self.photoTakingHelper = PhotoTakingHelper(viewController: self, juxt: juxt, cameraOnly: true, cancelButtonHidden: true)
             
+            sender.enabled = true
             //self.dismissViewControllerAnimated(true, completion: nil)
         }
     }

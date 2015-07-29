@@ -10,15 +10,11 @@ import UIKit
 
 class JXTTabBarController: UITabBarController {
 
+    // MARK: Properties
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        for item in self.tabBar.items {
-//            if let tabBarItem = item as! UITabBarItem {
-//                
-//            }
-//        }
-        
+                
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,15 +23,15 @@ class JXTTabBarController: UITabBarController {
         
         
     }
+    
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+extension JXTTabBarViewController: UITabBarControllerDelegate {
+    
+    func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
+        
+        println(viewController)
+        
     }
-    */
-
+    
 }

@@ -26,19 +26,20 @@ class JXTImageGalleryScrollView: UIScrollView {
             displayGallery(photos)
         }
     }
+    var images: [UIImage]?
     
     func displayGallery(photos: [Photo]?) {
         
         self.imageSize = self.imageSize ?? CGSizeMake(95, 95)
-        
-        self.pagingEnabled = true
+        self.images = []
         
         self.subviews.map { $0.removeFromSuperview() }
-        
+        self.showsVerticalScrollIndicator = false
+        self.showsHorizontalScrollIndicator = false
         dispatch_async(dispatch_get_main_queue()) {
             
             if let photos = photos {
-                let paddingWidth = CGFloat(photos.count + 1) * self.imagePadding
+                let paddingWidth = 2 * CGFloat(photos.count + 1) * self.imagePadding
                 let imageWidth = CGFloat(photos.count) * self.imageSize!.width
                 let imageHeight = CGFloat(photos.count) * self.imageSize!.height
                 let contentWidth = self.imageSize!.width
@@ -54,22 +55,26 @@ class JXTImageGalleryScrollView: UIScrollView {
                     var xPos: CGFloat = 0.0
                     var yPos: CGFloat = 0.0
                     
-                    let padding = self.imagePadding * CGFloat(i + 1)
                     if self.direction == .Horizontal {
-                        xPos = CGFloat(padding) + CGFloat(i) * self.imageSize!.width
-                    } else  if self.direction == .Vertical {
-                        yPos = CGFloat(padding) + CGFloat(i) * self.imageSize!.height
+                        xPos = self.imagePadding * CGFloat(i + 1) /*CGFloat(padding)*/ + CGFloat(i) * self.imageSize!.width
+                    } else if self.direction == .Vertical {
+                        yPos = 2 * self.imagePadding * CGFloat(i)/*CGFloat(padding)*/ + CGFloat(i) * self.imageSize!.height
+                        if i != 0 {
+                            yPos += 2
+                        }
                     }
                     
                     var imageView = PFImageView(frame: CGRectMake(xPos, yPos, self.imageSize!.width, self.imageSize!.height))
                     imageView.contentMode = .ScaleAspectFill
                     imageView.image = UIImage(named: "default-placeholder")
                     self.addSubview(imageView)
-                    JXTConstants.fadeInWidthDuration(imageView, duration: 0.3)
+//                    JXTConstants.fadeInWidthDuration(imageView, duration: 0.3)
                     imageView.file = photos[i].imageFile
                     imageView.layer.cornerRadius = 5.0
                     imageView.clipsToBounds = true
                     imageView.loadInBackground()
+                    
+                    self.images?.append(imageView.image!)
                 }
             }
         }

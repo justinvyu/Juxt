@@ -16,18 +16,24 @@ class PhotoTakingHelper : NSObject {
     weak var viewController: UIViewController!
     
     var juxt: Juxt?
+    var cancelButtonHidden: Bool?
     
 //    var callback: PhotoTakingHelperCallback
     var imagePickerController: UIImagePickerController?
     
-    init(viewController: UIViewController, juxt: Juxt/*, callback: PhotoTakingHelperCallback*/) {
+    init(viewController: UIViewController, juxt: Juxt, cameraOnly: Bool, cancelButtonHidden: Bool/*, callback: PhotoTakingHelperCallback*/) {
         self.viewController = viewController
 //        self.callback = callback
+        self.cancelButtonHidden = cancelButtonHidden
         self.juxt = juxt
         
         super.init()
         
-        showPhotoSourceSelection()
+        if cameraOnly {
+            presentCamera()
+        } else {
+            showPhotoSourceSelection()
+        }
         // showImagePickerController(.Camera) // switch after download to phone
     }
     
@@ -35,6 +41,7 @@ class PhotoTakingHelper : NSObject {
         
         let cameraViewController = JXTCameraViewController()
         cameraViewController.juxt = self.juxt
+        cameraViewController.cancelButtonHidden = self.cancelButtonHidden
         viewController.presentViewController(cameraViewController, animated: true, completion: nil)
         
     }

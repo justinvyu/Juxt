@@ -202,8 +202,8 @@ class JXTAddPhotoViewController: UIViewController {
             let photo = Photo()
             photo.title = titleTextField.text
             photo.fromJuxt = juxt
-            photo.image = image
-            
+            photo.image = self.scaleImage(image, width: 640)
+                
             photo.uploadPhoto { (finished, error) -> Void in
                 
                     self.uploadActivityIndicator?.stopAnimating()
@@ -213,6 +213,21 @@ class JXTAddPhotoViewController: UIViewController {
         }
         
         
+    }
+    
+    func scaleImage(image: UIImage, width: CGFloat) -> UIImage {
+        let oldWidth = image.size.width
+        let scaleFactor = width / oldWidth
+        
+        let newHeight = image.size.height * scaleFactor
+        let newWidth = oldWidth * scaleFactor
+        
+        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
+        image.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
     }
 }
 
@@ -225,5 +240,26 @@ extension JXTAddPhotoViewController: UIScrollViewDelegate {
             self.titleTextField?.becomeFirstResponder()
         }
     }
+    
+}
+
+extension UIImage {
+//    
+//    +(UIImage*)imageWithImage: (UIImage*) sourceImage scaledToWidth: (float) i_width
+//    {
+//    float oldWidth = sourceImage.size.width;
+//    float scaleFactor = i_width / oldWidth;
+//    
+//    float newHeight = sourceImage.size.height * scaleFactor;
+//    float newWidth = oldWidth * scaleFactor;
+//    
+//    UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight));
+//    [sourceImage drawInRect:CGRectMake(0, 0, newWidth, newHeight)];
+//    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+//    return newImage;
+//    }
+    
+
     
 }

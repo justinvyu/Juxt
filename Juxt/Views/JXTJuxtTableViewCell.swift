@@ -37,7 +37,6 @@ class JXTJuxtTableViewCell: PFTableViewCell {
     override func prepareForReuse() {
         self.galleryScrollView.photos = nil
         self.galleryScrollView.subviews.map { $0.removeFromSuperview() }
-        
     }
     
 }
