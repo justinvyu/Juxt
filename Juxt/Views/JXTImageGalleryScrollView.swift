@@ -39,7 +39,8 @@ class JXTImageGalleryScrollView: UIScrollView {
         dispatch_async(dispatch_get_main_queue()) {
             
             if let photos = photos {
-                let paddingWidth = 2 * CGFloat(photos.count + 1) * self.imagePadding
+                let paddingWidth = CGFloat(photos.count) * self.imagePadding
+                let paddingWidthPaginated = 2 * CGFloat(photos.count) * self.imagePadding
                 let imageWidth = CGFloat(photos.count) * self.imageSize!.width
                 let imageHeight = CGFloat(photos.count) * self.imageSize!.height
                 let contentWidth = self.imageSize!.width
@@ -48,7 +49,7 @@ class JXTImageGalleryScrollView: UIScrollView {
                 if self.direction == .Horizontal {
                     self.contentSize = CGSizeMake(paddingWidth + imageWidth, contentHeight)
                 } else if self.direction == .Vertical {
-                    self.contentSize = CGSizeMake(contentWidth, paddingWidth + imageHeight)
+                    self.contentSize = CGSizeMake(contentWidth, paddingWidthPaginated + imageHeight)
                 }
                 
                 for var i = 0; i < photos.count; i++ {

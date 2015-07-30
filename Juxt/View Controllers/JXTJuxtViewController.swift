@@ -172,14 +172,15 @@ extension JXTJuxtViewController: JXTCompareViewDelegate {
     }
     
     func compareButtonWasPressedWithImages(compareView: JXTCompareView, firstImage: UIImage, secondImage: UIImage) {
-        println(self.combineImage(image: firstImage, withImage: secondImage))
+        //println(self.combineImage(image: firstImage, withImage: secondImage))
         
         let testView = UIImageView(frame: CGRectMake(20, 0, self.view.frame.size.width - 40, self.view.frame.size.height))
         testView.image = self.combineImage(image: firstImage, withImage: secondImage)
         //testView.image = testView.image?.borderImage(UIColor.whiteColor(), borderWidth: 5.0)
         testView.contentMode = .ScaleAspectFit
         compareView.addSubview(testView)
-        JXTConstants.fadeInWidthDuration(compareView, duration: 0.3)
+        compareView.previewView = testView
+        JXTConstants.fadeInWidthDuration(testView, duration: 0.3)
     }
     
 }

@@ -579,24 +579,18 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="330" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="qhJ-Mb-6Rj">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="600" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="qhJ-Mb-6Rj">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PhotoCell" rowHeight="330" id="5ha-T1-OVH" customClass="JXTPhotoTableViewCell" customModule="Juxt" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PhotoCell" rowHeight="640" id="5ha-T1-OVH" customClass="JXTPhotoTableViewCell" customModule="Juxt" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5ha-T1-OVH" id="Elr-Xj-jq0">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6GX-de-QUC" customClass="PFImageView">
-                                                    <rect key="frame" x="8" y="40" width="584" height="282"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="282" id="ZiU-An-Elx"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Rz-hf-AyJ">
-                                                    <rect key="frame" x="8" y="11" width="33" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Rz-hf-AyJ">
+                                                    <rect key="frame" x="8" y="11" width="32.5" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" priority="750" constant="319" id="Euz-Hi-H3O"/>
                                                         <constraint firstAttribute="height" constant="21" id="F4G-T9-Jk5"/>
@@ -611,7 +605,7 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7/15/15" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lse-F6-faM">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="7/15/15" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lse-F6-faM">
                                                     <rect key="frame" x="521" y="12" width="71" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="258" id="2Y2-t1-SDe"/>
@@ -630,6 +624,18 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6GX-de-QUC" customClass="PFImageView">
+                                                    <rect key="frame" x="8" y="40" width="584" height="584"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="584" id="ZiU-An-Elx"/>
+                                                        <constraint firstAttribute="width" secondItem="6GX-de-QUC" secondAttribute="height" multiplier="1:1" id="iPQ-vP-C55"/>
+                                                    </constraints>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="ZiU-An-Elx"/>
+                                                        </mask>
+                                                    </variation>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="6GX-de-QUC" firstAttribute="leading" secondItem="Elr-Xj-jq0" secondAttribute="leadingMargin" id="3EY-66-vRH"/>
@@ -641,7 +647,7 @@
                                                 <constraint firstItem="lse-F6-faM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0Rz-hf-AyJ" secondAttribute="trailing" constant="5" id="HVU-3I-3yZ"/>
                                                 <constraint firstItem="6GX-de-QUC" firstAttribute="centerX" secondItem="Elr-Xj-jq0" secondAttribute="centerX" id="Jhg-6g-cZO"/>
                                                 <constraint firstItem="6GX-de-QUC" firstAttribute="trailing" secondItem="lse-F6-faM" secondAttribute="trailing" id="WCy-IF-ddM"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="6GX-de-QUC" secondAttribute="bottom" id="aGs-RV-zy4"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="6GX-de-QUC" secondAttribute="bottom" constant="-32" id="aGs-RV-zy4"/>
                                                 <constraint firstItem="6GX-de-QUC" firstAttribute="top" secondItem="lse-F6-faM" secondAttribute="bottom" constant="8" symbolic="YES" id="c9F-oK-kyM"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="lse-F6-faM" secondAttribute="trailing" constant="-7" id="dhz-Ot-k91"/>
                                                 <constraint firstItem="6GX-de-QUC" firstAttribute="top" secondItem="0Rz-hf-AyJ" secondAttribute="bottom" constant="8" symbolic="YES" id="jE6-NM-mRC"/>

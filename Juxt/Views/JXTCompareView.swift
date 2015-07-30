@@ -22,6 +22,7 @@ class JXTCompareView: UIView {
     var compareLabel: UILabel?
     var retryButton: UIButton?
     var compareButton: UIButton?
+    var previewView: UIImageView?
     
     //    var topBlurView: FXBlurView?
 //    var bottomBlurView: FXBlurView?
@@ -71,16 +72,18 @@ class JXTCompareView: UIView {
         retryButton?.setImage(UIImage(named: "retry"), forState: .Normal)
         retryButton?.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
         retryButton?.frame.origin.x = self.frame.width - 53
-        retryButton?.frame.origin.y = 5.0
         self.addSubview(retryButton!)
         retryButton?.hidden = true
+        retryButton?.addTarget(self, action: "showCompareUI", forControlEvents: .TouchUpInside)
         
         let imageSize: CGSize = CGSizeMake((frame.size.width / 2) - 20.0, (frame.size.width / 2) - 20.0)
         let imagePadding: CGFloat = 10.0
         
         topView = UIView()
         topView?.backgroundColor = UIColor.whiteColor()
-        topView?.frame = CGRectMake(0, imageSize.height + cancelButton!.frame.size.height + 2 * imagePadding, self.frame.size.width, 2)
+//        topView?.frame = CGRectMake(0, imageSize.height + cancelButton!.frame.size.height + 2 * imagePadding, self.frame.size.width, 2)
+        
+        topView?.frame = CGRectMake(0, self.center.y - imageSize.height / 2 - imagePadding - 2, self.frame.size.width, 2)
         self.addSubview(topView!)
         
 //        topBlurView = FXBlurView()
@@ -149,6 +152,7 @@ class JXTCompareView: UIView {
     }
     
     func compare(button: UIButton) {
+        button.enabled = false
         let imageSize: CGSize = CGSizeMake((frame.size.width / 2) - 20.0, (frame.size.width / 2) - 20.0)
 
         let leftImageIndex = Int(floor(leftCompareView!.contentOffset.y / imageSize.height))
@@ -158,12 +162,28 @@ class JXTCompareView: UIView {
         let rightImage = rightCompareView!.images![rightImageIndex]
         
         self.delegate?.compareButtonWasPressedWithImages(self, firstImage: leftImage, secondImage: rightImage)
+        hideCompareUI()
+        button.enabled = true
+    }
+    
+    func showCompareUI() {
+        leftCompareView?.hidden = false
+        rightCompareView?.hidden = false
+        topView?.hidden = false
+        bottomView?.hidden = false
+        
+        retryButton?.hidden = true
+        previewView?.hidden = true
+    }
+    
+    func hideCompareUI() {
         leftCompareView?.hidden = true
         rightCompareView?.hidden = true
         topView?.hidden = true
         bottomView?.hidden = true
         
         retryButton?.hidden = false
+        previewView?.hidden = false
     }
 }
 
