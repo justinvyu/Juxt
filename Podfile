@@ -18,6 +18,7 @@ target 'Juxt' do
 	pod 'LLSimpleCamera', '~> 3.0'
 	pod 'TGCameraViewController'
 	pod 'FXBlurView'
+	pod 'ParseFacebookUtils'
 
 end
 

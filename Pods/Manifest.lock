@@ -6,6 +6,8 @@ PODS:
     - Bolts/Tasks
   - Bolts/Tasks (1.2.0)
   - ConvenienceKit (0.1.0)
+  - Facebook-iOS-SDK (3.23.2):
+    - Bolts (~> 1.0)
   - FBSDKCoreKit (4.4.0):
     - Bolts (~> 1.1)
     - FBSDKCoreKit/arc (= 4.4.0)
@@ -25,6 +27,10 @@ PODS:
   - LLSimpleCamera (3.0.0)
   - Parse (1.7.5):
     - Bolts/Tasks (>= 1.2.0)
+  - ParseFacebookUtils (1.7.5):
+    - Bolts/Tasks (>= 1.2.0)
+    - Facebook-iOS-SDK (~> 3.23)
+    - Parse (~> 1.7.5)
   - ParseUI (1.1.4):
     - Parse (~> 1.7)
   - Realm (0.93.2):
@@ -45,6 +51,7 @@ DEPENDENCIES:
   - GTScrollNavigationBar
   - LLSimpleCamera (~> 3.0)
   - Parse
+  - ParseFacebookUtils
   - ParseUI
   - RealmSwift
   - TGCameraViewController
@@ -53,6 +60,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Bolts: d176cb1e0012175589e389a9db49b85e27787576
   ConvenienceKit: 083548558dedc22a586c1e1fbf3aa217728715af
+  Facebook-iOS-SDK: cd87f0b2f0c1d9574b44e8fa2baacc275524bac3
   FBSDKCoreKit: 75bdd75c980e811db218488d99dd93b7740f4474
   FBSDKLoginKit: 02a9254a4c132412fa03577b0d53e936d068a7fb
   FBSDKShareKit: a42865f20ba2d1cc548c4d0f73ad22cff6377ddb
@@ -61,6 +69,7 @@ SPEC CHECKSUMS:
   GTScrollNavigationBar: 2fee3124c458393eca1d6d68ebf759051280f475
   LLSimpleCamera: 3c41b46917f9ca53b91ef9c0cf24a75ce0ab4cd8
   Parse: 7c0f115eff3e0cea3fac08d50bda47154edb8832
+  ParseFacebookUtils: ebd2bc2b4134f25aa8a7ed3c33fa0575b8ce921c
   ParseUI: d1228541b02a36a7354c8f47747f5f7a89cf1ff0
   Realm: 2fdd0ae74f730e190384e0338d8a0d3654df8220
   RealmSwift: 231b064da9f98b1c4f325fe1f1cb8756aae2b8d6

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D00360C71B6AA17D003DCB3D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D00360C61B6AA17D003DCB3D /* Social.framework */; };
 		D0092D371B581FFD00769490 /* JXTJuxtTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0092D361B581FFD00769490 /* JXTJuxtTableViewCell.swift */; };
 		D0092D391B582DAA00769490 /* JXTAddJuxtViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0092D381B582DAA00769490 /* JXTAddJuxtViewController.swift */; };
 		D0092D3C1B585B1200769490 /* JXTTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0092D3B1B585B1200769490 /* JXTTabBarController.swift */; };
@@ -53,6 +54,7 @@
 		499E54B84FAF82B3EFF8429C /* Pods-Juxt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Juxt.release.xcconfig"; path = "Pods/Target Support Files/Pods-Juxt/Pods-Juxt.release.xcconfig"; sourceTree = "<group>"; };
 		7219618C4A5AA4482001067C /* Pods_Juxt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Juxt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7931DB76583F9A98551C49FA /* Pods-Juxt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Juxt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Juxt/Pods-Juxt.debug.xcconfig"; sourceTree = "<group>"; };
+		D00360C61B6AA17D003DCB3D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		D0092D361B581FFD00769490 /* JXTJuxtTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTJuxtTableViewCell.swift; sourceTree = "<group>"; };
 		D0092D381B582DAA00769490 /* JXTAddJuxtViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTAddJuxtViewController.swift; sourceTree = "<group>"; };
 		D0092D3B1B585B1200769490 /* JXTTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTTabBarController.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D00360C71B6AA17D003DCB3D /* Social.framework in Frameworks */,
 				D08978261B5C261A009FB6A2 /* AVFoundation.framework in Frameworks */,
 				D0AFDCAC1B55769A0097228E /* Fabric.framework in Frameworks */,
 				D0AFDCAF1B55769A0097228E /* TwitterCore.framework in Frameworks */,
@@ -222,6 +225,7 @@
 		DA7A36412FF8B21CCDC73CFE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D00360C61B6AA17D003DCB3D /* Social.framework */,
 				D08978251B5C261A009FB6A2 /* AVFoundation.framework */,
 				D0AFDCA81B55769A0097228E /* Fabric.framework */,
 				D0AFDCA91B55769A0097228E /* TwitterKit.framework */,

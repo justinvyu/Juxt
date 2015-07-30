@@ -1,4 +1,4 @@
-//
+    //
 //  AppDelegate.swift
 //  Juxt
 //
@@ -12,6 +12,8 @@ import TwitterKit
 import FBSDKCoreKit
 import Parse
 import Bolts
+import ParseFacebookUtils
+
 //import Realm
 //import RealmSwift
 
@@ -50,12 +52,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // [Optional] Track statistics around application opens.
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
         
+        // Setup Parse Facebook Utils
+        PFFacebookUtils.initializeFacebook()
+        
 //        Fabric.with([Twitter()])
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
-        return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
+//        return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
+        
+        return FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication, withSession: PFFacebookUtils.session())
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -76,6 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         
         FBSDKAppEvents.activateApp()
+        PFFacebookUtils.session()?.handleDidBecomeActive()
         
     }
 

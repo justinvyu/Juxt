@@ -13,6 +13,8 @@ import ParseUI
 import FBSDKCoreKit
 import FBSDKShareKit
 
+import Social
+
 //protocol JXTJuxtViewControllerDelegate {
 //    
 //    func didLoadPhotos(photos: [Photo])
@@ -95,7 +97,7 @@ class JXTJuxtViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.estimatedRowHeight = 315
+        tableView.estimatedRowHeight = 640
         tableView.rowHeight = UITableViewAutomaticDimension
         
         self.navigationItem.hidesBackButton = false
@@ -130,7 +132,6 @@ class JXTJuxtViewController: UIViewController {
         
         super.viewWillAppear(animated)
         
-        println("view will appear")
         //self.tabBarController?.tabBar.hidden = false
 
         if let juxt = juxt {
@@ -188,12 +189,23 @@ extension JXTJuxtViewController: JXTCompareViewDelegate {
         let fbPhoto = FBSDKSharePhoto(image: mergeImage, userGenerated: true)
         let content = FBSDKSharePhotoContent()
         content.photos = [fbPhoto]
+        FBSDKShareDialog.showFromViewController(self, withContent: content, delegate: nil)
         
-        let button = FBSDKShareButton(frame: CGRectMake(0, 0, 150, 44))
+        let button = FBSDKShareButton()
         button.shareContent = content
         button.center = self.view.center
         button.frame.origin.y = self.view.frame.size.height - 80
         compareView.addSubview(button)
+        
+//        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook) {
+//            var facebookSheet = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+//            self.presentViewController(facebookSheet, animated: true, completion: nil)
+//        } else {
+//            var alert = UIAlertController(title: "Accounts", message: "Login to Facebook to share.", preferredStyle: .Alert)
+//            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+//            self.presentViewController(alert, animated: true, completion: nil)
+//        }
+        
     }
     
 }
@@ -241,6 +253,7 @@ extension JXTJuxtViewController: UITableViewDataSource {
         
         cell.photo = photo
         cell.delegate = self
+        cell.layoutIfNeeded()
         
         return cell
     }
