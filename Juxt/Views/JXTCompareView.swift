@@ -24,6 +24,8 @@ class JXTCompareView: UIView {
     var compareButton: UIButton?
     var previewView: UIImageView?
     
+    var shareButton: UIButton?
+    
     //    var topBlurView: FXBlurView?
 //    var bottomBlurView: FXBlurView?
     var topView: UIView?
@@ -184,6 +186,15 @@ class JXTCompareView: UIView {
         
         retryButton?.hidden = false
         previewView?.hidden = false
+        
+//        shareButton = UIButton(frame: CGRectMake(0, 0, 150, 44))
+//        shareButton?.backgroundColor = JXTConstants.defaultBlueColor()
+//        shareButton?.layer.cornerRadius = 5.0
+//        shareButton?.center = self.center
+//        shareButton?.frame.origin.y = self.frame.size.height - 80
+//        shareButton?.setTitle("share", forState: .Normal)
+//        shareButton?.titleLabel?.textColor = UIColor.whiteColor()
+//        self.addSubview(shareButton!)
     }
 }
 

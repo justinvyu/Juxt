@@ -10,6 +10,8 @@ import UIKit
 import APParallaxHeader
 import Parse
 import ParseUI
+import FBSDKCoreKit
+import FBSDKShareKit
 
 //protocol JXTJuxtViewControllerDelegate {
 //    
@@ -175,12 +177,23 @@ extension JXTJuxtViewController: JXTCompareViewDelegate {
         //println(self.combineImage(image: firstImage, withImage: secondImage))
         
         let testView = UIImageView(frame: CGRectMake(20, 0, self.view.frame.size.width - 40, self.view.frame.size.height))
-        testView.image = self.combineImage(image: firstImage, withImage: secondImage)
+        let mergeImage = self.combineImage(image: firstImage, withImage: secondImage)
+        testView.image = mergeImage
         //testView.image = testView.image?.borderImage(UIColor.whiteColor(), borderWidth: 5.0)
         testView.contentMode = .ScaleAspectFit
         compareView.addSubview(testView)
         compareView.previewView = testView
         JXTConstants.fadeInWidthDuration(testView, duration: 0.3)
+        
+        let fbPhoto = FBSDKSharePhoto(image: mergeImage, userGenerated: true)
+        let content = FBSDKSharePhotoContent()
+        content.photos = [fbPhoto]
+        
+        let button = FBSDKShareButton(frame: CGRectMake(0, 0, 150, 44))
+        button.shareContent = content
+        button.center = self.view.center
+        button.frame.origin.y = self.view.frame.size.height - 80
+        compareView.addSubview(button)
     }
     
 }
