@@ -25,13 +25,3 @@ class JXTTabBarController: UITabBarController {
     }
     
 }
-
-extension JXTTabBarViewController: UITabBarControllerDelegate {
-    
-    func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
-        
-        println(viewController)
-        
-    }
-    
-}

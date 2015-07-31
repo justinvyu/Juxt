@@ -16,7 +16,6 @@ class JXTCompareViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        println(self.photos)
         if let photos = photos {
             compareView = JXTCompareView(frame: self.view.frame, photos: photos)
             self.view.addSubview(compareView!)

@@ -114,7 +114,6 @@ class JXTJuxtViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         self.navigationItem.title = juxt?.title
-        println(self.navigationItem.title)
         self.navigationItem.titleView?.tintColor = UIColor.whiteColor()
         
         if PFUser.currentUser()?.objectId == juxt?.user?.objectId {
@@ -150,25 +149,24 @@ class JXTJuxtViewController: UIViewController {
         
         //self.tabBarController?.tabBar.hidden = false
 
-        if let juxt = juxt {
-            dispatch_async(self.imageLoadQueue!) {
-                self.photos = ParseHelper.retrieveImagesFromJuxt(juxt, mostRecent: true)
-                dispatch_async(dispatch_get_main_queue()) {
-                    
-                    if let compareVC = self.storyboard?.instantiateViewControllerWithIdentifier("CompareVC") as? JXTCompareViewController {
-                        println(compareVC)
-                        compareVC.photos = self.photos
-                    }
-                    
-                    
-//                    if let photos = self.photos {
-//                        self.delegate?.didLoadPhotos(photos)
+//        if let juxt = juxt {
+//            dispatch_async(self.imageLoadQueue!) {
+//                self.photos = ParseHelper.retrieveImagesFromJuxt(juxt, mostRecent: true)
+//                dispatch_async(dispatch_get_main_queue()) {
+//                    
+//                    if let compareVC = self.storyboard?.instantiateViewControllerWithIdentifier("CompareVC") as? JXTCompareViewController {
+//                        compareVC.photos = self.photos
 //                    }
-                    self.tableView.reloadData()
-                }
-                
-            }
-        }
+//                    
+//                    
+////                    if let photos = self.photos {
+////                        self.delegate?.didLoadPhotos(photos)
+////                    }
+//                    self.tableView.reloadData()
+//                }
+//                
+//            }
+//        }
         
         UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
         

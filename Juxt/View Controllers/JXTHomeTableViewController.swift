@@ -137,7 +137,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.tableView.reloadData()
+//        self.tableView.reloadData()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -212,7 +212,6 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         self.navigationController?.scrollNavigationBar.resetToDefaultPositionWithAnimation(true)
         
         if segue.identifier == "ShowJuxt" {
-            println("showing juxt")
             if let juxtCell = sender as? JXTJuxtTableViewCell {
                 if let juxtViewController = segue.destinationViewController as? JXTJuxtViewController {
                         juxtViewController.juxt = juxtCell.juxt
@@ -247,7 +246,6 @@ extension JXTHomeTableViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        println("Search algorithm")
         
         searchBar.resignFirstResponder()
     }

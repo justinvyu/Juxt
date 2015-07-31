@@ -49,7 +49,6 @@ class JXTPhotoTableViewCell: UITableViewCell {
     }
     
     func photoTapped(gesture: UITapGestureRecognizer) {
-        println("tapped")
         if let image = self.photoView.image {
             self.delegate?.imageViewWasPressedWithImage(image)
         }

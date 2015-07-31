@@ -42,6 +42,7 @@ class PhotoTakingHelper : NSObject {
         let cameraViewController = JXTCameraViewController()
         cameraViewController.juxt = self.juxt
         cameraViewController.cancelButtonHidden = self.cancelButtonHidden
+        println()
         viewController.presentViewController(cameraViewController, animated: true, completion: nil)
         
     }

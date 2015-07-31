@@ -181,9 +181,7 @@ class JXTAddPhotoViewController: UIViewController {
     
     func doneButtonPressed(button: JYProgressButton) {
         
-        button.startAnimating()
         if let juxt = juxt, titleTextField = titleTextField, image = image {
-            println("inside")
             if titleTextField.text == "" || titleTextField.text == nil {
                 let alert = UIAlertView()
                 alert.title = "Add a title"
@@ -194,22 +192,28 @@ class JXTAddPhotoViewController: UIViewController {
             }
             
             button.enabled = false
-            
-            let photo = Photo()
-            photo.title = titleTextField.text
-            photo.fromJuxt = juxt
-            photo.image = JXTConstants.scaleImage(image, width: 640)
-                
-            photo.uploadPhoto { (finished, error) -> Void in
-                
-                    self.doneButton?.stopAnimating()
-//                    self.uploadActivityIndicator?.stopAnimating()
-                    //self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
-                    self.dismissToJuxt()
-            }
+            button.startAnimating()
+
+            juxt.uploadJuxt({ (finished, error) -> Void in
+                if error != nil {
+                    println("\(error)")
+                } else {
+                    let photo = Photo()
+                    photo.title = titleTextField.text
+                    photo.fromJuxt = juxt
+                    photo.image = JXTConstants.scaleImage(image, width: 640)
+                    
+                    photo.uploadPhoto { (finished, error) -> Void in
+                        
+                        self.doneButton?.stopAnimating()
+                        //                    self.uploadActivityIndicator?.stopAnimating()
+                        //self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+                        self.dismissToJuxt()
+                    }
+
+                }
+            })
         }
-        
-        
     }
 }
 
