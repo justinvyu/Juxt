@@ -117,14 +117,20 @@ class JXTJuxtViewController: UIViewController {
         println(self.navigationItem.title)
         self.navigationItem.titleView?.tintColor = UIColor.whiteColor()
         
-        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addPhotoButtonPressed:")
-        addButton.tintColor = UIColor.whiteColor()
+        if PFUser.currentUser()?.objectId == juxt?.user?.objectId {
+            
+            let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addPhotoButtonPressed:")
+            addButton.tintColor = UIColor.whiteColor()
+            
+            //        let compareButton = UIBarButtonItem(image: UIImage(named: "compare"), landscapeImagePhone: nil, style: .Plain, target: self, action: "compareButtonTapped:")
+            
+            let compareButton = UIBarButtonItem(image: UIImage(named: "share"), landscapeImagePhone: nil, style: .Plain, target: self, action: "compareButtonTapped:")
+            
+            self.navigationItem.rightBarButtonItems = [addButton, compareButton]
+            
+        }
         
-//        let compareButton = UIBarButtonItem(image: UIImage(named: "compare"), landscapeImagePhone: nil, style: .Plain, target: self, action: "compareButtonTapped:")
-
-        let compareButton = UIBarButtonItem(image: UIImage(named: "share"), landscapeImagePhone: nil, style: .Plain, target: self, action: "compareButtonTapped:")
         
-        self.navigationItem.rightBarButtonItems = [addButton, compareButton]
         
         imageLoadQueue = dispatch_queue_create("imageLoad", DISPATCH_QUEUE_SERIAL)
         

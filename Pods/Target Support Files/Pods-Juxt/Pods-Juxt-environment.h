@@ -6,6 +6,12 @@
 // project.
 
 
+// AMScrollingNavbar
+#define COCOAPODS_POD_AVAILABLE_AMScrollingNavbar
+#define COCOAPODS_VERSION_MAJOR_AMScrollingNavbar 1
+#define COCOAPODS_VERSION_MINOR_AMScrollingNavbar 5
+#define COCOAPODS_VERSION_PATCH_AMScrollingNavbar 1
+
 // Bolts
 #define COCOAPODS_POD_AVAILABLE_Bolts
 #define COCOAPODS_VERSION_MAJOR_Bolts 1

@@ -24,8 +24,8 @@ class JXTAddPhotoViewController: UIViewController {
     var confirmLabel: UILabel?
     var nextButton: UIButton?
     var takeAgainButton: UIButton?
-    var doneButton: UIButton?
-    var uploadActivityIndicator: UIActivityIndicatorView?
+    var doneButton: JYProgressButton?
+//    var uploadActivityIndicator: UIActivityIndicatorView?
     var titleLabel: UILabel?
     var titleTextField: UITextField?
     var scrollView: UIScrollView?
@@ -140,7 +140,7 @@ class JXTAddPhotoViewController: UIViewController {
         titleTextField?.font = UIFont.systemFontOfSize(18.0)
         scrollView!.addSubview(titleTextField!)
         
-        doneButton = UIButton(frame: CGRectMake(secondPageX + 20, self.view.frame.size.height - self.navigationController!.navigationBar.frame.size.height - 44 - 20 - 20, self.view.frame.size.width - 40, 44))
+        doneButton = JYProgressButton(frame: CGRectMake(secondPageX + 20, self.view.frame.size.height - self.navigationController!.navigationBar.frame.size.height - 44 - 20 - 20, self.view.frame.size.width - 40, 44), animating: false)
         doneButton?.backgroundColor = JXTConstants.defaultBlueColor()
         doneButton?.setTitle("share", forState: .Normal)
         doneButton?.layer.cornerRadius = 5.0
@@ -149,11 +149,11 @@ class JXTAddPhotoViewController: UIViewController {
         doneButton?.addTarget(self, action: Selector("doneButtonPressed:"), forControlEvents: .TouchUpInside)
         scrollView!.addSubview(doneButton!)
         
-        uploadActivityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 20, 20))
-        uploadActivityIndicator?.center = doneButton!.center
-        uploadActivityIndicator?.frame.origin.y = doneButton!.frame.size.width - 30
-        uploadActivityIndicator?.hidesWhenStopped = true
-        doneButton!.addSubview(uploadActivityIndicator!)
+//        uploadActivityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 20, 20))
+//        uploadActivityIndicator?.center = doneButton!.center
+//        uploadActivityIndicator?.frame.origin.y = doneButton!.frame.size.width - 30
+//        uploadActivityIndicator?.hidesWhenStopped = true
+//        doneButton!.addSubview(uploadActivityIndicator!)
     }
     
     func takeAgainButtonPressed(button: UIButton) {
@@ -172,14 +172,16 @@ class JXTAddPhotoViewController: UIViewController {
     }
     
     func dismissToJuxt() {
-    
-        self.presentingViewController?.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
-        self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
-        
+        if let homeVC = self.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController as? JXTHomeTableViewController {
+            self.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+        } else {
+            self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+        }
     }
     
-    func doneButtonPressed(button: UIButton) {
+    func doneButtonPressed(button: JYProgressButton) {
         
+        button.startAnimating()
         if let juxt = juxt, titleTextField = titleTextField, image = image {
             println("inside")
             if titleTextField.text == "" || titleTextField.text == nil {
@@ -191,7 +193,6 @@ class JXTAddPhotoViewController: UIViewController {
                 return
             }
             
-            uploadActivityIndicator?.startAnimating()
             button.enabled = false
             
             let photo = Photo()
@@ -201,7 +202,8 @@ class JXTAddPhotoViewController: UIViewController {
                 
             photo.uploadPhoto { (finished, error) -> Void in
                 
-                    self.uploadActivityIndicator?.stopAnimating()
+                    self.doneButton?.stopAnimating()
+//                    self.uploadActivityIndicator?.stopAnimating()
                     //self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
                     self.dismissToJuxt()
             }

@@ -8,6 +8,7 @@
 
 import UIKit
 import GTScrollNavigationBar
+import AMScrollingNavbar
 import Parse
 import ParseUI
 import ConvenienceKit
@@ -98,25 +99,17 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         super.viewDidLoad()
         
 //        timelineComponent = TimelineComponent(target: self)
-        self.navigationController?.scrollNavigationBar.scrollView = self.tableView
-
+//        self.navigationController?.scrollNavigationBar.scrollView = self.tableView
+//        self.navigationController?.scrollNavigationBar.scrollView.delegate = self
+        
+        self.followScrollView(self.tableView)
+        self.setUseSuperview(false)
+        
         UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
         
-//        let searchBar = UISearchBar(frame: CGRectMake(-5, 0, 320, 44))
-//        searchBar.autoresizingMask = .FlexibleWidth
-//        let searchView = UIView(frame: CGRectMake(0, 0, 310, 44))
-//        searchBar.delegate = self
-//        searchView.addSubview(searchBar)
-//        self.searchBar = searchBar
-//        self.navigationItem.titleView = searchBar
-        
-//        self.tabBarController?.tabBar.hidden = true
-        
         var profileButton = UIBarButtonItem(image: UIImage(named: "profile"), landscapeImagePhone: nil, style: .Plain, target: self, action: "presentProfileViewController:")
-        
-//        var profileButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: "presentProfileViewController:")
+
         profileButton.tintColor = UIColor.whiteColor()
-//        profileButton.image = UIImage(named: "profile")
         profileButton.imageInsets = UIEdgeInsetsMake(3, 3, 3, 3)
         
         var addJuxtButton = UIBarButtonItem(barButtonSystemItem: .Compose, target: self, action: "presentAddJuxtViewController:")
@@ -132,23 +125,28 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         
         tableView.estimatedRowHeight = 184
         tableView.rowHeight = UITableViewAutomaticDimension
+        
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.hidden = true
-
-        //self.view.layoutIfNeeded()
         
         self.loadObjects()
-        self.tableView.reloadData()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        self.tableView.reloadData()
     }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.showNavBarAnimated(true)
 
+    }
+    
     override func viewWillLayoutSubviews() {
         
         if tableView.respondsToSelector(Selector("setSeparatorInset:")) {
@@ -173,31 +171,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         if let juxt = object as? Juxt, cell = cell {
             cell.juxt = juxt
             
-            
-            
-//            dispatch_async(self.imageLoadQueue!) {
-//                let photos = ParseHelper.retrieveImagesFromJuxt(juxt)
-//                if photos?.count != 0 {
-//                    dispatch_async(dispatch_get_main_queue()) {
-//                        var juxtCell = tableView.cellForRowAtIndexPath(indexPath) as? JXTJuxtTableViewCell
-//                        juxtCell?.galleryScrollView.photos = photos
-//                    }
-//                }
-//            }
-            //if cell.galleryScrollView.photos == nil {
-            
-            if let user = juxt.user {
-                let userQuery = PFQuery(className: "_User")
-                userQuery.getObjectInBackgroundWithId(user.objectId!, block: { (user, error) -> Void in
-                    if error != nil {
-                        println("\(error)")
-                    } else {
-                        let file = user?.objectForKey("profilePicture") as? PFFile
-                        cell.profilePictureImageView.file = file
-                        cell.profilePictureImageView.loadInBackground()
-                    }
-                })
-            }
+            // Photo Gallery
             
             let juxtQuery = PFQuery(className: "Photo")
             juxtQuery.cachePolicy = PFCachePolicy.CacheThenNetwork
@@ -214,12 +188,6 @@ class JXTHomeTableViewController: PFQueryTableViewController {
                                             
                 }
             })
-            //}
-            
-//            cell.galleryScrollView.photos = ParseHelper.retrieveImagesFromJuxt(juxt)
-            
-            //self.loadImagesInBackground(juxt, cell: cell)
-            
         }
         
         return cell

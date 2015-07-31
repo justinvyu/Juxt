@@ -19,6 +19,7 @@ target 'Juxt' do
 	pod 'TGCameraViewController'
 	pod 'FXBlurView'
 	pod 'ParseFacebookUtils'
+	pod 'AMScrollingNavbar'
 
 end
 

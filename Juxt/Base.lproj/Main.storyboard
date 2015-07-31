@@ -64,10 +64,10 @@
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Justin Yu" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ELX-47-EzG">
-                                            <rect key="frame" x="68" y="7" width="72" height="21"/>
+                                            <rect key="frame" x="68" y="7" width="241" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="M7W-GZ-V8k"/>
-                                                <constraint firstAttribute="width" constant="72" id="P9i-sB-rFd"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="241" id="P9i-sB-rFd"/>
                                                 <constraint firstAttribute="height" constant="21" id="v2O-s6-QTt"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
@@ -110,7 +110,7 @@
                                             <color key="backgroundColor" red="0.89530066283636367" green="0.89530066283636367" blue="0.89530066283636367" alpha="1" colorSpace="calibratedRGB"/>
                                         </view>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="Ntd-MI-LTv" customClass="PFImageView">
-                                            <rect key="frame" x="15" y="7" width="45" height="45"/>
+                                            <rect key="frame" x="15" y="9" width="45" height="45"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="45" id="KY4-8X-nY1"/>
                                                 <constraint firstAttribute="width" secondItem="Ntd-MI-LTv" secondAttribute="height" multiplier="1:1" id="XHC-6Z-LZk"/>
@@ -131,7 +131,7 @@
                                         <constraint firstItem="y2Z-FM-t5e" firstAttribute="top" secondItem="Ntd-MI-LTv" secondAttribute="bottom" constant="12" id="Fwp-yf-x7B"/>
                                         <constraint firstItem="ELX-47-EzG" firstAttribute="leading" secondItem="Ntd-MI-LTv" secondAttribute="trailing" constant="8" symbolic="YES" id="Gd2-kO-650"/>
                                         <constraint firstItem="KmY-8f-GLM" firstAttribute="leading" secondItem="ELX-47-EzG" secondAttribute="leading" id="Irz-EB-5yV"/>
-                                        <constraint firstItem="ELX-47-EzG" firstAttribute="top" secondItem="Ntd-MI-LTv" secondAttribute="top" id="J0P-Gc-3Mk"/>
+                                        <constraint firstItem="ELX-47-EzG" firstAttribute="top" secondItem="Ntd-MI-LTv" secondAttribute="top" constant="-2" id="J0P-Gc-3Mk"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="vMd-vK-OoQ" secondAttribute="bottom" constant="-5.5" id="K0A-kH-mO3"/>
                                         <constraint firstAttribute="trailing" secondItem="ySo-BA-7sW" secondAttribute="trailing" constant="283" id="PU8-Y7-AbH"/>
                                         <constraint firstItem="ELX-47-EzG" firstAttribute="top" secondItem="hNu-SD-ZRg" secondAttribute="topMargin" constant="-1" id="Pkl-6x-0Wb"/>
@@ -786,11 +786,7 @@
                             <constraint firstItem="qhJ-Mb-6Rj" firstAttribute="bottom" secondItem="pwD-4x-NUR" secondAttribute="top" id="f5F-GP-eiL"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="pmU-cP-aHy">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ATk-OC-iig">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="pmU-cP-aHy"/>
                     <connections>
                         <outlet property="tableView" destination="qhJ-Mb-6Rj" id="gcV-Iz-RnS"/>
                     </connections>

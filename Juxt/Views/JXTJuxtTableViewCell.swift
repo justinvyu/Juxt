@@ -24,7 +24,22 @@ class JXTJuxtTableViewCell: PFTableViewCell {
                 if let date = juxt.date {
                     dateLabel.text = JXTConstants.stringFromDate(date)
                 }
-                // Setup gallery view
+
+                // Profile Picture
+                if let user = juxt.user {
+                    let userQuery = PFQuery(className: "_User")
+                    userQuery.getObjectInBackgroundWithId(user.objectId!, block: { (user, error) -> Void in
+                        if error != nil {
+                            println("\(error)")
+                        } else {
+                            self.usernameLabel.text = user?.objectForKey("name") as? String
+                            
+                            let file = user?.objectForKey("profilePicture") as? PFFile
+                            self.profilePictureImageView.file = file
+                            self.profilePictureImageView.loadInBackground()
+                        }
+                    })
+                }
             }
         }
     }
@@ -36,6 +51,7 @@ class JXTJuxtTableViewCell: PFTableViewCell {
     @IBOutlet weak var usernameLabel: UILabel!
 
     override func prepareForReuse() {
+        self.profilePictureImageView.image = UIImage(named: "default-placeholder")
         self.galleryScrollView.photos = nil
         self.galleryScrollView.subviews.map { $0.removeFromSuperview() }
     }

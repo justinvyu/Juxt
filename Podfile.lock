@@ -1,4 +1,5 @@
 PODS:
+  - AMScrollingNavbar (1.5.1)
   - Bolts (1.2.0):
     - Bolts/AppLinks (= 1.2.0)
     - Bolts/Tasks (= 1.2.0)
@@ -42,6 +43,7 @@ PODS:
   - TPKeyboardAvoiding (1.2.8)
 
 DEPENDENCIES:
+  - AMScrollingNavbar
   - ConvenienceKit
   - FBSDKCoreKit
   - FBSDKLoginKit
@@ -58,6 +60,7 @@ DEPENDENCIES:
   - TPKeyboardAvoiding
 
 SPEC CHECKSUMS:
+  AMScrollingNavbar: 767ed2db60d927a809bddff5d01b739b7020b12b
   Bolts: d176cb1e0012175589e389a9db49b85e27787576
   ConvenienceKit: 083548558dedc22a586c1e1fbf3aa217728715af
   Facebook-iOS-SDK: cd87f0b2f0c1d9574b44e8fa2baacc275524bac3
