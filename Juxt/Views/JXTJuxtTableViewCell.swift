@@ -33,6 +33,7 @@ class JXTJuxtTableViewCell: PFTableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var galleryScrollView: JXTImageGalleryScrollView!
     @IBOutlet weak var profilePictureImageView: UIImageView!
+    @IBOutlet weak var usernameLabel: UILabel!
 
     override func prepareForReuse() {
         self.galleryScrollView.photos = nil

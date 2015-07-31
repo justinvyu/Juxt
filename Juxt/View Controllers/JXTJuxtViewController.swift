@@ -13,8 +13,6 @@ import ParseUI
 import FBSDKCoreKit
 import FBSDKShareKit
 
-import Social
-
 //protocol JXTJuxtViewControllerDelegate {
 //    
 //    func didLoadPhotos(photos: [Photo])
@@ -32,6 +30,7 @@ class JXTJuxtViewController: UIViewController {
     
     var fullScreenImageView: UIImageView?
     var fullScreenCancelButton: UIButton?
+    var shareButton: UIButton?
     
     @IBOutlet weak var tableView: UITableView!
     var compareView: JXTCompareView?
@@ -39,13 +38,15 @@ class JXTJuxtViewController: UIViewController {
     @IBOutlet weak var compareButton: UIButton!
     var photoTakingHelper: PhotoTakingHelper?
     
+    var content: FBSDKSharePhotoContent?
+    
     // MARK: Helper Funcs
     
     func addPhotoButtonPressed(sender: UIBarButtonItem) {
         
         if let juxt = juxt {
             
-            photoTakingHelper = PhotoTakingHelper(viewController: self, juxt: juxt, cameraOnly: true, cancelButtonHidden: false)
+            photoTakingHelper = PhotoTakingHelper(viewController: self, juxt: juxt, cameraOnly: true, cancelButtonHidden: false, addPhotoCancelButton: true)
         }
         
 //        let cameraViewController = JXTCameraViewController()
@@ -79,6 +80,10 @@ class JXTJuxtViewController: UIViewController {
         self.tableView.userInteractionEnabled = false
         self.navigationController?.view.addSubview(compareView!)
         JXTConstants.fadeInWidthDuration(compareView!, duration: 0.3)
+        self.tableView.userInteractionEnabled = false
+        if self.navigationController?.respondsToSelector("interactivePopGestureRecognizer") == true {
+            self.navigationController?.interactivePopGestureRecognizer.enabled = false
+        }
         
     }
     
@@ -90,12 +95,17 @@ class JXTJuxtViewController: UIViewController {
 
     }
     
+    func showShareDialog() {
+
+        FBSDKShareDialog.showFromViewController(self, withContent: self.content, delegate: self)
+        
+    }
+    
     // MARK: VC Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.delegate = self
         tableView.dataSource = self
         tableView.estimatedRowHeight = 640
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -167,11 +177,30 @@ class JXTJuxtViewController: UIViewController {
     }
 }
 
+extension JXTJuxtViewController: FBSDKSharingDelegate {
+    
+    func sharer(sharer: FBSDKSharing!, didCompleteWithResults results: [NSObject : AnyObject]!) {
+        self.compareView?.shareButton?.stopAnimating()
+    }
+    
+    func sharer(sharer: FBSDKSharing!, didFailWithError error: NSError!) {
+        self.compareView?.shareButton?.stopAnimating()
+    }
+    
+    func sharerDidCancel(sharer: FBSDKSharing!) {
+        self.compareView?.shareButton?.stopAnimating()
+    }
+    
+}
+
 extension JXTJuxtViewController: JXTCompareViewDelegate {
     
     func compareViewDidCancel(button: UIButton) {
         JXTConstants.fadeOutWithDuration(self.compareView!, duration: 0.3)
         self.tableView.userInteractionEnabled = true
+        if self.navigationController?.respondsToSelector("interactivePopGestureRecognizer") == true {
+            self.navigationController?.interactivePopGestureRecognizer.enabled = true
+        }
     }
     
     func compareButtonWasPressedWithImages(compareView: JXTCompareView, firstImage: UIImage, secondImage: UIImage) {
@@ -186,42 +215,29 @@ extension JXTJuxtViewController: JXTCompareViewDelegate {
         compareView.previewView = testView
         JXTConstants.fadeInWidthDuration(testView, duration: 0.3)
         
-        let fbPhoto = FBSDKSharePhoto(image: mergeImage, userGenerated: true)
+        let fbPhoto = FBSDKSharePhoto(image: JXTConstants.scaleImage(mergeImage, width: 640), userGenerated: true)
+//        println(JXTConstants.scaleImage(mergeImage, width: 200))
         let content = FBSDKSharePhotoContent()
         content.photos = [fbPhoto]
-        FBSDKShareDialog.showFromViewController(self, withContent: content, delegate: nil)
         
-        let button = FBSDKShareButton()
-        button.shareContent = content
-        button.center = self.view.center
-        button.frame.origin.y = self.view.frame.size.height - 80
-        compareView.addSubview(button)
-        
-//        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook) {
-//            var facebookSheet = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-//            self.presentViewController(facebookSheet, animated: true, completion: nil)
-//        } else {
-//            var alert = UIAlertController(title: "Accounts", message: "Login to Facebook to share.", preferredStyle: .Alert)
-//            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-//            self.presentViewController(alert, animated: true, completion: nil)
-//        }
+        self.content = content
         
     }
     
-}
-
-extension JXTJuxtViewController: UITableViewDelegate {
+    func shareButtonWasPressed(button: UIButton) {
+        self.showShareDialog()
+    }
     
 }
 
 extension JXTJuxtViewController: UITableViewDataSource {
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        
-        
-        return UITableViewAutomaticDimension
-    }
-    
+//    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//        
+//        
+//        return UITableViewAutomaticDimension
+//    }
+//    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
         if self.photos?.count != 0 {

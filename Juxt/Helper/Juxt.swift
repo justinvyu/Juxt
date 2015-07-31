@@ -16,11 +16,17 @@ class Juxt: PFObject, PFSubclassing {
     @NSManaged var title: String?
     @NSManaged var desc: String?
     @NSManaged var date: NSDate?
+    @NSManaged var user: PFUser?
     
     // MARK: Parse Functions
     
     func uploadJuxt(completion: PFBooleanResultBlock) {
         
+        if let currentUser = PFUser.currentUser() {
+         
+            self.ACL = PFACL(user: currentUser)
+            self.user = currentUser
+        }
         saveInBackgroundWithBlock(completion)
         
     }

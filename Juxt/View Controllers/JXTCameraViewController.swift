@@ -25,6 +25,7 @@ class JXTCameraViewController: UIViewController {
     var cancelButton: UIButton?
     
     var cancelButtonHidden: Bool? = false
+    var addPhotoCancelButtonHidden: Bool? = false
     
 //    let captureSession = AVCaptureSession()
 //    var previewLayer: AVCaptureVideoPreviewLayer?
@@ -177,6 +178,7 @@ class JXTCameraViewController: UIViewController {
                 let addPhotoController = JXTAddPhotoViewController()
                 addPhotoController.delegate = self
                 addPhotoController.juxt = self.juxt
+                addPhotoController.addPhotoCancelButtonHidden = self.addPhotoCancelButtonHidden
                 let navigationController = UINavigationController(rootViewController: addPhotoController)
                 addPhotoController.image = image
                 self.presentViewController(navigationController, animated: true, completion: nil)

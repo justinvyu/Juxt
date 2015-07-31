@@ -19,26 +19,19 @@ protocol JXTAddPhotoViewControllerDelegate {
 class JXTAddPhotoViewController: UIViewController {
 
     var delegate: JXTAddPhotoViewControllerDelegate?
-    
     var juxt: Juxt?
-    
     var photoView: UIImageView?
-    
     var confirmLabel: UILabel?
     var nextButton: UIButton?
     var takeAgainButton: UIButton?
-    
     var doneButton: UIButton?
     var uploadActivityIndicator: UIActivityIndicatorView?
-    
     var titleLabel: UILabel?
     var titleTextField: UITextField?
-    
     var scrollView: UIScrollView?
-    
     var image: UIImage?
-    
     var keyboardNotificationHandler: KeyboardNotificationHandler?
+    var addPhotoCancelButtonHidden: Bool? = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +64,9 @@ class JXTAddPhotoViewController: UIViewController {
         UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
         self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
         self.navigationController?.navigationItem.leftBarButtonItem?.tintColor = UIColor.blackColor()
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: Selector("dismissToJuxt"))
+        if self.addPhotoCancelButtonHidden == false {
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: Selector("dismissToJuxt"))
+        }
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.blackColor()
 
     }
@@ -202,7 +197,7 @@ class JXTAddPhotoViewController: UIViewController {
             let photo = Photo()
             photo.title = titleTextField.text
             photo.fromJuxt = juxt
-            photo.image = self.scaleImage(image, width: 640)
+            photo.image = JXTConstants.scaleImage(image, width: 640)
                 
             photo.uploadPhoto { (finished, error) -> Void in
                 
@@ -213,21 +208,6 @@ class JXTAddPhotoViewController: UIViewController {
         }
         
         
-    }
-    
-    func scaleImage(image: UIImage, width: CGFloat) -> UIImage {
-        let oldWidth = image.size.width
-        let scaleFactor = width / oldWidth
-        
-        let newHeight = image.size.height * scaleFactor
-        let newWidth = oldWidth * scaleFactor
-        
-        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
-        image.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return newImage
     }
 }
 
@@ -240,26 +220,5 @@ extension JXTAddPhotoViewController: UIScrollViewDelegate {
             self.titleTextField?.becomeFirstResponder()
         }
     }
-    
-}
-
-extension UIImage {
-//    
-//    +(UIImage*)imageWithImage: (UIImage*) sourceImage scaledToWidth: (float) i_width
-//    {
-//    float oldWidth = sourceImage.size.width;
-//    float scaleFactor = i_width / oldWidth;
-//    
-//    float newHeight = sourceImage.size.height * scaleFactor;
-//    float newWidth = oldWidth * scaleFactor;
-//    
-//    UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight));
-//    [sourceImage drawInRect:CGRectMake(0, 0, newWidth, newHeight)];
-//    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
-//    return newImage;
-//    }
-    
-
     
 }

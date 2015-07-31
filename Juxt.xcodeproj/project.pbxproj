@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D00360C71B6AA17D003DCB3D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D00360C61B6AA17D003DCB3D /* Social.framework */; };
+		D00360CC1B6AD782003DCB3D /* JYProgressButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00360CB1B6AD782003DCB3D /* JYProgressButton.swift */; };
 		D0092D371B581FFD00769490 /* JXTJuxtTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0092D361B581FFD00769490 /* JXTJuxtTableViewCell.swift */; };
 		D0092D391B582DAA00769490 /* JXTAddJuxtViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0092D381B582DAA00769490 /* JXTAddJuxtViewController.swift */; };
 		D0092D3C1B585B1200769490 /* JXTTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0092D3B1B585B1200769490 /* JXTTabBarController.swift */; };
@@ -55,6 +56,7 @@
 		7219618C4A5AA4482001067C /* Pods_Juxt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Juxt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7931DB76583F9A98551C49FA /* Pods-Juxt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Juxt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Juxt/Pods-Juxt.debug.xcconfig"; sourceTree = "<group>"; };
 		D00360C61B6AA17D003DCB3D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		D00360CB1B6AD782003DCB3D /* JYProgressButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JYProgressButton.swift; path = Juxt/Views/JYProgressButton.swift; sourceTree = SOURCE_ROOT; };
 		D0092D361B581FFD00769490 /* JXTJuxtTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTJuxtTableViewCell.swift; sourceTree = "<group>"; };
 		D0092D381B582DAA00769490 /* JXTAddJuxtViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTAddJuxtViewController.swift; sourceTree = "<group>"; };
 		D0092D3B1B585B1200769490 /* JXTTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTTabBarController.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 		D0AFDCA31B556F520097228E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D00360CB1B6AD782003DCB3D /* JYProgressButton.swift */,
 				D0092D361B581FFD00769490 /* JXTJuxtTableViewCell.swift */,
 				D0BD46521B602EAA0007943E /* JXTPhotoTableViewCell.swift */,
 				D0F7C5EE1B596496004E2F3E /* JXTImageGalleryScrollView.swift */,
@@ -414,6 +417,7 @@
 			files = (
 				D0F7C5FC1B59A4B7004E2F3E /* Photo.swift in Sources */,
 				D0AA20671B66EA690062033E /* JXTCompareViewController.swift in Sources */,
+				D00360CC1B6AD782003DCB3D /* JYProgressButton.swift in Sources */,
 				D0F7C5FE1B59AC73004E2F3E /* JXTJuxtViewController.swift in Sources */,
 				D0AFDCA61B556F7E0097228E /* JXTLandingViewController.swift in Sources */,
 				D08978241B5C25D8009FB6A2 /* JXTCameraViewController.swift in Sources */,

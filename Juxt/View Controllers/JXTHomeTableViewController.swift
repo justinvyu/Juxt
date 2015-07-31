@@ -12,6 +12,10 @@ import Parse
 import ParseUI
 import ConvenienceKit
 
+import FBSDKCoreKit
+import FBSDKShareKit
+import ParseFacebookUtils
+
 class JXTHomeTableViewController: PFQueryTableViewController {
 
     // MARK: Properties
@@ -168,6 +172,8 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         
         if let juxt = object as? Juxt, cell = cell {
             cell.juxt = juxt
+            
+
             
 //            dispatch_async(self.imageLoadQueue!) {
 //                let photos = ParseHelper.retrieveImagesFromJuxt(juxt)

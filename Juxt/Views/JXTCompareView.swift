@@ -12,6 +12,7 @@ import FXBlurView
 protocol JXTCompareViewDelegate {
     func compareViewDidCancel(button: UIButton)
     func compareButtonWasPressedWithImages(compareView: JXTCompareView, firstImage: UIImage, secondImage: UIImage)
+    func shareButtonWasPressed(button: UIButton)
 }
 
 class JXTCompareView: UIView {
@@ -24,7 +25,7 @@ class JXTCompareView: UIView {
     var compareButton: UIButton?
     var previewView: UIImageView?
     
-    var shareButton: UIButton?
+    var shareButton: JYProgressButton?
     
     //    var topBlurView: FXBlurView?
 //    var bottomBlurView: FXBlurView?
@@ -139,6 +140,16 @@ class JXTCompareView: UIView {
         compareButton?.layer.cornerRadius = 30
         self.addSubview(compareButton!)
         
+        let button = JYProgressButton(frame: CGRectMake(0, 0, 200, 40), animating: false)
+        button.center = self.center
+        button.frame.origin.y = self.frame.size.height - 80
+        button.layer.cornerRadius = 5.0
+        button.setTitle("share", forState: .Normal)
+        button.addTarget(self, action: "shareButtonPressed:", forControlEvents: .TouchUpInside)
+        shareButton = button
+        shareButton?.hidden = true
+        self.addSubview(button)
+        
         self.bringSubviewToFront(topView!)
         self.bringSubviewToFront(compareLabel!)
         self.bringSubviewToFront(cancelButton!)
@@ -168,6 +179,11 @@ class JXTCompareView: UIView {
         button.enabled = true
     }
     
+    func shareButtonPressed(button: JYProgressButton) {
+        self.shareButton?.startAnimating()
+        self.delegate?.shareButtonWasPressed(button)
+    }
+    
     func showCompareUI() {
         leftCompareView?.hidden = false
         rightCompareView?.hidden = false
@@ -176,6 +192,7 @@ class JXTCompareView: UIView {
         
         retryButton?.hidden = true
         previewView?.hidden = true
+        shareButton?.hidden = true
     }
     
     func hideCompareUI() {
@@ -186,6 +203,7 @@ class JXTCompareView: UIView {
         
         retryButton?.hidden = false
         previewView?.hidden = false
+        shareButton?.hidden = false
         
 //        shareButton = UIButton(frame: CGRectMake(0, 0, 150, 44))
 //        shareButton?.backgroundColor = JXTConstants.defaultBlueColor()

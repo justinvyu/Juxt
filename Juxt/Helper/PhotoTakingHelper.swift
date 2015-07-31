@@ -21,7 +21,7 @@ class PhotoTakingHelper : NSObject {
 //    var callback: PhotoTakingHelperCallback
     var imagePickerController: UIImagePickerController?
     
-    init(viewController: UIViewController, juxt: Juxt, cameraOnly: Bool, cancelButtonHidden: Bool/*, callback: PhotoTakingHelperCallback*/) {
+    init(viewController: UIViewController, juxt: Juxt, cameraOnly: Bool, cancelButtonHidden: Bool, addPhotoCancelButton: Bool/*, callback: PhotoTakingHelperCallback*/) {
         self.viewController = viewController
 //        self.callback = callback
         self.cancelButtonHidden = cancelButtonHidden

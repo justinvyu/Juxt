@@ -47,4 +47,19 @@ class JXTConstants: NSObject {
         return dateFormatter.stringFromDate(date)
     }
     
+    static func scaleImage(image: UIImage, width: CGFloat) -> UIImage {
+        let oldWidth = image.size.width
+        let scaleFactor = width / oldWidth
+        
+        let newHeight = image.size.height * scaleFactor
+        let newWidth = oldWidth * scaleFactor
+        
+        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
+        image.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
+    }
+    
 }
