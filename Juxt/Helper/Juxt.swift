@@ -24,10 +24,19 @@ class Juxt: PFObject, PFSubclassing {
         
         if let currentUser = PFUser.currentUser() {
          
-            self.ACL = PFACL(user: currentUser)
+            let ACL = PFACL()
+            ACL.setPublic
             self.user = currentUser
         }
         saveInBackgroundWithBlock(completion)
+        
+    }
+    
+    func profilePictureOfUser() -> PFFile? {
+        
+        
+        
+        return nil
         
     }
     

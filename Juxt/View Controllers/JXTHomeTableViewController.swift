@@ -173,7 +173,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         if let juxt = object as? Juxt, cell = cell {
             cell.juxt = juxt
             
-
+            
             
 //            dispatch_async(self.imageLoadQueue!) {
 //                let photos = ParseHelper.retrieveImagesFromJuxt(juxt)
@@ -185,21 +185,35 @@ class JXTHomeTableViewController: PFQueryTableViewController {
 //                }
 //            }
             //if cell.galleryScrollView.photos == nil {
-                let juxtQuery = PFQuery(className: "Photo")
-                juxtQuery.cachePolicy = PFCachePolicy.CacheThenNetwork
-                juxtQuery.whereKey("fromJuxt", equalTo: juxt)
-                juxtQuery.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
-                    
-                    if error == nil {
-                        
-                        if cell.galleryScrollView.photos?.count != objects?.count {
-                            cell.galleryScrollView.photos = objects as? [Photo]
-                            
-                            cell.juxt?.photos = objects as? [Photo]
-                        }
-                                                
+            
+            if let user = juxt.user {
+                let userQuery = PFQuery(className: "_User")
+                userQuery.getObjectInBackgroundWithId(user.objectId!, block: { (user, error) -> Void in
+                    if error != nil {
+                        println("\(error)")
+                    } else {
+                        let file = user?.objectForKey("profilePicture") as? PFFile
+                        cell.profilePictureImageView.file = file
+                        cell.profilePictureImageView.loadInBackground()
                     }
                 })
+            }
+            
+            let juxtQuery = PFQuery(className: "Photo")
+            juxtQuery.cachePolicy = PFCachePolicy.CacheThenNetwork
+            juxtQuery.whereKey("fromJuxt", equalTo: juxt)
+            juxtQuery.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+                
+                if error == nil {
+                    
+                    if cell.galleryScrollView.photos?.count != objects?.count {
+                        cell.galleryScrollView.photos = objects as? [Photo]
+                        
+                        cell.juxt?.photos = objects as? [Photo]
+                    }
+                                            
+                }
+            })
             //}
             
 //            cell.galleryScrollView.photos = ParseHelper.retrieveImagesFromJuxt(juxt)

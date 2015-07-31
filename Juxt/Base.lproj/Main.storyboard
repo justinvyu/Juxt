@@ -109,7 +109,7 @@
                                             <rect key="frame" x="0.0" y="169" width="600" height="1"/>
                                             <color key="backgroundColor" red="0.89530066283636367" green="0.89530066283636367" blue="0.89530066283636367" alpha="1" colorSpace="calibratedRGB"/>
                                         </view>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile-pic" translatesAutoresizingMaskIntoConstraints="NO" id="Ntd-MI-LTv">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="Ntd-MI-LTv" customClass="PFImageView">
                                             <rect key="frame" x="15" y="7" width="45" height="45"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="45" id="KY4-8X-nY1"/>
@@ -841,9 +841,9 @@
     </scenes>
     <resources>
         <image name="cancel" width="32" height="32"/>
+        <image name="default-placeholder" width="50" height="50"/>
         <image name="more2" width="32" height="32"/>
         <image name="profile" width="32" height="32"/>
-        <image name="profile-pic" width="100" height="98"/>
         <image name="settings" width="32" height="32"/>
         <image name="splash" width="378" height="387"/>
     </resources>

@@ -67,15 +67,20 @@ class JXTLandingViewController: UIViewController {
                     let picture = result.valueForKey("picture") as? NSDictionary
                     let data = picture?.valueForKey("data") as? NSDictionary
                     let url = data?.valueForKey("url") as! String
-                    
+
                     let imageData = NSData(contentsOfURL: NSURL(string: url)!)
-                    
+
                     let imageFile = PFFile(data: imageData!)
-                    imageFile.saveInBackground()
                     
-                    PFUser.currentUser()?.setValue(imageFile, forKey: "profilePicture")
+                    imageFile.saveInBackgroundWithBlock() { (finished, error) -> Void in
+                        if error != nil {
+                            println("\(error)")
+                        }
+                        PFUser.currentUser()?.setObject(imageFile, forKey: "profilePicture")
+                        PFUser.currentUser()?.saveEventually()
+                    }
                     
-                    PFUser.currentUser()?.saveEventually()
+                    
                     
                     //PFUser.currentUser()["name"] = result.valueForKey("name") as? NSString
                     //                    PFUser. = result.valueForKey("email") as? String
