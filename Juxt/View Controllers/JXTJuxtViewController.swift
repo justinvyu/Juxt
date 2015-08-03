@@ -137,13 +137,14 @@ class JXTJuxtViewController: UIViewController {
         imageLoadQueue = dispatch_queue_create("imageLoad", DISPATCH_QUEUE_SERIAL)
         
         if let juxt = juxt {
-            dispatch_async(self.imageLoadQueue!) {
-                self.photos = ParseHelper.retrieveImagesFromJuxt(juxt, mostRecent: true)
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.tableView.reloadData()
-                    self.backgroundActivityView?.stopAnimating()
-                }
-            }
+//            dispatch_async(self.imageLoadQueue!) {
+//                self.photos = ParseHelper.retrieveImagesFromJuxt(juxt, mostRecent: true)
+//                dispatch_async(dispatch_get_main_queue()) {
+//                    self.tableView.reloadData()
+//                    self.backgroundActivityView?.stopAnimating()
+//                }
+//            }
+            self.photos = juxt.photos
         }
     }
     

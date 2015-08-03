@@ -31,6 +31,7 @@ class Juxt: PFObject, PFSubclassing {
             juxtQuery.whereKey("fromJuxt", equalTo: self)
             juxtQuery.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
                 
+                self.photos = objects as? [Photo]
                 completion(objects as? [Photo])
             })
         }

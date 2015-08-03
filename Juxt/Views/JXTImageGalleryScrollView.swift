@@ -23,7 +23,7 @@ class JXTImageGalleryScrollView: UIScrollView {
     var direction: GalleryScrollViewDirection? = .Horizontal
     var photos: [Photo]? {
         didSet {
-//            displayGallery(photos)
+            displayGallery(photos)
         }
     }
     var juxt: Juxt?

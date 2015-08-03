@@ -54,10 +54,9 @@ class JXTJuxtTableViewCell: PFTableViewCell {
     @IBOutlet weak var usernameLabel: UILabel!
 
     override func prepareForReuse() {
-        galleryScrollView.juxt = self.juxt
         self.profilePictureImageView.image = UIImage(named: "default-placeholder")
         self.galleryScrollView.photos = nil
-        self.galleryScrollView.subviews.map { $0.removeFromSuperview() }
+        self.galleryScrollView.images = nil 
     }
     
 }

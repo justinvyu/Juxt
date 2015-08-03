@@ -31,7 +31,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
 //    let defaultRange = 0...4
 //    let additionalRangeSize = 5
     
-    var searchBar: UISearchBar?
+    var juxts: [Juxt]?
     var imageLoadQueue: dispatch_queue_t?
     
     // MARK: Init
@@ -70,13 +70,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         
     }
     
-    // MARK: Other Funcs 
-    
-    func dismissKeyboard() {
-        
-        searchBar?.resignFirstResponder()
-        
-    }
+    // MARK: Other Funcs
     
     func presentProfileViewController(button: UIBarButtonItem) {
         
@@ -183,7 +177,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         if let juxt = object as? Juxt, cell = cell {
             cell.juxt = juxt
             cell.juxt?.photosForJuxt() { (photos) -> Void in
-                cell.galleryScrollView.photos = photos as? [Photo]
+                cell.galleryScrollView.photos = photos as [Photo]?
             }
         }
         
@@ -205,7 +199,6 @@ class JXTHomeTableViewController: PFQueryTableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        self.searchBar?.resignFirstResponder()
         self.navigationController?.scrollNavigationBar.resetToDefaultPositionWithAnimation(true)
         
         if segue.identifier == "ShowJuxt" {
