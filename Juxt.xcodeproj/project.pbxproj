@@ -13,6 +13,7 @@
 		D0092D391B582DAA00769490 /* JXTAddJuxtViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0092D381B582DAA00769490 /* JXTAddJuxtViewController.swift */; };
 		D0092D3C1B585B1200769490 /* JXTTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0092D3B1B585B1200769490 /* JXTTabBarController.swift */; };
 		D00B09391B56ED9900870D4D /* JXTHomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00B09381B56ED9900870D4D /* JXTHomeTableViewController.swift */; };
+		D0225CBA1B6FD5250004E93B /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0225CB91B6FD5250004E93B /* HomeTableViewController.swift */; };
 		D08978221B59C2C4009FB6A2 /* PhotoTakingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08978211B59C2C4009FB6A2 /* PhotoTakingHelper.swift */; };
 		D08978241B5C25D8009FB6A2 /* JXTCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08978231B5C25D8009FB6A2 /* JXTCameraViewController.swift */; };
 		D08978261B5C261A009FB6A2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D08978251B5C261A009FB6A2 /* AVFoundation.framework */; };
@@ -59,6 +60,7 @@
 		D0092D381B582DAA00769490 /* JXTAddJuxtViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTAddJuxtViewController.swift; sourceTree = "<group>"; };
 		D0092D3B1B585B1200769490 /* JXTTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTTabBarController.swift; sourceTree = "<group>"; };
 		D00B09381B56ED9900870D4D /* JXTHomeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTHomeTableViewController.swift; sourceTree = "<group>"; };
+		D0225CB91B6FD5250004E93B /* HomeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
 		D08978211B59C2C4009FB6A2 /* PhotoTakingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoTakingHelper.swift; sourceTree = "<group>"; };
 		D08978231B5C25D8009FB6A2 /* JXTCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTCameraViewController.swift; sourceTree = "<group>"; };
 		D08978251B5C261A009FB6A2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -179,6 +181,7 @@
 				D0AFDCA51B556F7E0097228E /* JXTLandingViewController.swift */,
 				D0092D3B1B585B1200769490 /* JXTTabBarController.swift */,
 				D00B09381B56ED9900870D4D /* JXTHomeTableViewController.swift */,
+				D0225CB91B6FD5250004E93B /* HomeTableViewController.swift */,
 				D0F7C5FD1B59AC73004E2F3E /* JXTJuxtViewController.swift */,
 				D0092D381B582DAA00769490 /* JXTAddJuxtViewController.swift */,
 				D08978231B5C25D8009FB6A2 /* JXTCameraViewController.swift */,
@@ -413,6 +416,7 @@
 				D00360CC1B6AD782003DCB3D /* JYProgressButton.swift in Sources */,
 				D0F7C5FE1B59AC73004E2F3E /* JXTJuxtViewController.swift in Sources */,
 				D0AFDCA61B556F7E0097228E /* JXTLandingViewController.swift in Sources */,
+				D0225CBA1B6FD5250004E93B /* HomeTableViewController.swift in Sources */,
 				D08978241B5C25D8009FB6A2 /* JXTCameraViewController.swift in Sources */,
 				D0092D371B581FFD00769490 /* JXTJuxtTableViewCell.swift in Sources */,
 				D08978221B59C2C4009FB6A2 /* PhotoTakingHelper.swift in Sources */,

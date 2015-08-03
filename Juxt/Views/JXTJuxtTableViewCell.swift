@@ -25,6 +25,9 @@ class JXTJuxtTableViewCell: PFTableViewCell {
                     dateLabel.text = JXTConstants.stringFromDate(date)
                 }
                 
+                galleryScrollView.juxt = self.juxt // For tap gesture
+
+                
                 // Profile Picture
                 if let user = juxt.user {
                     let userQuery = PFQuery(className: "_User")
@@ -51,6 +54,7 @@ class JXTJuxtTableViewCell: PFTableViewCell {
     @IBOutlet weak var usernameLabel: UILabel!
 
     override func prepareForReuse() {
+        galleryScrollView.juxt = self.juxt
         self.profilePictureImageView.image = UIImage(named: "default-placeholder")
         self.galleryScrollView.photos = nil
         self.galleryScrollView.subviews.map { $0.removeFromSuperview() }

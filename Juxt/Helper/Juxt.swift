@@ -9,6 +9,8 @@
 import UIKit
 import Parse
 
+typealias JuxtCallback = [Photo]? -> Void // returning a block
+
 class Juxt: PFObject, PFSubclassing {
     
     var photos: [Photo]?
@@ -20,6 +22,20 @@ class Juxt: PFObject, PFSubclassing {
     
     // MARK: Parse Functions
     
+    func photosForJuxt(completion: JuxtCallback) {
+        if photos != nil {
+            completion(photos)
+        } else {
+            let juxtQuery = PFQuery(className: "Photo")
+            juxtQuery.cachePolicy = PFCachePolicy.CacheThenNetwork
+            juxtQuery.whereKey("fromJuxt", equalTo: self)
+            juxtQuery.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+                
+                completion(objects as? [Photo])
+            })
+        }
+    }
+    
     func uploadJuxt(completion: PFBooleanResultBlock) {
         
         if let currentUser = PFUser.currentUser() {
@@ -30,14 +46,6 @@ class Juxt: PFObject, PFSubclassing {
             self.user = currentUser
         }
         saveInBackgroundWithBlock(completion)
-        
-    }
-    
-    func profilePictureOfUser() -> PFFile? {
-        
-        
-        
-        return nil
         
     }
     

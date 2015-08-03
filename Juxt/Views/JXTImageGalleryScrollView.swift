@@ -23,10 +23,11 @@ class JXTImageGalleryScrollView: UIScrollView {
     var direction: GalleryScrollViewDirection? = .Horizontal
     var photos: [Photo]? {
         didSet {
-            displayGallery(photos)
+//            displayGallery(photos)
         }
     }
     var juxt: Juxt?
+    var indexPath: NSIndexPath?
     var images: [UIImage]?
     
     func displayGallery(photos: [Photo]?) {
@@ -62,9 +63,9 @@ class JXTImageGalleryScrollView: UIScrollView {
                         xPos = self.imagePadding * CGFloat(i + 1) /*CGFloat(padding)*/ + CGFloat(i) * self.imageSize!.width
                     } else if self.direction == .Vertical {
                         yPos = 2 * self.imagePadding * CGFloat(i)/*CGFloat(padding)*/ + CGFloat(i) * self.imageSize!.height
-                        if i != 0 {
-                            yPos += 2
-                        }
+//                        if i != 0 {
+//                            yPos += 2
+//                        }
                     }
                     
                     var imageView = PFImageView(frame: CGRectMake(xPos, yPos, self.imageSize!.width, self.imageSize!.height))
@@ -73,7 +74,9 @@ class JXTImageGalleryScrollView: UIScrollView {
                     self.addSubview(imageView)
 //                    JXTConstants.fadeInWidthDuration(imageView, duration: 0.3)
                     imageView.file = photos[i].imageFile
-                    imageView.layer.cornerRadius = 5.0
+                    if self.direction == .Horizontal {
+                        imageView.layer.cornerRadius = 5.0
+                    }
                     imageView.clipsToBounds = true
                     imageView.loadInBackground()
                     

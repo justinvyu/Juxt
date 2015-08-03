@@ -93,9 +93,14 @@ class JXTHomeTableViewController: PFQueryTableViewController {
     
     @IBAction func performJuxtSegue(sender: UITapGestureRecognizer) {
         
-        self.performSegueWithIdentifier("ShowJuxt", sender: sender)
+//        println(sender.view as? JXTImageGalleryScrollView)
+//        if let galleryView = sender.view as? JXTImageGalleryScrollView {
+//            println(galleryView.indexPath?.row)
+//            self.tableView.selectRowAtIndexPath(galleryView.indexPath, animated: true, scrollPosition: UITableViewScrollPosition.None)
+//        }
+
     }
-    
+
     // MARK: VC Methods
     
     override func viewDidLayoutSubviews() {
@@ -177,27 +182,9 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         
         if let juxt = object as? Juxt, cell = cell {
             cell.juxt = juxt
-            
-            // Photo Gallery
-            
-            let juxtQuery = PFQuery(className: "Photo")
-            juxtQuery.cachePolicy = PFCachePolicy.CacheThenNetwork
-            juxtQuery.whereKey("fromJuxt", equalTo: juxt)
-            juxtQuery.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
-                
-                if error == nil {
-                    
-                    if cell.galleryScrollView.photos?.count != objects?.count {
-                        cell.galleryScrollView.photos = objects as? [Photo]
-                        cell.juxt?.photos = objects as? [Photo]
-                        
-                    }
-                    
-                }
-            })
-            cell.galleryScrollView.juxt = cell.juxt // For tap gesture
-            println(cell.galleryScrollView.juxt)
-
+            cell.juxt?.photosForJuxt() { (photos) -> Void in
+                cell.galleryScrollView.photos = photos as? [Photo]
+            }
         }
         
         return cell
@@ -231,6 +218,13 @@ class JXTHomeTableViewController: PFQueryTableViewController {
 //                        tabBarViewController.juxt = juxtCell.juxt
 //                    }
 //                }
+            } else if let tap = sender as? UITapGestureRecognizer {
+                println(tap)
+                if let galleryView = tap.view as? JXTImageGalleryScrollView {
+                    if let juxtViewController = segue.destinationViewController as? JXTJuxtViewController {
+                        juxtViewController.juxt = galleryView.juxt
+                    }
+                }
             }
         }
     }
