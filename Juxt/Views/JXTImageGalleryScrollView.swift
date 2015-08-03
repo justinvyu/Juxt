@@ -26,6 +26,7 @@ class JXTImageGalleryScrollView: UIScrollView {
             displayGallery(photos)
         }
     }
+    var juxt: Juxt?
     var images: [UIImage]?
     
     func displayGallery(photos: [Photo]?) {
@@ -36,6 +37,7 @@ class JXTImageGalleryScrollView: UIScrollView {
         self.subviews.map { $0.removeFromSuperview() }
         self.showsVerticalScrollIndicator = false
         self.showsHorizontalScrollIndicator = false
+        
         dispatch_async(dispatch_get_main_queue()) {
             
             if let photos = photos {

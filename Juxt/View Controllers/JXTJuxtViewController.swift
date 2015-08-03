@@ -23,7 +23,6 @@ class JXTJuxtViewController: UIViewController {
    
     // MARK: Properties
     
-//    var delegate: JXTJuxtViewControllerDelegate?
     var juxt: Juxt?
     var photos: [Photo]?
     var imageLoadQueue: dispatch_queue_t?
@@ -37,7 +36,7 @@ class JXTJuxtViewController: UIViewController {
     
     @IBOutlet weak var compareButton: UIButton!
     var photoTakingHelper: PhotoTakingHelper?
-    
+    var backgroundActivityView: UIActivityIndicatorView?
     var content: FBSDKSharePhotoContent?
     
     // MARK: Helper Funcs
@@ -106,6 +105,10 @@ class JXTJuxtViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        backgroundActivityView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+        backgroundActivityView?.startAnimating()
+        self.tableView.backgroundView = backgroundActivityView
+        
         tableView.dataSource = self
         tableView.estimatedRowHeight = 640
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -138,6 +141,7 @@ class JXTJuxtViewController: UIViewController {
                 self.photos = ParseHelper.retrieveImagesFromJuxt(juxt, mostRecent: true)
                 dispatch_async(dispatch_get_main_queue()) {
                     self.tableView.reloadData()
+                    self.backgroundActivityView?.stopAnimating()
                 }
             }
         }
@@ -248,15 +252,6 @@ extension JXTJuxtViewController: UITableViewDataSource {
             tableView.backgroundView?.removeFromSuperview()
             tableView.backgroundView = nil
             return 1
-        } else {
-//            var label = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
-//            label.text = "Looks like there's nothing here!\nClick the '+' button to get started or swipe to refresh."
-//            label.numberOfLines = 0
-//            label.textAlignment = .Center
-//            label.font = UIFont.systemFontOfSize(18.0)
-//            label.sizeToFit()
-            
-            //tableView.backgroundView = label
         }
         
         return 0

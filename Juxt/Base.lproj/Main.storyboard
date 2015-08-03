@@ -80,9 +80,13 @@
                                         </label>
                                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" bounces="NO" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y2Z-FM-t5e" customClass="JXTImageGalleryScrollView" customModule="Juxt" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="57" width="600" height="110"/>
+                                            <gestureRecognizers/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="110" id="h9t-Bs-I1B"/>
                                             </constraints>
+                                            <connections>
+                                                <outletCollection property="gestureRecognizers" destination="NVs-bs-CeC" appends="YES" id="TKE-TD-WaF"/>
+                                            </connections>
                                         </scrollView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KmY-8f-GLM">
                                             <rect key="frame" x="68" y="31" width="532" height="15"/>
@@ -199,6 +203,11 @@
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Awy-Ml-fGC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="NVs-bs-CeC">
+                    <connections>
+                        <action selector="performJuxtSegue:" destination="cQc-qi-dPv" id="bEl-uu-TAi"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2702" y="400"/>
         </scene>
@@ -436,7 +445,7 @@
         <!--Landing View Controller-->
         <scene sceneID="AWJ-DC-Dwe">
             <objects>
-                <viewController id="1Wn-uF-C9Y" customClass="JXTLandingViewController" customModule="Juxt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginVC" id="1Wn-uF-C9Y" customClass="JXTLandingViewController" customModule="Juxt" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JW2-Wl-SxZ"/>
                         <viewControllerLayoutGuide type="bottom" id="3cc-WV-k6M"/>
@@ -602,7 +611,7 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="F3a-6m-mm5" customClass="PFImageView">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="F3a-6m-mm5" customClass="PFImageView">
                                         <rect key="frame" x="245" y="64" width="110" height="110"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="110" id="9NI-N1-KrH"/>

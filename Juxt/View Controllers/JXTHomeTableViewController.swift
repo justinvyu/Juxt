@@ -46,8 +46,8 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         // Configure the PFQueryTableView
         self.parseClassName = "Juxt"
         self.pullToRefreshEnabled = true
-        self.paginationEnabled = true
-        self.objectsPerPage = 8
+        self.paginationEnabled = false
+//        self.objectsPerPage = 8
         self.loadingViewEnabled = false
         
     }
@@ -61,7 +61,9 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         // If no objects are loaded in memory, we look to the cache first to fill the table
         // and then subsequently do a query against the network.
         if (self.objects?.count == 0) {
-            query.cachePolicy = .CacheThenNetwork;
+            query.cachePolicy = .CacheThenNetwork
+        } else {
+            query.cachePolicy = .CacheElseNetwork
         }
 
         return query
@@ -87,6 +89,11 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         
         self.performSegueWithIdentifier("AddJuxt", sender: nil)
         
+    }
+    
+    @IBAction func performJuxtSegue(sender: UITapGestureRecognizer) {
+        
+        self.performSegueWithIdentifier("ShowJuxt", sender: sender)
     }
     
     // MARK: VC Methods
@@ -182,12 +189,15 @@ class JXTHomeTableViewController: PFQueryTableViewController {
                     
                     if cell.galleryScrollView.photos?.count != objects?.count {
                         cell.galleryScrollView.photos = objects as? [Photo]
-                        
                         cell.juxt?.photos = objects as? [Photo]
+                        
                     }
-                                            
+                    
                 }
             })
+            cell.galleryScrollView.juxt = cell.juxt // For tap gesture
+            println(cell.galleryScrollView.juxt)
+
         }
         
         return cell

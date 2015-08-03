@@ -22,6 +22,13 @@ class JXTProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.nameLabel.text = PFUser.currentUser()?["name"] as? String
+        
+        let file = PFUser.currentUser()?.objectForKey("profilePicture") as? PFFile
+        self.profilePicture.file = file
+        self.profilePicture.loadInBackground()
+        
+        self.profilePicture.layer.cornerRadius = 5.0
     }
     
     // Helper Funcs

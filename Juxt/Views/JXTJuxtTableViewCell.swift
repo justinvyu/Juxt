@@ -24,7 +24,7 @@ class JXTJuxtTableViewCell: PFTableViewCell {
                 if let date = juxt.date {
                     dateLabel.text = JXTConstants.stringFromDate(date)
                 }
-
+                
                 // Profile Picture
                 if let user = juxt.user {
                     let userQuery = PFQuery(className: "_User")
