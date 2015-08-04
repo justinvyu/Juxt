@@ -35,6 +35,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="separatorColor" red="0.55429571449792037" green="0.55429571449792037" blue="0.55429571449792037" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="sectionIndexBackgroundColor" white="0.96999999999999997" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="JuxtCell" rowHeight="173" id="Lfi-qV-oNA" customClass="JXTJuxtTableViewCell" customModule="Juxt" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -63,21 +64,6 @@
                                                 </mask>
                                             </variation>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Justin Yu" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ELX-47-EzG">
-                                            <rect key="frame" x="68" y="7" width="241" height="21"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="M7W-GZ-V8k"/>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="241" id="P9i-sB-rFd"/>
-                                                <constraint firstAttribute="height" constant="21" id="v2O-s6-QTt"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
-                                            <nil key="highlightedColor"/>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="v2O-s6-QTt"/>
-                                                </mask>
-                                            </variation>
-                                        </label>
                                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" bounces="NO" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y2Z-FM-t5e" customClass="JXTImageGalleryScrollView" customModule="Juxt" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="57" width="600" height="110"/>
                                             <gestureRecognizers/>
@@ -95,7 +81,7 @@
                                                 <constraint firstAttribute="height" constant="20" id="wt4-Cd-VvL"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" white="0.20000000000000001" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="default">
                                                 <mask key="constraints">
@@ -118,7 +104,24 @@
                                                 <constraint firstAttribute="width" constant="45" id="tJG-yA-SVq"/>
                                             </constraints>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Justin Yu" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ELX-47-EzG">
+                                            <rect key="frame" x="68" y="7" width="241" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="M7W-GZ-V8k"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="241" id="P9i-sB-rFd"/>
+                                                <constraint firstAttribute="height" constant="21" id="v2O-s6-QTt"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                            <color key="textColor" white="0.20000000000000001" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="v2O-s6-QTt"/>
+                                                </mask>
+                                            </variation>
+                                        </label>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.96999999999999997" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="y2Z-FM-t5e" secondAttribute="bottom" constant="5.5" id="0U0-4t-VjU"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="y2Z-FM-t5e" secondAttribute="bottom" constant="-1" id="3xT-Lw-JLX"/>
@@ -189,7 +192,7 @@
                     <navigationItem key="navigationItem" id="5iH-hO-Qz7">
                         <barButtonItem key="backBarButtonItem" title="juxts" id="SK0-TB-lf8"/>
                         <barButtonItem key="leftBarButtonItem" systemItem="search" id="IQp-Cq-Zvx">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="tintColor" white="0.97999999999999998" alpha="1" colorSpace="calibratedWhite"/>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" systemItem="add" id="Ip0-nd-3O8">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -243,7 +246,6 @@
                             </activityIndicatorView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ABe-96-eTR">
                                 <rect key="frame" x="30" y="109" width="540" height="426"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="426" id="ftF-1s-D3T"/>
                                 </constraints>
@@ -251,7 +253,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="next"/>
                             </textView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.97999999999999998" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="ABe-96-eTR" secondAttribute="trailing" constant="14" id="2i7-iQ-45w"/>
                             <constraint firstItem="ABe-96-eTR" firstAttribute="top" secondItem="bF9-vx-lGT" secondAttribute="bottom" constant="8" symbolic="YES" id="548-kv-aFI"/>
@@ -284,6 +286,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="your new juxt" id="jJh-dV-GRl">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="8ZZ-3s-YYP">
+                            <color key="tintColor" white="0.19993832236842107" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="dismissButtonTapped:" destination="9or-PC-Wnh" id="ZD1-ci-7FD"/>
                             </connections>
@@ -428,20 +431,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Srh-Og-5gb">
-                                <rect key="frame" x="25" y="487" width="550" height="40"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="g7S-gQ-aVH"/>
-                                </constraints>
-                                <state key="normal">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="twitterAction:" destination="1Wn-uF-C9Y" eventType="touchUpInside" id="0LU-B2-iBb"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="see change happen" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5xH-kE-mrT">
                                 <rect key="frame" x="197" y="311" width="207" height="24"/>
                                 <constraints>
@@ -491,6 +480,20 @@
                                 </state>
                                 <connections>
                                     <action selector="facebookAction:" destination="1Wn-uF-C9Y" eventType="touchUpInside" id="WtW-Nk-6lt"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Srh-Og-5gb">
+                                <rect key="frame" x="25" y="487" width="550" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="g7S-gQ-aVH"/>
+                                </constraints>
+                                <state key="normal">
+                                    <color key="titleColor" white="0.97999999999999998" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="twitterAction:" destination="1Wn-uF-C9Y" eventType="touchUpInside" id="0LU-B2-iBb"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -680,7 +683,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ow3-YD-vvE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" white="0.97999999999999998" alpha="1" colorSpace="calibratedWhite"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -704,8 +707,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="640" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="qhJ-Mb-6Rj">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="687"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="0.96999999999999997" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PhotoCell" rowHeight="640" id="5ha-T1-OVH" customClass="JXTPhotoTableViewCell" customModule="Juxt" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -720,7 +724,7 @@
                                                         <constraint firstAttribute="height" constant="21" id="F4G-T9-Jk5"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" white="0.20000000000000001" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
@@ -761,6 +765,7 @@
                                                     </variation>
                                                 </imageView>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.96999999999999997" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="6GX-de-QUC" firstAttribute="leading" secondItem="Elr-Xj-jq0" secondAttribute="leadingMargin" id="3EY-66-vRH"/>
                                                 <constraint firstItem="6GX-de-QUC" firstAttribute="trailing" secondItem="Elr-Xj-jq0" secondAttribute="trailingMargin" id="7Yh-nq-Ccz"/>
@@ -798,13 +803,17 @@
                                     <outlet property="delegate" destination="tI9-EZ-yIc" id="t6F-9l-xAU"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rSw-1M-IDJ">
+                                <rect key="frame" x="0.0" y="64" width="600" height="60"/>
+                                <color key="backgroundColor" white="0.40861430921052633" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="qhJ-Mb-6Rj" secondAttribute="trailing" id="48k-ic-o6f"/>
-                            <constraint firstItem="qhJ-Mb-6Rj" firstAttribute="top" secondItem="2hf-yF-uBb" secondAttribute="top" id="IBe-lU-lJI"/>
+                            <constraint firstItem="qhJ-Mb-6Rj" firstAttribute="top" secondItem="2hf-yF-uBb" secondAttribute="top" constant="64" id="IBe-lU-lJI"/>
                             <constraint firstItem="qhJ-Mb-6Rj" firstAttribute="leading" secondItem="2hf-yF-uBb" secondAttribute="leading" id="eMZ-IN-9i9"/>
-                            <constraint firstItem="qhJ-Mb-6Rj" firstAttribute="bottom" secondItem="pwD-4x-NUR" secondAttribute="top" id="f5F-GP-eiL"/>
+                            <constraint firstItem="qhJ-Mb-6Rj" firstAttribute="bottom" secondItem="pwD-4x-NUR" secondAttribute="top" constant="151" id="f5F-GP-eiL"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pmU-cP-aHy"/>

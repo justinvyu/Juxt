@@ -145,12 +145,12 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
         
         var profileButton = UIBarButtonItem(image: UIImage(named: "profile"), landscapeImagePhone: nil, style: .Plain, target: self, action: "presentProfileViewController:")
-
-        profileButton.tintColor = UIColor.whiteColor()
+        
+        profileButton.tintColor = UIColor(white: 0.97, alpha: 1.0)
         profileButton.imageInsets = UIEdgeInsetsMake(3, 3, 3, 3)
         
         var addJuxtButton = UIBarButtonItem(barButtonSystemItem: .Compose, target: self, action: "presentAddJuxtViewController:")
-        addJuxtButton.tintColor = UIColor.whiteColor()
+        addJuxtButton.tintColor = UIColor(white: 0.97, alpha: 1.0)
         
         self.navigationItem.rightBarButtonItems = [addJuxtButton, profileButton]
         
@@ -169,6 +169,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         super.viewWillAppear(animated)
         
         self.loadObjects()
+//        self.tableView.insertSections(NSIndexSet(index: 0), withRowAnimation: .Fade)
     }
     
     override func viewDidAppear(animated: Bool) {

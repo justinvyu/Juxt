@@ -15,6 +15,7 @@ import Bolts
 import ParseFacebookUtils
 import FBSDKCoreKit
 import FBSDKLoginKit
+import Mixpanel
 
 //import Realm
 //import RealmSwift
@@ -40,6 +41,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        })
 //        
 //        let realm = Realm()
+        
+        Mixpanel.sharedInstanceWithToken("e17fd7184de2ab04c97000b09aea54eb")
+        let mixpanel: Mixpanel = Mixpanel.sharedInstance()
+        mixpanel.track("App launched")
         
         UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: false)
         UITabBar.appearance().tintColor = UIColor.whiteColor()
@@ -101,7 +106,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
 
 }
 

@@ -20,6 +20,7 @@ target 'Juxt' do
 	pod 'FXBlurView'
 	pod 'ParseFacebookUtils'
 	pod 'AMScrollingNavbar'
+	pod 'Mixpanel'
 
 end
 

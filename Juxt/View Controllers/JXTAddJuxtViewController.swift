@@ -93,7 +93,7 @@ class JXTAddJuxtViewController: UIViewController {
 //            self.descriptionTextView.resignFirstResponder()
 //            self.uploadActivityIndicator.stopAnimating()
 
-            self.photoTakingHelper = PhotoTakingHelper(viewController: self, juxt: juxt, cameraOnly: true, cancelButtonHidden: true, addPhotoCancelButton: true)
+            self.photoTakingHelper = PhotoTakingHelper(viewController: self, juxt: juxt, cameraOnly: true/*, cancelButtonHidden: true, addPhotoCancelButton: true*/)
             
 //            sender.enabled = true
 //            //self.dismissViewControllerAnimated(true, completion: nil)
