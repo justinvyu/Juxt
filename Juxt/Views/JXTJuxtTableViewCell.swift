@@ -9,7 +9,6 @@
 import UIKit
 import Parse
 import ParseUI
-import DOFavoriteButton
 
 class JXTJuxtTableViewCell: PFTableViewCell {
 

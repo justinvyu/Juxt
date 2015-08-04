@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import APParallaxHeader
 import Parse
 import ParseUI
 import FBSDKCoreKit

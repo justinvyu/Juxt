@@ -13,6 +13,8 @@ import FBSDKCoreKit
 import Parse
 import Bolts
 import ParseFacebookUtils
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 //import Realm
 //import RealmSwift
@@ -55,7 +57,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Setup Parse Facebook Utils
         PFFacebookUtils.initializeFacebook()
         
+//        FBSession.openActiveSessionWithPublishPermissions(["publish_actions"], defaultAudience: FBSessionDefaultAudience.Friends, allowLoginUI: true, completionHandler: nil)
+        
         if PFUser.currentUser() != nil {
+            
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let mainNav = storyboard.instantiateViewControllerWithIdentifier("MainNav") as! UINavigationController
             self.window?.rootViewController = mainNav

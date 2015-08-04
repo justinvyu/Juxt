@@ -24,8 +24,8 @@ class JXTCameraViewController: UIViewController {
     var switchButton: UIButton?
     var cancelButton: UIButton?
     
-    var cancelButtonHidden: Bool? = false
-    var addPhotoCancelButtonHidden: Bool? = false
+//    var cancelButtonHidden: Bool? = false
+//    var addPhotoCancelButtonHidden: Bool? = false
     
 //    let captureSession = AVCaptureSession()
 //    var previewLayer: AVCaptureVideoPreviewLayer?
@@ -144,17 +144,13 @@ class JXTCameraViewController: UIViewController {
         switchButton?.addTarget(self, action: Selector("switchButtonPressed:"), forControlEvents: .TouchUpInside)
         self.view.addSubview(switchButton!)
         
-        if let cancelButtonHidden = cancelButtonHidden {
-            if cancelButtonHidden == false {
-                cancelButton = UIButton.buttonWithType(.Custom) as? UIButton
-                cancelButton?.frame = CGRectMake(5, 4, 44, 44)
-                cancelButton?.tintColor = JXTConstants.defaultBlueColor()
-                cancelButton?.setImage(UIImage(named: "cancel-blue"), forState: .Normal)
-                cancelButton?.imageEdgeInsets = UIEdgeInsetsMake(12, 12, 12, 12)
-                cancelButton?.addTarget(self, action: Selector("cancelButtonPressed:"), forControlEvents: .TouchUpInside)
-                self.view.addSubview(cancelButton!)
-            }
-        }
+        cancelButton = UIButton.buttonWithType(.Custom) as? UIButton
+        cancelButton?.frame = CGRectMake(5, 4, 44, 44)
+        cancelButton?.tintColor = JXTConstants.defaultBlueColor()
+        cancelButton?.setImage(UIImage(named: "cancel-blue"), forState: .Normal)
+        cancelButton?.imageEdgeInsets = UIEdgeInsetsMake(12, 12, 12, 12)
+        cancelButton?.addTarget(self, action: Selector("cancelButtonPressed:"), forControlEvents: .TouchUpInside)
+        self.view.addSubview(cancelButton!)
         
         if camera?.flash.value == CameraFlashOn.value {
             flashButton?.selected = true
@@ -178,7 +174,7 @@ class JXTCameraViewController: UIViewController {
                 let addPhotoController = JXTAddPhotoViewController()
                 addPhotoController.delegate = self
                 addPhotoController.juxt = self.juxt
-                addPhotoController.addPhotoCancelButtonHidden = self.addPhotoCancelButtonHidden
+//                addPhotoController.addPhotoCancelButtonHidden = self.addPhotoCancelButtonHidden
                 let navigationController = UINavigationController(rootViewController: addPhotoController)
                 addPhotoController.image = image
                 self.presentViewController(navigationController, animated: true, completion: nil)

@@ -26,4 +26,3 @@ end
 target 'JuxtTests' do
 
 end
-

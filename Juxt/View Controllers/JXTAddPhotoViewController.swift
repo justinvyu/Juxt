@@ -31,7 +31,7 @@ class JXTAddPhotoViewController: UIViewController {
     var scrollView: UIScrollView?
     var image: UIImage?
     var keyboardNotificationHandler: KeyboardNotificationHandler?
-    var addPhotoCancelButtonHidden: Bool? = false
+//    var addPhotoCancelButtonHidden: Bool? = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,9 +64,9 @@ class JXTAddPhotoViewController: UIViewController {
         UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
         self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
         self.navigationController?.navigationItem.leftBarButtonItem?.tintColor = UIColor.blackColor()
-        if self.addPhotoCancelButtonHidden == false {
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: Selector("dismissToJuxt"))
-        }
+//        if self.addPhotoCancelButtonHidden == false {
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: Selector("dismissToJuxt"))
+//        }
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.blackColor()
 
     }

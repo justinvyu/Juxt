@@ -51,9 +51,22 @@ class JXTLandingViewController: UIViewController {
 
     override func viewDidAppear(animated: Bool) {
         
-        super.viewWillAppear(animated)
+        super.viewDidAppear(animated)
         
         if PFUser.currentUser() != nil {
+            
+            // User is logged in, do work such as go to next view controller.
+            let mainNav = self.storyboard?.instantiateViewControllerWithIdentifier("MainNav") as? UINavigationController
+            self.presentViewController(mainNav!, animated: true, completion: nil)
+
+        }
+    }
+
+    @IBAction func facebookAction(sender: FBSDKLoginButton) {
+        if PFUser.currentUser() != nil {
+            // User is logged in, do work such as go to next view controller.
+            
+//            PFUser.currentUser()["name"] =
             
             let nameRequest = FBSDKGraphRequest(graphPath: "/me?fields=name,picture", parameters: nil, HTTPMethod: "GET")
             nameRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
@@ -61,15 +74,14 @@ class JXTLandingViewController: UIViewController {
                     // Process error
                     println("Error: \(error)")
                 } else {
-                    println(result)
                     PFUser.currentUser()?.setValue(result.valueForKey("name") as? String, forKey: "name")
                     
                     let picture = result.valueForKey("picture") as? NSDictionary
                     let data = picture?.valueForKey("data") as? NSDictionary
                     let url = data?.valueForKey("url") as! String
-
+                    
                     let imageData = NSData(contentsOfURL: NSURL(string: url)!)
-
+                    
                     let imageFile = PFFile(data: imageData!)
                     
                     imageFile.saveInBackgroundWithBlock() { (finished, error) -> Void in
@@ -86,19 +98,6 @@ class JXTLandingViewController: UIViewController {
                     //                    PFUser. = result.valueForKey("email") as? String
                 }
             })
-            
-            // User is logged in, do work such as go to next view controller.
-            let mainNav = self.storyboard?.instantiateViewControllerWithIdentifier("MainNav") as? UINavigationController
-            self.presentViewController(mainNav!, animated: true, completion: nil)
-
-        }
-    }
-
-    @IBAction func facebookAction(sender: FBSDKLoginButton) {
-        if PFUser.currentUser() != nil {
-            // User is logged in, do work such as go to next view controller.
-            
-//            PFUser.currentUser()["name"] =
             
                 println("logged in")
                 let mainNav = self.storyboard?.instantiateViewControllerWithIdentifier("MainNav") as? UINavigationController
@@ -130,27 +129,31 @@ class JXTLandingViewController: UIViewController {
                 println("Uh oh. The user cancelled the Facebook login.")
             } else if user!.isNew == true {
                 println("User signed up and logged in through Facebook!")
+                let mainNav = self.storyboard?.instantiateViewControllerWithIdentifier("MainNav") as? UINavigationController
+                self.presentViewController(mainNav!, animated: true, completion: nil)
             } else {
                 println("User logged in through Facebook!")
+                let mainNav = self.storyboard?.instantiateViewControllerWithIdentifier("MainNav") as? UINavigationController
+                self.presentViewController(mainNav!, animated: true, completion: nil)
             }
         }
     }
     
 }
 
-extension JXTLandingViewController: FBSDKLoginButtonDelegate {
-    
-    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
-        if error != nil {
-            println("error: \(error?.localizedDescription)")
-        } else {
-            let mainNav = self.storyboard?.instantiateViewControllerWithIdentifier("MainNav") as? UINavigationController
-            self.presentViewController(mainNav!, animated: true, completion: nil)
-        }
-    }
-    
-    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
-        
-    }
-    
-}
+//extension JXTLandingViewController: FBSDKLoginButtonDelegate {
+//    
+//    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
+//        if error != nil {
+//            println("error: \(error?.localizedDescription)")
+//        } else {
+//            println("logged in")
+//
+//        }
+//    }
+//    
+//    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+//        
+//    }
+//    
+//}

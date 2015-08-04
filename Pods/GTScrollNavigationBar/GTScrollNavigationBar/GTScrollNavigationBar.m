@@ -41,6 +41,7 @@
     self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self
                                                               action:@selector(handlePan:)];
     self.panGesture.delegate = self;
+    self.panGesture.cancelsTouchesInView = NO;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationDidBecomeActive)
@@ -62,10 +63,12 @@
                                                   object:nil];
 }
 
+#pragma mark - Properties
 - (void)setScrollView:(UIScrollView*)scrollView
 {
-    _scrollView = scrollView;
     [self resetToDefaultPositionWithAnimation:NO];
+    
+    _scrollView = scrollView;
     
     // remove gesture from current panGesture's view
     if (self.panGesture.view) {
@@ -77,6 +80,7 @@
     }
 }
 
+#pragma mark - Public methods
 - (void)resetToDefaultPositionWithAnimation:(BOOL)animated
 {
     self.scrollState = GTScrollNavigationBarNone;
@@ -85,7 +89,7 @@
     [self setFrame:frame alpha:1.0f animated:animated];
 }
 
-#pragma mark - notifications
+#pragma mark - Notifications
 - (void)statusBarOrientationDidChange
 {
     [self resetToDefaultPositionWithAnimation:NO];
@@ -138,6 +142,13 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     CGFloat minY = maxY - CGRectGetHeight(frame) + 1.0f;
     // NOTE: plus 1px to prevent the navigation bar disappears in iOS < 7
     
+    CGFloat contentInsetTop = self.scrollView.contentInset.top;
+    bool isBouncePastTopEdge = contentOffsetY < -contentInsetTop;
+    if (isBouncePastTopEdge && CGRectGetMinY(frame) == maxY) {
+        self.lastContentOffsetY = contentOffsetY;
+        return;
+    }
+    
     bool isScrolling = (self.scrollState == GTScrollNavigationBarScrollingUp ||
                         self.scrollState == GTScrollNavigationBarScrollingDown);
     
@@ -167,11 +178,15 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         [self setFrame:frame alpha:alpha animated:NO];
     }
     
-    self.lastContentOffsetY = contentOffsetY;
+    // When panning down at begining of scrollView and the bar is expanding, do not update lastContentOffsetY
+    if (isBouncePastTopEdge && CGRectGetMinY(frame) != maxY) {
+        
+    } else {
+        self.lastContentOffsetY = contentOffsetY;
+    }
 }
 
 #pragma mark - helper methods
-
 - (CGFloat)statusBarTopOffset
 {
     CGRect statusBarFrame = [UIApplication sharedApplication].statusBarFrame;
@@ -195,10 +210,13 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     }
     self.frame = frame;
     
-    CGRect parentViewFrame = self.scrollView.superview.frame;
-    parentViewFrame.origin.y += offsetY;
-    parentViewFrame.size.height -= offsetY;
-    self.scrollView.superview.frame = parentViewFrame;
+
+    if (self.scrollView) {
+        CGRect parentViewFrame = self.scrollView.superview.frame;
+        parentViewFrame.origin.y += offsetY;
+        parentViewFrame.size.height -= offsetY;
+        self.scrollView.superview.frame = parentViewFrame;
+    }
     
     if (animated) {
         [UIView commitAnimations];

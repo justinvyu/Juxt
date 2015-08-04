@@ -10,10 +10,10 @@ import UIKit
 import ConvenienceKit
 
 class JXTAddJuxtViewController: UIViewController {
-
-    @IBOutlet weak var titleTextField: UITextField!
+//
+//    @IBOutlet weak var titleTextField: UITextField!
     
-    @IBOutlet weak var descriptionTextView: UITextView!
+    @IBOutlet weak var titleTextView: UITextView!
     
     @IBOutlet weak var nextBottomSpace: NSLayoutConstraint! // Default bottom space = 20
     @IBOutlet weak var nextButton: UIButton!
@@ -27,11 +27,10 @@ class JXTAddJuxtViewController: UIViewController {
         super.viewDidLoad()
         
         nextButton.layer.cornerRadius = 5.0
-        titleTextField.becomeFirstResponder()
+        titleTextView.becomeFirstResponder()
         
-        titleTextField.returnKeyType = .Next
-        descriptionTextView.delegate = self
-        titleTextField.delegate = self
+        titleTextView.returnKeyType = .Next
+        titleTextView.delegate = self
         
     }
 
@@ -69,7 +68,7 @@ class JXTAddJuxtViewController: UIViewController {
 
     @IBAction func takePictureButtonTapped(sender: UIButton) {
          
-        if titleTextField.text == "" || titleTextField == nil {
+        if titleTextView.text == "" || titleTextView.text == nil {
             let alert = UIAlertView()
             alert.title = "Add a title"
             alert.message = "Show the world what you're doing"
@@ -82,8 +81,8 @@ class JXTAddJuxtViewController: UIViewController {
         
         // Upload juxt
         let juxt = Juxt()
-        juxt.title = self.titleTextField.text
-        juxt.desc = self.descriptionTextView.text
+        juxt.title = self.titleTextView.text
+//        juxt.desc = self.descriptionTextView.text
         juxt.date = NSDate()
 //        sender.enabled = false
 //        juxt.uploadJuxt { (finished, error) -> Void in
@@ -103,24 +102,10 @@ class JXTAddJuxtViewController: UIViewController {
 
     @IBAction func dismissButtonTapped(sender: UIBarButtonItem) {
         
-        titleTextField.resignFirstResponder()
-        descriptionTextView.resignFirstResponder()
+        titleTextView.resignFirstResponder()
         dismissViewControllerAnimated(true, completion: nil)
     }
 }
-
-extension JXTAddJuxtViewController: UITextFieldDelegate {
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        
-        descriptionTextView.becomeFirstResponder()
-        
-        return false
-        
-    }
-    
-}
-
 extension JXTAddJuxtViewController: UITextViewDelegate {
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {

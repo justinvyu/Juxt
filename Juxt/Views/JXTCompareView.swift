@@ -90,7 +90,7 @@ class JXTCompareView: UIView {
 //        topView?.frame = CGRectMake(0, imageSize.height + cancelButton!.frame.size.height + 2 * imagePadding, self.frame.size.width, 2)
         
         topView?.frame = CGRectMake(0, self.center.y - imageSize.height / 2 - imagePadding - 2, self.frame.size.width, 2)
-        self.addSubview(topView!)
+//        self.addSubview(topView!)
         
         whiteBackgroundView = UIView(frame: CGRectMake(16 /* 20 (offset) - 4 (border width)*/, topView!.frame.origin.y + topView!.frame.size.height + imagePadding - 4, frame.size.width - 32, imageSize.height + 8))
         whiteBackgroundView?.backgroundColor = UIColor.whiteColor()
@@ -121,7 +121,7 @@ class JXTCompareView: UIView {
         bottomView = UIView()
         bottomView?.backgroundColor = UIColor.whiteColor()
         bottomView?.frame = CGRectMake(0, leftCompareView!.frame.origin.y + imageSize.height + imagePadding + 2, self.frame.size.width, 2)
-        self.addSubview(bottomView!)
+//        self.addSubview(bottomView!)
         
         self.bringSubviewToFront(separatorView!)
         

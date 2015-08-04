@@ -16,15 +16,15 @@ class PhotoTakingHelper : NSObject {
     weak var viewController: UIViewController!
     
     var juxt: Juxt?
-    var cancelButtonHidden: Bool?
+//    var cancelButtonHidden: Bool?
     
 //    var callback: PhotoTakingHelperCallback
     var imagePickerController: UIImagePickerController?
     
-    init(viewController: UIViewController, juxt: Juxt, cameraOnly: Bool, cancelButtonHidden: Bool, addPhotoCancelButton: Bool/*, callback: PhotoTakingHelperCallback*/) {
+    init(viewController: UIViewController, juxt: Juxt, cameraOnly: Bool/*, cancelButtonHidden: Bool, addPhotoCancelButton: Bool, callback: PhotoTakingHelperCallback*/) {
         self.viewController = viewController
 //        self.callback = callback
-        self.cancelButtonHidden = cancelButtonHidden
+//        self.cancelButtonHidden = cancelButtonHidden
         self.juxt = juxt
         
         super.init()
@@ -41,8 +41,7 @@ class PhotoTakingHelper : NSObject {
         
         let cameraViewController = JXTCameraViewController()
         cameraViewController.juxt = self.juxt
-        cameraViewController.cancelButtonHidden = self.cancelButtonHidden
-        println()
+//        cameraViewController.cancelButtonHidden = self.cancelButtonHidden
         viewController.presentViewController(cameraViewController, animated: true, completion: nil)
         
     }

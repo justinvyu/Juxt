@@ -50,7 +50,7 @@ class JXTImageGalleryScrollView: UIScrollView {
                 let contentHeight = self.imageSize!.height + self.imagePadding
                 
                 if self.direction == .Horizontal {
-                    self.contentSize = CGSizeMake(paddingWidth + imageWidth, contentHeight)
+                    self.contentSize = CGSizeMake(paddingWidth + imageWidth + self.imagePadding, contentHeight)
                 } else if self.direction == .Vertical {
                     self.contentSize = CGSizeMake(contentWidth, paddingWidthPaginated + imageHeight)
                 }
