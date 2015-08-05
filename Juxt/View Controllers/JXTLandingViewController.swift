@@ -16,7 +16,6 @@ import ParseFacebookUtils
 
 class JXTLandingViewController: UIViewController {
 
-    
     @IBOutlet weak var facebookButton: UIButton!
     @IBOutlet weak var twitterButton: UIButton!
     
@@ -49,45 +48,27 @@ class JXTLandingViewController: UIViewController {
             // User is logged in, do work such as go to next view controller.
             
 //            PFUser.currentUser()["name"] =
-            
-                println("logged in")
                 let mainNav = self.storyboard?.instantiateViewControllerWithIdentifier("MainNav") as? UINavigationController
                 self.presentViewController(mainNav!, animated: true, completion: nil)
         } else {
-            self.loginWithFacebook()
+            ParseHelper.loginWithFacebook({ (user, error) -> Void in
+                if user == nil {
+                    println("Uh oh. The user cancelled the Facebook login.")
+                } else if user!.isNew == true {
+                    println("User signed up and logged in through Facebook!")
+                    let mainNav = self.storyboard?.instantiateViewControllerWithIdentifier("MainNav") as? UINavigationController
+                    self.presentViewController(mainNav!, animated: true, completion: nil)
+                } else {
+                    println("User logged in through Facebook!")
+                    let mainNav = self.storyboard?.instantiateViewControllerWithIdentifier("MainNav") as? UINavigationController
+                    self.presentViewController(mainNav!, animated: true, completion: nil)
+                }
+            })
         }
     }
     
     @IBAction func twitterAction(sender: UIButton) {
         
-    }
-    
-    func loginWithFacebook() {
-        let permissionsArray = ["email", "public_profile", "user_friends"]
-        
-//        PFFacebookUtils.logInWithPermissions(permissionsArray, block: { (user, error) -> Void in
-//            if user == nil {
-//                println("Uh oh. The user cancelled the Facebook login.")
-//            } else if user!.isNew == true {
-//                println("User signed up and logged in through Facebook!")
-//            } else {
-//                println("User logged in through Facebook!")
-//            }
-//        })
-        
-        PFFacebookUtils.logInWithPermissions(permissionsArray) { (user, error) -> Void in
-            if user == nil {
-                println("Uh oh. The user cancelled the Facebook login.")
-            } else if user!.isNew == true {
-                println("User signed up and logged in through Facebook!")
-                let mainNav = self.storyboard?.instantiateViewControllerWithIdentifier("MainNav") as? UINavigationController
-                self.presentViewController(mainNav!, animated: true, completion: nil)
-            } else {
-                println("User logged in through Facebook!")
-                let mainNav = self.storyboard?.instantiateViewControllerWithIdentifier("MainNav") as? UINavigationController
-                self.presentViewController(mainNav!, animated: true, completion: nil)
-            }
-        }
     }
     
 }

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import GTScrollNavigationBar
 import AMScrollingNavbar
 import Parse
 import ParseUI
@@ -21,19 +20,8 @@ class JXTHomeTableViewController: PFQueryTableViewController {
 
     // MARK: Properties
     
-//    var juxts: Results<Juxt>! {
-//        didSet {
-//            tableView?.reloadData()
-//        }
-//    }
-    
-//    var timelineComponent: TimelineComponent<Juxt, JXTHomeTableViewController>!
-//    let defaultRange = 0...4
-//    let additionalRangeSize = 5
-    
     var juxts: [Juxt]?
     var imageLoadQueue: dispatch_queue_t?
-    var parseHelper = ParseHelper()
     
     // MARK: Init
     
@@ -45,7 +33,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         super.init(coder: aDecoder)
         
         // Configure the PFQueryTableView
-        self.parseClassName = "Juxt"
+        self.parseClassName = ParseHelper.ProjectClassName
         self.pullToRefreshEnabled = true
         self.paginationEnabled = false
 //        self.objectsPerPage = 8
@@ -56,7 +44,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
     // MARK: PFQueryTableViewController
     
     override func queryForTable() -> PFQuery {
-        var query = PFQuery(className: "Juxt")
+        var query = PFQuery(className: ParseHelper.ProjectClassName)
         query.orderByDescending("createdAt")
         
         // If no objects are loaded in memory, we look to the cache first to fill the table
@@ -105,7 +93,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        parseHelper.getUserInformationFromFB()
+        ParseHelper.getUserInformationFromFB()
         
         self.followScrollView(self.tableView)
         self.setUseSuperview(false)
@@ -256,6 +244,3 @@ extension JXTHomeTableViewController: UISearchBarDelegate {
     }
     
 }
-
-
-

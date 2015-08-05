@@ -63,9 +63,6 @@ class JXTImageGalleryScrollView: UIScrollView {
                         xPos = self.imagePadding * CGFloat(i + 1) /*CGFloat(padding)*/ + CGFloat(i) * self.imageSize!.width
                     } else if self.direction == .Vertical {
                         yPos = 2 * self.imagePadding * CGFloat(i)/*CGFloat(padding)*/ + CGFloat(i) * self.imageSize!.height
-//                        if i != 0 {
-//                            yPos += 2
-//                        }
                     }
                     
                     var imageView = PFImageView(frame: CGRectMake(xPos, yPos, self.imageSize!.width, self.imageSize!.height))

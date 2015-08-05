@@ -25,9 +25,9 @@ class JXTProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.nameLabel.text = PFUser.currentUser()?["name"] as? String
+        self.nameLabel.text = ParseHelper.userName()
         
-        let file = PFUser.currentUser()?.objectForKey("profilePicture") as? PFFile
+        let file = ParseHelper.userProfilePicture()
         self.profilePicture.file = file
         self.profilePicture.loadInBackground()
         
@@ -62,11 +62,12 @@ class JXTProfileViewController: UIViewController {
 //        }
 //        sheet.showInView(self.view, animated: true)
         
-        self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
 
         let alertController = UIAlertController(title: self.nameLabel.text, message: nil, preferredStyle: .ActionSheet)
         let logoutAction = UIAlertAction(title: "Log Out", style: .Default) { (action) in
-            
+            ParseHelper.logoutUser() {
+                self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+            }
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)

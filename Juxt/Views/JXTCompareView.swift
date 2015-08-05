@@ -75,7 +75,7 @@ class JXTCompareView: UIView {
         self.addSubview(cancelButton!)
         
         saveButton = UIButton.buttonWithType(.Custom) as? UIButton
-        saveButton?.frame = CGRectMake(<#x: CGFloat#>, <#y: CGFloat#>, <#width: CGFloat#>, <#height: CGFloat#>)
+        //saveButton?.frame = CGRectMake(<#x: CGFloat#>, <#y: CGFloat#>, <#width: CGFloat#>, <#height: CGFloat#>)
         
         retryButton = UIButton(frame: CGRectMake(0, 20, 44, 44))
         retryButton?.setImage(UIImage(named: "retry"), forState: .Normal)
