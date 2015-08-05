@@ -29,24 +29,6 @@ class JXTLandingViewController: UIViewController {
         facebookButton.layer.cornerRadius = 5.0
         twitterButton.layer.cornerRadius = 5.0
         
-//        let fbLogin = FBSDKLoginButton()
-//        fbLogin.frame = CGRectMake(0, 0, self.view.frame.width - 100, 40)
-//        fbLogin.center = self.view.center
-//        //fbLogin.delegate = self
-//        fbLogin.frame.origin.y += 50
-        
-//        self.view.addSubview(fbLogin)
-        
-//        let twitterLogin = TWTRLogInButton(logInCompletion: {
-//            (session: TWTRSession!, error: NSError!) in
-//            // play with Twitter session
-//        })
-//        twitterLogin.frame = CGRectMake(0, 0, self.view.frame.width - 100, 40)
-//        twitterLogin.center = self.view.center
-//        
-//        twitterLogin.frame.origin.y += 100
-//        self.view.addSubview(twitterLogin)
-        
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -67,37 +49,6 @@ class JXTLandingViewController: UIViewController {
             // User is logged in, do work such as go to next view controller.
             
 //            PFUser.currentUser()["name"] =
-            
-            let nameRequest = FBSDKGraphRequest(graphPath: "/me?fields=name,picture", parameters: nil, HTTPMethod: "GET")
-            nameRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
-                if error != nil {
-                    // Process error
-                    println("Error: \(error)")
-                } else {
-                    PFUser.currentUser()?.setValue(result.valueForKey("name") as? String, forKey: "name")
-                    
-                    let picture = result.valueForKey("picture") as? NSDictionary
-                    let data = picture?.valueForKey("data") as? NSDictionary
-                    let url = data?.valueForKey("url") as! String
-                    
-                    let imageData = NSData(contentsOfURL: NSURL(string: url)!)
-                    
-                    let imageFile = PFFile(data: imageData!)
-                    
-                    imageFile.saveInBackgroundWithBlock() { (finished, error) -> Void in
-                        if error != nil {
-                            println("\(error)")
-                        }
-                        PFUser.currentUser()?.setObject(imageFile, forKey: "profilePicture")
-                        PFUser.currentUser()?.saveEventually()
-                    }
-                    
-                    
-                    
-                    //PFUser.currentUser()["name"] = result.valueForKey("name") as? NSString
-                    //                    PFUser. = result.valueForKey("email") as? String
-                }
-            })
             
                 println("logged in")
                 let mainNav = self.storyboard?.instantiateViewControllerWithIdentifier("MainNav") as? UINavigationController

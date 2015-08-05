@@ -62,16 +62,11 @@ class JXTProfileViewController: UIViewController {
 //        }
 //        sheet.showInView(self.view, animated: true)
         
+        self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+
         let alertController = UIAlertController(title: self.nameLabel.text, message: nil, preferredStyle: .ActionSheet)
         let logoutAction = UIAlertAction(title: "Log Out", style: .Default) { (action) in
-            PFUser.logOutInBackgroundWithBlock({ (error) -> Void in
-                if error == nil {
-                    println("done")
-                    PFFacebookUtils.session()?.closeAndClearTokenInformation()
-                    FBSession.activeSession().closeAndClearTokenInformation()
-                    self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
-                }
-            })
+            
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
