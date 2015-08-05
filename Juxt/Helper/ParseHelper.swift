@@ -63,7 +63,7 @@ class ParseHelper: NSObject {
                 // Process error
                 println("Error: \(error)")
             } else {
-                PFUser.currentUser()?.setValue(result.valueForKey(UserName) as? String, forKey: UserName)
+                PFUser.currentUser()?.setValue(result.valueForKey(self.UserName) as? String, forKey: self.UserName)
                 
                 let picture = result.valueForKey("picture") as? NSDictionary
                 let data = picture?.valueForKey("data") as? NSDictionary

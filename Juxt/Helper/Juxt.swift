@@ -31,10 +31,10 @@ class Juxt: PFObject, PFSubclassing {
     }
     
     func reloadPhotos(completion: JuxtCallback) {
-        let juxtQuery = PFQuery(className: "Photo")
+        let juxtQuery = PFQuery(className: ParseHelper.PhotoClassName)
         juxtQuery.cachePolicy = PFCachePolicy.CacheThenNetwork
-        juxtQuery.whereKey("fromJuxt", equalTo: self)
-        juxtQuery.orderByAscending("createdAt")
+        juxtQuery.whereKey(ParseHelper.PhotoFromProject, equalTo: self)
+        juxtQuery.orderByAscending(ParseHelper.PhotoCreatedAt)
         juxtQuery.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
             
             self.photos = objects as? [Photo]
@@ -58,7 +58,7 @@ class Juxt: PFObject, PFSubclassing {
     // MARK: PFSubclassing
     
     static func parseClassName() -> String {
-        return "Juxt"
+        return ParseHelper.ProjectClassName
     }
     
     override init() {

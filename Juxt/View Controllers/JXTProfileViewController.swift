@@ -62,7 +62,6 @@ class JXTProfileViewController: UIViewController {
 //        }
 //        sheet.showInView(self.view, animated: true)
         
-
         let alertController = UIAlertController(title: self.nameLabel.text, message: nil, preferredStyle: .ActionSheet)
         let logoutAction = UIAlertAction(title: "Log Out", style: .Default) { (action) in
             ParseHelper.logoutUser() {

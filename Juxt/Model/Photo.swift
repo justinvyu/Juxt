@@ -60,7 +60,7 @@ class Photo: PFObject, PFSubclassing {
     // MARK: PFSubclassing
     
     static func parseClassName() -> String {
-        return "Photo"
+        return ParseHelper.PhotoClassName
     }
     
     override init() {
