@@ -13,6 +13,7 @@ protocol JXTCompareViewDelegate {
     func compareViewDidCancel(button: UIButton)
     func compareButtonWasPressedWithImages(compareView: JXTCompareView, firstImage: UIImage, secondImage: UIImage)
     func shareButtonWasPressed(button: UIButton)
+    func saveToCameraRoll(compareView: JXTCompareView, firstImage: UIImage, secondImage: UIImage)
 }
 
 class JXTCompareView: UIView {
@@ -116,12 +117,12 @@ class JXTCompareView: UIView {
         
         self.bringSubviewToFront(separatorView!)
         
-        compareButton = UIButton(frame: CGRectMake(0, 0, 60, 60))
-        compareButton?.center = self.center
-        compareButton?.setImage(UIImage(named: "check"), forState: .Normal)
-        compareButton?.addTarget(self, action: "compare:", forControlEvents: .TouchUpInside)
-        compareButton?.backgroundColor = JXTConstants.defaultBlueColor()
-        compareButton?.layer.cornerRadius = 30
+//        compareButton = UIButton(frame: CGRectMake(0, 0, 60, 60))
+//        compareButton?.center = self.center
+//        compareButton?.setImage(UIImage(named: "check"), forState: .Normal)
+//        compareButton?.addTarget(self, action: "compare:", forControlEvents: .TouchUpInside)
+//        compareButton?.backgroundColor = JXTConstants.defaultBlueColor()
+//        compareButton?.layer.cornerRadius = 30
 //        self.addSubview(compareButton!)
         
         topDarkenView = UIView(frame: CGRectMake(0, 0, frame.size.width, topView!.frame.origin.y))
@@ -148,6 +149,7 @@ class JXTCompareView: UIView {
         facebookButton?.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
         bottomBar?.addSubview(facebookButton!)
         facebookButton?.center.x = bottomBar!.center.x
+        facebookButton?.addTarget(self, action: "compareFacebook:", forControlEvents: .TouchUpInside)
         
         twitterButton = UIButton(frame: CGRectMake(2 * bottomBar!.frame.size.width / 3, 5, 44, 44))
         twitterButton?.setImage(UIImage(named: "twitter"), forState: .Normal)
@@ -169,26 +171,37 @@ class JXTCompareView: UIView {
         self.delegate?.compareViewDidCancel(button)
     }
     
-    func compare(button: UIButton) {
-        button.enabled = false
-//        let imageSize: CGSize = CGSizeMake((frame.size.width / 2) - 20.0, (frame.size.width / 2) - 20.0)
+    func getCurrentLeftGalleryImage() -> UIImage {
+
         let imageSize: CGSize = CGSizeMake(frame.size.width / 2 - 20, frame.size.width - 60)
         
         let leftImageIndex = Int(floor(leftCompareView!.contentOffset.y / imageSize.height))
         let leftImage = leftCompareView!.images![leftImageIndex]
         
+        return leftImage
+    }
+    
+    func getCurrentRightGalleryImage() -> UIImage {
+        let imageSize: CGSize = CGSizeMake(frame.size.width / 2 - 20, frame.size.width - 60)
+
         let rightImageIndex = Int(floor(rightCompareView!.contentOffset.y / imageSize.height))
         let rightImage = rightCompareView!.images![rightImageIndex]
         
-        self.delegate?.compareButtonWasPressedWithImages(self, firstImage: leftImage, secondImage: rightImage)
-//        hideCompareUI()
+        return rightImage
+    }
+    
+    func compareFacebook(button: UIButton) {
+        button.enabled = false
+        
+        self.delegate?.compareButtonWasPressedWithImages(self, firstImage: self.getCurrentLeftGalleryImage(), secondImage: self.getCurrentRightGalleryImage())
+        
         button.enabled = true
     }
     
     func saveToCameraRoll(button: UIButton) {
         
 //        UIImageWriteToSavedPhotosAlbum(imageToBeSaved, nil, nil, nil);
-        
+        self.delegate?.saveToCameraRoll(self, firstImage: self.getCurrentLeftGalleryImage(), secondImage: self.getCurrentRightGalleryImage())
     }
     
     func shareButtonPressed(button: JYProgressButton) {

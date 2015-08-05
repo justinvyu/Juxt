@@ -64,8 +64,8 @@ class JXTJuxtViewController: UIViewController {
         var newImageSize = CGSizeMake(firstImage.size.width + secondImage.size.width, max(firstImage.size.height, secondImage.size.height))
         UIGraphicsBeginImageContextWithOptions(newImageSize, false, UIScreen.mainScreen().scale)
         
-        var borderedFirstImage = firstImage.borderImage(UIColor.whiteColor(), borderWidth: 30)
-        var borderedSecondImage = secondImage.borderImage(UIColor.whiteColor(), borderWidth: 30)
+        var borderedFirstImage = firstImage.borderImage(UIColor(white: 0.97, alpha: 1.0), borderWidth: 30)
+        var borderedSecondImage = secondImage.borderImage(UIColor(white: 0.97, alpha: 1.0), borderWidth: 30)
         borderedFirstImage.drawAtPoint(CGPointMake(0, 0))
         borderedSecondImage.drawAtPoint(CGPointMake(firstImage.size.width - 15, 0))
         
@@ -222,20 +222,9 @@ extension JXTJuxtViewController: JXTCompareViewDelegate {
     }
     
     func saveToCameraRoll(compareView: JXTCompareView, firstImage: UIImage, secondImage: UIImage) {
-        let testView = UIImageView(frame: CGRectMake(20, 0, self.view.frame.size.width - 40, self.view.frame.size.height))
         let mergeImage = self.combineImage(image: firstImage, withImage: secondImage)
-        testView.image = mergeImage
-        //testView.image = testView.image?.borderImage(UIColor.whiteColor(), borderWidth: 5.0)
-        testView.contentMode = .ScaleAspectFit
-        compareView.addSubview(testView)
-        JXTConstants.fadeInWidthDuration(testView, duration: 0.3)
         
-        let fbPhoto = FBSDKSharePhoto(image: JXTConstants.scaleImage(mergeImage, width: 640), userGenerated: true)
-        //        println(JXTConstants.scaleImage(mergeImage, width: 200))
-        let content = FBSDKSharePhotoContent()
-        content.photos = [fbPhoto]
-        
-        self.content = content
+        UIImageWriteToSavedPhotosAlbum(mergeImage, nil, nil, nil);
     }
     
     func shareButtonWasPressed(button: UIButton) {
