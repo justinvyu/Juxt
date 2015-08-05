@@ -33,11 +33,14 @@ class JXTPhotoTableViewCell: UITableViewCell {
                 photoView.clipsToBounds = true
                 photoView.image = UIImage(named: "default-placeholder")
                 
+                self.photoView?.frame = CGRectMake(15, 40, self.frame.size.width - 30, self.frame.size.width - 30)
+                self.layoutIfNeeded()
                 let tapGesture = UITapGestureRecognizer(target: self, action: "photoTapped:")
                 photoView.addGestureRecognizer(tapGesture)
                 photoView.userInteractionEnabled = true
                 
                 titleLabel.text = photo.title
+                self.titleLabel.frame = CGRectMake(15, 11, self.frame.size.width - 30, self.frame.size.width - 30)
                 if let date = photo.date {
                     dateLabel.text = JXTConstants.stringFromDate(date)
                 }

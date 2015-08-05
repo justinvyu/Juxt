@@ -21,7 +21,6 @@ target 'Juxt' do
 	pod 'ParseFacebookUtils'
 	pod 'AMScrollingNavbar'
 	pod 'Mixpanel'
-
 end
 
 target 'JuxtTests' do

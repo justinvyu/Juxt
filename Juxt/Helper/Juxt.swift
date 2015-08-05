@@ -26,15 +26,20 @@ class Juxt: PFObject, PFSubclassing {
         if photos != nil {
             completion(photos)
         } else {
-            let juxtQuery = PFQuery(className: "Photo")
-            juxtQuery.cachePolicy = PFCachePolicy.CacheThenNetwork
-            juxtQuery.whereKey("fromJuxt", equalTo: self)
-            juxtQuery.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
-                
-                self.photos = objects as? [Photo]
-                completion(objects as? [Photo])
-            })
+            reloadPhotos(completion)
         }
+    }
+    
+    func reloadPhotos(completion: JuxtCallback) {
+        let juxtQuery = PFQuery(className: "Photo")
+        juxtQuery.cachePolicy = PFCachePolicy.CacheThenNetwork
+        juxtQuery.whereKey("fromJuxt", equalTo: self)
+        juxtQuery.orderByAscending("createdAt")
+        juxtQuery.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+            
+            self.photos = objects as? [Photo]
+            completion(objects as? [Photo])
+        })
     }
     
     func uploadJuxt(completion: PFBooleanResultBlock) {

@@ -28,6 +28,7 @@ class JXTCompareView: UIView {
     var separatorView: UIView?
     var topDarkenView: UIView?
     var bottomDarkenView: UIView?
+    var saveButton: UIButton?
     
     var shareButton: JYProgressButton?
     
@@ -54,10 +55,10 @@ class JXTCompareView: UIView {
         
         self.addSubview(blurView)
         
-        compareLabel = UILabel(frame: CGRectMake(0, 0, 100, 40))
+        compareLabel = UILabel(frame: CGRectMake(0, 0, 200, 40))
         compareLabel?.center = self.center
         compareLabel?.frame.origin.y = 20
-        compareLabel?.text = "compare"
+        compareLabel?.text = "share a side by side"
         compareLabel?.font = UIFont.systemFontOfSize(18.0)
         compareLabel?.textAlignment = .Center
         compareLabel?.textColor = UIColor.whiteColor()
@@ -104,7 +105,7 @@ class JXTCompareView: UIView {
         leftCompareView?.frame = CGRectMake(20, topView!.frame.origin.y + topView!.frame.size.height + imagePadding, self.frame.size.width / 2, imageSize.height+20)
         leftCompareView?.direction = .Vertical
         leftCompareView?.imageSize = imageSize
-        leftCompareView?.photos = photos.reverse()
+        leftCompareView?.photos = photos
         leftCompareView?.clipsToBounds = false
         leftCompareView?.pagingEnabled = true
         self.addSubview(leftCompareView!)
@@ -113,7 +114,7 @@ class JXTCompareView: UIView {
         rightCompareView?.frame = CGRectMake(self.frame.size.width / 2, topView!.frame.origin.y + topView!.frame.size.height + imagePadding, self.frame.size.width / 2, imageSize.height+20)
         rightCompareView?.direction = .Vertical
         rightCompareView?.imageSize = imageSize
-        rightCompareView?.photos = photos
+        rightCompareView?.photos = photos.reverse()
         rightCompareView?.clipsToBounds = false
         rightCompareView?.pagingEnabled = true
         self.addSubview(rightCompareView!)

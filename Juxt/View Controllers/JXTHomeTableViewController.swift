@@ -132,8 +132,6 @@ class JXTHomeTableViewController: PFQueryTableViewController {
                     PFUser.currentUser()?.saveEventually()
                 }
                 
-                
-                
                 //PFUser.currentUser()["name"] = result.valueForKey("name") as? NSString
                 //                    PFUser. = result.valueForKey("email") as? String
             }
@@ -168,7 +166,8 @@ class JXTHomeTableViewController: PFQueryTableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.loadObjects()
+        self.tableView.reloadData()
+//        self.loadObjects()
 //        self.tableView.insertSections(NSIndexSet(index: 0), withRowAnimation: .Fade)
     }
     
@@ -216,6 +215,10 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         return cell
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if cell.respondsToSelector(Selector("setSeparatorInset:")) {
             cell.separatorInset = UIEdgeInsetsZero
@@ -226,7 +229,9 @@ class JXTHomeTableViewController: PFQueryTableViewController {
     }
     
     override func scrollViewDidScrollToTop(scrollView: UIScrollView) {
-        self.navigationController?.scrollNavigationBar.resetToDefaultPositionWithAnimation(true)
+        if let tableView = scrollView as? UITableView {
+            self.navigationController?.scrollNavigationBar.resetToDefaultPositionWithAnimation(true)
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -236,7 +241,8 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         if segue.identifier == "ShowJuxt" {
             if let juxtCell = sender as? JXTJuxtTableViewCell {
                 if let juxtViewController = segue.destinationViewController as? JXTJuxtViewController {
-                        juxtViewController.juxt = juxtCell.juxt
+                    juxtViewController.juxt = juxtCell.juxt
+                    juxtViewController.presentingTableViewCell = sender as? JXTJuxtTableViewCell
                 }
 //                if let navController = segue.destinationViewController as? UINavigationController {
 //                    if let tabBarViewController = navController.viewControllers?[0] as? JXTTabBarViewController {

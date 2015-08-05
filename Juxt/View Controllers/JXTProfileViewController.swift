@@ -9,7 +9,6 @@
 import UIKit
 import Parse
 import ParseUI
-import JGActionSheet
 import FBSDKCoreKit
 import FBSDKLoginKit
 import ParseFacebookUtils
@@ -70,7 +69,7 @@ class JXTProfileViewController: UIViewController {
                     println("done")
                     PFFacebookUtils.session()?.closeAndClearTokenInformation()
                     FBSession.activeSession().closeAndClearTokenInformation()
-                    self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+                    self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
                 }
             })
         }

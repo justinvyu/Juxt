@@ -28,7 +28,6 @@ class JXTJuxtViewController: UIViewController {
     
     var fullScreenImageView: UIImageView?
     var fullScreenCancelButton: UIButton?
-    var shareButton: UIButton?
     
     @IBOutlet weak var tableView: UITableView!
     var compareView: JXTCompareView?
@@ -37,6 +36,11 @@ class JXTJuxtViewController: UIViewController {
     var photoTakingHelper: PhotoTakingHelper?
     var backgroundActivityView: UIActivityIndicatorView?
     var content: FBSDKSharePhotoContent?
+    
+    var presentingTableViewCell: JXTJuxtTableViewCell?
+    
+    var shareButton: UIBarButtonItem?
+    var addButton: UIBarButtonItem?
     
     // MARK: Helper Funcs
     
@@ -89,6 +93,14 @@ class JXTJuxtViewController: UIViewController {
         
         JXTConstants.fadeOutWithDuration(fullScreenImageView!, duration: 0.3)
         JXTConstants.fadeOutWithDuration(fullScreenCancelButton!, duration: 0.3)
+        self.tableView.userInteractionEnabled = true
+        if self.navigationController?.respondsToSelector("interactivePopGestureRecognizer") == true {
+            self.navigationController?.interactivePopGestureRecognizer.enabled = true
+        }
+        self.shareButton?.enabled = true
+        self.addButton?.enabled = true
+        self.navigationItem.hidesBackButton = false
+
         UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide)
 
     }
@@ -113,25 +125,24 @@ class JXTJuxtViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         
         self.navigationItem.hidesBackButton = false
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.tintColor = UIColor(white: 0.97, alpha: 1.0)
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         self.navigationItem.title = juxt?.title
-        self.navigationItem.titleView?.tintColor = UIColor.whiteColor()
+        self.navigationItem.titleView?.tintColor = UIColor(white: 0.97, alpha: 1.0)
         
+        let compareButton = UIBarButtonItem(image: UIImage(named: "share"), landscapeImagePhone: nil, style: .Plain, target: self, action: "compareButtonTapped:")
         if PFUser.currentUser()?.objectId == juxt?.user?.objectId {
             
             let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addPhotoButtonPressed:")
             addButton.tintColor = UIColor.whiteColor()
             
-            //        let compareButton = UIBarButtonItem(image: UIImage(named: "compare"), landscapeImagePhone: nil, style: .Plain, target: self, action: "compareButtonTapped:")
-            
-            let compareButton = UIBarButtonItem(image: UIImage(named: "share"), landscapeImagePhone: nil, style: .Plain, target: self, action: "compareButtonTapped:")
-            
             self.navigationItem.rightBarButtonItems = [addButton, compareButton]
-            
+            self.addButton = addButton
+        } else {
+            self.navigationItem.rightBarButtonItem = compareButton
         }
         
-        
+        self.shareButton = compareButton
         
         imageLoadQueue = dispatch_queue_create("imageLoad", DISPATCH_QUEUE_SERIAL)
         
@@ -151,30 +162,13 @@ class JXTJuxtViewController: UIViewController {
         
         super.viewWillAppear(animated)
         
-        //self.tabBarController?.tabBar.hidden = false
-
-//        if let juxt = juxt {
-//            dispatch_async(self.imageLoadQueue!) {
-//                self.photos = ParseHelper.retrieveImagesFromJuxt(juxt, mostRecent: true)
-//                dispatch_async(dispatch_get_main_queue()) {
-//                    
-//                    if let compareVC = self.storyboard?.instantiateViewControllerWithIdentifier("CompareVC") as? JXTCompareViewController {
-//                        compareVC.photos = self.photos
-//                    }
-//                    
-//                    
-////                    if let photos = self.photos {
-////                        self.delegate?.didLoadPhotos(photos)
-////                    }
-//                    self.tableView.reloadData()
-//                }
-//                
-//            }
-//        }
-        
         UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
         
-        tableView.reloadData()
+        self.juxt?.reloadPhotos() { (photos) in
+            self.photos = photos as [Photo]?
+            self.presentingTableViewCell?.juxt?.photos = self.photos
+            self.tableView.reloadData()
+        }
         
         self.tabBarController?.tabBar.hidden = false
         self.view.layoutIfNeeded()
@@ -205,6 +199,7 @@ extension JXTJuxtViewController: JXTCompareViewDelegate {
     
     func compareViewDidCancel(button: UIButton) {
         JXTConstants.fadeOutWithDuration(self.compareView!, duration: 0.3)
+        self.navigationItem.hidesBackButton = false
         self.tableView.userInteractionEnabled = true
         if self.navigationController?.respondsToSelector("interactivePopGestureRecognizer") == true {
             self.navigationController?.interactivePopGestureRecognizer.enabled = true
@@ -272,14 +267,21 @@ extension JXTJuxtViewController: UITableViewDataSource {
         
         return cell
     }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if cell.respondsToSelector(Selector("setSeparatorInset:")) {
+            cell.separatorInset = UIEdgeInsetsZero
+        }
+        if cell.respondsToSelector(Selector("setLayoutMargins:")) {
+            cell.layoutMargins = UIEdgeInsetsZero
+        }
+    }
 }
 
 extension JXTJuxtViewController: JXTPhotoTableViewCellDelegate {
     
     func imageViewWasPressedWithImage(image: UIImage) {
-        
-        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Slide)
-        
+                
         self.fullScreenImageView = UIImageView()
         self.fullScreenImageView?.frame = self.view.frame
         self.fullScreenImageView?.contentMode = UIViewContentMode.ScaleAspectFill
@@ -289,14 +291,23 @@ extension JXTJuxtViewController: JXTPhotoTableViewCellDelegate {
         self.navigationController?.view.addSubview(self.fullScreenImageView!)
         
         fullScreenCancelButton = UIButton.buttonWithType(.Custom) as? UIButton
-        fullScreenCancelButton?.frame = CGRectMake(5, 4, 44, 44)
+        fullScreenCancelButton?.frame = CGRectMake(10, 20, 44, 44)
         fullScreenCancelButton?.tintColor = JXTConstants.defaultBlueColor()
-        fullScreenCancelButton?.setImage(UIImage(named: "cancel-blue"), forState: .Normal)
+        fullScreenCancelButton?.setImage(UIImage(named: "cancel"), forState: .Normal)
         fullScreenCancelButton?.imageEdgeInsets = UIEdgeInsetsMake(12, 12, 12, 12)
         fullScreenCancelButton?.addTarget(self, action: Selector("fullScreenCancelButtonPressed:"), forControlEvents: .TouchUpInside)
         self.navigationController?.view.addSubview(fullScreenCancelButton!)
         
         JXTConstants.fadeInWidthDuration(self.fullScreenImageView!, duration: 0.3)
+        
+        self.navigationItem.hidesBackButton = true
+        self.addButton?.enabled = false
+        self.shareButton?.enabled = false
+
+        self.tableView.userInteractionEnabled = false
+        if self.navigationController?.respondsToSelector("interactivePopGestureRecognizer") == true {
+            self.navigationController?.interactivePopGestureRecognizer.enabled = false
+        }
         
     }
     
