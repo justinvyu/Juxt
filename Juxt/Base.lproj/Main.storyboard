@@ -218,6 +218,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQn-QI-Blu">
                                 <rect key="frame" x="30" y="543" width="540" height="37"/>
                                 <color key="backgroundColor" red="0.39368876870000002" green="0.76120675329999998" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="oEQ-EJ-Hzg"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
                                 <state key="normal" title="done!">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -466,10 +469,10 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kyx-SP-ykh">
-                                <rect key="frame" x="25" y="432" width="550" height="40"/>
+                                <rect key="frame" x="25" y="432" width="550" height="44"/>
                                 <color key="backgroundColor" red="0.18823529411764706" green="0.25490196078431371" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="Wbc-5N-Oj2"/>
+                                    <constraint firstAttribute="height" constant="44" id="Wbc-5N-Oj2"/>
                                 </constraints>
                                 <state key="normal">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -480,10 +483,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Srh-Og-5gb">
-                                <rect key="frame" x="25" y="487" width="550" height="40"/>
+                                <rect key="frame" x="25" y="489" width="550" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="g7S-gQ-aVH"/>
+                                    <constraint firstAttribute="height" constant="44" id="g7S-gQ-aVH"/>
                                 </constraints>
                                 <state key="normal">
                                     <color key="titleColor" white="0.97999999999999998" alpha="1" colorSpace="calibratedWhite"/>
@@ -493,6 +496,13 @@
                                     <action selector="twitterAction:" destination="1Wn-uF-C9Y" eventType="touchUpInside" id="0LU-B2-iBb"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facebook" translatesAutoresizingMaskIntoConstraints="NO" id="a90-US-4ZL">
+                                <rect key="frame" x="287" y="441" width="26" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="26" id="YZH-HN-icn"/>
+                                    <constraint firstAttribute="width" constant="26" id="Ywh-WH-26x"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.34082844629712356" green="0.76628207642823709" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -501,11 +511,13 @@
                             <constraint firstItem="Kyx-SP-ykh" firstAttribute="trailing" secondItem="Srh-Og-5gb" secondAttribute="trailing" id="Z7C-2u-a3d"/>
                             <constraint firstItem="5xH-kE-mrT" firstAttribute="top" secondItem="RRF-Dq-btu" secondAttribute="bottom" constant="-3" id="ZzO-5r-7rP"/>
                             <constraint firstItem="Srh-Og-5gb" firstAttribute="leading" secondItem="Kyx-SP-ykh" secondAttribute="leading" id="eBz-Eb-XY2"/>
+                            <constraint firstItem="a90-US-4ZL" firstAttribute="centerY" secondItem="Kyx-SP-ykh" secondAttribute="centerY" id="eXF-ML-DnS"/>
+                            <constraint firstItem="a90-US-4ZL" firstAttribute="centerX" secondItem="Kyx-SP-ykh" secondAttribute="centerX" id="gwN-TR-b2Y"/>
                             <constraint firstItem="Kyx-SP-ykh" firstAttribute="top" secondItem="5xH-kE-mrT" secondAttribute="bottom" constant="97" id="j41-xM-AEf"/>
-                            <constraint firstItem="Srh-Og-5gb" firstAttribute="top" secondItem="Kyx-SP-ykh" secondAttribute="bottom" constant="15" id="pUC-u8-ymW"/>
+                            <constraint firstItem="Srh-Og-5gb" firstAttribute="top" secondItem="Kyx-SP-ykh" secondAttribute="bottom" constant="13" id="pUC-u8-ymW"/>
                             <constraint firstItem="Kyx-SP-ykh" firstAttribute="leading" secondItem="vvJ-qp-MwO" secondAttribute="leadingMargin" constant="9" id="pVe-2X-ICJ"/>
                             <constraint firstItem="RRF-Dq-btu" firstAttribute="centerX" secondItem="vvJ-qp-MwO" secondAttribute="centerX" id="qFR-bk-B7f"/>
-                            <constraint firstItem="3cc-WV-k6M" firstAttribute="top" secondItem="Srh-Og-5gb" secondAttribute="bottom" constant="73" id="zk5-Aj-4Nx"/>
+                            <constraint firstItem="3cc-WV-k6M" firstAttribute="top" secondItem="Srh-Og-5gb" secondAttribute="bottom" constant="67" id="zk5-Aj-4Nx"/>
                         </constraints>
                     </view>
                     <connections>
@@ -876,6 +888,7 @@
     <resources>
         <image name="cancel" width="32" height="32"/>
         <image name="default-placeholder" width="50" height="50"/>
+        <image name="facebook" width="32" height="32"/>
         <image name="more2" width="32" height="32"/>
         <image name="profile" width="32" height="32"/>
         <image name="settings" width="32" height="32"/>

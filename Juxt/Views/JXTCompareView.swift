@@ -21,14 +21,15 @@ class JXTCompareView: UIView {
     var rightCompareView: JXTImageGalleryScrollView?
     var cancelButton: UIButton?
     var compareLabel: UILabel?
-    var retryButton: UIButton?
     var compareButton: UIButton?
-    var previewView: UIImageView?
     var whiteBackgroundView: UIView?
     var separatorView: UIView?
     var topDarkenView: UIView?
     var bottomDarkenView: UIView?
     var saveButton: UIButton?
+    var bottomBar: UIView?
+    var facebookButton: UIButton?
+    var twitterButton: UIButton?
     
     var shareButton: JYProgressButton?
     
@@ -74,27 +75,13 @@ class JXTCompareView: UIView {
         cancelButton?.layer.zPosition = 4
         self.addSubview(cancelButton!)
         
-        saveButton = UIButton.buttonWithType(.Custom) as? UIButton
-        //saveButton?.frame = CGRectMake(<#x: CGFloat#>, <#y: CGFloat#>, <#width: CGFloat#>, <#height: CGFloat#>)
-        
-        retryButton = UIButton(frame: CGRectMake(0, 20, 44, 44))
-        retryButton?.setImage(UIImage(named: "retry"), forState: .Normal)
-        retryButton?.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
-        retryButton?.frame.origin.x = self.frame.width - 53
-        self.addSubview(retryButton!)
-        retryButton?.hidden = true
-        retryButton?.addTarget(self, action: "showCompareUI", forControlEvents: .TouchUpInside)
-        
-//        let imageSize: CGSize = CGSizeMake((frame.size.width / 2) - 20.0, (frame.size.width / 2) - 20.0)
         let imageSize: CGSize = CGSizeMake(frame.size.width / 2 - 20, frame.size.width - 60)
         let imagePadding: CGFloat = 10.0
         
         topView = UIView()
         topView?.backgroundColor = UIColor.whiteColor()
-//        topView?.frame = CGRectMake(0, imageSize.height + cancelButton!.frame.size.height + 2 * imagePadding, self.frame.size.width, 2)
         
         topView?.frame = CGRectMake(0, self.center.y - imageSize.height / 2 - imagePadding - 2, self.frame.size.width, 2)
-//        self.addSubview(topView!)
         
         whiteBackgroundView = UIView(frame: CGRectMake(16 /* 20 (offset) - 4 (border width)*/, topView!.frame.origin.y + topView!.frame.size.height + imagePadding - 4, frame.size.width - 32, imageSize.height + 8))
         whiteBackgroundView?.backgroundColor = UIColor.whiteColor()
@@ -135,7 +122,7 @@ class JXTCompareView: UIView {
         compareButton?.addTarget(self, action: "compare:", forControlEvents: .TouchUpInside)
         compareButton?.backgroundColor = JXTConstants.defaultBlueColor()
         compareButton?.layer.cornerRadius = 30
-        self.addSubview(compareButton!)
+//        self.addSubview(compareButton!)
         
         topDarkenView = UIView(frame: CGRectMake(0, 0, frame.size.width, topView!.frame.origin.y))
         topDarkenView?.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
@@ -145,19 +132,32 @@ class JXTCompareView: UIView {
         bottomDarkenView?.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
         self.addSubview(bottomDarkenView!)
         
-//        let button = JYProgressButton(frame: CGRectMake(0, 0, 200, 40), animating: false)
-//        button.center = self.center
-//        button.frame.origin.y = self.frame.size.height - 80
-//        button.layer.cornerRadius = 5.0
-//        button.setTitle("share", forState: .Normal)
-//        button.addTarget(self, action: "shareButtonPressed:", forControlEvents: .TouchUpInside)
-//        shareButton = button
-//        shareButton?.hidden = true
-//        self.addSubview(button)
+        bottomBar = UIView(frame: CGRectMake(0, frame.size.height - 60, frame.size.width, 60))
+        bottomBar?.backgroundColor = JXTConstants.defaultBlueColor().colorWithAlphaComponent(0.9)
+        self.addSubview(bottomBar!)
         
-        self.bringSubviewToFront(topView!)
+        saveButton = UIButton(frame: CGRectMake(bottomBar!.frame.size.width / 3 - 44, 5, 44, 44))
+        saveButton?.setImage(UIImage(named: "download"), forState: .Normal)
+        saveButton?.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
+//        saveButton?.frame.origin.x = self.frame.width - 53
+        bottomBar?.addSubview(saveButton!)
+        saveButton?.addTarget(self, action: "saveToCameraRoll:", forControlEvents: .TouchUpInside)
+        
+        facebookButton = UIButton(frame: CGRectMake(0, 5, 44, 44))
+        facebookButton?.setImage(UIImage(named: "facebook"), forState: .Normal)
+        facebookButton?.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
+        bottomBar?.addSubview(facebookButton!)
+        facebookButton?.center.x = bottomBar!.center.x
+        
+        twitterButton = UIButton(frame: CGRectMake(2 * bottomBar!.frame.size.width / 3, 5, 44, 44))
+        twitterButton?.setImage(UIImage(named: "twitter"), forState: .Normal)
+        twitterButton?.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
+        bottomBar?.addSubview(twitterButton!)
+        
         self.bringSubviewToFront(compareLabel!)
         self.bringSubviewToFront(cancelButton!)
+        self.bringSubviewToFront(saveButton!)
+        self.bringSubviewToFront(facebookButton!)
 
     }
     
@@ -185,41 +185,16 @@ class JXTCompareView: UIView {
         button.enabled = true
     }
     
+    func saveToCameraRoll(button: UIButton) {
+        
+//        UIImageWriteToSavedPhotosAlbum(imageToBeSaved, nil, nil, nil);
+        
+    }
+    
     func shareButtonPressed(button: JYProgressButton) {
         self.shareButton?.startAnimating()
         self.delegate?.shareButtonWasPressed(button)
     }
-    
-//    func showCompareUI() {
-//        leftCompareView?.hidden = false
-//        rightCompareView?.hidden = false
-//        topView?.hidden = false
-//        bottomView?.hidden = false
-//        
-//        retryButton?.hidden = true
-//        previewView?.hidden = true
-//        shareButton?.hidden = true
-//    }
-    
-//    func hideCompareUI() {
-//        leftCompareView?.hidden = true
-//        rightCompareView?.hidden = true
-//        topView?.hidden = true
-//        bottomView?.hidden = true
-//        
-//        retryButton?.hidden = false
-//        previewView?.hidden = false
-//        shareButton?.hidden = false
-//        
-////        shareButton = UIButton(frame: CGRectMake(0, 0, 150, 44))
-////        shareButton?.backgroundColor = JXTConstants.defaultBlueColor()
-////        shareButton?.layer.cornerRadius = 5.0
-////        shareButton?.center = self.center
-////        shareButton?.frame.origin.y = self.frame.size.height - 80
-////        shareButton?.setTitle("share", forState: .Normal)
-////        shareButton?.titleLabel?.textColor = UIColor.whiteColor()
-////        self.addSubview(shareButton!)
-//    }
 }
 
 extension JXTCompareView: UIScrollViewDelegate {

@@ -209,26 +209,36 @@ extension JXTJuxtViewController: JXTCompareViewDelegate {
     func compareButtonWasPressedWithImages(compareView: JXTCompareView, firstImage: UIImage, secondImage: UIImage) {
         //println(self.combineImage(image: firstImage, withImage: secondImage))
         
+        let mergeImage = self.combineImage(image: firstImage, withImage: secondImage)
+        
+        let fbPhoto = FBSDKSharePhoto(image: JXTConstants.scaleImage(mergeImage, width: 640), userGenerated: true)
+        let content = FBSDKSharePhotoContent()
+        content.photos = [fbPhoto]
+        
+        self.content = content
+        
+        self.showShareDialog()
+        
+    }
+    
+    func saveToCameraRoll(compareView: JXTCompareView, firstImage: UIImage, secondImage: UIImage) {
         let testView = UIImageView(frame: CGRectMake(20, 0, self.view.frame.size.width - 40, self.view.frame.size.height))
         let mergeImage = self.combineImage(image: firstImage, withImage: secondImage)
         testView.image = mergeImage
         //testView.image = testView.image?.borderImage(UIColor.whiteColor(), borderWidth: 5.0)
         testView.contentMode = .ScaleAspectFit
         compareView.addSubview(testView)
-        compareView.previewView = testView
         JXTConstants.fadeInWidthDuration(testView, duration: 0.3)
         
         let fbPhoto = FBSDKSharePhoto(image: JXTConstants.scaleImage(mergeImage, width: 640), userGenerated: true)
-//        println(JXTConstants.scaleImage(mergeImage, width: 200))
+        //        println(JXTConstants.scaleImage(mergeImage, width: 200))
         let content = FBSDKSharePhotoContent()
         content.photos = [fbPhoto]
         
         self.content = content
-        
     }
     
     func shareButtonWasPressed(button: UIButton) {
-        self.showShareDialog()
     }
     
 }
@@ -325,18 +335,6 @@ extension UIView {
 }
 
 extension UIImage {
-//    -(UIImage *)imageBorderedWithColor:(UIColor *)color borderWidth:(CGFloat)width
-//    {
-//    UIGraphicsBeginImageContextWithOptions(self.size, NO, self.scale);
-//    [self drawAtPoint:CGPointZero];
-//    [color setStroke];
-//    UIBezierPath *path = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, self.size.width, self.size.height)];
-//    path.lineWidth = width;
-//    [path stroke];
-//    UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
-//    return result;
-//    }
     
     func borderImage(color: UIColor, borderWidth: CGFloat) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
