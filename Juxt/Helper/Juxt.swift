@@ -14,6 +14,7 @@ typealias JuxtCallback = [Photo]? -> Void // returning a block
 class Juxt: PFObject, PFSubclassing {
     
     var photos: [Photo]?
+//    var usersFlagged: [PFUser]?
     
     @NSManaged var title: String?
     @NSManaged var desc: String?
@@ -22,12 +23,61 @@ class Juxt: PFObject, PFSubclassing {
     
     // MARK: Parse Functions
     
+//    func fetchFlags() {
+//        
+//        if usersFlagged != nil {
+//            return
+//        }
+//        
+//        ParseHelper.flagsForPost(self) { (var results: [AnyObject]?, error) -> Void in
+//            if error != nil {
+//                println("\(error)")
+//            } else {
+//                
+//                results = results?.filter { like in like[ParseHelper.FlaggedContentFromUser] != nil }
+//            
+//                self.usersFlagged = results?.map { flag in
+//                    let flag = flag as! PFObject
+//                    let fromUser = flag[ParseHelper.FlaggedContentFromUser] as! PFUser
+//                    
+//                    return fromUser
+//                }
+//            }
+//        }
+//        
+//    }
+//    
+//    func hasUserFlaggedPost(user: PFUser) -> Bool {
+//        if let usersFlagged = usersFlagged {
+//            return contains(usersFlagged, user)
+//        } else {
+//            return false
+//        }
+//    }
+    
     func photosForJuxt(completion: JuxtCallback) {
         if photos != nil {
             completion(photos)
         } else {
             reloadPhotos(completion)
         }
+    }
+    
+//    func toggleFlagPost(user: PFUser) {
+//        if hasUserFlaggedPost(user) {
+//            println("unflagging")
+//            usersFlagged?.filter { $0 != user }
+//            ParseHelper.unflagPost(user, post: self)
+//        } else {
+//            println("flagging")
+//            usersFlagged?.append(user)
+//            ParseHelper.flagPost(user, post: self)
+//        }
+//        println(usersFlagged)
+//    }
+    
+    func flagPost(user: PFUser) {
+        ParseHelper.flagPost(user, post: self)
     }
     
     func reloadPhotos(completion: JuxtCallback) {

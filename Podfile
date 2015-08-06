@@ -13,14 +13,13 @@ target 'Juxt' do
 	pod 'FBSDKLoginKit'
 	pod 'FBSDKShareKit'
 	pod 'ConvenienceKit'
-	pod 'RealmSwift'
-	pod 'GTScrollNavigationBar'
 	pod 'LLSimpleCamera', '~> 3.0'
 	pod 'TGCameraViewController'
 	pod 'FXBlurView'
 	pod 'ParseFacebookUtils'
 	pod 'AMScrollingNavbar'
 	pod 'Mixpanel'
+	pod 'DOFavoriteButton'
 end
 
 target 'JuxtTests' do

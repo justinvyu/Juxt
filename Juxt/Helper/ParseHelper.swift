@@ -39,6 +39,11 @@ class ParseHelper: NSObject {
     static let PhotoFromProject = "fromJuxt"
     static let PhotoCreatedAt = "createdAt"
     
+    // Flagged Content
+    
+    static let FlaggedContentClassName = "FlaggedContent"
+    static let FlaggedContentFromUser = "fromUser"
+    static let FlaggedContentToJuxt = "toJuxt"
     
     // FB
     
@@ -97,7 +102,65 @@ class ParseHelper: NSObject {
         })
     }
     
-    // Other
+    // MARK: Flagging
+    
+//    static func flagsForPost(post: Juxt, completion: PFArrayResultBlock) {
+//        
+//        let flagQuery = PFQuery(className: FlaggedContentClassName)
+//        flagQuery.whereKey(FlaggedContentToJuxt, equalTo: post)
+//        
+//        flagQuery.includeKey(FlaggedContentFromUser)
+//        flagQuery.findObjectsInBackgroundWithBlock(completion)
+//        
+//    }
+//    
+//    static func flagPost(user: PFUser, post: Juxt) {
+//        
+//        let flag = PFObject(className: FlaggedContentClassName)
+//        flag[FlaggedContentFromUser] = user
+//        flag[FlaggedContentToJuxt] = post
+//        flag.saveInBackground()
+//        
+//    }
+//    
+//    static func unflagPost(user: PFUser, post: Juxt) {
+//        
+//        let flagQuery = PFQuery(className: FlaggedContentClassName)
+//        flagQuery.whereKey(FlaggedContentFromUser, equalTo: user)
+//        flagQuery.whereKey(FlaggedContentToJuxt, equalTo: post)
+//        
+//        flagQuery.findObjectsInBackgroundWithBlock { (results, error) -> Void in
+//            if error != nil {
+//                println("\(error)")
+//            } else {
+//                if let flags = results as? [PFObject] {
+//                    for flag in flags {
+//                        flag.deleteInBackground()
+//                    }
+//                    
+//                }
+//            }
+//        }
+//        
+//    }
+    
+    static func flagPost(user: PFUser, post: Juxt) {
+        let flagObject = PFObject(className: FlaggedContentClassName)
+        flagObject.setObject(user, forKey: FlaggedContentFromUser)
+        flagObject.setObject(post, forKey: FlaggedContentToJuxt)
+        
+        let ACL = PFACL(user: PFUser.currentUser()!)
+        ACL.setPublicReadAccess(true)
+        flagObject.ACL = ACL
+        
+        let postACL = PFACL(user: post.user!)
+        postACL.setPublicReadAccess(false)
+        post.ACL = postACL
+        post.saveInBackground()
+        
+        //TODO: add error handling
+        flagObject.saveInBackgroundWithBlock(nil)
+    }
     
     static func retrieveImagesFromJuxt(juxt: Juxt, mostRecent: Bool) -> [Photo]? {
         
@@ -111,9 +174,20 @@ class ParseHelper: NSObject {
         
         var photos: [Photo]? = juxtQuery.findObjects() as? [Photo]
         
-        println(photos?.count)
         return photos
         
     }
     
+}
+
+extension PFObject: Equatable {
+    
+}
+
+public func ==(lhs: PFObject, rhs: PFObject) -> Bool {
+    return lhs.objectId == rhs.objectId
+}
+
+public func !=(lhs: PFObject, rhs: PFObject) -> Bool {
+    return lhs.objectId == rhs.objectId
 }

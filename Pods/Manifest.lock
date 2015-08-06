@@ -7,6 +7,7 @@ PODS:
     - Bolts/Tasks
   - Bolts/Tasks (1.2.0)
   - ConvenienceKit (0.2.0)
+  - DOFavoriteButton (0.0.4)
   - Facebook-iOS-SDK (3.23.2):
     - Bolts (~> 1.0)
   - FBSDKCoreKit (4.4.0):
@@ -24,7 +25,6 @@ PODS:
     - FBSDKCoreKit
   - FlatUIKit (1.6.2)
   - FXBlurView (1.6.3)
-  - GTScrollNavigationBar (0.2)
   - LLSimpleCamera (3.0.0)
   - Mixpanel (2.8.2):
     - Mixpanel/Mixpanel (= 2.8.2)
@@ -37,29 +37,23 @@ PODS:
     - Parse (~> 1.7.5.3)
   - ParseUI (1.1.4):
     - Parse (~> 1.7)
-  - Realm (0.94.0):
-    - Realm/Headers (= 0.94.0)
-  - Realm/Headers (0.94.0)
-  - RealmSwift (0.94.0):
-    - Realm (= 0.94.0)
   - TGCameraViewController (2.2.1)
   - TPKeyboardAvoiding (1.2.9)
 
 DEPENDENCIES:
   - AMScrollingNavbar
   - ConvenienceKit
+  - DOFavoriteButton
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
   - FlatUIKit
   - FXBlurView
-  - GTScrollNavigationBar
   - LLSimpleCamera (~> 3.0)
   - Mixpanel
   - Parse
   - ParseFacebookUtils
   - ParseUI
-  - RealmSwift
   - TGCameraViewController
   - TPKeyboardAvoiding
 
@@ -67,20 +61,18 @@ SPEC CHECKSUMS:
   AMScrollingNavbar: 767ed2db60d927a809bddff5d01b739b7020b12b
   Bolts: d176cb1e0012175589e389a9db49b85e27787576
   ConvenienceKit: 947032f82c3d419d107e0cbde1fcb725e9c7ed62
+  DOFavoriteButton: 866e15af173d2dd5233971a1f657a5f31d2491d5
   Facebook-iOS-SDK: cd87f0b2f0c1d9574b44e8fa2baacc275524bac3
   FBSDKCoreKit: 75bdd75c980e811db218488d99dd93b7740f4474
   FBSDKLoginKit: 02a9254a4c132412fa03577b0d53e936d068a7fb
   FBSDKShareKit: a42865f20ba2d1cc548c4d0f73ad22cff6377ddb
   FlatUIKit: 1b41f0d4952ce8d970d8479ce79df54a960242c4
   FXBlurView: c6d23f3d35af2c6282296a2930f61c6e2c788d01
-  GTScrollNavigationBar: eea90e88744d13444d918824ea3d671ee0aeb292
   LLSimpleCamera: 3c41b46917f9ca53b91ef9c0cf24a75ce0ab4cd8
   Mixpanel: f4d71ac2a306e7cda6ad03d4a2be249a0fd7a967
   Parse: 373adbb1ad2e34d383542c3b28f678c49ebe4881
   ParseFacebookUtils: 008a24dc35884519ed6a6750648beb5149f1fad9
   ParseUI: d1228541b02a36a7354c8f47747f5f7a89cf1ff0
-  Realm: a046149653e0ca220b65b5783da907aa5b74d86c
-  RealmSwift: 5efbbf1a5c179a7237e4d428594e41619fa167ba
   TGCameraViewController: 06bc4b742f2524fbf60f92cade61df595e8b8678
   TPKeyboardAvoiding: ff1ee4e5a5a0c119b965552af8f183868ea20207
 

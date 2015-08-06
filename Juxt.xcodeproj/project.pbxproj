@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B64EA95EE41C72586264E43 /* Pods_Juxt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7219618C4A5AA4482001067C /* Pods_Juxt.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D00360C71B6AA17D003DCB3D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D00360C61B6AA17D003DCB3D /* Social.framework */; };
 		D00360CC1B6AD782003DCB3D /* JYProgressButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00360CB1B6AD782003DCB3D /* JYProgressButton.swift */; };
 		D0092D371B581FFD00769490 /* JXTJuxtTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0092D361B581FFD00769490 /* JXTJuxtTableViewCell.swift */; };
@@ -42,6 +43,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D02812031B72A48F004423A4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0BE3AC41B71839D0062B5B0 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3961030E1B6047424AD1A7E2AFF5CBFC;
+			remoteInfo = DOFavoriteButton;
+		};
 		D0AFDC921B556E630097228E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D0AFDC741B556E630097228E /* Project object */;
@@ -119,13 +127,6 @@
 			remoteGlobalIDString = 087DE760DE5636E6FCBC720026596EF1;
 			remoteInfo = FlatUIKit;
 		};
-		D0BE3CA11B71839E0062B5B0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D0BE3AC41B71839D0062B5B0 /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = ABDF69E3452B9269FD414461D7356C1B;
-			remoteInfo = GTScrollNavigationBar;
-		};
 		D0BE3CA31B71839E0062B5B0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D0BE3AC41B71839D0062B5B0 /* Pods.xcodeproj */;
@@ -167,20 +168,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = DCF6F8CEC8DB4AC6288C351860E63BA1;
 			remoteInfo = "Pods-Juxt";
-		};
-		D0BE3CAF1B71839E0062B5B0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D0BE3AC41B71839D0062B5B0 /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8C108DEF63713C482C7308014D6CED92;
-			remoteInfo = Realm;
-		};
-		D0BE3CB11B71839E0062B5B0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D0BE3AC41B71839D0062B5B0 /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3465CD00248CBC524DCCC2EA28EA0CA7;
-			remoteInfo = RealmSwift;
 		};
 		D0BE3CB31B71839E0062B5B0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -2123,6 +2110,7 @@
 				D0AFDCAC1B55769A0097228E /* Fabric.framework in Frameworks */,
 				D0AFDCAF1B55769A0097228E /* TwitterCore.framework in Frameworks */,
 				D0AFDCAD1B55769A0097228E /* TwitterKit.framework in Frameworks */,
+				1B64EA95EE41C72586264E43 /* Pods_Juxt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4734,21 +4722,19 @@
 				D0BE3C901B71839E0062B5B0 /* Bolts.framework */,
 				D0BE3C921B71839E0062B5B0 /* ConvenienceKit.framework */,
 				D0BE3C941B71839E0062B5B0 /* ConvenienceKit.bundle */,
+				D02812041B72A48F004423A4 /* DOFavoriteButton.framework */,
 				D0BE3C961B71839E0062B5B0 /* FBSDKCoreKit.framework */,
 				D0BE3C981B71839E0062B5B0 /* FBSDKLoginKit.framework */,
 				D0BE3C9A1B71839E0062B5B0 /* FBSDKShareKit.framework */,
 				D0BE3C9C1B71839E0062B5B0 /* FXBlurView.framework */,
 				D0BE3C9E1B71839E0062B5B0 /* FacebookSDK.framework */,
 				D0BE3CA01B71839E0062B5B0 /* FlatUIKit.framework */,
-				D0BE3CA21B71839E0062B5B0 /* GTScrollNavigationBar.framework */,
 				D0BE3CA41B71839E0062B5B0 /* LLSimpleCamera.framework */,
 				D0BE3CA61B71839E0062B5B0 /* Mixpanel.framework */,
 				D0BE3CA81B71839E0062B5B0 /* Parse.framework */,
 				D0BE3CAA1B71839E0062B5B0 /* ParseFacebookUtils.framework */,
 				D0BE3CAC1B71839E0062B5B0 /* ParseUI.framework */,
 				D0BE3CAE1B71839E0062B5B0 /* Pods_Juxt.framework */,
-				D0BE3CB01B71839E0062B5B0 /* Realm.framework */,
-				D0BE3CB21B71839E0062B5B0 /* RealmSwift.framework */,
 				D0BE3CB41B71839E0062B5B0 /* TGCameraViewController.framework */,
 				D0BE3CB61B71839E0062B5B0 /* TPKeyboardAvoiding.framework */,
 			);
@@ -5620,6 +5606,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		D02812041B72A48F004423A4 /* DOFavoriteButton.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = DOFavoriteButton.framework;
+			remoteRef = D02812031B72A48F004423A4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		D0BE3C8E1B71839E0062B5B0 /* AMScrollingNavbar.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -5690,13 +5683,6 @@
 			remoteRef = D0BE3C9F1B71839E0062B5B0 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		D0BE3CA21B71839E0062B5B0 /* GTScrollNavigationBar.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = GTScrollNavigationBar.framework;
-			remoteRef = D0BE3CA11B71839E0062B5B0 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		D0BE3CA41B71839E0062B5B0 /* LLSimpleCamera.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -5737,20 +5723,6 @@
 			fileType = wrapper.framework;
 			path = Pods_Juxt.framework;
 			remoteRef = D0BE3CAD1B71839E0062B5B0 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		D0BE3CB01B71839E0062B5B0 /* Realm.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Realm.framework;
-			remoteRef = D0BE3CAF1B71839E0062B5B0 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		D0BE3CB21B71839E0062B5B0 /* RealmSwift.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = RealmSwift.framework;
-			remoteRef = D0BE3CB11B71839E0062B5B0 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		D0BE3CB41B71839E0062B5B0 /* TGCameraViewController.framework */ = {

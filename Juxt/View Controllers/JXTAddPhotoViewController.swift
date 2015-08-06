@@ -173,6 +173,7 @@ class JXTAddPhotoViewController: UIViewController {
     
     func dismissToJuxt() {
         if let homeVC = self.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController as? JXTHomeTableViewController {
+            println("home vc")
             self.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
         } else {
             self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)

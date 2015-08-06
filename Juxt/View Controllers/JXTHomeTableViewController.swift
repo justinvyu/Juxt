@@ -52,7 +52,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         if (self.objects?.count == 0) {
             query.cachePolicy = .CacheThenNetwork
         } else {
-            query.cachePolicy = .CacheElseNetwork
+            query.cachePolicy = .CacheThenNetwork
         }
 
         return query
@@ -82,6 +82,57 @@ class JXTHomeTableViewController: PFQueryTableViewController {
 //            self.tableView.selectRowAtIndexPath(galleryView.indexPath, animated: true, scrollPosition: UITableViewScrollPosition.None)
 //        }
 
+    }
+    
+    // MARK: UIActionSheets
+    
+    func showActionSheetForPost(post: Juxt) {
+        if (post.user == PFUser.currentUser()) {
+            showDeleteActionSheetForPost(post)
+        } else {
+            showFlagActionSheetForPost(post)
+        }
+    }
+    
+    func showDeleteActionSheetForPost(post: Juxt) {
+        let alertController = UIAlertController(title: nil, message: "Do you want to delete this post?", preferredStyle: .ActionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        let destroyAction = UIAlertAction(title: "Delete", style: .Destructive) { (action) in
+            
+            if let photos = post.photos {
+                for photo in photos {
+                    photo.deleteInBackgroundWithBlock(nil)
+                }
+            }
+            
+            post.deleteInBackgroundWithBlock({ (success, error) -> Void in
+                if success {
+                    self.loadObjects()
+                    self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Fade)
+                }
+            })
+        }
+        alertController.addAction(destroyAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func showFlagActionSheetForPost(post: Juxt) {
+        let alertController = UIAlertController(title: nil, message: "Do you want to flag this post?", preferredStyle: .ActionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        let destroyAction = UIAlertAction(title: "Flag", style: .Destructive) { (action) in
+            post.flagPost(PFUser.currentUser()!)
+        }
+        
+        alertController.addAction(destroyAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
 
     // MARK: VC Methods
@@ -113,7 +164,6 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         tableView.contentInset = UIEdgeInsetsZero
         tableView.separatorInset = UIEdgeInsetsZero
         
-        self.loadObjects()
         imageLoadQueue = dispatch_queue_create("imageLoad", DISPATCH_QUEUE_SERIAL)
         
         tableView.estimatedRowHeight = 184
@@ -124,7 +174,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.tableView.reloadData()
+//        self.tableView.reloadData()
 //        self.loadObjects()
 //        self.tableView.insertSections(NSIndexSet(index: 0), withRowAnimation: .Fade)
     }
@@ -168,6 +218,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
             cell.juxt?.photosForJuxt() { (photos) -> Void in
                 cell.galleryScrollView.photos = photos as [Photo]?
             }
+            cell.homeViewController = self
         }
         
         return cell
@@ -187,15 +238,13 @@ class JXTHomeTableViewController: PFQueryTableViewController {
     }
     
     override func scrollViewDidScrollToTop(scrollView: UIScrollView) {
-        if let tableView = scrollView as? UITableView {
-            self.navigationController?.scrollNavigationBar.resetToDefaultPositionWithAnimation(true)
-        }
+//        if let tableView = scrollView as? UITableView {
+//            self.navigationController?.scrollNavigationBar.resetToDefaultPositionWithAnimation(true)
+//        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        self.navigationController?.scrollNavigationBar.resetToDefaultPositionWithAnimation(true)
-        
+                
         if segue.identifier == "ShowJuxt" {
             if let juxtCell = sender as? JXTJuxtTableViewCell {
                 if let juxtViewController = segue.destinationViewController as? JXTJuxtViewController {

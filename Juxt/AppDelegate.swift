@@ -64,12 +64,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        FBSession.openActiveSessionWithPublishPermissions(["publish_actions"], defaultAudience: FBSessionDefaultAudience.Friends, allowLoginUI: true, completionHandler: nil)
         
-        if PFUser.currentUser() != nil {
-            
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let mainNav = storyboard.instantiateViewControllerWithIdentifier("MainNav") as! UINavigationController
-            self.window?.rootViewController = mainNav
-        }
+//        if PFUser.currentUser() != nil {
+//            
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let mainNav = storyboard.instantiateViewControllerWithIdentifier("MainNav") as! UINavigationController
+//            self.window?.rootViewController = mainNav
+//        }
         
 //        Fabric.with([Twitter()])
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)

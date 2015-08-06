@@ -69,7 +69,7 @@ class JXTImageGalleryScrollView: UIScrollView {
                     imageView.contentMode = .ScaleAspectFill
                     imageView.image = UIImage(named: "default-placeholder")
                     self.addSubview(imageView)
-//                    JXTConstants.fadeInWidthDuration(imageView, duration: 0.3)
+                    JXTConstants.fadeInWidthDuration(imageView, duration: 0.25)
                     imageView.file = photos[i].imageFile
                     if self.direction == .Horizontal {
                         imageView.layer.cornerRadius = 5.0

@@ -20,6 +20,8 @@ class JXTPhotoTableViewCell: UITableViewCell {
 
     @IBOutlet weak var photoView: PFImageView!
     
+    weak var juxtViewController: JXTJuxtViewController?
+    
     var delegate: JXTPhotoTableViewCellDelegate?
     
     var photo: Photo? {
@@ -57,7 +59,12 @@ class JXTPhotoTableViewCell: UITableViewCell {
         }
     }
     
+    @IBAction func moreButtonPressed(sender: UIButton) {
+        self.juxtViewController?.
+    }
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var moreButton: UIButton!
     
 }

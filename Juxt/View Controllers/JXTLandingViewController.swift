@@ -29,25 +29,27 @@ class JXTLandingViewController: UIViewController {
         twitterButton.layer.cornerRadius = 5.0
         
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+
+    }
 
     override func viewDidAppear(animated: Bool) {
         
         super.viewDidAppear(animated)
-        
         if PFUser.currentUser() != nil {
             
-            // User is logged in, do work such as go to next view controller.
             let mainNav = self.storyboard?.instantiateViewControllerWithIdentifier("MainNav") as? UINavigationController
             self.presentViewController(mainNav!, animated: true, completion: nil)
-
+            
         }
+        
     }
 
     @IBAction func facebookAction(sender: FBSDKLoginButton) {
         if PFUser.currentUser() != nil {
-            // User is logged in, do work such as go to next view controller.
-            
-//            PFUser.currentUser()["name"] =
                 let mainNav = self.storyboard?.instantiateViewControllerWithIdentifier("MainNav") as? UINavigationController
                 self.presentViewController(mainNav!, animated: true, completion: nil)
         } else {
@@ -55,11 +57,17 @@ class JXTLandingViewController: UIViewController {
                 if user == nil {
                     println("Uh oh. The user cancelled the Facebook login.")
                 } else if user!.isNew == true {
+                    
+                    MixpanelHelper.trackFacebookSignup()
+                    
                     println("User signed up and logged in through Facebook!")
                     let mainNav = self.storyboard?.instantiateViewControllerWithIdentifier("MainNav") as? UINavigationController
                     self.presentViewController(mainNav!, animated: true, completion: nil)
                 } else {
                     println("User logged in through Facebook!")
+                    
+                    MixpanelHelper.trackFacebookLogin()
+                    
                     let mainNav = self.storyboard?.instantiateViewControllerWithIdentifier("MainNav") as? UINavigationController
                     self.presentViewController(mainNav!, animated: true, completion: nil)
                 }

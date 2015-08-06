@@ -42,6 +42,28 @@ class JXTJuxtViewController: UIViewController {
     var shareButton: UIBarButtonItem?
     var addButton: UIBarButtonItem?
     
+    // MARK: UIActionSheets
+    
+    func showActionSheetForPhoto(photo: Photo) {
+        showDeleteActionSheetForPhoto(photo)
+    }
+    
+    func showDeleteActionSheetForPhoto(photo: Photo) {
+        let alertController = UIAlertController(title: nil, message: "Do you want to delete this post?", preferredStyle: .ActionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        let destroyAction = UIAlertAction(title: "Delete", style: .Destructive) { (action) in
+            
+            
+            
+        }
+        alertController.addAction(destroyAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
     // MARK: Helper Funcs
     
     func addPhotoButtonPressed(sender: UIBarButtonItem) {
@@ -261,7 +283,8 @@ extension JXTJuxtViewController: UITableViewDataSource {
         let photo = photos?[indexPath.row]
         
         cell.photo = photo
-        cell.delegate = self
+//        cell.delegate = self
+        
         cell.layoutIfNeeded()
         
         return cell
