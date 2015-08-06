@@ -111,7 +111,8 @@ class JXTHomeTableViewController: PFQueryTableViewController {
             post.deleteInBackgroundWithBlock({ (success, error) -> Void in
                 if success {
                     self.loadObjects()
-                    self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: .Fade)
+                    self.tableView.reloadData()
+//                    self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: .Fade)
                 }
             })
         }

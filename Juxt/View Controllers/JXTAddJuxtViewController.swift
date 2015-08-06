@@ -95,10 +95,12 @@ class JXTAddJuxtViewController: UIViewController {
 //            self.descriptionTextView.resignFirstResponder()
 //            self.uploadActivityIndicator.stopAnimating()
 
-        if let presentingVC = self.presentingViewController {
-            self.photoTakingHelper = PhotoTakingHelper(viewController: self, juxt: juxt, cameraOnly: true, originalVC: presentingVC/*, cancelButtonHidden: true, addPhotoCancelButton: true*/)
-        }
-        
+//        if let presentingVC = self.presentingViewController as? JXTHomeTableViewController {
+//            if let navController = presentingVC.navigationController {
+                self.photoTakingHelper = PhotoTakingHelper(viewController: self, juxt: juxt, cameraOnly: true, returnHome: true/*, cancelButtonHidden: true, addPhotoCancelButton: true*/)
+//            }
+//        }
+    
 //            sender.enabled = true
 //            //self.dismissViewControllerAnimated(true, completion: nil)
 //        }

@@ -27,8 +27,7 @@ class JXTCameraViewController: UIViewController {
     var cancelButton: UIButton?
     var translucentGuideView: PFImageView?
     
-    var originalVC: UIViewController?
-    
+    var returnHome: Bool?
 //    var cancelButtonHidden: Bool? = false
 //    var addPhotoCancelButtonHidden: Bool? = false
     
@@ -196,7 +195,7 @@ class JXTCameraViewController: UIViewController {
 //                addPhotoController.addPhotoCancelButtonHidden = self.addPhotoCancelButtonHidden
                 let navigationController = UINavigationController(rootViewController: addPhotoController)
                 addPhotoController.image = image
-                addPhotoController.originalVC = self.originalVC
+                addPhotoController.returnHome = self.returnHome
                 self.presentViewController(navigationController, animated: true, completion: nil)
             }
         }, exactSeenImage: true)

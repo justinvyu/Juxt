@@ -149,7 +149,7 @@ class JXTJuxtViewController: UIViewController {
         
         if let juxt = juxt {
             
-            photoTakingHelper = PhotoTakingHelper(viewController: self, juxt: juxt, cameraOnly: true, originalVC: self/*, cancelButtonHidden: false, addPhotoCancelButton: true*/)
+            photoTakingHelper = PhotoTakingHelper(viewController: self, juxt: juxt, cameraOnly: true, returnHome: false/*, cancelButtonHidden: false, addPhotoCancelButton: true*/)
         }
         
 //        let cameraViewController = JXTCameraViewController()

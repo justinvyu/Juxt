@@ -32,8 +32,7 @@ class JXTAddPhotoViewController: UIViewController {
     var image: UIImage?
     var keyboardNotificationHandler: KeyboardNotificationHandler?
 //    var addPhotoCancelButtonHidden: Bool? = false
-    
-    var originalVC: UIViewController?
+    var returnHome: Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -176,7 +175,15 @@ class JXTAddPhotoViewController: UIViewController {
     }
     
     func dismissToJuxt() {
-        self.originalVC?.dismissViewControllerAnimated(true, completion: nil)
+
+        self.titleTextField?.resignFirstResponder()
+        println(returnHome)
+        if returnHome == true {
+            self.presentingViewController?.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+        } else {
+            self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+        }
+        
     }
     
     func doneButtonPressed(button: JYProgressButton) {
