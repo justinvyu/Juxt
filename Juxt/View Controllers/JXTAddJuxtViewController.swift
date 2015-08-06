@@ -23,6 +23,8 @@ class JXTAddJuxtViewController: UIViewController {
     var photoTakingHelper: PhotoTakingHelper?
     var keyboardNotificationHandler : KeyboardNotificationHandler?
     
+    weak var originalVC: UIViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -93,8 +95,10 @@ class JXTAddJuxtViewController: UIViewController {
 //            self.descriptionTextView.resignFirstResponder()
 //            self.uploadActivityIndicator.stopAnimating()
 
-            self.photoTakingHelper = PhotoTakingHelper(viewController: self, juxt: juxt, cameraOnly: true/*, cancelButtonHidden: true, addPhotoCancelButton: true*/)
-            
+        if let presentingVC = self.presentingViewController {
+            self.photoTakingHelper = PhotoTakingHelper(viewController: self, juxt: juxt, cameraOnly: true, originalVC: presentingVC/*, cancelButtonHidden: true, addPhotoCancelButton: true*/)
+        }
+        
 //            sender.enabled = true
 //            //self.dismissViewControllerAnimated(true, completion: nil)
 //        }

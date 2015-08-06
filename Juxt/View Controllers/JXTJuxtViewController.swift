@@ -12,11 +12,11 @@ import ParseUI
 import FBSDKCoreKit
 import FBSDKShareKit
 
-//protocol JXTJuxtViewControllerDelegate {
-//    
-//    func didLoadPhotos(photos: [Photo])
-//    
-//}
+protocol JXTJuxtViewControllerDelegate {
+    
+    func deletedJuxt()
+    
+}
 
 class JXTJuxtViewController: UIViewController {
    
@@ -25,6 +25,8 @@ class JXTJuxtViewController: UIViewController {
     var juxt: Juxt?
     var photos: [Photo]?
     var imageLoadQueue: dispatch_queue_t?
+    
+    var delegate: JXTJuxtViewControllerDelegate?
     
     var fullScreenImageView: UIImageView?
     var fullScreenCancelButton: UIButton?
@@ -62,6 +64,56 @@ class JXTJuxtViewController: UIViewController {
         
     }
     
+    func showActionSheetForPost(post: Juxt) {
+        if (post.user == PFUser.currentUser()) {
+            showDeleteActionSheetForPost(post)
+        } else {
+            showFlagActionSheetForPost(post)
+        }
+    }
+    
+    func showDeleteActionSheetForPost(post: Juxt) {
+        let alertController = UIAlertController(title: nil, message: "Do you want to delete this post?", preferredStyle: .ActionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        let destroyAction = UIAlertAction(title: "Delete", style: .Destructive) { (action) in
+            
+            if let photos = post.photos {
+                for photo in photos {
+                    photo.deleteInBackgroundWithBlock(nil)
+                }
+            }
+            
+            post.deleteInBackgroundWithBlock({ (success, error) -> Void in
+                if success {
+                    self.navigationController?.popToRootViewControllerAnimated(true)
+                    self.delegate?.deletedJuxt()
+//                    self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: .Fade)
+                }
+            })
+        }
+        alertController.addAction(destroyAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func showFlagActionSheetForPost(post: Juxt) {
+        let alertController = UIAlertController(title: nil, message: "Do you want to flag this post?", preferredStyle: .ActionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        let destroyAction = UIAlertAction(title: "Flag", style: .Destructive) { (action) in
+            post.flagPost(PFUser.currentUser()!)
+        }
+        
+        alertController.addAction(destroyAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
     func showFullScreenImage(image: UIImage) {
         self.fullScreenImageView = UIImageView()
         self.fullScreenImageView?.frame = self.view.frame
@@ -97,7 +149,7 @@ class JXTJuxtViewController: UIViewController {
         
         if let juxt = juxt {
             
-            photoTakingHelper = PhotoTakingHelper(viewController: self, juxt: juxt, cameraOnly: true/*, cancelButtonHidden: false, addPhotoCancelButton: true*/)
+            photoTakingHelper = PhotoTakingHelper(viewController: self, juxt: juxt, cameraOnly: true, originalVC: self/*, cancelButtonHidden: false, addPhotoCancelButton: true*/)
         }
         
 //        let cameraViewController = JXTCameraViewController()
@@ -176,7 +228,7 @@ class JXTJuxtViewController: UIViewController {
         self.navigationItem.hidesBackButton = false
         self.navigationController?.navigationBar.tintColor = UIColor(white: 0.97, alpha: 1.0)
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
-        self.navigationItem.title = juxt?.title
+        self.navigationItem.title = "juxt"
         self.navigationItem.titleView?.tintColor = UIColor(white: 0.97, alpha: 1.0)
         
         let compareButton = UIBarButtonItem(image: UIImage(named: "share"), landscapeImagePhone: nil, style: .Plain, target: self, action: "compareButtonTapped:")
@@ -322,14 +374,18 @@ extension JXTJuxtViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as! JXTHeaderTableViewCell
             
             cell.juxt = self.juxt
+            cell.profilePicture.layer.cornerRadius = 5.0
+            cell.juxtViewController = self
             
             return cell
         case 1:
             let cell = tableView.dequeueReusableCellWithIdentifier("PhotoCell") as! JXTPhotoTableViewCell
             
-            let photo = photos?[indexPath.row]
+            if let photos = photos {
+                let photo = photos[photos.count - 1 - indexPath.row]
+                cell.photo = photo
+            }
             
-            cell.photo = photo
             cell.juxtViewController = self
             cell.layoutIfNeeded()
             

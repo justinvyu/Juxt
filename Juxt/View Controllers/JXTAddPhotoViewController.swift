@@ -33,6 +33,8 @@ class JXTAddPhotoViewController: UIViewController {
     var keyboardNotificationHandler: KeyboardNotificationHandler?
 //    var addPhotoCancelButtonHidden: Bool? = false
     
+    var originalVC: UIViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -42,24 +44,26 @@ class JXTAddPhotoViewController: UIViewController {
         
         setupPhotoUI()
         
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
         keyboardNotificationHandler = KeyboardNotificationHandler()
         
         keyboardNotificationHandler?.keyboardWillBeHiddenHandler = { (height: CGFloat) in
+            println(height)
             UIView.animateWithDuration(0.3, animations: { () -> Void in
                 self.doneButton?.frame.origin.y += height
             })
         }
         
         keyboardNotificationHandler?.keyboardWillBeShownHandler = { (height: CGFloat) in
+            println(height)
             UIView.animateWithDuration(0.3, animations: { () -> Void in
                 self.doneButton?.frame.origin.y -= height
             })
         }
-        
-    }
-
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
         
         UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
         self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
@@ -172,12 +176,7 @@ class JXTAddPhotoViewController: UIViewController {
     }
     
     func dismissToJuxt() {
-        if let homeVC = self.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController as? JXTHomeTableViewController {
-            println("home vc")
-            self.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
-        } else {
-            self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
-        }
+        self.originalVC?.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func doneButtonPressed(button: JYProgressButton) {
@@ -193,6 +192,7 @@ class JXTAddPhotoViewController: UIViewController {
             }
             
             button.enabled = false
+            
             button.startAnimating()
 
             juxt.uploadJuxt({ (finished, error) -> Void in

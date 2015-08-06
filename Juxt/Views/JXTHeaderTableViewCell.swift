@@ -12,6 +12,8 @@ import ParseUI
 
 class JXTHeaderTableViewCell: UITableViewCell {
 
+    weak var juxtViewController: JXTJuxtViewController?
+    
     var juxt: Juxt? {
         didSet {
             self.usernameLabel.text = ParseHelper.userName()
@@ -21,6 +23,8 @@ class JXTHeaderTableViewCell: UITableViewCell {
             self.titleLabel.text = juxt?.title
             
             otherButton.imageView?.image = juxt?.user == PFUser.currentUser() ? UIImage(named: "delete") : UIImage(named: "flag")
+            otherButton.setImage(juxt?.user == PFUser.currentUser() ? UIImage(named: "delete") : UIImage(named: "flag"), forState: .Selected)
+            otherButton.setImage(juxt?.user == PFUser.currentUser() ? UIImage(named: "delete") : UIImage(named: "flag"), forState: .Highlighted)
         }
     }
     
@@ -30,4 +34,12 @@ class JXTHeaderTableViewCell: UITableViewCell {
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var likesLabel: UILabel!
     @IBOutlet weak var otherButton: UIButton! // Flag or delete
+    
+    @IBAction func otherButtonPressed(sender: UIButton) {
+        
+        if let juxt = self.juxt {
+            self.juxtViewController?.showActionSheetForPost(juxt)
+        }
+        
+    }
 }

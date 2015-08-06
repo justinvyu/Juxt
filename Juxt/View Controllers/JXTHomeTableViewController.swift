@@ -111,7 +111,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
             post.deleteInBackgroundWithBlock({ (success, error) -> Void in
                 if success {
                     self.loadObjects()
-                    self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Fade)
+                    self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: .Fade)
                 }
             })
         }
@@ -182,6 +182,8 @@ class JXTHomeTableViewController: PFQueryTableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        self.view.layoutIfNeeded()
+        
 //        self.tableView.reloadData()
     }
     
@@ -194,12 +196,12 @@ class JXTHomeTableViewController: PFQueryTableViewController {
     
     override func viewWillLayoutSubviews() {
         
-        if tableView.respondsToSelector(Selector("setSeparatorInset:")) {
-            tableView.separatorInset = UIEdgeInsetsZero
-        }
-        if tableView.respondsToSelector(Selector("setLayoutMargins:")) {
-            tableView.layoutMargins = UIEdgeInsetsZero
-        }
+//        if tableView.respondsToSelector(Selector("setSeparatorInset:")) {
+//            tableView.separatorInset = UIEdgeInsetsZero
+//        }
+//        if tableView.respondsToSelector(Selector("setLayoutMargins:")) {
+//            tableView.layoutMargins = UIEdgeInsetsZero
+//        }
     }
 
     // MARK: - Table view data source
@@ -249,6 +251,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
             if let juxtCell = sender as? JXTJuxtTableViewCell {
                 if let juxtViewController = segue.destinationViewController as? JXTJuxtViewController {
                     juxtViewController.juxt = juxtCell.juxt
+                    juxtViewController.delegate = self
                     juxtViewController.presentingTableViewCell = sender as? JXTJuxtTableViewCell
                 }
 //                if let navController = segue.destinationViewController as? UINavigationController {
@@ -266,6 +269,16 @@ class JXTHomeTableViewController: PFQueryTableViewController {
             }
         }
     }
+}
+
+extension JXTHomeTableViewController: JXTJuxtViewControllerDelegate {
+    
+    func deletedJuxt() {
+        self.loadObjects()
+        self.tableView.reloadData()
+//        self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: .Fade)
+    }
+    
 }
 
 

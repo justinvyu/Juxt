@@ -12,7 +12,7 @@ class JXTConstants: NSObject {
     
     static var dateFormatter: NSDateFormatter = {
         var formatter = NSDateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.dateFormat = "MM/dd/yyyy"
         return formatter
     }()
     
