@@ -321,6 +321,7 @@ extension JXTJuxtViewController: UITableViewDataSource {
         case 0:
             let cell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as! JXTHeaderTableViewCell
             
+            cell.juxt = self.juxt
             
             return cell
         case 1:

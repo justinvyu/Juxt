@@ -7,9 +7,27 @@
 //
 
 import UIKit
+import Parse
+import ParseUI
 
 class JXTHeaderTableViewCell: UITableViewCell {
 
+    var juxt: Juxt? {
+        didSet {
+            self.usernameLabel.text = ParseHelper.userName()
+            self.profilePicture.file = ParseHelper.userProfilePicture()
+            self.profilePicture.loadInBackground()
+            self.profilePicture.layer.cornerRadius = 5.0
+            self.titleLabel.text = juxt?.title
+            
+            otherButton.imageView?.image = juxt?.user == PFUser.currentUser() ? UIImage(named: "delete") : UIImage(named: "flag")
+        }
+    }
     
-
+    @IBOutlet weak var profilePicture: PFImageView!
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var likesLabel: UILabel!
+    @IBOutlet weak var otherButton: UIButton! // Flag or delete
 }

@@ -783,7 +783,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="c8E-cO-z4y" id="0qG-lY-hxR">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="heO-Cp-6HD">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="heO-Cp-6HD" customClass="PFImageView">
                                                     <rect key="frame" x="8" y="8" width="50" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="50" id="HoV-XY-pmX"/>
@@ -810,6 +810,13 @@
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vci-rq-WMd">
+                                                            <rect key="frame" x="360" y="8" width="32" height="32"/>
+                                                            <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                                                            <state key="normal" image="flag">
+                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                        </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Zq-as-ZnH">
                                                             <rect key="frame" x="290" y="14" width="20" height="20"/>
                                                             <constraints>
@@ -820,13 +827,6 @@
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JmV-Bq-sKK">
-                                                            <rect key="frame" x="200" y="7" width="32" height="32"/>
-                                                            <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
-                                                            <state key="normal" image="star">
-                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                            </state>
-                                                        </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X1R-Cn-DZV">
                                                             <rect key="frame" x="240" y="13" width="70" height="21"/>
                                                             <constraints>
@@ -837,10 +837,10 @@
                                                             <color key="textColor" white="0.46788454341317365" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vci-rq-WMd">
-                                                            <rect key="frame" x="360" y="8" width="32" height="32"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JmV-Bq-sKK">
+                                                            <rect key="frame" x="200" y="8" width="32" height="32"/>
                                                             <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
-                                                            <state key="normal" image="flag">
+                                                            <state key="normal" image="star">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
                                                         </button>
@@ -859,7 +859,7 @@
                                                         <constraint firstItem="X1R-Cn-DZV" firstAttribute="top" secondItem="iaF-Jp-yZr" secondAttribute="top" constant="13" id="nLj-nf-RUY"/>
                                                         <constraint firstItem="OKd-U2-KIs" firstAttribute="centerX" secondItem="iaF-Jp-yZr" secondAttribute="centerX" id="qcp-Yc-nWy"/>
                                                         <constraint firstItem="2Zq-as-ZnH" firstAttribute="firstBaseline" secondItem="OKd-U2-KIs" secondAttribute="firstBaseline" id="sfz-dy-FRp"/>
-                                                        <constraint firstItem="JmV-Bq-sKK" firstAttribute="top" secondItem="iaF-Jp-yZr" secondAttribute="top" constant="7" id="x8U-2S-vOT"/>
+                                                        <constraint firstItem="JmV-Bq-sKK" firstAttribute="top" secondItem="iaF-Jp-yZr" secondAttribute="top" constant="8" id="x8U-2S-vOT"/>
                                                         <constraint firstItem="2Zq-as-ZnH" firstAttribute="leading" secondItem="X1R-Cn-DZV" secondAttribute="trailing" constant="-20" id="yyB-et-ghf"/>
                                                     </constraints>
                                                     <variation key="default">
@@ -892,6 +892,14 @@
                                                 <constraint firstItem="vpV-vj-DsL" firstAttribute="top" secondItem="heO-Cp-6HD" secondAttribute="top" id="smX-pV-ELq"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="likeButton" destination="JmV-Bq-sKK" id="DPW-cm-Qf8"/>
+                                            <outlet property="likesLabel" destination="X1R-Cn-DZV" id="xQo-iW-YPk"/>
+                                            <outlet property="otherButton" destination="vci-rq-WMd" id="Xgx-fR-cJx"/>
+                                            <outlet property="profilePicture" destination="heO-Cp-6HD" id="yYr-wu-mBD"/>
+                                            <outlet property="titleLabel" destination="U0W-AE-w3O" id="MQC-tE-gXa"/>
+                                            <outlet property="usernameLabel" destination="vpV-vj-DsL" id="8RU-WR-rPl"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PhotoCell" rowHeight="664" id="5ha-T1-OVH" customClass="JXTPhotoTableViewCell" customModule="Juxt" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -1037,7 +1045,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wL1-98-Dwn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3587" y="504"/>
+            <point key="canvasLocation" x="3587" y="507"/>
         </scene>
         <!--Compare View Controller-->
         <scene sceneID="lzQ-dM-fLK">
