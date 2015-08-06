@@ -10,6 +10,8 @@ import UIKit
 import AVFoundation
 import LLSimpleCamera
 import TGCameraViewController
+import Parse
+import ParseUI
 
 class JXTCameraViewController: UIViewController {
 
@@ -23,6 +25,7 @@ class JXTCameraViewController: UIViewController {
     var flashButton: UIButton?
     var switchButton: UIButton?
     var cancelButton: UIButton?
+    var translucentGuideView: PFImageView?
     
 //    var cancelButtonHidden: Bool? = false
 //    var addPhotoCancelButtonHidden: Bool? = false
@@ -66,12 +69,12 @@ class JXTCameraViewController: UIViewController {
 //        }
         
         self.camera?.start()
-
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Slide)
+
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -115,6 +118,20 @@ class JXTCameraViewController: UIViewController {
     
     func setupCaptureUI() {
 
+        if let photos = self.juxt?.photos {
+            if photos.count != 0 {
+                
+                let photo = photos[photos.count - 1]
+                translucentGuideView = PFImageView(frame: self.view.frame)
+                translucentGuideView?.file = photo.imageFile
+                self.view.addSubview(translucentGuideView!)
+                translucentGuideView?.alpha = 0.25
+                
+                translucentGuideView?.contentMode = .ScaleAspectFill
+                translucentGuideView?.loadInBackground()
+            }
+        }
+        
         snapButton = UIButton.buttonWithType(.Custom) as? UIButton
         snapButton?.frame = CGRectMake(0, 0, 70, 70)
         snapButton?.clipsToBounds = true

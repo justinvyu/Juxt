@@ -273,8 +273,6 @@ extension JXTHomeTableViewController: UISearchBarDelegate {
     
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
         
-        self.navigationController?.scrollNavigationBar.scrollView = nil
-        
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: Selector("dismissKeyboard"))
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
         
@@ -283,7 +281,6 @@ extension JXTHomeTableViewController: UISearchBarDelegate {
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
         
-        self.navigationController?.scrollNavigationBar.scrollView = self.tableView
         self.navigationItem.leftBarButtonItem = nil
     }
     

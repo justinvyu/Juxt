@@ -42,26 +42,53 @@ class JXTJuxtViewController: UIViewController {
     var shareButton: UIBarButtonItem?
     var addButton: UIBarButtonItem?
     
-    // MARK: UIActionSheets
+    // MARK: TableViewCell (Delegate)
     
     func showActionSheetForPhoto(photo: Photo) {
-        showDeleteActionSheetForPhoto(photo)
-    }
-    
-    func showDeleteActionSheetForPhoto(photo: Photo) {
+        
         let alertController = UIAlertController(title: nil, message: "Do you want to delete this post?", preferredStyle: .ActionSheet)
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
         alertController.addAction(cancelAction)
         
-        let destroyAction = UIAlertAction(title: "Delete", style: .Destructive) { (action) in
+        let retakeAction = UIAlertAction(title: "Retake", style: .Default) { (action) in
             
-            
+            println("retake")
             
         }
-        alertController.addAction(destroyAction)
+        alertController.addAction(retakeAction)
         
         self.presentViewController(alertController, animated: true, completion: nil)
+        
+    }
+    
+    func showFullScreenImage(image: UIImage) {
+        self.fullScreenImageView = UIImageView()
+        self.fullScreenImageView?.frame = self.view.frame
+        self.fullScreenImageView?.contentMode = UIViewContentMode.ScaleAspectFill
+        self.fullScreenImageView?.clipsToBounds = true
+        
+        self.fullScreenImageView?.image = image
+        self.navigationController?.view.addSubview(self.fullScreenImageView!)
+        
+        fullScreenCancelButton = UIButton.buttonWithType(.Custom) as? UIButton
+        fullScreenCancelButton?.frame = CGRectMake(10, 20, 44, 44)
+        fullScreenCancelButton?.tintColor = JXTConstants.defaultBlueColor()
+        fullScreenCancelButton?.setImage(UIImage(named: "cancel"), forState: .Normal)
+        fullScreenCancelButton?.imageEdgeInsets = UIEdgeInsetsMake(12, 12, 12, 12)
+        fullScreenCancelButton?.addTarget(self, action: Selector("fullScreenCancelButtonPressed:"), forControlEvents: .TouchUpInside)
+        self.navigationController?.view.addSubview(fullScreenCancelButton!)
+        
+        JXTConstants.fadeInWidthDuration(self.fullScreenImageView!, duration: 0.3)
+        
+        self.navigationItem.hidesBackButton = true
+        self.addButton?.enabled = false
+        self.shareButton?.enabled = false
+        
+        self.tableView.userInteractionEnabled = false
+        if self.navigationController?.respondsToSelector("interactivePopGestureRecognizer") == true {
+            self.navigationController?.interactivePopGestureRecognizer.enabled = false
+        }
     }
     
     // MARK: Helper Funcs
@@ -264,30 +291,53 @@ extension JXTJuxtViewController: UITableViewDataSource {
 //    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
-        if self.photos?.count != 0 {
+        if self.photos?.count != 0 && self.juxt != nil {
             tableView.backgroundView?.removeFromSuperview()
             tableView.backgroundView = nil
-            return 1
+            return 2
         }
         
         return 0
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Int(photos?.count ?? 0)
+//        return Int(photos?.count ?? 0)
+        
+        switch section {
+        case 0:
+            return 1
+        case 1:
+            return Int(photos?.count ?? 0)
+        default:
+            println("Out of bounds??")
+            return 0
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("PhotoCell") as! JXTPhotoTableViewCell
         
-        let photo = photos?[indexPath.row]
-        
-        cell.photo = photo
-//        cell.delegate = self
-        
-        cell.layoutIfNeeded()
-        
-        return cell
+        switch indexPath.section {
+            
+        case 0:
+            let cell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as! JXTHeaderTableViewCell
+            
+            
+            return cell
+        case 1:
+            let cell = tableView.dequeueReusableCellWithIdentifier("PhotoCell") as! JXTPhotoTableViewCell
+            
+            let photo = photos?[indexPath.row]
+            
+            cell.photo = photo
+            cell.juxtViewController = self
+            cell.layoutIfNeeded()
+            
+            return cell
+        default:
+            return UITableViewCell()
+            
+        }
+
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -304,32 +354,7 @@ extension JXTJuxtViewController: JXTPhotoTableViewCellDelegate {
     
     func imageViewWasPressedWithImage(image: UIImage) {
                 
-        self.fullScreenImageView = UIImageView()
-        self.fullScreenImageView?.frame = self.view.frame
-        self.fullScreenImageView?.contentMode = UIViewContentMode.ScaleAspectFill
-        self.fullScreenImageView?.clipsToBounds = true
-
-        self.fullScreenImageView?.image = image
-        self.navigationController?.view.addSubview(self.fullScreenImageView!)
         
-        fullScreenCancelButton = UIButton.buttonWithType(.Custom) as? UIButton
-        fullScreenCancelButton?.frame = CGRectMake(10, 20, 44, 44)
-        fullScreenCancelButton?.tintColor = JXTConstants.defaultBlueColor()
-        fullScreenCancelButton?.setImage(UIImage(named: "cancel"), forState: .Normal)
-        fullScreenCancelButton?.imageEdgeInsets = UIEdgeInsetsMake(12, 12, 12, 12)
-        fullScreenCancelButton?.addTarget(self, action: Selector("fullScreenCancelButtonPressed:"), forControlEvents: .TouchUpInside)
-        self.navigationController?.view.addSubview(fullScreenCancelButton!)
-        
-        JXTConstants.fadeInWidthDuration(self.fullScreenImageView!, duration: 0.3)
-        
-        self.navigationItem.hidesBackButton = true
-        self.addButton?.enabled = false
-        self.shareButton?.enabled = false
-
-        self.tableView.userInteractionEnabled = false
-        if self.navigationController?.respondsToSelector("interactivePopGestureRecognizer") == true {
-            self.navigationController?.interactivePopGestureRecognizer.enabled = false
-        }
         
     }
     

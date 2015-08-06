@@ -22,7 +22,7 @@ class JXTPhotoTableViewCell: UITableViewCell {
     
     weak var juxtViewController: JXTJuxtViewController?
     
-    var delegate: JXTPhotoTableViewCellDelegate?
+//    var delegate: JXTPhotoTableViewCellDelegate?
     
     var photo: Photo? {
         
@@ -55,12 +55,15 @@ class JXTPhotoTableViewCell: UITableViewCell {
     
     func photoTapped(gesture: UITapGestureRecognizer) {
         if let image = self.photoView.image {
-            self.delegate?.imageViewWasPressedWithImage(image)
+//            self.delegate?.imageViewWasPressedWithImage(image)
+            self.juxtViewController?.showFullScreenImage(image)
         }
     }
     
     @IBAction func moreButtonPressed(sender: UIButton) {
-        self.juxtViewController?.
+        if let photo = self.photo {
+            self.juxtViewController?.showActionSheetForPhoto(photo)
+        }
     }
     
     @IBOutlet weak var titleLabel: UILabel!
