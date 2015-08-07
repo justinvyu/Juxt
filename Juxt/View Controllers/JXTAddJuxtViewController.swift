@@ -106,6 +106,7 @@ class JXTAddJuxtViewController: UIViewController {
 
     @IBAction func dismissButtonTapped(sender: UIBarButtonItem) {
         
+        MixpanelHelper.trackCancelAtCreateProject()
         titleTextView.resignFirstResponder()
         dismissViewControllerAnimated(true, completion: nil)
     }

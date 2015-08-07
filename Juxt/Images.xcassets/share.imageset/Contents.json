@@ -2,16 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "share53-2.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "share.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "share.png"
+      "filename" : "share53.png"
     }
   ],
   "info" : {

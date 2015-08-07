@@ -17,7 +17,8 @@ import ParseFacebookUtils
 class JXTLandingViewController: UIViewController {
 
     @IBOutlet weak var facebookButton: UIButton!
-    @IBOutlet weak var twitterButton: UIButton!
+//    @IBOutlet weak var twitterButton: UIButton!
+    @IBOutlet weak var facebookImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,8 +27,8 @@ class JXTLandingViewController: UIViewController {
         
         self.view.backgroundColor = JXTConstants.defaultBlueColor()
         facebookButton.layer.cornerRadius = 5.0
-        twitterButton.layer.cornerRadius = 5.0
-        
+//        twitterButton.layer.cornerRadius = 5.0
+        self.view.bringSubviewToFront(facebookImage)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -75,9 +76,9 @@ class JXTLandingViewController: UIViewController {
         }
     }
     
-    @IBAction func twitterAction(sender: UIButton) {
-        
-    }
+//    @IBAction func twitterAction(sender: UIButton) {
+//        
+//    }
     
 }
 

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FXBlurView
 
 protocol JXTCompareViewDelegate {
     func compareViewDidCancel(button: UIButton)
@@ -137,24 +136,37 @@ class JXTCompareView: UIView {
         bottomBar?.backgroundColor = JXTConstants.defaultBlueColor().colorWithAlphaComponent(0.9)
         self.addSubview(bottomBar!)
         
-        saveButton = UIButton(frame: CGRectMake(bottomBar!.frame.size.width / 3 - 44, 5, 44, 44))
+//        saveButton = UIButton(frame: CGRectMake(bottomBar!.frame.size.width / 3 - 44, 5, 44, 44))
+//        saveButton?.setImage(UIImage(named: "download"), forState: .Normal)
+//        saveButton?.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
+//        bottomBar?.addSubview(saveButton!)
+//        saveButton?.addTarget(self, action: "saveToCameraRoll:", forControlEvents: .TouchUpInside)
+//        
+//        facebookButton = UIButton(frame: CGRectMake(0, 5, 44, 44))
+//        facebookButton?.setImage(UIImage(named: "facebook"), forState: .Normal)
+//        facebookButton?.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
+//        bottomBar?.addSubview(facebookButton!)
+//        facebookButton?.center.x = bottomBar!.center.x
+//        facebookButton?.addTarget(self, action: "compareFacebook:", forControlEvents: .TouchUpInside)
+//        
+//        twitterButton = UIButton(frame: CGRectMake(2 * bottomBar!.frame.size.width / 3, 5, 44, 44))
+//        twitterButton?.setImage(UIImage(named: "twitter"), forState: .Normal)
+//        twitterButton?.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
+//        bottomBar?.addSubview(twitterButton!)
+        
+        
+        saveButton = UIButton(frame: CGRectMake(bottomBar!.frame.size.width / 2 - 44 - 30, 5, 44, 44))
         saveButton?.setImage(UIImage(named: "download"), forState: .Normal)
         saveButton?.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
-//        saveButton?.frame.origin.x = self.frame.width - 53
         bottomBar?.addSubview(saveButton!)
         saveButton?.addTarget(self, action: "saveToCameraRoll:", forControlEvents: .TouchUpInside)
-        
-        facebookButton = UIButton(frame: CGRectMake(0, 5, 44, 44))
+
+        facebookButton = UIButton(frame: CGRectMake(bottomBar!.frame.size.width / 2 + 30, 5, 44, 44))
         facebookButton?.setImage(UIImage(named: "facebook"), forState: .Normal)
         facebookButton?.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
         bottomBar?.addSubview(facebookButton!)
-        facebookButton?.center.x = bottomBar!.center.x
+//        facebookButton?.center.x = bottomBar!.center.x
         facebookButton?.addTarget(self, action: "compareFacebook:", forControlEvents: .TouchUpInside)
-        
-        twitterButton = UIButton(frame: CGRectMake(2 * bottomBar!.frame.size.width / 3, 5, 44, 44))
-        twitterButton?.setImage(UIImage(named: "twitter"), forState: .Normal)
-        twitterButton?.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
-        bottomBar?.addSubview(twitterButton!)
         
         self.bringSubviewToFront(compareLabel!)
         self.bringSubviewToFront(cancelButton!)

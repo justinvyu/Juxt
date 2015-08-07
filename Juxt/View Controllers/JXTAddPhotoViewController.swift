@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import TPKeyboardAvoiding
 import ConvenienceKit
 
 protocol JXTAddPhotoViewControllerDelegate {
@@ -181,6 +180,7 @@ class JXTAddPhotoViewController: UIViewController {
     
     func dismissToJuxt() {
 
+        MixpanelHelper.trackCancelAtDescribeImage()
         self.titleTextField?.resignFirstResponder()
         println(returnHome)
         if returnHome == true {
@@ -211,6 +211,10 @@ class JXTAddPhotoViewController: UIViewController {
                 if error != nil {
                     println("\(error)")
                 } else {
+                    if juxt.photos?.count == 0 {
+                        MixpanelHelper.trackCreatePost()
+                    }
+                
                     let photo = Photo()
                     photo.title = titleTextField.text
                     photo.fromJuxt = juxt
@@ -221,6 +225,7 @@ class JXTAddPhotoViewController: UIViewController {
                         self.doneButton?.stopAnimating()
                         //                    self.uploadActivityIndicator?.stopAnimating()
                         //self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+                        MixpanelHelper.trackAddPhoto()
                         self.dismissToJuxt()
                     }
 

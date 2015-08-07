@@ -3,23 +3,24 @@
 
 use_frameworks!
 
+post_install do | installer |
+ require 'fileutils'
+ FileUtils.cp_r('Pods/Target Support Files/Pods-Juxt/Pods-Juxt-acknowledgements.plist', 'Juxt/Settings.bundle/Acknowledgements.plist', :remove_destination => true)
+end
+
 target 'Juxt' do
 
 	pod 'Parse'
 	pod 'ParseUI'
-	pod 'TPKeyboardAvoiding'
-	pod 'FlatUIKit'
 	pod 'FBSDKCoreKit'
 	pod 'FBSDKLoginKit'
 	pod 'FBSDKShareKit'
 	pod 'ConvenienceKit'
 	pod 'LLSimpleCamera', '~> 3.0'
 	pod 'TGCameraViewController'
-	pod 'FXBlurView'
 	pod 'ParseFacebookUtils'
 	pod 'AMScrollingNavbar'
 	pod 'Mixpanel'
-	pod 'DOFavoriteButton'
 end
 
 target 'JuxtTests' do
