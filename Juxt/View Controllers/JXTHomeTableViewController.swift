@@ -167,7 +167,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         
         imageLoadQueue = dispatch_queue_create("imageLoad", DISPATCH_QUEUE_SERIAL)
         
-        tableView.estimatedRowHeight = 184
+        tableView.estimatedRowHeight = 340
         tableView.rowHeight = UITableViewAutomaticDimension
         
     }
@@ -219,7 +219,8 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         if let juxt = object as? Juxt, cell = cell {
             cell.juxt = juxt
             cell.juxt?.photosForJuxt() { (photos) -> Void in
-                cell.galleryScrollView.photos = photos as [Photo]?
+//                cell.galleryScrollView.photos = photos as [Photo]?
+                cell.sideBySideView.photos = photos as [Photo]?
             }
             cell.homeViewController = self
         }

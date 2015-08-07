@@ -20,19 +20,19 @@ class JXTJuxtTableViewCell: PFTableViewCell {
     
     var juxt: Juxt? {
         didSet {
-            if let juxt = juxt, titleLabel = titleLabel, dateLabel = dateLabel {
+            if let juxt = juxt, titleLabel = titleLabel, dateLabel = dateLabel, sideBySideView = sideBySideView {
                 
 //                juxt.fetchFlags()
 //                if let usersFlagged = juxt.usersFlagged {
 //                    flagButton.selected = contains(usersFlagged, PFUser.currentUser()!)
 //                }
-                
+                                
                 titleLabel.text = juxt.title
                 if let date = juxt.date {
                     dateLabel.text = JXTConstants.stringFromDate(date)
                 }
                 
-                galleryScrollView.juxt = self.juxt // For tap gesture
+//                galleryScrollView.juxt = self.juxt // For tap gesture
 
                 // Profile Picture
                 if let user = juxt.user {
@@ -55,18 +55,22 @@ class JXTJuxtTableViewCell: PFTableViewCell {
     
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var galleryScrollView: JXTImageGalleryScrollView!
+//    @IBOutlet weak var galleryScrollView: JXTImageGalleryScrollView!
     @IBOutlet weak var profilePictureImageView: PFImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var likesLabel: UILabel!
     @IBOutlet weak var moreButton: UIButton!
+    @IBOutlet weak var sideBySideView: JXTSideBySideView!
+    
 //    @IBOutlet weak var flagButton: UIButton!
     
     override func prepareForReuse() {
 //        self.profilePictureImageView.image = UIImage(named: "default-placeholder")
-        self.galleryScrollView.photos = nil
-        self.galleryScrollView.images = nil 
+//        self.galleryScrollView.photos = nil
+//        self.galleryScrollView.images = nil
+//        self.sideBySideView.photos = nil
+        self.sideBySideView.subviews.map { $0.removeFromSuperview() }
     }
 //
 //    @IBAction func flaggedContentButtonPressed(sender: UIButton) {

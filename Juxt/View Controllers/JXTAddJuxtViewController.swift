@@ -59,8 +59,6 @@ class JXTAddJuxtViewController: UIViewController {
 //                self.view.layoutIfNeeded()
             }
         }
-        
-        
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -97,7 +95,7 @@ class JXTAddJuxtViewController: UIViewController {
 
 //        if let presentingVC = self.presentingViewController as? JXTHomeTableViewController {
 //            if let navController = presentingVC.navigationController {
-                self.photoTakingHelper = PhotoTakingHelper(viewController: self, juxt: juxt, cameraOnly: true, returnHome: true/*, cancelButtonHidden: true, addPhotoCancelButton: true*/)
+        self.photoTakingHelper = PhotoTakingHelper(viewController: self, juxt: juxt, cameraOnly: true, returnHome: true/*, cancelButtonHidden: true, addPhotoCancelButton: true*/)
 //            }
 //        }
     
