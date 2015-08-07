@@ -164,7 +164,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         
         tableView.contentInset = UIEdgeInsetsZero
         tableView.separatorInset = UIEdgeInsetsZero
-        
+        tableView.scrollsToTop = true
         imageLoadQueue = dispatch_queue_create("imageLoad", DISPATCH_QUEUE_SERIAL)
         
         tableView.estimatedRowHeight = 340
@@ -184,7 +184,8 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         super.viewDidAppear(animated)
         
         self.view.layoutIfNeeded()
-        
+        self.loadObjects()
+        self.tableView.reloadData()
 //        self.tableView.reloadData()
     }
     

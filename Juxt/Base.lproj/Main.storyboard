@@ -249,7 +249,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Awy-Ml-fGC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3326" y="1119"/>
+            <point key="canvasLocation" x="3587" y="1183"/>
         </scene>
         <!--your new juxt-->
         <scene sceneID="072-C5-XNC">
@@ -1076,7 +1076,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tqr-5c-rBc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2702" y="1119"/>
+            <point key="canvasLocation" x="2702" y="1183"/>
         </scene>
         <!--Item-->
         <scene sceneID="ud1-Az-x6N">
@@ -1096,7 +1096,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5pn-lV-mXb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1942" y="1119"/>
+            <point key="canvasLocation" x="1942" y="1183"/>
         </scene>
         <!--juxts-->
         <scene sceneID="hrS-31-YeH">
@@ -1225,7 +1225,7 @@
                                         </button>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dPt-ki-gXY" customClass="JXTSideBySideView" customModule="Juxt" customModuleProvider="target">
                                             <rect key="frame" x="15" y="62" width="570" height="431"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="backgroundColor" white="0.91806344696969699" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="dPt-ki-gXY" secondAttribute="height" multiplier="577:431" constant="-7" id="4Yy-oK-msP"/>
                                             </constraints>
