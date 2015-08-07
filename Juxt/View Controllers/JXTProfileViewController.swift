@@ -19,22 +19,40 @@ class JXTProfileViewController: UIViewController {
     
     @IBOutlet weak var profilePicture: PFImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var tableView: UITableView!
+    
+    var juxts: [Juxt]?
     
     // VC Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.nameLabel.text = ParseHelper.userName()
+        self.nameLabel.text = ParseHelper.userName(PFUser.currentUser()!)
         
-        let file = ParseHelper.userProfilePicture()
+        let file = ParseHelper.userProfilePicture(PFUser.currentUser()!)
         self.profilePicture.file = file
         self.profilePicture.loadInBackground()
         
         self.profilePicture.layer.cornerRadius = 5.0
+        
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        
+        self.loadData()
     }
     
     // Helper Funcs
+    
+    func loadData() {
+        ParseHelper.juxtsFromUser(PFUser.currentUser()!) { (objects, error) -> Void in
+            if error != nil {
+                println("\(error)")
+            } else {
+                self.juxts = objects as! [Juxt]?
+            }
+        }
+    }
     
     @IBAction func cancelButtonTapped(sender: UIButton) {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -75,4 +93,25 @@ class JXTProfileViewController: UIViewController {
         alertController.addAction(logoutAction)
         self.presentViewController(alertController, animated: true, completion: nil)
     }
+}
+
+extension JXTProfileViewController: UITableViewDataSource {
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return Int(self.juxts?.count ?? 0)
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("JuxtCell") as! JXTJuxtTableViewCell
+        
+        cell.juxt = self.juxts?[indexPath.row]
+        
+        return cell
+    }
+    
 }

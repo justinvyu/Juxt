@@ -48,17 +48,20 @@ class ParseHelper: NSObject {
     // FB
     
     static func loginWithFacebook(completion: PFUserResultBlock) {
-        let permissionsArray = ["email", "public_profile", "user_friends"]
+        let permissionsArray = ["email", "public_profile"]
         
         PFFacebookUtils.logInWithPermissions(permissionsArray, block: completion)
     }
     
-    static func userName() -> String? {
-        return PFUser.currentUser()?[UserName] as? String
+    static func userName(user: PFUser) -> String? {
+//        return PFUser.currentUser()?[UserName] as? String
+        return user[UserName] as? String
     }
     
-    static func userProfilePicture() -> PFFile? {
-        return PFUser.currentUser()?[UserProfilePicture] as? PFFile
+    static func userProfilePicture(user: PFUser) -> PFFile? {
+//        return PFUser.currentUser()?[UserProfilePicture] as? PFFile
+        
+        return user[UserProfilePicture] as? PFFile
     }
     
     static func getUserInformationFromFB() {
@@ -160,6 +163,14 @@ class ParseHelper: NSObject {
         
         //TODO: add error handling
         flagObject.saveInBackgroundWithBlock(nil)
+    }
+    
+    static func juxtsFromUser(user: PFUser, completion: PFArrayResultBlock) {
+        
+        let query = PFQuery(className: ProjectClassName)
+        query.whereKey(ProjectUser, equalTo: user)
+        query.findObjectsInBackgroundWithBlock(completion)
+        
     }
     
     static func retrieveImagesFromJuxt(juxt: Juxt, mostRecent: Bool) -> [Photo]? {

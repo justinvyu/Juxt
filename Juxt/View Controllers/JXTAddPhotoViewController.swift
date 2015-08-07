@@ -50,18 +50,19 @@ class JXTAddPhotoViewController: UIViewController {
         
         keyboardNotificationHandler = KeyboardNotificationHandler()
         
-        keyboardNotificationHandler?.keyboardWillBeHiddenHandler = { (height: CGFloat) in
-            println(height)
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
-                self.doneButton?.frame.origin.y += height
-            })
-        }
+//        keyboardNotificationHandler?.keyboardWillBeHiddenHandler = { (height: CGFloat) in
+//            println(height)
+//            UIView.animateWithDuration(0.3, animations: { () -> Void in
+//                self.doneButton?.frame.origin.y += height
+//            })
+//        }
         
         keyboardNotificationHandler?.keyboardWillBeShownHandler = { (height: CGFloat) in
             println(height)
             UIView.animateWithDuration(0.3, animations: { () -> Void in
                 self.doneButton?.frame.origin.y -= height
             })
+            self.keyboardNotificationHandler?.keyboardWillBeShownHandler = nil
         }
         
         UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
@@ -84,6 +85,9 @@ class JXTAddPhotoViewController: UIViewController {
     
     func setupPhotoUI() {
         
+        self.view.backgroundColor = UIColor(white: 0.96, alpha: 1.0)
+        self.navigationController?.navigationBar.tintColor = UIColor(white: 0.96, alpha: 1.0)
+        
         scrollView = UIScrollView(frame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height))
         scrollView?.scrollEnabled = true
         scrollView?.pagingEnabled = true
@@ -93,36 +97,37 @@ class JXTAddPhotoViewController: UIViewController {
         scrollView?.delegate = self
         self.view.addSubview(scrollView!)
         
-        photoView = UIImageView(frame: CGRectMake(10, 10, scrollView!.frame.size.width - 20, scrollView!.frame.size.width - 20))
+        photoView = UIImageView(frame: CGRectMake(20, 10, scrollView!.frame.size.width - 40, scrollView!.frame.size.width - 40))
         photoView?.image = self.image
         photoView?.layer.cornerRadius = 5.0
         photoView?.contentMode = .ScaleAspectFill
         photoView?.clipsToBounds = true
         scrollView!.addSubview(photoView!)
         
-        confirmLabel = UILabel(frame: CGRectMake(10, 20 + photoView!.frame.size.height, scrollView!.frame.size.width - 20, 44))
+        confirmLabel = UILabel(frame: CGRectMake(30, 15 + photoView!.frame.size.height, scrollView!.frame.size.width - 60, 44))
         confirmLabel?.text = "are you okay with this photo?"
         confirmLabel?.textAlignment = .Center
         confirmLabel?.font = UIFont.systemFontOfSize(18.0)
+        confirmLabel?.textColor = UIColor(white: 0.30, alpha: 1.0)
         scrollView!.addSubview(confirmLabel!)
         
-        takeAgainButton = UIButton(frame: CGRectMake(20, self.view.frame.size.height - self.navigationController!.navigationBar.frame.size.height - 44 - 20 - 20, scrollView!.frame.size.width - 40, 44))
+        takeAgainButton = UIButton(frame: CGRectMake(30, self.view.frame.size.height - self.navigationController!.navigationBar.frame.size.height - 44 - 15 - 20, scrollView!.frame.size.width - 60, 44))
         takeAgainButton?.layer.cornerRadius = 5.0
         takeAgainButton?.layer.borderColor = JXTConstants.defaultBlueColor().CGColor
         takeAgainButton?.layer.borderWidth = 1.0
-        takeAgainButton?.backgroundColor = UIColor.whiteColor()
+        takeAgainButton?.backgroundColor = UIColor(white: 0.96, alpha: 1.0)
         takeAgainButton?.setTitleColor(JXTConstants.defaultBlueColor(), forState: .Normal)
-        takeAgainButton?.setTitle("get another picture", forState: .Normal)
+        takeAgainButton?.setTitle("retake", forState: .Normal)
         takeAgainButton?.titleLabel?.font = UIFont.systemFontOfSize(18.0)
         takeAgainButton?.addTarget(self, action: Selector("takeAgainButtonPressed:"), forControlEvents: .TouchUpInside)
         scrollView!.addSubview(takeAgainButton!)
         
-        nextButton = UIButton(frame: CGRectMake(20, takeAgainButton!.frame.origin.y - 44 - 20, scrollView!.frame.size.width - 40, 44))
+        nextButton = UIButton(frame: CGRectMake(30, takeAgainButton!.frame.origin.y - 44 - 15, scrollView!.frame.size.width - 60, 44))
         nextButton?.layer.cornerRadius = 5.0
         nextButton?.layer.borderColor = JXTConstants.defaultBlueColor().CGColor
         nextButton?.layer.borderWidth = 1.0
         nextButton?.backgroundColor = JXTConstants.defaultBlueColor()
-        nextButton?.titleLabel?.textColor = UIColor.whiteColor()
+        nextButton?.titleLabel?.textColor = UIColor(white: 0.96, alpha: 1.0)
         nextButton?.setTitle("next", forState: .Normal)
         nextButton?.titleLabel?.font = UIFont.systemFontOfSize(18.0)
         

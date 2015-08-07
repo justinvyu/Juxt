@@ -21,41 +21,48 @@ class JXTJuxtTableViewCell: PFTableViewCell {
     var juxt: Juxt? {
         didSet {
             if let juxt = juxt, titleLabel = titleLabel, dateLabel = dateLabel, sideBySideView = sideBySideView {
-                
-//                juxt.fetchFlags()
-//                if let usersFlagged = juxt.usersFlagged {
-//                    flagButton.selected = contains(usersFlagged, PFUser.currentUser()!)
-//                }
                                 
                 titleLabel.text = juxt.title
                 if let date = juxt.date {
                     dateLabel.text = JXTConstants.stringFromDate(date)
                 }
                 
-//                galleryScrollView.juxt = self.juxt // For tap gesture
-
-                // Profile Picture
-                if let user = juxt.user {
-                    let userQuery = PFQuery(className: "_User")
-                    userQuery.getObjectInBackgroundWithId(user.objectId!, block: { (user, error) -> Void in
-                        if error != nil {
-                            println("\(error)")
-                        } else {
-                            self.usernameLabel.text = user?.objectForKey("name") as? String
-                            
-                            let file = user?.objectForKey("profilePicture") as? PFFile
-                            self.profilePictureImageView.file = file
+//                // Profile Picture WTF WAS I THINKING
+//                if let user = juxt.user {
+//                    let userQuery = PFQuery(className: "_User")
+//                    userQuery.getObjectInBackgroundWithId(user.objectId!, block: { (user, error) -> Void in
+//                        if error != nil {
+//                            println("\(error)")
+//                        } else {
+//                            self.usernameLabel.text = user?.objectForKey("name") as? String
+//                            
+//                            let file = user?.objectForKey("profilePicture") as? PFFile
+//                            self.profilePictureImageView.file = file
+//                            self.profilePictureImageView.loadInBackground()
+//                        }
+//                    })
+//                }
+                
+                juxt.user?.fetchIfNeededInBackgroundWithBlock({ (user, error) -> Void in
+                    if error != nil {
+                        println("\(error)")
+                    } else {
+                        dispatch_async(dispatch_get_main_queue()) {
+                            self.usernameLabel.text = user?[ParseHelper.UserName] as? String
+                            self.profilePictureImageView.file = user?[ParseHelper.UserProfilePicture] as? PFFile
                             self.profilePictureImageView.loadInBackground()
                         }
-                    })
-                }
+                    }
+                })
+                
+                
+            
             }
         }
     }
     
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
-//    @IBOutlet weak var galleryScrollView: JXTImageGalleryScrollView!
     @IBOutlet weak var profilePictureImageView: PFImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!

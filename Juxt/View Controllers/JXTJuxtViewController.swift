@@ -107,6 +107,7 @@ class JXTJuxtViewController: UIViewController {
         
         let destroyAction = UIAlertAction(title: "Flag", style: .Destructive) { (action) in
             post.flagPost(PFUser.currentUser()!)
+            self.navigationController?.popToRootViewControllerAnimated(true)
         }
         
         alertController.addAction(destroyAction)

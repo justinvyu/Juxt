@@ -16,13 +16,22 @@ class JXTHeaderTableViewCell: UITableViewCell {
     
     var juxt: Juxt? {
         didSet {
-            self.usernameLabel.text = ParseHelper.userName()
-            self.profilePicture.file = ParseHelper.userProfilePicture()
-            self.profilePicture.loadInBackground()
+            if let user = juxt?.user {
+                user.fetchIfNeededInBackgroundWithBlock({ (user, error) -> Void in
+                    if error != nil {
+                        println("\(error)")
+                    } else {
+                        self.usernameLabel.text = ParseHelper.userName(user as! PFUser)
+                        self.profilePicture.file = ParseHelper.userProfilePicture(user as! PFUser)
+                        self.profilePicture.loadInBackground()
+                    }
+                })
+
+            }
             self.profilePicture.layer.cornerRadius = 5.0
             self.titleLabel.text = juxt?.title
             
-            otherButton.imageView?.image = juxt?.user == PFUser.currentUser() ? UIImage(named: "delete") : UIImage(named: "flag")
+            otherButton.setImage(juxt?.user == PFUser.currentUser() ? UIImage(named: "delete") : UIImage(named: "flag"), forState: .Normal)
             otherButton.setImage(juxt?.user == PFUser.currentUser() ? UIImage(named: "delete") : UIImage(named: "flag"), forState: .Selected)
             otherButton.setImage(juxt?.user == PFUser.currentUser() ? UIImage(named: "delete") : UIImage(named: "flag"), forState: .Highlighted)
         }
