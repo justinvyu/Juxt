@@ -39,6 +39,13 @@ class JXTProfileViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
+        tableView.estimatedRowHeight = 340
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
+        self.navigationItem.titleView?.tintColor = UIColor(white: 0.97, alpha: 1.0)
+        self.navigationController?.navigationBar.tintColor = UIColor(white: 0.97, alpha: 1.0)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        
         self.loadData()
     }
     
@@ -49,36 +56,18 @@ class JXTProfileViewController: UIViewController {
             if error != nil {
                 println("\(error)")
             } else {
+                println(self.juxts)
                 self.juxts = objects as! [Juxt]?
+                self.tableView.reloadData()
             }
         }
     }
     
-    @IBAction func cancelButtonTapped(sender: UIButton) {
+    @IBAction func cancelButtonTapped(sender: UIBarButtonItem) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    @IBAction func settingsButtonTapped(sender: UIButton) {
-//        let section1 = JGActionSheetSection(title: self.nameLabel.text, message: nil, buttonTitles: ["Log Out"], buttonStyle: .Blue)
-//        let cancelSection = JGActionSheetSection(title: nil, message: nil, buttonTitles: ["Cancel"], buttonStyle: .Cancel)
-//        let sheet = JGActionSheet(sections: [section1, cancelSection])
-//        sheet.buttonPressedBlock = { (sheet: JGActionSheet?, indexPath: NSIndexPath?) -> Void in
-//            if let indexPath = indexPath, sheet = sheet {
-//                if indexPath.row == 0 {
-//                    PFUser.logOutInBackgroundWithBlock({ (error) -> Void in
-//                        if error == nil {
-////                            let loginVC = self.storyboard?.instantiateViewControllerWithIdentifier("LoginVC") as? JXTLandingViewController
-////                            if let loginVC = loginVC {
-////                                self.presentViewController(loginVC, animated: true, completion: nil)
-////                            }
-//                            self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
-//                        }
-//                    })
-//                }
-//            }
-//            sheet?.dismissAnimated(true)
-//        }
-//        sheet.showInView(self.view, animated: true)
+    @IBAction func settingsButtonTapped(sender: UIBarButtonItem) {
         
         let alertController = UIAlertController(title: self.nameLabel.text, message: nil, preferredStyle: .ActionSheet)
         let logoutAction = UIAlertAction(title: "Log Out", style: .Default) { (action) in
@@ -93,15 +82,69 @@ class JXTProfileViewController: UIViewController {
         alertController.addAction(logoutAction)
         self.presentViewController(alertController, animated: true, completion: nil)
     }
+    
+    func showActionSheetForPost(post: Juxt) {
+        if (post.user == PFUser.currentUser()) {
+            showDeleteActionSheetForPost(post)
+        }
+    }
+    
+    func showDeleteActionSheetForPost(post: Juxt) {
+        let alertController = UIAlertController(title: nil, message: "Do you want to delete this post?", preferredStyle: .ActionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        let destroyAction = UIAlertAction(title: "Delete", style: .Destructive) { (action) in
+            
+            if let photos = post.photos {
+                for photo in photos {
+                    photo.deleteInBackgroundWithBlock(nil)
+                }
+            }
+            
+            post.deleteInBackgroundWithBlock({ (success, error) -> Void in
+                if success {
+                    self.loadData()
+                    //                    self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: .Fade)
+                }
+            })
+        }
+        alertController.addAction(destroyAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "ShowJuxt" {
+            if let juxtCell = sender as? JXTJuxtTableViewCell {
+                if let juxtViewController = segue.destinationViewController as? JXTJuxtViewController {
+                    juxtViewController.juxt = juxtCell.juxt
+                    juxtViewController.delegate = self
+                    juxtViewController.presentingTableViewCell = sender as? JXTJuxtTableViewCell
+                }
+            }
+        }
+    }
+
+}
+
+extension JXTProfileViewController: UITableViewDelegate {
+    
 }
 
 extension JXTProfileViewController: UITableViewDataSource {
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        println(self.juxts?.count)
         return Int(self.juxts?.count ?? 0)
     }
     
@@ -110,8 +153,22 @@ extension JXTProfileViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier("JuxtCell") as! JXTJuxtTableViewCell
         
         cell.juxt = self.juxts?[indexPath.row]
+        cell.profilePictureImageView.layer.cornerRadius = 5.0
+        
+        cell.juxt?.photosForJuxt() { (photos) -> Void in
+            //                cell.galleryScrollView.photos = photos as [Photo]?
+            cell.sideBySideView.photos = photos as [Photo]?
+        }
         
         return cell
+    }
+    
+}
+
+extension JXTProfileViewController: JXTJuxtViewControllerDelegate {
+    
+    func deletedJuxt() {
+        self.loadData()
     }
     
 }

@@ -170,6 +170,9 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         tableView.estimatedRowHeight = 340
         tableView.rowHeight = UITableViewAutomaticDimension
         
+        self.navigationItem.titleView?.tintColor = UIColor(white: 0.97, alpha: 1.0)
+        self.navigationController?.navigationBar.tintColor = UIColor(white: 0.97, alpha: 1.0)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -186,7 +189,6 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         self.view.layoutIfNeeded()
         self.loadObjects()
         self.tableView.reloadData()
-//        self.tableView.reloadData()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -262,14 +264,15 @@ class JXTHomeTableViewController: PFQueryTableViewController {
 //                        tabBarViewController.juxt = juxtCell.juxt
 //                    }
 //                }
-            } else if let tap = sender as? UITapGestureRecognizer {
-                println(tap)
-                if let galleryView = tap.view as? JXTImageGalleryScrollView {
-                    if let juxtViewController = segue.destinationViewController as? JXTJuxtViewController {
-                        juxtViewController.juxt = galleryView.juxt
-                    }
-                }
             }
+//            else if let tap = sender as? UITapGestureRecognizer {
+//                println(tap)
+//                if let galleryView = tap.view as? JXTImageGalleryScrollView {
+//                    if let juxtViewController = segue.destinationViewController as? JXTJuxtViewController {
+//                        juxtViewController.juxt = galleryView.juxt
+//                    }
+//                }
+//            }
         }
     }
 }

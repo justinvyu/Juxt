@@ -15,6 +15,7 @@ class JXTJuxtTableViewCell: PFTableViewCell {
     // MARK: Properties
     
     weak var homeViewController: JXTHomeTableViewController?
+    weak var profileViewController: JXTProfileViewController?
     
     var currentPage: Int?
     
@@ -77,6 +78,10 @@ class JXTJuxtTableViewCell: PFTableViewCell {
 //        self.galleryScrollView.photos = nil
 //        self.galleryScrollView.images = nil
 //        self.sideBySideView.photos = nil
+        
+//        self.sideBySideView.leftPhoto?.image = UIImage(named: "default-placeholder")
+//        self.sideBySideView.rightPhoto?.image = UIImage(named: "default-placeholder")
+
         self.sideBySideView.subviews.map { $0.removeFromSuperview() }
     }
 //
@@ -93,6 +98,7 @@ class JXTJuxtTableViewCell: PFTableViewCell {
         
         if let juxt = self.juxt {
             homeViewController?.showActionSheetForPost(juxt)
+            profileViewController?.showActionSheetForPost(juxt)
         }
         
     }
