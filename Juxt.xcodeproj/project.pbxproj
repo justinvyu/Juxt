@@ -5505,7 +5505,6 @@
 				D0AFDC7A1B556E630097228E /* Resources */,
 				6850756DBEB048C41E2990DF /* Embed Pods Frameworks */,
 				B18105D8762C711D23496DE0 /* Copy Pods Resources */,
-				D0AFDCA71B55763C0097228E /* ShellScript */,
 				D0BE34811B7183400062B5B0 /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -5754,19 +5753,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Juxt/Pods-Juxt-resources.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		D0AFDCA71B55763C0097228E /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-			shellPath = /bin/sh;
-			shellScript = "//./Fabric.framework/run fdc171f023f673b190f8afa8a10bf47cb0e6ff5d 40c6b73e8499b6af81eb393684ca821f6cf586b6fbe65d0505caba06c9147047";
 		};
 /* End PBXShellScriptBuildPhase section */
 

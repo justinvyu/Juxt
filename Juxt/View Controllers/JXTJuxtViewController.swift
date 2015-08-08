@@ -235,6 +235,7 @@ class JXTJuxtViewController: UIViewController {
         self.navigationItem.titleView?.tintColor = UIColor(white: 0.97, alpha: 1.0)
         
         let compareButton = UIBarButtonItem(image: UIImage(named: "share"), landscapeImagePhone: nil, style: .Plain, target: self, action: "compareButtonTapped:")
+        compareButton.imageInsets = UIEdgeInsetsMake(5, 5, 5, 5)
         if PFUser.currentUser()?.objectId == juxt?.user?.objectId {
             
             let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addPhotoButtonPressed:")
