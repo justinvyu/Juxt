@@ -45,13 +45,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D02812031B72A48F004423A4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D0BE3AC41B71839D0062B5B0 /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3961030E1B6047424AD1A7E2AFF5CBFC;
-			remoteInfo = DOFavoriteButton;
-		};
 		D0AFDC921B556E630097228E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D0AFDC741B556E630097228E /* Project object */;
@@ -108,26 +101,12 @@
 			remoteGlobalIDString = 05FE92E7D14E86EAF41F6E533600822F;
 			remoteInfo = FBSDKShareKit;
 		};
-		D0BE3C9B1B71839E0062B5B0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D0BE3AC41B71839D0062B5B0 /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A8F5428B3F4B8272992B8E78A3210AB5;
-			remoteInfo = FXBlurView;
-		};
 		D0BE3C9D1B71839E0062B5B0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D0BE3AC41B71839D0062B5B0 /* Pods.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 255B282C038EE05F1729DE0B397AA9E4;
 			remoteInfo = "Facebook-iOS-SDK";
-		};
-		D0BE3C9F1B71839E0062B5B0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D0BE3AC41B71839D0062B5B0 /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 087DE760DE5636E6FCBC720026596EF1;
-			remoteInfo = FlatUIKit;
 		};
 		D0BE3CA31B71839E0062B5B0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -177,13 +156,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 31C92BFDCD293A63EB8BD53D173C4EB2;
 			remoteInfo = TGCameraViewController;
-		};
-		D0BE3CB51B71839E0062B5B0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D0BE3AC41B71839D0062B5B0 /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CA073352509A0F04C5195D50B55A7787;
-			remoteInfo = TPKeyboardAvoiding;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -4728,13 +4700,10 @@
 				D0BE3C901B71839E0062B5B0 /* Bolts.framework */,
 				D0BE3C921B71839E0062B5B0 /* ConvenienceKit.framework */,
 				D0BE3C941B71839E0062B5B0 /* ConvenienceKit.bundle */,
-				D02812041B72A48F004423A4 /* DOFavoriteButton.framework */,
 				D0BE3C961B71839E0062B5B0 /* FBSDKCoreKit.framework */,
 				D0BE3C981B71839E0062B5B0 /* FBSDKLoginKit.framework */,
 				D0BE3C9A1B71839E0062B5B0 /* FBSDKShareKit.framework */,
-				D0BE3C9C1B71839E0062B5B0 /* FXBlurView.framework */,
 				D0BE3C9E1B71839E0062B5B0 /* FacebookSDK.framework */,
-				D0BE3CA01B71839E0062B5B0 /* FlatUIKit.framework */,
 				D0BE3CA41B71839E0062B5B0 /* LLSimpleCamera.framework */,
 				D0BE3CA61B71839E0062B5B0 /* Mixpanel.framework */,
 				D0BE3CA81B71839E0062B5B0 /* Parse.framework */,
@@ -4742,7 +4711,6 @@
 				D0BE3CAC1B71839E0062B5B0 /* ParseUI.framework */,
 				D0BE3CAE1B71839E0062B5B0 /* Pods_Juxt.framework */,
 				D0BE3CB41B71839E0062B5B0 /* TGCameraViewController.framework */,
-				D0BE3CB61B71839E0062B5B0 /* TPKeyboardAvoiding.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -5578,7 +5546,7 @@
 				TargetAttributes = {
 					D0AFDC7B1B556E630097228E = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = UWSMUE6KT8;
+						DevelopmentTeam = 7GWWSZ3ZW4;
 					};
 					D0AFDC901B556E630097228E = {
 						CreatedOnToolsVersion = 6.4;
@@ -5612,13 +5580,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		D02812041B72A48F004423A4 /* DOFavoriteButton.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = DOFavoriteButton.framework;
-			remoteRef = D02812031B72A48F004423A4 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		D0BE3C8E1B71839E0062B5B0 /* AMScrollingNavbar.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -5668,25 +5629,11 @@
 			remoteRef = D0BE3C991B71839E0062B5B0 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		D0BE3C9C1B71839E0062B5B0 /* FXBlurView.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = FXBlurView.framework;
-			remoteRef = D0BE3C9B1B71839E0062B5B0 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		D0BE3C9E1B71839E0062B5B0 /* FacebookSDK.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = FacebookSDK.framework;
 			remoteRef = D0BE3C9D1B71839E0062B5B0 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		D0BE3CA01B71839E0062B5B0 /* FlatUIKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = FlatUIKit.framework;
-			remoteRef = D0BE3C9F1B71839E0062B5B0 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		D0BE3CA41B71839E0062B5B0 /* LLSimpleCamera.framework */ = {
@@ -5736,13 +5683,6 @@
 			fileType = wrapper.framework;
 			path = TGCameraViewController.framework;
 			remoteRef = D0BE3CB31B71839E0062B5B0 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		D0BE3CB61B71839E0062B5B0 /* TPKeyboardAvoiding.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = TPKeyboardAvoiding.framework;
-			remoteRef = D0BE3CB51B71839E0062B5B0 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

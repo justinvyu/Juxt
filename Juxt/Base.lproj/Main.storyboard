@@ -511,7 +511,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="profile" id="a9T-eo-DJf">
                         <barButtonItem key="leftBarButtonItem" image="cancel" id="EBS-fM-zvD">
-                            <inset key="imageInsets" minX="6" minY="7" maxX="10" maxY="7"/>
+                            <inset key="imageInsets" minX="1" minY="7" maxX="14" maxY="7"/>
                             <color key="tintColor" white="0.95000000000000007" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="cancelButtonTapped:" destination="kR9-UP-z7H" id="tOI-2c-hnl"/>
@@ -1258,7 +1258,7 @@
         <image name="star-selected" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VSE-tx-Dc3"/>
+        <segue reference="SgX-Yp-pAr"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.39368876870000002" green="0.76120675329999998" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
 </document>

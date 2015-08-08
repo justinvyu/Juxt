@@ -51,6 +51,7 @@ class ParseHelper: NSObject {
         let permissionsArray = ["email", "public_profile"]
         
         PFFacebookUtils.logInWithPermissions(permissionsArray, block: completion)
+
     }
     
     static func userName(user: PFUser) -> String? {
@@ -98,8 +99,8 @@ class ParseHelper: NSObject {
     static func logoutUser(completion: LogoutCallback) {
         PFUser.logOutInBackgroundWithBlock({ (error) -> Void in
             if error == nil {
-                PFFacebookUtils.session()?.closeAndClearTokenInformation()
-                FBSession.activeSession().closeAndClearTokenInformation()
+//                PFFacebookUtils.session()?.closeAndClearTokenInformation()
+//                FBSession.activeSession().closeAndClearTokenInformation()
                 completion()
             }
         })

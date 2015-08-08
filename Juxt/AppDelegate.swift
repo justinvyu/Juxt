@@ -61,6 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Setup Parse Facebook Utils
         PFFacebookUtils.initializeFacebook()
+        println(FBSession.activeSession())
         
 //        FBSession.openActiveSessionWithPublishPermissions(["publish_actions"], defaultAudience: FBSessionDefaultAudience.Friends, allowLoginUI: true, completionHandler: nil)
         
