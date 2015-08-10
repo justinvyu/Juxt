@@ -1,0 +1,6 @@
+framework module FBSDKLoginKit {
+  umbrella header "Pods-Juxt-FBSDKLoginKit-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+framework module TGCameraViewController {
+  umbrella header "Pods-Juxt-TGCameraViewController-umbrella.h"
+
+  export *
+  module * { export * }
+}

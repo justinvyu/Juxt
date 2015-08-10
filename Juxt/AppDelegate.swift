@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Fabric
-import TwitterKit
 import FBSDKCoreKit
 import Parse
 import Bolts
@@ -17,6 +15,9 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import Mixpanel
 
+import Fabric
+import TwitterKit
+    
 //import Realm
 //import RealmSwift
 
@@ -72,7 +73,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            self.window?.rootViewController = mainNav
 //        }
         
-//        Fabric.with([Twitter()])
+        Fabric.with([Twitter()])
+
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     

@@ -28,6 +28,14 @@ class JXTLandingViewController: UIViewController {
         facebookButton.layer.cornerRadius = 5.0
 //        twitterButton.layer.cornerRadius = 5.0
         self.view.bringSubviewToFront(facebookImage)
+        
+//        let logInButton = TWTRLogInButton { (session, error) in
+//            // play with Twitter session
+//            
+//        }
+//        logInButton.center = self.view.center
+//        self.view.addSubview(logInButton)
+
     }
     
     override func viewWillAppear(animated: Bool) {

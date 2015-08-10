@@ -21,6 +21,11 @@ target 'Juxt' do
 	pod 'ParseFacebookUtils'
 	pod 'AMScrollingNavbar'
 	pod 'Mixpanel'
+	pod 'Fabric'
+	pod 'TwitterKit'
+	pod 'TwitterCore'
+	pod 'MPCoachMarks'
+
 end
 
 target 'JuxtTests' do
