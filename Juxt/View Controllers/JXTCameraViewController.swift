@@ -12,6 +12,7 @@ import LLSimpleCamera
 import TGCameraViewController
 import Parse
 import ParseUI
+import MPCoachMarks
 
 class JXTCameraViewController: UIViewController {
 
@@ -26,6 +27,7 @@ class JXTCameraViewController: UIViewController {
     var switchButton: UIButton?
     var cancelButton: UIButton?
     var translucentGuideView: PFImageView?
+    var toggleButton: UIButton?
     
     var returnHome: Bool?
 //    var cancelButtonHidden: Bool? = false
@@ -93,10 +95,15 @@ class JXTCameraViewController: UIViewController {
         snapButton?.frame.origin.y = self.view.frame.size.height - 85
         
         flashButton?.center = self.view.center
+        flashButton?.frame.origin.x += 50
         flashButton?.frame.origin.y = 5.0
         
         switchButton?.frame.origin.x = self.view.frame.width - 53
         switchButton?.frame.origin.y = 5.0
+        
+        toggleButton?.center = self.view.center
+        toggleButton?.frame.origin.x -= 50
+        toggleButton?.frame.origin.y = 5.0
     }
     
     // MARK: HELPER FUNCTIONS
@@ -118,20 +125,6 @@ class JXTCameraViewController: UIViewController {
 //    }
     
     func setupCaptureUI() {
-
-        if let photos = self.juxt?.photos {
-            if photos.count != 0 {
-                
-                let photo = photos[photos.count - 1]
-                translucentGuideView = PFImageView(frame: self.view.frame)
-                translucentGuideView?.file = photo.imageFile
-                self.view.addSubview(translucentGuideView!)
-                translucentGuideView?.alpha = 0.25
-                
-                translucentGuideView?.contentMode = .ScaleAspectFill
-                translucentGuideView?.loadInBackground()
-            }
-        }
         
         snapButton = UIButton.buttonWithType(.Custom) as? UIButton
         snapButton?.frame = CGRectMake(0, 0, 70, 70)
@@ -144,6 +137,28 @@ class JXTCameraViewController: UIViewController {
         snapButton?.layer.shouldRasterize = true
         snapButton?.addTarget(self, action: Selector("snapButtonPressed:"), forControlEvents: .TouchUpInside)
         self.view.addSubview(snapButton!)
+        
+        if let photos = self.juxt?.photos {
+            if photos.count != 0 {
+                
+                let photo = photos[photos.count - 1]
+                translucentGuideView = PFImageView(frame: self.view.frame)
+                translucentGuideView?.file = photo.imageFile
+                self.view.addSubview(translucentGuideView!)
+                translucentGuideView?.alpha = 0.25
+                
+                translucentGuideView?.contentMode = .ScaleAspectFill
+                translucentGuideView?.loadInBackground()
+                
+                toggleButton = UIButton(frame: CGRectMake(0, 0, 44, 44))
+                toggleButton?.imageEdgeInsets = UIEdgeInsetsMake(7, 7, 7, 7)
+                toggleButton?.setImage(UIImage(named: "toggle"), forState: .Normal)
+                toggleButton?.addTarget(self, action: "toggleButtonPressed:", forControlEvents: .TouchUpInside)
+                self.view.addSubview(toggleButton!)
+                
+                self.setupCoachmarks()
+            }
+        }
         
         flashButton = UIButton.buttonWithType(.Custom) as? UIButton
         flashButton?.frame = CGRectMake(0, 0, 16.0 + 20.0, 24.0 + 20.0)
@@ -177,6 +192,31 @@ class JXTCameraViewController: UIViewController {
             flashButton?.selected = false
             flashButton?.backgroundColor = UIColor.clearColor()
         }
+        
+    }
+    
+    func setupCoachmarks() {
+        
+        if !CoachmarksHelper.coachmarkHasBeenViewed(CoachmarksHelper.keys.OverlayToggle) {
+            let overlayToggleCoachmarkRect = CGRectMake(self.view.center.x - 78, 0, 55, 55)
+            let overlayToggleCoachmark = CoachmarksHelper.generateCoachmark(rect: overlayToggleCoachmarkRect, caption: "The guide view is meant to help you take your picture from the best angle and position possible. This button will toggle ", shape: MaskShape.SHAPE_CIRCLE, position: LabelPosition.LABEL_POSITION_BOTTOM, alignment: LabelAligment.LABEL_ALIGNMENT_CENTER, showArrow: true)
+            
+            var coachmarks: [CoachmarksHelper.mark] = []
+            
+            coachmarks = CoachmarksHelper.addMarkToCoachmarks(coachmarks, newMark: overlayToggleCoachmark)
+            let coachmarkView = CoachmarksHelper.generateCoachmarksViewWithMarks(marks: coachmarks, withFrame: self.view.frame)
+            self.view.addSubview(coachmarkView)
+            coachmarkView.enableContinueLabel = false
+            coachmarkView.enableSkipButton = false
+            coachmarkView.start()
+            
+            CoachmarksHelper.setCoachmarkHasBeenViewedToTrue(CoachmarksHelper.keys.OverlayToggle)
+        }
+    }
+    
+    func toggleButtonPressed(button: UIButton) {
+        
+        self.translucentGuideView?.hidden = self.translucentGuideView!.hidden == true ? false : true
         
     }
     

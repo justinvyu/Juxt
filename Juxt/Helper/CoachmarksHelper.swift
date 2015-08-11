@@ -27,10 +27,15 @@ class CoachmarksHelper: NSObject {
         case AddJuxt = "AddJuxtViewed"
         case SeeDetail = "SeeDetailViewed"
         case AddPhoto = "AddPhotoViewed"
-        case Compare = "CompareViewed"
+        case CompareUser = "CompareUserViewed"
+        case Header = "HeaderViewed"
         case Share = "ShareViewed"
+        case OverlayToggle = "OverlayToggleViewed"
+        case SideBySide = "SideBySideViewed"
+        case SaveToGallery = "SaveToGallery"
+        case ShareToFacebook = "ShareToFacebook"
         
-        static let allValues = [Profile, AddJuxt, SeeDetail, AddPhoto, Compare, Share]
+        static let allValues = [Profile, AddJuxt, SeeDetail, AddPhoto, Header, CompareUser, Share, OverlayToggle]
     }
     
     

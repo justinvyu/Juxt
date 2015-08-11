@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MPCoachMarks
 
 protocol JXTCompareViewDelegate {
     func compareViewDidCancel(button: UIButton)
@@ -173,10 +174,46 @@ class JXTCompareView: UIView {
         self.bringSubviewToFront(saveButton!)
         self.bringSubviewToFront(facebookButton!)
 
+        self.setupCoachmarks()
+        
     }
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    // MARK: Helper Funcs
+    
+    func setupCoachmarks() {
+        
+        if !CoachmarksHelper.coachmarkHasBeenViewed(CoachmarksHelper.keys.SideBySide) || !CoachmarksHelper.coachmarkHasBeenViewed(CoachmarksHelper.keys.SaveToGallery) || !CoachmarksHelper.coachmarkHasBeenViewed(CoachmarksHelper.keys.ShareToFacebook) {
+            let sideBySideCoachmarkRect = CGRectMake(whiteBackgroundView!.frame.origin.x, whiteBackgroundView!.frame.origin.y, whiteBackgroundView!.frame.width, whiteBackgroundView!.frame.height)
+            let sideBySideCoachmark = CoachmarksHelper.generateCoachmark(rect: sideBySideCoachmarkRect, caption: "Swipe up and down to compare different images for your side-by-side", shape: MaskShape.SHAPE_SQUARE, position: LabelPosition.LABEL_POSITION_BOTTOM, alignment: LabelAligment.LABEL_ALIGNMENT_CENTER, showArrow: true)
+            
+            let saveToGalleryCoachmarkRect = CGRectMake(saveButton!.frame.origin.x - 5,  self.frame.size.height - 60, 55, 55)
+            let saveToGalleryCoachmark = CoachmarksHelper.generateCoachmark(rect: saveToGalleryCoachmarkRect, caption: "Save to the photo gallery", shape: MaskShape.SHAPE_CIRCLE, position: LabelPosition.LABEL_POSITION_TOP, alignment: LabelAligment.LABEL_ALIGNMENT_CENTER, showArrow: true)
+            
+            let shareToFacebookCoachmarkRect = CGRectMake(facebookButton!.frame.origin.x - 5, self.frame.size.height - 60, 55, 55)
+            let shareToFacebookCoachmark = CoachmarksHelper.generateCoachmark(rect: shareToFacebookCoachmarkRect, caption: "Share your accomplishments to Facebook!", shape: MaskShape.SHAPE_CIRCLE, position: LabelPosition.LABEL_POSITION_TOP, alignment: LabelAligment.LABEL_ALIGNMENT_CENTER, showArrow: true)
+            
+            var coachmarks: [CoachmarksHelper.mark] = []
+            
+            coachmarks = CoachmarksHelper.addMarkToCoachmarks(coachmarks, newMark: sideBySideCoachmark)
+            coachmarks = CoachmarksHelper.addMarkToCoachmarks(coachmarks, newMark: saveToGalleryCoachmark)
+            coachmarks = CoachmarksHelper.addMarkToCoachmarks(coachmarks, newMark: shareToFacebookCoachmark)
+            
+            let coachmarkView = CoachmarksHelper.generateCoachmarksViewWithMarks(marks: coachmarks, withFrame: self.frame)
+            
+            self.addSubview(coachmarkView)
+            coachmarkView.enableContinueLabel = false
+            coachmarkView.enableSkipButton = false
+            coachmarkView.start()
+            
+            CoachmarksHelper.setCoachmarkHasBeenViewedToTrue(CoachmarksHelper.keys.SideBySide)
+            CoachmarksHelper.setCoachmarkHasBeenViewedToTrue(CoachmarksHelper.keys.SaveToGallery)
+            CoachmarksHelper.setCoachmarkHasBeenViewedToTrue(CoachmarksHelper.keys.ShareToFacebook)
+        }
+        
     }
     
     func cancelButtonPressed(button: UIButton) {

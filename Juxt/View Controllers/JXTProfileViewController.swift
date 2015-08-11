@@ -75,10 +75,14 @@ class JXTProfileViewController: UIViewController {
                 self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
             }
         }
+        let tutorialAction = UIAlertAction(title: "Reset Tutorial", style: .Default) { (action) in
+            CoachmarksHelper.resetCoachmarksHaveBeenViewed()
+        }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
         alertController.addAction(cancelAction)
-
+        
+        alertController.addAction(tutorialAction)
         alertController.addAction(logoutAction)
         self.presentViewController(alertController, animated: true, completion: nil)
     }

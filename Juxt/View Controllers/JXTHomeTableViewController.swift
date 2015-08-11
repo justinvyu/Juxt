@@ -63,6 +63,37 @@ class JXTHomeTableViewController: PFQueryTableViewController {
     
     // MARK: Other Funcs
     
+    func setupCoachmarks() {
+        
+        if !CoachmarksHelper.coachmarkHasBeenViewed(CoachmarksHelper.keys.Profile) || !CoachmarksHelper.coachmarkHasBeenViewed(CoachmarksHelper.keys.AddJuxt) || !CoachmarksHelper.coachmarkHasBeenViewed(CoachmarksHelper.keys.SeeDetail) {
+            let profileCoachmarkRect = CGRectMake(self.view.frame.size.width - 113, 15, 55, 55)
+            let profileCoachmark = CoachmarksHelper.generateCoachmark(rect: profileCoachmarkRect, caption: "View your own projects in your profile", shape: MaskShape.SHAPE_CIRCLE, position: LabelPosition.LABEL_POSITION_BOTTOM, alignment: LabelAligment.LABEL_ALIGNMENT_CENTER, showArrow: true)
+            
+            let addJuxtCoachmarkRect = CGRectMake(self.view.frame.size.width - 57, 15, 55, 55)
+            let addJuxtCoachmark = CoachmarksHelper.generateCoachmark(rect: addJuxtCoachmarkRect, caption: "Add a project of your own", shape: MaskShape.SHAPE_CIRCLE, position: LabelPosition.LABEL_POSITION_BOTTOM, alignment: LabelAligment.LABEL_ALIGNMENT_CENTER, showArrow: true)
+            
+            let seeDetailCoachmarkRect = CGRectMake(0, navigationController!.navigationBar.frame.size.height + 20, self.view.frame.size.width, 300)
+            let seeDetailCoachmark = CoachmarksHelper.generateCoachmark(rect: seeDetailCoachmarkRect, caption: "See projects in detail", shape: MaskShape.SHAPE_SQUARE, position: LabelPosition.LABEL_POSITION_BOTTOM, alignment: LabelAligment.LABEL_ALIGNMENT_CENTER, showArrow: true)
+            
+            var coachmarks: [CoachmarksHelper.mark] = []
+            
+            coachmarks = CoachmarksHelper.addMarkToCoachmarks(coachmarks, newMark: profileCoachmark)
+            coachmarks = CoachmarksHelper.addMarkToCoachmarks(coachmarks, newMark: addJuxtCoachmark)
+            coachmarks = CoachmarksHelper.addMarkToCoachmarks(coachmarks, newMark: seeDetailCoachmark)
+            let coachmarkView = CoachmarksHelper.generateCoachmarksViewWithMarks(marks: coachmarks, withFrame: self.view.frame)
+            self.navigationController?.view.addSubview(coachmarkView)
+            coachmarkView.enableContinueLabel = false
+            coachmarkView.enableSkipButton = false
+            coachmarkView.start()
+            
+            CoachmarksHelper.setCoachmarkHasBeenViewedToTrue(CoachmarksHelper.keys.Profile)
+            CoachmarksHelper.setCoachmarkHasBeenViewedToTrue(CoachmarksHelper.keys.AddJuxt)
+            CoachmarksHelper.setCoachmarkHasBeenViewedToTrue(CoachmarksHelper.keys.SeeDetail)
+        }
+        
+        
+    }
+    
     func presentProfileViewController(button: UIBarButtonItem) {
         
         let profileViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileVC") as! UIViewController
@@ -176,26 +207,8 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         self.navigationItem.titleView?.tintColor = UIColor(white: 0.97, alpha: 1.0)
         self.navigationController?.navigationBar.tintColor = UIColor(white: 0.97, alpha: 1.0)
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
-
-        let profileCoachmarkRect = CGRectMake(self.view.frame.size.width - 113, 15, 55, 55)
-        let profileCoachmark = CoachmarksHelper.generateCoachmark(rect: profileCoachmarkRect, caption: "View your own projects in your profile", shape: MaskShape.SHAPE_CIRCLE, position: LabelPosition.LABEL_POSITION_BOTTOM, alignment: LabelAligment.LABEL_ALIGNMENT_CENTER, showArrow: true)
-    
-        let addJuxtCoachmarkRect = CGRectMake(self.view.frame.size.width - 57, 15, 55, 55)
-        let addJuxtCoachmark = CoachmarksHelper.generateCoachmark(rect: addJuxtCoachmarkRect, caption: "Add a project of your own", shape: MaskShape.SHAPE_CIRCLE, position: LabelPosition.LABEL_POSITION_BOTTOM, alignment: LabelAligment.LABEL_ALIGNMENT_CENTER, showArrow: true)
         
-        let seeDetailCoachmarkRect = CGRectMake(0, navigationController!.navigationBar.frame.size.height + 20, self.view.frame.size.width, 300)
-        let seeDetailCoachmark = CoachmarksHelper.generateCoachmark(rect: seeDetailCoachmarkRect, caption: "See projects in detail", shape: MaskShape.SHAPE_SQUARE, position: LabelPosition.LABEL_POSITION_BOTTOM, alignment: LabelAligment.LABEL_ALIGNMENT_CENTER, showArrow: true)
-        
-        var coachmarks: [CoachmarksHelper.mark] = []
-        
-        coachmarks = CoachmarksHelper.addMarkToCoachmarks(coachmarks, newMark: profileCoachmark)
-        coachmarks = CoachmarksHelper.addMarkToCoachmarks(coachmarks, newMark: addJuxtCoachmark)
-        coachmarks = CoachmarksHelper.addMarkToCoachmarks(coachmarks, newMark: seeDetailCoachmark)
-        let coachmarkView = CoachmarksHelper.generateCoachmarksViewWithMarks(marks: coachmarks, withFrame: self.view.frame)
-        self.navigationController?.view.addSubview(coachmarkView)
-        coachmarkView.enableContinueLabel = false
-        coachmarkView.enableSkipButton = false
-        coachmarkView.start()
+        self.setupCoachmarks()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -204,6 +217,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
 //        self.tableView.reloadData()
 //        self.loadObjects()
 //        self.tableView.insertSections(NSIndexSet(index: 0), withRowAnimation: .Fade)
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -298,6 +312,14 @@ class JXTHomeTableViewController: PFQueryTableViewController {
 //            }
         }
     }
+}
+
+extension JXTHomeTableViewController: MPCoachMarksViewDelegate {
+    
+    func coachMarksViewDidClicked(coachMarksView: MPCoachMarks!, atIndex index: Int) {
+        self.presentAddJuxtViewController(UIBarButtonItem())
+    }
+    
 }
 
 extension JXTHomeTableViewController: JXTJuxtViewControllerDelegate {

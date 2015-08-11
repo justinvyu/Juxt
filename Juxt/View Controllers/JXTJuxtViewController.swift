@@ -11,6 +11,7 @@ import Parse
 import ParseUI
 import FBSDKCoreKit
 import FBSDKShareKit
+import MPCoachMarks
 
 protocol JXTJuxtViewControllerDelegate {
     
@@ -215,6 +216,55 @@ class JXTJuxtViewController: UIViewController {
         
     }
     
+    func setupCoachmarks() {
+        
+        if !CoachmarksHelper.coachmarkHasBeenViewed(CoachmarksHelper.keys.CompareUser) || !CoachmarksHelper.coachmarkHasBeenViewed(CoachmarksHelper.keys.AddPhoto) {
+            let compareCoachmarkRect = CGRectMake(self.view.frame.size.width - 108, 15, 55, 55)
+            let compareCoachmark = CoachmarksHelper.generateCoachmark(rect: compareCoachmarkRect, caption: "Compare your photos in a side by side image or an animated gif", shape: MaskShape.SHAPE_CIRCLE, position: LabelPosition.LABEL_POSITION_BOTTOM, alignment: LabelAligment.LABEL_ALIGNMENT_CENTER, showArrow: true)
+            
+            let addPhotoCoachmarkRect = CGRectMake(self.view.frame.size.width - 52, 15, 55, 55)
+            let addPhotoCoachmark = CoachmarksHelper.generateCoachmark(rect: addPhotoCoachmarkRect, caption: "Add a photo to your project's timeline", shape: MaskShape.SHAPE_CIRCLE, position: LabelPosition.LABEL_POSITION_BOTTOM, alignment: LabelAligment.LABEL_ALIGNMENT_CENTER, showArrow: true)
+            
+            var coachmarks: [CoachmarksHelper.mark] = []
+            
+            coachmarks = CoachmarksHelper.addMarkToCoachmarks(coachmarks, newMark: compareCoachmark)
+            coachmarks = CoachmarksHelper.addMarkToCoachmarks(coachmarks, newMark: addPhotoCoachmark)
+            let coachmarkView = CoachmarksHelper.generateCoachmarksViewWithMarks(marks: coachmarks, withFrame: self.view.frame)
+            self.navigationController?.view.addSubview(coachmarkView)
+            coachmarkView.enableContinueLabel = false
+            coachmarkView.enableSkipButton = false
+            coachmarkView.start()
+            
+            CoachmarksHelper.setCoachmarkHasBeenViewedToTrue(CoachmarksHelper.keys.CompareUser)
+            CoachmarksHelper.setCoachmarkHasBeenViewedToTrue(CoachmarksHelper.keys.AddPhoto)
+        }
+        
+    }
+    
+    func setupCoachmarks_notUser() {
+        
+        if !CoachmarksHelper.coachmarkHasBeenViewed(CoachmarksHelper.keys.Header) {
+            let headerCoachmarkRect = CGRectMake(0, self.navigationController!.navigationBar.frame.size.height + 20, self.view.frame.size.width, 68)
+            let headerCoachmark = CoachmarksHelper.generateCoachmark(rect: headerCoachmarkRect, caption: "You're checking out someone else's project!", shape: MaskShape.SHAPE_SQUARE, position: LabelPosition.LABEL_POSITION_BOTTOM, alignment: LabelAligment.LABEL_ALIGNMENT_CENTER, showArrow: true)
+            
+            let compareCoachmarkRect = CGRectMake(self.view.frame.size.width - 52, 15, 55, 55)
+            let compareCoachmark = CoachmarksHelper.generateCoachmark(rect: compareCoachmarkRect, caption: "Compare their photos in a side by side image or an animated gif", shape: MaskShape.SHAPE_CIRCLE, position: LabelPosition.LABEL_POSITION_BOTTOM, alignment: LabelAligment.LABEL_ALIGNMENT_CENTER, showArrow: true)
+            
+            var coachmarks: [CoachmarksHelper.mark] = []
+            
+            coachmarks = CoachmarksHelper.addMarkToCoachmarks(coachmarks, newMark: headerCoachmark)
+            coachmarks = CoachmarksHelper.addMarkToCoachmarks(coachmarks, newMark: compareCoachmark)
+            let coachmarkView = CoachmarksHelper.generateCoachmarksViewWithMarks(marks: coachmarks, withFrame: self.view.frame)
+            self.navigationController?.view.addSubview(coachmarkView)
+            coachmarkView.enableContinueLabel = false
+            coachmarkView.enableSkipButton = false
+            coachmarkView.start()
+            
+            CoachmarksHelper.setCoachmarkHasBeenViewedToTrue(CoachmarksHelper.keys.Header)
+        }
+        
+    }
+    
     // MARK: VC Lifecycle
     
     override func viewDidLoad() {
@@ -260,6 +310,12 @@ class JXTJuxtViewController: UIViewController {
 //                }
 //            }
             self.photos = juxt.photos
+        }
+        
+        if PFUser.currentUser() == juxt?.user {
+            self.setupCoachmarks()
+        } else {
+            self.setupCoachmarks_notUser()
         }
     }
     
