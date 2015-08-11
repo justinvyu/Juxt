@@ -14,6 +14,7 @@
 		D0092D391B582DAA00769490 /* JXTAddJuxtViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0092D381B582DAA00769490 /* JXTAddJuxtViewController.swift */; };
 		D0092D3C1B585B1200769490 /* JXTTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0092D3B1B585B1200769490 /* JXTTabBarController.swift */; };
 		D00B09391B56ED9900870D4D /* JXTHomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00B09381B56ED9900870D4D /* JXTHomeTableViewController.swift */; };
+		D02C94CB1B791FD1005C8B7F /* CoachmarksHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C94CA1B791FD1005C8B7F /* CoachmarksHelper.swift */; };
 		D04E26B01B741D9E006AC1A3 /* JXTSideBySideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04E26AF1B741D9E006AC1A3 /* JXTSideBySideView.swift */; };
 		D08978221B59C2C4009FB6A2 /* PhotoTakingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08978211B59C2C4009FB6A2 /* PhotoTakingHelper.swift */; };
 		D08978241B5C25D8009FB6A2 /* JXTCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08978231B5C25D8009FB6A2 /* JXTCameraViewController.swift */; };
@@ -139,6 +140,13 @@
 			remoteGlobalIDString = A80FD57E6EF0849C7CAB18A1;
 			remoteInfo = "Pods-Juxt-TGCameraViewController";
 		};
+		D02C94DC1B791FD2005C8B7F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0BE3AC41B71839D0062B5B0 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A4DD576189021E616D575D36;
+			remoteInfo = "Pods-Juxt-MPCoachMarks";
+		};
 		D0AFDC921B556E630097228E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D0AFDC741B556E630097228E /* Project object */;
@@ -179,6 +187,7 @@
 		D0092D381B582DAA00769490 /* JXTAddJuxtViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTAddJuxtViewController.swift; sourceTree = "<group>"; };
 		D0092D3B1B585B1200769490 /* JXTTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTTabBarController.swift; sourceTree = "<group>"; };
 		D00B09381B56ED9900870D4D /* JXTHomeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTHomeTableViewController.swift; sourceTree = "<group>"; };
+		D02C94CA1B791FD1005C8B7F /* CoachmarksHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachmarksHelper.swift; sourceTree = "<group>"; };
 		D04E26AF1B741D9E006AC1A3 /* JXTSideBySideView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTSideBySideView.swift; sourceTree = "<group>"; };
 		D08978211B59C2C4009FB6A2 /* PhotoTakingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoTakingHelper.swift; sourceTree = "<group>"; };
 		D08978231B5C25D8009FB6A2 /* JXTCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTCameraViewController.swift; sourceTree = "<group>"; };
@@ -4695,6 +4704,7 @@
 				D02C94B71B7912AF005C8B7F /* FBSDKShareKit.framework */,
 				D02C94B91B7912AF005C8B7F /* FacebookSDK.framework */,
 				D02C94BB1B7912AF005C8B7F /* LLSimpleCamera.framework */,
+				D02C94DD1B791FD2005C8B7F /* MPCoachMarks.framework */,
 				D02C94BD1B7912AF005C8B7F /* Mixpanel.framework */,
 				D02C94BF1B7912AF005C8B7F /* Parse.framework */,
 				D02C94C11B7912AF005C8B7F /* ParseFacebookUtils.framework */,
@@ -5444,6 +5454,7 @@
 				D0F7C5F21B596F48004E2F3E /* JXTConstants.swift */,
 				D08978271B5D589B009FB6A2 /* ParseHelper.swift */,
 				D0BE3CB91B727E1F0062B5B0 /* MixpanelHelper.swift */,
+				D02C94CA1B791FD1005C8B7F /* CoachmarksHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -5663,6 +5674,13 @@
 			remoteRef = D02C94C41B7912AF005C8B7F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		D02C94DD1B791FD2005C8B7F /* MPCoachMarks.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MPCoachMarks.framework;
+			remoteRef = D02C94DC1B791FD2005C8B7F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		D0BE3CAE1B71839E0062B5B0 /* Pods_Juxt.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -5762,6 +5780,7 @@
 				D0BE3CBC1B7283610062B5B0 /* JXTLandingViewController.swift in Sources */,
 				D0F7C5FC1B59A4B7004E2F3E /* Photo.swift in Sources */,
 				D00360CC1B6AD782003DCB3D /* JYProgressButton.swift in Sources */,
+				D02C94CB1B791FD1005C8B7F /* CoachmarksHelper.swift in Sources */,
 				D0F7C5FE1B59AC73004E2F3E /* JXTJuxtViewController.swift in Sources */,
 				D0BE3CBA1B727E1F0062B5B0 /* MixpanelHelper.swift in Sources */,
 				D08978241B5C25D8009FB6A2 /* JXTCameraViewController.swift in Sources */,

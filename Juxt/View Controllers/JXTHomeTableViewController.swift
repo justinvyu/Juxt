@@ -16,6 +16,8 @@ import FBSDKCoreKit
 import FBSDKShareKit
 import ParseFacebookUtils
 
+import MPCoachMarks
+
 class JXTHomeTableViewController: PFQueryTableViewController {
 
     // MARK: Properties
@@ -174,6 +176,26 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         self.navigationItem.titleView?.tintColor = UIColor(white: 0.97, alpha: 1.0)
         self.navigationController?.navigationBar.tintColor = UIColor(white: 0.97, alpha: 1.0)
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+
+        let profileCoachmarkRect = CGRectMake(self.view.frame.size.width - 113, 15, 55, 55)
+        let profileCoachmark = CoachmarksHelper.generateCoachmark(rect: profileCoachmarkRect, caption: "View your own projects in your profile", shape: MaskShape.SHAPE_CIRCLE, position: LabelPosition.LABEL_POSITION_BOTTOM, alignment: LabelAligment.LABEL_ALIGNMENT_CENTER, showArrow: true)
+    
+        let addJuxtCoachmarkRect = CGRectMake(self.view.frame.size.width - 57, 15, 55, 55)
+        let addJuxtCoachmark = CoachmarksHelper.generateCoachmark(rect: addJuxtCoachmarkRect, caption: "Add a project of your own", shape: MaskShape.SHAPE_CIRCLE, position: LabelPosition.LABEL_POSITION_BOTTOM, alignment: LabelAligment.LABEL_ALIGNMENT_CENTER, showArrow: true)
+        
+        let seeDetailCoachmarkRect = CGRectMake(0, navigationController!.navigationBar.frame.size.height + 20, self.view.frame.size.width, 300)
+        let seeDetailCoachmark = CoachmarksHelper.generateCoachmark(rect: seeDetailCoachmarkRect, caption: "See projects in detail", shape: MaskShape.SHAPE_SQUARE, position: LabelPosition.LABEL_POSITION_BOTTOM, alignment: LabelAligment.LABEL_ALIGNMENT_CENTER, showArrow: true)
+        
+        var coachmarks: [CoachmarksHelper.mark] = []
+        
+        coachmarks = CoachmarksHelper.addMarkToCoachmarks(coachmarks, newMark: profileCoachmark)
+        coachmarks = CoachmarksHelper.addMarkToCoachmarks(coachmarks, newMark: addJuxtCoachmark)
+        coachmarks = CoachmarksHelper.addMarkToCoachmarks(coachmarks, newMark: seeDetailCoachmark)
+        let coachmarkView = CoachmarksHelper.generateCoachmarksViewWithMarks(marks: coachmarks, withFrame: self.view.frame)
+        self.navigationController?.view.addSubview(coachmarkView)
+        coachmarkView.enableContinueLabel = false
+        coachmarkView.enableSkipButton = false
+        coachmarkView.start()
     }
     
     override func viewWillAppear(animated: Bool) {
