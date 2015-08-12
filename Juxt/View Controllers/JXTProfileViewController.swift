@@ -157,6 +157,7 @@ extension JXTProfileViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier("JuxtCell") as! JXTJuxtTableViewCell
         
         cell.juxt = self.juxts?[indexPath.row]
+        cell.juxt?.fetchLikes()
         cell.profilePictureImageView.layer.cornerRadius = 5.0
         
         cell.juxt?.photosForJuxt() { (photos) -> Void in

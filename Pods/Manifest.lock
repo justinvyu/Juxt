@@ -6,6 +6,7 @@ PODS:
   - Bolts/AppLinks (1.2.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.2.0)
+  - Bond (3.10.0)
   - ConvenienceKit (0.2.0)
   - Fabric (1.2.8):
     - Fabric/Base (= 1.2.8)
@@ -44,6 +45,7 @@ PODS:
 
 DEPENDENCIES:
   - AMScrollingNavbar
+  - Bond
   - ConvenienceKit
   - Fabric
   - FBSDKCoreKit
@@ -62,6 +64,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AMScrollingNavbar: 767ed2db60d927a809bddff5d01b739b7020b12b
   Bolts: d176cb1e0012175589e389a9db49b85e27787576
+  Bond: c873dba04a09dde9e422242420979aa8e4c9e133
   ConvenienceKit: 947032f82c3d419d107e0cbde1fcb725e9c7ed62
   Fabric: a9eabe53915e9f1db55a84dd2838737928675878
   Facebook-iOS-SDK: cd87f0b2f0c1d9574b44e8fa2baacc275524bac3

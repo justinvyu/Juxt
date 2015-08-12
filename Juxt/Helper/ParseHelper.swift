@@ -45,6 +45,12 @@ class ParseHelper: NSObject {
     static let FlaggedContentFromUser = "fromUser"
     static let FlaggedContentToJuxt = "toJuxt"
     
+    // Like
+    
+    static let LikeClassName = "Like"
+    static let LikeFromUser = "fromUser"
+    static let LikeToJuxt = "toJuxt"
+    
     // FB
     
     static func loginWithFacebook(completion: PFUserResultBlock) {
@@ -108,46 +114,6 @@ class ParseHelper: NSObject {
     
     // MARK: Flagging
     
-//    static func flagsForPost(post: Juxt, completion: PFArrayResultBlock) {
-//        
-//        let flagQuery = PFQuery(className: FlaggedContentClassName)
-//        flagQuery.whereKey(FlaggedContentToJuxt, equalTo: post)
-//        
-//        flagQuery.includeKey(FlaggedContentFromUser)
-//        flagQuery.findObjectsInBackgroundWithBlock(completion)
-//        
-//    }
-//    
-//    static func flagPost(user: PFUser, post: Juxt) {
-//        
-//        let flag = PFObject(className: FlaggedContentClassName)
-//        flag[FlaggedContentFromUser] = user
-//        flag[FlaggedContentToJuxt] = post
-//        flag.saveInBackground()
-//        
-//    }
-//    
-//    static func unflagPost(user: PFUser, post: Juxt) {
-//        
-//        let flagQuery = PFQuery(className: FlaggedContentClassName)
-//        flagQuery.whereKey(FlaggedContentFromUser, equalTo: user)
-//        flagQuery.whereKey(FlaggedContentToJuxt, equalTo: post)
-//        
-//        flagQuery.findObjectsInBackgroundWithBlock { (results, error) -> Void in
-//            if error != nil {
-//                println("\(error)")
-//            } else {
-//                if let flags = results as? [PFObject] {
-//                    for flag in flags {
-//                        flag.deleteInBackground()
-//                    }
-//                    
-//                }
-//            }
-//        }
-//        
-//    }
-    
     static func flagPost(user: PFUser, post: Juxt) {
         let flagObject = PFObject(className: FlaggedContentClassName)
         flagObject.setObject(user, forKey: FlaggedContentFromUser)
@@ -166,10 +132,51 @@ class ParseHelper: NSObject {
         flagObject.saveInBackgroundWithBlock(nil)
     }
     
+    // MARK: Likes
+    
+    static func likePost(user: PFUser, post: Juxt) {
+
+        let likeObject = PFObject(className: LikeClassName)
+        likeObject[LikeFromUser] = user
+        likeObject[LikeToJuxt] = post
+        
+        likeObject.saveInBackgroundWithBlock(nil)
+    }
+    
+    static func unlikePost(user: PFUser, post: Juxt) {
+        let query = PFQuery(className: LikeClassName)
+        query.whereKey(LikeFromUser, equalTo: user)
+        query.whereKey(LikeToJuxt, equalTo: post)
+        
+        query.findObjectsInBackgroundWithBlock {
+            (results: [AnyObject]?, error: NSError?) -> Void in
+            if let error = error {
+                println("\(error)")
+            }
+            
+            if let results = results as? [PFObject] {
+                for likes in results {
+                    likes.deleteInBackgroundWithBlock(nil)
+                }
+            }
+        }
+    }
+    
+    static func likesForPost(post: Juxt, completionBlock: PFArrayResultBlock) {
+        let query = PFQuery(className: LikeClassName)
+        query.whereKey(LikeToJuxt, equalTo: post)
+        query.includeKey(LikeFromUser)
+        
+        query.findObjectsInBackgroundWithBlock(completionBlock)
+    }
+    
+    // MARK: Other
+    
     static func juxtsFromUser(user: PFUser, completion: PFArrayResultBlock) {
         
         let query = PFQuery(className: ProjectClassName)
         query.whereKey(ProjectUser, equalTo: user)
+        query.orderByDescending(PhotoCreatedAt)
         query.findObjectsInBackgroundWithBlock(completion)
         
     }
@@ -200,6 +207,6 @@ public func ==(lhs: PFObject, rhs: PFObject) -> Bool {
     return lhs.objectId == rhs.objectId
 }
 
-public func !=(lhs: PFObject, rhs: PFObject) -> Bool {
-    return lhs.objectId == rhs.objectId
-}
+//public func !=(lhs: PFObject, rhs: PFObject) -> Bool {
+//    return lhs.objectId == rhs.objectId
+//}

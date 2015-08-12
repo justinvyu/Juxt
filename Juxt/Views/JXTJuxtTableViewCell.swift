@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import ParseUI
+import Bond
 
 class JXTJuxtTableViewCell: PFTableViewCell {
 
@@ -16,6 +17,7 @@ class JXTJuxtTableViewCell: PFTableViewCell {
     
     weak var homeViewController: JXTHomeTableViewController?
     weak var profileViewController: JXTProfileViewController?
+    var likeBond: Bond<[PFUser]?>!
     
     var currentPage: Int?
     
@@ -56,8 +58,22 @@ class JXTJuxtTableViewCell: PFTableViewCell {
                     }
                 })
                 
+//                self.likeButton.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5)
                 
-            
+                juxt.likes ->> likeBond
+            }
+        }
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        likeBond = Bond<[PFUser]?>() { [unowned self] likeList in
+            if let likeList = likeList {
+                println(likeList.count)
+//                self.likeButton.setTitle("\(likeList.count)", forState: .Normal)
+                self.likesLabel.text = "\(likeList.count)"
+                self.likeButton.selected = contains(likeList, PFUser.currentUser()!)
             }
         }
     }
@@ -82,7 +98,10 @@ class JXTJuxtTableViewCell: PFTableViewCell {
 //        self.sideBySideView.leftPhoto?.image = UIImage(named: "default-placeholder")
 //        self.sideBySideView.rightPhoto?.image = UIImage(named: "default-placeholder")
 
+        self.sideBySideView.leftPhoto?.image = UIImage(named: "default-placeholder")
+        self.sideBySideView.rightPhoto?.image = UIImage(named: "default-placeholder")
         self.sideBySideView.subviews.map { $0.removeFromSuperview() }
+        
     }
 //
 //    @IBAction func flaggedContentButtonPressed(sender: UIButton) {
@@ -93,6 +112,11 @@ class JXTJuxtTableViewCell: PFTableViewCell {
 //            println(contains(usersFlagged, PFUser.currentUser()!))
 //        }
 //    }
+    
+    @IBAction func likeButtonPressed(sender: UIButton) {
+        
+        self.juxt?.toggleLikePost(PFUser.currentUser()!)
+    }
     
     @IBAction func moreButtonPressed(sender: UIButton) {
         

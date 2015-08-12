@@ -8,6 +8,7 @@
 
 import UIKit
 import ConvenienceKit
+import Parse
 
 protocol JXTAddPhotoViewControllerDelegate {
     
@@ -211,6 +212,7 @@ class JXTAddPhotoViewController: UIViewController {
                 if error != nil {
                     println("\(error)")
                 } else {
+                    juxt.toggleLikePost(PFUser.currentUser()!)
                     if juxt.photos?.count == 0 {
                         MixpanelHelper.trackCreatePost()
                     }
@@ -218,7 +220,7 @@ class JXTAddPhotoViewController: UIViewController {
                     let photo = Photo()
                     photo.title = titleTextField.text
                     photo.fromJuxt = juxt
-                    photo.image = JXTConstants.scaleImage(image, width: 640)
+                    photo.image = ImageHelper.scaleImage(image, width: 640)
                     
                     photo.uploadPhoto { (finished, error) -> Void in
                         

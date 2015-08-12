@@ -162,24 +162,6 @@ class JXTJuxtViewController: UIViewController {
         
     }
     
-    // Juxtapose images
-    func combineImage(image firstImage: UIImage, withImage secondImage: UIImage) -> UIImage {
-        var image: UIImage
-        
-        var newImageSize = CGSizeMake(firstImage.size.width + secondImage.size.width, max(firstImage.size.height, secondImage.size.height))
-        UIGraphicsBeginImageContextWithOptions(newImageSize, false, UIScreen.mainScreen().scale)
-        
-        var borderedFirstImage = firstImage.borderImage(UIColor(white: 0.97, alpha: 1.0), borderWidth: 30)
-        var borderedSecondImage = secondImage.borderImage(UIColor(white: 0.97, alpha: 1.0), borderWidth: 30)
-        borderedFirstImage.drawAtPoint(CGPointMake(0, 0))
-        borderedSecondImage.drawAtPoint(CGPointMake(firstImage.size.width - 15, 0))
-        
-        image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return image
-    }
-    
     func compareButtonTapped(sender: UIBarButtonItem) {
         
         compareView = JXTCompareView(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, UIScreen.mainScreen().bounds.size.height), photos: self.photos!)
@@ -370,9 +352,9 @@ extension JXTJuxtViewController: JXTCompareViewDelegate {
     func compareButtonWasPressedWithImages(compareView: JXTCompareView, firstImage: UIImage, secondImage: UIImage) {
         //println(self.combineImage(image: firstImage, withImage: secondImage))
         
-        let mergeImage = self.combineImage(image: firstImage, withImage: secondImage)
+        let mergeImage = ImageHelper.combineImage(image: firstImage, withImage: secondImage)
         
-        let fbPhoto = FBSDKSharePhoto(image: JXTConstants.scaleImage(mergeImage, width: 640), userGenerated: true)
+        let fbPhoto = FBSDKSharePhoto(image: ImageHelper.scaleImage(mergeImage, width: 640), userGenerated: true)
         let content = FBSDKSharePhotoContent()
         content.photos = [fbPhoto]
         
@@ -383,7 +365,7 @@ extension JXTJuxtViewController: JXTCompareViewDelegate {
     }
     
     func saveToCameraRoll(compareView: JXTCompareView, firstImage: UIImage, secondImage: UIImage) {
-        let mergeImage = self.combineImage(image: firstImage, withImage: secondImage)
+        let mergeImage = ImageHelper.combineImage(image: firstImage, withImage: secondImage)
         
         UIImageWriteToSavedPhotosAlbum(mergeImage, nil, nil, nil);
     }
@@ -475,30 +457,4 @@ extension JXTJuxtViewController: JXTPhotoTableViewCellDelegate {
         
     }
     
-}
-
-extension UIView {
-    func convertViewToImage() -> UIImage {
-        UIGraphicsBeginImageContext(self.bounds.size)
-        self.drawViewHierarchyInRect(self.bounds, afterScreenUpdates: true)
-        var image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return image
-    }
-}
-
-extension UIImage {
-    
-    func borderImage(color: UIColor, borderWidth: CGFloat) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
-        self.drawAtPoint(CGPointZero)
-        color.setStroke()
-        var path = UIBezierPath(rect: CGRectMake(0, 0, self.size.width, self.size.height))
-        path.lineWidth = borderWidth
-        path.stroke()
-        var result = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return result
-    }
 }

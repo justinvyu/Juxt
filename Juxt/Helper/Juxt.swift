@@ -8,12 +8,17 @@
 
 import UIKit
 import Parse
+import Bond
 
 typealias JuxtCallback = [Photo]? -> Void // returning a block
 
 class Juxt: PFObject, PFSubclassing {
     
     var photos: [Photo]?
+//    var likes: [PFUser]?
+
+    var likes =  Dynamic<[PFUser]?>(nil)
+
 //    var usersFlagged: [PFUser]?
     
     @NSManaged var title: String?
@@ -21,39 +26,51 @@ class Juxt: PFObject, PFSubclassing {
     @NSManaged var date: NSDate?
     @NSManaged var user: PFUser?
     
-    // MARK: Parse Functions
+    // MARK: Liking
+    func fetchLikes() {
+        // 1
+        if (likes.value != nil) {
+            return
+        }
+        
+        // 2
+        ParseHelper.likesForPost(self, completionBlock: { (var likes: [AnyObject]?, error: NSError?) -> Void in
+            // 3
+            likes = likes?.filter { like in like[ParseHelper.LikeFromUser] != nil }
+            
+            // 4
+            self.likes.value = likes?.map { like in
+                let like = like as! PFObject
+                let fromUser = like[ParseHelper.LikeFromUser] as! PFUser
+                
+                return fromUser
+            }
+        })
+    }
     
-//    func fetchFlags() {
-//        
-//        if usersFlagged != nil {
-//            return
-//        }
-//        
-//        ParseHelper.flagsForPost(self) { (var results: [AnyObject]?, error) -> Void in
-//            if error != nil {
-//                println("\(error)")
-//            } else {
-//                
-//                results = results?.filter { like in like[ParseHelper.FlaggedContentFromUser] != nil }
-//            
-//                self.usersFlagged = results?.map { flag in
-//                    let flag = flag as! PFObject
-//                    let fromUser = flag[ParseHelper.FlaggedContentFromUser] as! PFUser
-//                    
-//                    return fromUser
-//                }
-//            }
-//        }
-//        
-//    }
-//    
-//    func hasUserFlaggedPost(user: PFUser) -> Bool {
-//        if let usersFlagged = usersFlagged {
-//            return contains(usersFlagged, user)
-//        } else {
-//            return false
-//        }
-//    }
+    func doesUserLikePost(user: PFUser) -> Bool {
+        if let likes = likes.value {
+            return contains(likes, user)
+        } else {
+            return false
+        }
+    }
+    
+    func toggleLikePost(user: PFUser) {
+        if (doesUserLikePost(user)) {
+            // if image is liked, unlike it now
+            // 1
+            likes.value = likes.value?.filter { $0 != user }
+            ParseHelper.unlikePost(user, post: self)
+        } else {
+            // if this image is not liked yet, like it now
+            // 2
+            likes.value?.append(user)
+            ParseHelper.likePost(user, post: self)
+        }
+    }
+    
+    // MARK: Fetching Photos
     
     func photosForJuxt(completion: JuxtCallback) {
         if photos != nil {
@@ -63,18 +80,7 @@ class Juxt: PFObject, PFSubclassing {
         }
     }
     
-//    func toggleFlagPost(user: PFUser) {
-//        if hasUserFlaggedPost(user) {
-//            println("unflagging")
-//            usersFlagged?.filter { $0 != user }
-//            ParseHelper.unflagPost(user, post: self)
-//        } else {
-//            println("flagging")
-//            usersFlagged?.append(user)
-//            ParseHelper.flagPost(user, post: self)
-//        }
-//        println(usersFlagged)
-//    }
+    // MARK: Flagging
     
     func flagPost(user: PFUser) {
         ParseHelper.flagPost(user, post: self)

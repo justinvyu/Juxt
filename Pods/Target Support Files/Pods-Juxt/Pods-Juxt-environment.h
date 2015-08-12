@@ -30,6 +30,12 @@
 #define COCOAPODS_VERSION_MINOR_Bolts_Tasks 2
 #define COCOAPODS_VERSION_PATCH_Bolts_Tasks 0
 
+// Bond
+#define COCOAPODS_POD_AVAILABLE_Bond
+#define COCOAPODS_VERSION_MAJOR_Bond 3
+#define COCOAPODS_VERSION_MINOR_Bond 10
+#define COCOAPODS_VERSION_PATCH_Bond 0
+
 // ConvenienceKit
 #define COCOAPODS_POD_AVAILABLE_ConvenienceKit
 #define COCOAPODS_VERSION_MAJOR_ConvenienceKit 0

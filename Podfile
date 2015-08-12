@@ -25,6 +25,7 @@ target 'Juxt' do
 	pod 'TwitterKit'
 	pod 'TwitterCore'
 	pod 'MPCoachMarks'
+	pod 'Bond'
 
 end
 

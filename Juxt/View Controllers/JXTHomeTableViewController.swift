@@ -214,6 +214,8 @@ class JXTHomeTableViewController: PFQueryTableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.loadObjects()
+        
 //        self.tableView.reloadData()
 //        self.loadObjects()
 //        self.tableView.insertSections(NSIndexSet(index: 0), withRowAnimation: .Fade)
@@ -224,7 +226,6 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         super.viewDidAppear(animated)
         
         self.view.layoutIfNeeded()
-        self.loadObjects()
         self.tableView.reloadData()
     }
     
@@ -250,10 +251,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> JXTJuxtTableViewCell {
         
         var cell = tableView.dequeueReusableCellWithIdentifier("JuxtCell") as! JXTJuxtTableViewCell!
-        if cell == nil {
-            cell = JXTJuxtTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "JuxtCell")
-        }
-        
+
         cell.profilePictureImageView.layer.cornerRadius = 5.0
         
         if let juxt = object as? Juxt, cell = cell {
@@ -262,6 +260,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
 //                cell.galleryScrollView.photos = photos as [Photo]?
                 cell.sideBySideView.photos = photos as [Photo]?
             }
+            cell.juxt?.fetchLikes()
             cell.homeViewController = self
         }
         

@@ -9,11 +9,13 @@
 import UIKit
 import Parse
 import ParseUI
+import Bond
 
 class JXTHeaderTableViewCell: UITableViewCell {
 
     weak var juxtViewController: JXTJuxtViewController?
     
+    var likeBond: Bond<[PFUser]?>!
     var juxt: Juxt? {
         didSet {
             if let user = juxt?.user {
@@ -34,6 +36,23 @@ class JXTHeaderTableViewCell: UITableViewCell {
             otherButton.setImage(juxt?.user == PFUser.currentUser() ? UIImage(named: "delete") : UIImage(named: "flag"), forState: .Normal)
             otherButton.setImage(juxt?.user == PFUser.currentUser() ? UIImage(named: "delete") : UIImage(named: "flag"), forState: .Selected)
             otherButton.setImage(juxt?.user == PFUser.currentUser() ? UIImage(named: "delete") : UIImage(named: "flag"), forState: .Highlighted)
+            
+            if let juxt = juxt {
+                juxt.likes ->> likeBond
+            }
+        }
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        likeBond = Bond<[PFUser]?>() { [unowned self] likeList in
+            if let likeList = likeList {
+                println(likeList.count)
+                //                self.likeButton.setTitle("\(likeList.count)", forState: .Normal)
+                self.likesLabel.text = "\(likeList.count)"
+                self.likeButton.selected = contains(likeList, PFUser.currentUser()!)
+            }
         }
     }
     
@@ -43,6 +62,12 @@ class JXTHeaderTableViewCell: UITableViewCell {
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var likesLabel: UILabel!
     @IBOutlet weak var otherButton: UIButton! // Flag or delete
+    
+    @IBAction func likeButtonPressed(sender: UIButton) {
+        
+        self.juxt?.toggleLikePost(PFUser.currentUser()!)
+        
+    }
     
     @IBAction func otherButtonPressed(sender: UIButton) {
         
