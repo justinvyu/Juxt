@@ -313,8 +313,8 @@
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="UTI-ey-hiU"/>
                                                             <exclude reference="ArS-I0-0Eb"/>
+                                                            <exclude reference="UTI-ey-hiU"/>
                                                         </mask>
                                                     </variation>
                                                 </label>
@@ -365,11 +365,11 @@
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
+                                                            <exclude reference="63F-a9-xhO"/>
+                                                            <exclude reference="6Qu-Nm-kcQ"/>
                                                             <exclude reference="S15-HE-B12"/>
                                                             <exclude reference="bUm-mh-IlN"/>
-                                                            <exclude reference="63F-a9-xhO"/>
                                                             <exclude reference="kty-th-x2j"/>
-                                                            <exclude reference="6Qu-Nm-kcQ"/>
                                                             <exclude reference="php-T5-gJT"/>
                                                         </mask>
                                                     </variation>
@@ -507,6 +507,7 @@
                                             <outlet property="sideBySideView" destination="PmN-xc-ptd" id="ONI-n6-rhg"/>
                                             <outlet property="titleLabel" destination="DAf-rk-NQw" id="AT9-Bn-xgT"/>
                                             <outlet property="usernameLabel" destination="4bD-27-x48" id="Wen-f7-fFv"/>
+                                            <segue destination="tI9-EZ-yIc" kind="show" identifier="ShowJuxt" id="51R-Eh-0bM"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -918,7 +919,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Y7v-WK-bNY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.28698124681945392" green="0.7380529933890978" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.29372690069321555" green="0.74687912587425886" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="0.94999999999999996" alpha="1" colorSpace="calibratedWhite"/>
                         </textAttributes>
@@ -1298,5 +1299,8 @@
         <image name="star" width="32" height="32"/>
         <image name="star-selected" width="32" height="32"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="51R-Eh-0bM"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.39368876870000002" green="0.76120675329999998" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
 </document>

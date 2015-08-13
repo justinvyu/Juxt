@@ -99,6 +99,7 @@ class JXTCompareView: UIView {
         leftCompareView?.photos = photos
         leftCompareView?.clipsToBounds = false
         leftCompareView?.pagingEnabled = true
+        leftCompareView?.bounces = false
         self.addSubview(leftCompareView!)
         
         rightCompareView = JXTImageGalleryScrollView()
@@ -108,6 +109,7 @@ class JXTCompareView: UIView {
         rightCompareView?.photos = photos.reverse()
         rightCompareView?.clipsToBounds = false
         rightCompareView?.pagingEnabled = true
+        rightCompareView?.bounces = false
         self.addSubview(rightCompareView!)
         
         bottomView = UIView()

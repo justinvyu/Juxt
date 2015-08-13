@@ -119,6 +119,10 @@ class JXTJuxtViewController: UIViewController {
     }
     
     func showFullScreenImage(image: UIImage) {
+        
+        self.fullScreenImageView?.removeFromSuperview()
+        self.fullScreenCancelButton?.removeFromSuperview()
+        
         self.fullScreenImageView = UIImageView()
         self.fullScreenImageView?.frame = self.view.frame
         self.fullScreenImageView?.contentMode = UIViewContentMode.ScaleAspectFill
@@ -179,6 +183,8 @@ class JXTJuxtViewController: UIViewController {
     func fullScreenCancelButtonPressed(sender: UIButton) {
         
         JXTConstants.fadeOutWithDuration(fullScreenImageView!, duration: 0.3)
+        
+//        self.navigationController?.view.subviews.map { JXTConstants.fadeInWidthDuration($0 as! UIView, duration: 0.25) }
         JXTConstants.fadeOutWithDuration(fullScreenCancelButton!, duration: 0.3)
         self.tableView.userInteractionEnabled = true
         if self.navigationController?.respondsToSelector("interactivePopGestureRecognizer") == true {
@@ -341,7 +347,9 @@ extension JXTJuxtViewController: FBSDKSharingDelegate {
 extension JXTJuxtViewController: JXTCompareViewDelegate {
     
     func compareViewDidCancel(button: UIButton) {
-        JXTConstants.fadeOutWithDuration(self.compareView!, duration: 0.3)
+        JXTConstants.fadeOutWithDuration(self.compareView!, duration: 0.25)
+        
+//        self.navigationController?.view.subviews.map { JXTConstants.fadeInWidthDuration($0 as! UIView, duration: 0.25) }
         self.navigationItem.hidesBackButton = false
         self.tableView.userInteractionEnabled = true
         if self.navigationController?.respondsToSelector("interactivePopGestureRecognizer") == true {

@@ -73,7 +73,10 @@ class JXTJuxtTableViewCell: PFTableViewCell {
                 println(likeList.count)
 //                self.likeButton.setTitle("\(likeList.count)", forState: .Normal)
                 self.likesLabel.text = "\(likeList.count)"
-                self.likeButton.selected = contains(likeList, PFUser.currentUser()!)
+                if let user = PFUser.currentUser() {
+                    self.likeButton.selected = contains(likeList, user)
+                }
+//                self.likeButton.selected = contains(likeList, PFUser.currentUser()!)
             }
         }
     }

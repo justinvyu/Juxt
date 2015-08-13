@@ -45,21 +45,6 @@ class ImageHelper: NSObject {
         return image
     }
     
-    func generateGIFWithImages(images: [UIImage]) {
-        
-        let path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last?.stringByAppendingPathComponent("animated.gif")
-        let destination = CGImageDestinationCreateWithURL(NSURL(fileURLWithPath: path!) as! CFURLRef, kUTTypeGIF, images.count, nil)
-        let frameProperties = [kCGImagePropertyGIFDelayTime as String : NSNumber(int: 2)]
-        let gifProperties = [kCGImagePropertyGIFLoopCount as String : NSNumber(int: 0)]
-        
-        for image in images {
-            CGImageDestinationAddImage(destination, image.CGImage, frameProperties)
-        }
-        CGImageDestinationSetProperties(destination, gifProperties)
-        CGImageDestinationFinalize(destination)
-        println("animated GIF file created at \(path)")
-    }
-    
 }
 
 extension UIImage {

@@ -209,6 +209,8 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         
         self.setupCoachmarks()
+        
+        ImageHelper.generateGIFWithImages([UIImage(named: "splash")!, UIImage(named: "star")!, UIImage(named: "cancel-blue")!])
     }
     
     override func viewWillAppear(animated: Bool) {

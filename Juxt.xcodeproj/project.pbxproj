@@ -19,6 +19,8 @@
 		D08978241B5C25D8009FB6A2 /* JXTCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08978231B5C25D8009FB6A2 /* JXTCameraViewController.swift */; };
 		D08978261B5C261A009FB6A2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D08978251B5C261A009FB6A2 /* AVFoundation.framework */; };
 		D08978281B5D589B009FB6A2 /* ParseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08978271B5D589B009FB6A2 /* ParseHelper.swift */; };
+		D08EA3621B7D2DA4008D2ADD /* GIFHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08EA3611B7D2DA4008D2ADD /* GIFHelper.swift */; };
+		D08EA3781B7D2E9C008D2ADD /* MLIMGURUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = D08EA3771B7D2E9C008D2ADD /* MLIMGURUploader.m */; };
 		D09B81211B6173E500C87FC5 /* JXTCompareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B81201B6173E500C87FC5 /* JXTCompareView.swift */; };
 		D09E7B811B7B0E78001397E1 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D09E7B801B7B0E78001397E1 /* ImageIO.framework */; };
 		D09E7B961B7B0E81001397E1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D09E7B951B7B0E81001397E1 /* MobileCoreServices.framework */; };
@@ -201,6 +203,10 @@
 		D08978231B5C25D8009FB6A2 /* JXTCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTCameraViewController.swift; sourceTree = "<group>"; };
 		D08978251B5C261A009FB6A2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D08978271B5D589B009FB6A2 /* ParseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseHelper.swift; sourceTree = "<group>"; };
+		D08EA3611B7D2DA4008D2ADD /* GIFHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GIFHelper.swift; sourceTree = "<group>"; };
+		D08EA3751B7D2E9B008D2ADD /* Juxt-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Juxt-Bridging-Header.h"; sourceTree = "<group>"; };
+		D08EA3761B7D2E9C008D2ADD /* MLIMGURUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLIMGURUploader.h; sourceTree = "<group>"; };
+		D08EA3771B7D2E9C008D2ADD /* MLIMGURUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLIMGURUploader.m; sourceTree = "<group>"; };
 		D09B81201B6173E500C87FC5 /* JXTCompareView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTCompareView.swift; sourceTree = "<group>"; };
 		D09E7B801B7B0E78001397E1 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		D09E7B951B7B0E81001397E1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -2111,6 +2117,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D08EA3741B7D2E84008D2ADD /* Objective C */ = {
+			isa = PBXGroup;
+			children = (
+				D08EA3761B7D2E9C008D2ADD /* MLIMGURUploader.h */,
+				D08EA3771B7D2E9C008D2ADD /* MLIMGURUploader.m */,
+				D08EA3751B7D2E9B008D2ADD /* Juxt-Bridging-Header.h */,
+			);
+			name = "Objective C";
+			sourceTree = "<group>";
+		};
 		D0AFDC731B556E630097228E = {
 			isa = PBXGroup;
 			children = (
@@ -2134,6 +2150,7 @@
 		D0AFDC7E1B556E630097228E /* Juxt */ = {
 			isa = PBXGroup;
 			children = (
+				D08EA3741B7D2E84008D2ADD /* Objective C */,
 				D0F7C5FA1B59A0D3004E2F3E /* Model */,
 				D0F7C5F01B596F48004E2F3E /* Helper */,
 				D0AFDCA11B556F520097228E /* View Controllers */,
@@ -5469,6 +5486,7 @@
 				D0BE3CB91B727E1F0062B5B0 /* MixpanelHelper.swift */,
 				D02C94CA1B791FD1005C8B7F /* CoachmarksHelper.swift */,
 				D09E7B971B7B0E9C001397E1 /* ImageHelper.swift */,
+				D08EA3611B7D2DA4008D2ADD /* GIFHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -5809,6 +5827,7 @@
 				D08978241B5C25D8009FB6A2 /* JXTCameraViewController.swift in Sources */,
 				D0092D371B581FFD00769490 /* JXTJuxtTableViewCell.swift in Sources */,
 				D08978221B59C2C4009FB6A2 /* PhotoTakingHelper.swift in Sources */,
+				D08EA3781B7D2E9C008D2ADD /* MLIMGURUploader.m in Sources */,
 				D04E26B01B741D9E006AC1A3 /* JXTSideBySideView.swift in Sources */,
 				D0F7C5E91B586949004E2F3E /* JXTAddPhotoViewController.swift in Sources */,
 				D08978281B5D589B009FB6A2 /* ParseHelper.swift in Sources */,
@@ -5816,6 +5835,7 @@
 				D0BD46531B602EAA0007943E /* JXTPhotoTableViewCell.swift in Sources */,
 				D09E7B981B7B0E9C001397E1 /* ImageHelper.swift in Sources */,
 				D0F7C5F41B596F48004E2F3E /* JXTConstants.swift in Sources */,
+				D08EA3621B7D2DA4008D2ADD /* GIFHelper.swift in Sources */,
 				D09B81211B6173E500C87FC5 /* JXTCompareView.swift in Sources */,
 				D0092D391B582DAA00769490 /* JXTAddJuxtViewController.swift in Sources */,
 				D0AA20691B6818040062033E /* JXTProfileViewController.swift in Sources */,
@@ -5984,6 +6004,7 @@
 			baseConfigurationReference = 7931DB76583F9A98551C49FA /* Pods-Juxt.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5994,6 +6015,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Juxt/Juxt-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -6003,6 +6026,7 @@
 			baseConfigurationReference = 499E54B84FAF82B3EFF8429C /* Pods-Juxt.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -6013,6 +6037,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Juxt/Juxt-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
