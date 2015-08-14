@@ -22,8 +22,16 @@ class GIFHelper: NSObject {
         dispatch_async(dispatch_queue_create("createGIF", DISPATCH_QUEUE_SERIAL)) {
             let path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last?.stringByAppendingPathComponent("animated.gif")
             let destination = CGImageDestinationCreateWithURL(NSURL(fileURLWithPath: path!) as! CFURLRef, kUTTypeGIF, images.count, nil)
-            let frameProperties = [kCGImagePropertyGIFDelayTime as String : NSNumber(int: 2)]
-            let gifProperties = [kCGImagePropertyGIFLoopCount as String : NSNumber(int: 0)]
+            let frameProperties = [
+                kCGImagePropertyGIFDictionary as String : [
+                    kCGImagePropertyGIFDelayTime as String : NSNumber(float: 0.15)
+                ]
+            ]
+            let gifProperties = [
+                kCGImagePropertyGIFDictionary as String : [
+                    kCGImagePropertyGIFLoopCount as String : NSNumber(int: 0)
+                ]
+            ]
             
             for image in images {
                 CGImageDestinationAddImage(destination, image.CGImage, frameProperties)
@@ -37,7 +45,7 @@ class GIFHelper: NSObject {
         }
     }
     
-    func postGIFToImgur(gif: NSData, title: String, description: String) {
+    func postGIFToImgur(gif: NSData, title: String?, description: String?) {
             
             let CLIENT_KEY = "9e0492acb161044"
             
@@ -47,7 +55,7 @@ class GIFHelper: NSObject {
                     
                     let url = FBSDKShareLinkContent()
                     url.contentURL = NSURL(string: result)
-                    
+                                        
                     FBSDKShareDialog.showFromViewController(self.viewController, withContent: url, delegate: nil)
                     
                     }, failureBlock: { (response, error, status) -> Void in

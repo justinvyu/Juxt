@@ -62,6 +62,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Parse.framework'
   install_framework 'ParseFacebookUtils.framework'
   install_framework 'ParseUI.framework'
+  install_framework 'SCLAlertView.framework'
   install_framework 'TGCameraViewController.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -79,5 +80,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Parse.framework'
   install_framework 'ParseFacebookUtils.framework'
   install_framework 'ParseUI.framework'
+  install_framework 'SCLAlertView.framework'
   install_framework 'TGCameraViewController.framework'
 fi

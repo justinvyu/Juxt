@@ -210,7 +210,6 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         
         self.setupCoachmarks()
         
-        ImageHelper.generateGIFWithImages([UIImage(named: "splash")!, UIImage(named: "star")!, UIImage(named: "cancel-blue")!])
     }
     
     override func viewWillAppear(animated: Bool) {

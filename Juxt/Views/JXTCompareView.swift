@@ -31,7 +31,9 @@ class JXTCompareView: UIView {
     var bottomBar: UIView?
     var facebookButton: UIButton?
     var twitterButton: UIButton?
-    
+//    var sideBySideButton: UIButton?
+//    var gifButton: UIButton?
+
     var shareButton: JYProgressButton?
     
     //    var topBlurView: FXBlurView?
@@ -60,7 +62,7 @@ class JXTCompareView: UIView {
         compareLabel = UILabel(frame: CGRectMake(0, 0, 200, 40))
         compareLabel?.center = self.center
         compareLabel?.frame.origin.y = 20
-        compareLabel?.text = "share a side by side"
+        compareLabel?.text = "share"
         compareLabel?.font = UIFont.systemFontOfSize(18.0)
         compareLabel?.textAlignment = .Center
         compareLabel?.textColor = UIColor.whiteColor()
@@ -170,6 +172,20 @@ class JXTCompareView: UIView {
         bottomBar?.addSubview(facebookButton!)
 //        facebookButton?.center.x = bottomBar!.center.x
         facebookButton?.addTarget(self, action: "compareFacebook:", forControlEvents: .TouchUpInside)
+        
+//        sideBySideButton = UIButton(frame: CGRectMake(0, 0, 44, 44))
+//        sideBySideButton?.setImage(UIImage(named: "compare"), forState: .Normal)
+//        sideBySideButton?.imageEdgeInsets = UIEdgeInsetsMake(4, 4, 4, 4)
+//        self.addSubview(sideBySideButton!)
+//        sideBySideButton?.center = leftCompareView!.center
+//        sideBySideButton?.frame.origin.y = leftCompareView!.frame.origin.y - 80
+//        
+//        gifButton = UIButton(frame: CGRectMake(0, 0, 44, 44))
+//        gifButton?.setImage(UIImage(named: "gif"), forState: .Normal)
+//        gifButton?.imageEdgeInsets = UIEdgeInsetsMake(4, 4, 4, 4)
+//        self.addSubview(gifButton!)
+//        gifButton?.center = rightCompareView!.center
+//        gifButton?.frame.origin.y = rightCompareView!.frame.origin.y - 80
         
         self.bringSubviewToFront(compareLabel!)
         self.bringSubviewToFront(cancelButton!)

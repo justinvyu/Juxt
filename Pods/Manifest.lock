@@ -39,6 +39,7 @@ PODS:
     - Parse (~> 1.7.5.3)
   - ParseUI (1.1.4):
     - Parse (~> 1.7)
+  - SCLAlertView (0.4.1)
   - TGCameraViewController (2.2.1)
   - TwitterCore (1.9.0)
   - TwitterKit (1.9.0)
@@ -57,6 +58,7 @@ DEPENDENCIES:
   - Parse
   - ParseFacebookUtils
   - ParseUI
+  - SCLAlertView
   - TGCameraViewController
   - TwitterCore
   - TwitterKit
@@ -77,8 +79,9 @@ SPEC CHECKSUMS:
   Parse: 373adbb1ad2e34d383542c3b28f678c49ebe4881
   ParseFacebookUtils: 008a24dc35884519ed6a6750648beb5149f1fad9
   ParseUI: d1228541b02a36a7354c8f47747f5f7a89cf1ff0
+  SCLAlertView: 9e60641edd9efcfc6d58227558eb7b03678dbcf3
   TGCameraViewController: 06bc4b742f2524fbf60f92cade61df595e8b8678
   TwitterCore: 98ed97a6047c4ef109522840337e815683ead7e5
-  TwitterKit: 7ec3d60ef21776f9e5726ecb85856e024d8c25b3
+  TwitterKit: 1492792649dee11c2087498f7993f529bdb6c870
 
 COCOAPODS: 0.37.2

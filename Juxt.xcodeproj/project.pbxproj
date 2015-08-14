@@ -13,6 +13,7 @@
 		D0092D371B581FFD00769490 /* JXTJuxtTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0092D361B581FFD00769490 /* JXTJuxtTableViewCell.swift */; };
 		D0092D391B582DAA00769490 /* JXTAddJuxtViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0092D381B582DAA00769490 /* JXTAddJuxtViewController.swift */; };
 		D00B09391B56ED9900870D4D /* JXTHomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00B09381B56ED9900870D4D /* JXTHomeTableViewController.swift */; };
+		D028C7E91B7E679200343F30 /* JXTGIFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028C7E81B7E679200343F30 /* JXTGIFView.swift */; };
 		D02C94CB1B791FD1005C8B7F /* CoachmarksHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C94CA1B791FD1005C8B7F /* CoachmarksHelper.swift */; };
 		D04E26B01B741D9E006AC1A3 /* JXTSideBySideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04E26AF1B741D9E006AC1A3 /* JXTSideBySideView.swift */; };
 		D08978221B59C2C4009FB6A2 /* PhotoTakingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08978211B59C2C4009FB6A2 /* PhotoTakingHelper.swift */; };
@@ -46,6 +47,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D028C7FC1B7E679300343F30 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0BE3AC41B71839D0062B5B0 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2B4EC581A836D07A5F2EA006;
+			remoteInfo = "Pods-Juxt-SCLAlertView";
+		};
 		D02C94AA1B7912AF005C8B7F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D0BE3AC41B71839D0062B5B0 /* Pods.xcodeproj */;
@@ -197,6 +205,7 @@
 		D0092D361B581FFD00769490 /* JXTJuxtTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTJuxtTableViewCell.swift; sourceTree = "<group>"; };
 		D0092D381B582DAA00769490 /* JXTAddJuxtViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTAddJuxtViewController.swift; sourceTree = "<group>"; };
 		D00B09381B56ED9900870D4D /* JXTHomeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTHomeTableViewController.swift; sourceTree = "<group>"; };
+		D028C7E81B7E679200343F30 /* JXTGIFView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTGIFView.swift; sourceTree = "<group>"; };
 		D02C94CA1B791FD1005C8B7F /* CoachmarksHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachmarksHelper.swift; sourceTree = "<group>"; };
 		D04E26AF1B741D9E006AC1A3 /* JXTSideBySideView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTSideBySideView.swift; sourceTree = "<group>"; };
 		D08978211B59C2C4009FB6A2 /* PhotoTakingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoTakingHelper.swift; sourceTree = "<group>"; };
@@ -2214,6 +2223,7 @@
 				D0F7C5EE1B596496004E2F3E /* JXTImageGalleryScrollView.swift */,
 				D09B81201B6173E500C87FC5 /* JXTCompareView.swift */,
 				D04E26AF1B741D9E006AC1A3 /* JXTSideBySideView.swift */,
+				D028C7E81B7E679200343F30 /* JXTGIFView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -4739,6 +4749,7 @@
 				D02C94BF1B7912AF005C8B7F /* Parse.framework */,
 				D02C94C11B7912AF005C8B7F /* ParseFacebookUtils.framework */,
 				D02C94C31B7912AF005C8B7F /* ParseUI.framework */,
+				D028C7FD1B7E679300343F30 /* SCLAlertView.framework */,
 				D02C94C51B7912AF005C8B7F /* TGCameraViewController.framework */,
 			);
 			name = Products;
@@ -5610,6 +5621,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		D028C7FD1B7E679300343F30 /* SCLAlertView.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SCLAlertView.framework;
+			remoteRef = D028C7FC1B7E679300343F30 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		D02C94AB1B7912AF005C8B7F /* AMScrollingNavbar.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -5818,6 +5836,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D028C7E91B7E679200343F30 /* JXTGIFView.swift in Sources */,
 				D0BE3CBC1B7283610062B5B0 /* JXTLandingViewController.swift in Sources */,
 				D0F7C5FC1B59A4B7004E2F3E /* Photo.swift in Sources */,
 				D00360CC1B6AD782003DCB3D /* JYProgressButton.swift in Sources */,

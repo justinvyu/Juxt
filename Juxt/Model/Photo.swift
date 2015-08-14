@@ -46,12 +46,13 @@ class Photo: PFObject, PFSubclassing {
         
     }
     
-    func downloadImage() {
+    func downloadImage(completion: UIImage? -> Void) {
         if image == nil {
             imageFile?.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) -> Void in
                 if let data = data {
                     let image = UIImage(data: data, scale: 1.0)
                     self.image = image
+                    completion(image)
                 }
             })
         }

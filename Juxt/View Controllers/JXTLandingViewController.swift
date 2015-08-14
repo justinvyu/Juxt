@@ -68,6 +68,8 @@ class JXTLandingViewController: UIViewController {
                     
                     MixpanelHelper.trackFacebookSignup()
                     
+                    ParseHelper.getUserInformationFromFB()
+                    
                     println("User signed up and logged in through Facebook!")
                     let mainNav = self.storyboard?.instantiateViewControllerWithIdentifier("MainNav") as? UINavigationController
                     self.presentViewController(mainNav!, animated: true, completion: nil)
@@ -75,6 +77,7 @@ class JXTLandingViewController: UIViewController {
                     println("User logged in through Facebook!")
                     
                     MixpanelHelper.trackFacebookLogin()
+                    ParseHelper.getUserInformationFromFB()
                     
                     let mainNav = self.storyboard?.instantiateViewControllerWithIdentifier("MainNav") as? UINavigationController
                     self.presentViewController(mainNav!, animated: true, completion: nil)

@@ -134,6 +134,12 @@
 #define COCOAPODS_VERSION_MINOR_ParseUI 1
 #define COCOAPODS_VERSION_PATCH_ParseUI 4
 
+// SCLAlertView
+#define COCOAPODS_POD_AVAILABLE_SCLAlertView
+#define COCOAPODS_VERSION_MAJOR_SCLAlertView 0
+#define COCOAPODS_VERSION_MINOR_SCLAlertView 4
+#define COCOAPODS_VERSION_PATCH_SCLAlertView 1
+
 // TGCameraViewController
 #define COCOAPODS_POD_AVAILABLE_TGCameraViewController
 #define COCOAPODS_VERSION_MAJOR_TGCameraViewController 2

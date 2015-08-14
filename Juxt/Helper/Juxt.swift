@@ -11,10 +11,12 @@ import Parse
 import Bond
 
 typealias JuxtCallback = [Photo]? -> Void // returning a block
+typealias ImagesCallback = [UIImage]? -> Void // returning a block
 
 class Juxt: PFObject, PFSubclassing {
     
     var photos: [Photo]?
+    var images: [UIImage]?
 //    var likes: [PFUser]?
 
     var likes =  Dynamic<[PFUser]?>(nil)
@@ -108,6 +110,26 @@ class Juxt: PFObject, PFSubclassing {
             self.user = currentUser
         }
         saveInBackgroundWithBlock(completion)
+        
+    }
+    
+    func downloadPhotos(completion: ImagesCallback) {
+        
+        if let photos = self.photos {
+            
+            self.images = []
+            dispatch_async(dispatch_queue_create("photoDownload", DISPATCH_QUEUE_SERIAL)) {
+                for photo in photos {
+                    
+                    let imageData = photo.imageFile?.getData()
+                    self.images?.append(UIImage(data: imageData!)!)
+                    
+                }
+                
+                completion(self.images)
+            }
+            
+        }
         
     }
     

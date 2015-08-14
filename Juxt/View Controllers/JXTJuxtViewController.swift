@@ -12,6 +12,7 @@ import ParseUI
 import FBSDKCoreKit
 import FBSDKShareKit
 import MPCoachMarks
+import SCLAlertView
 
 protocol JXTJuxtViewControllerDelegate {
     
@@ -37,6 +38,7 @@ class JXTJuxtViewController: UIViewController {
     
     @IBOutlet weak var compareButton: UIButton!
     var photoTakingHelper: PhotoTakingHelper?
+    var gifHelper: GIFHelper?
     var backgroundActivityView: UIActivityIndicatorView?
     var content: FBSDKSharePhotoContent?
     
@@ -166,17 +168,33 @@ class JXTJuxtViewController: UIViewController {
         
     }
     
-    func compareButtonTapped(sender: UIBarButtonItem) {
+    
+    func shareButtonTapped(sender: UIBarButtonItem) {
         
+        let shareView = SCLAlertView()
+        shareView.addButton("Create a before and after") {
+            self.showSideBySideScreen()
+        }
+        shareView.addButton("Create an animated GIF") {
+            self.showGIFScreen()
+        }
+        shareView.showNotice("Share", subTitle: "Compare with a before and after image or link everything together with an animated GIF!", closeButtonTitle: "Cancel", colorStyle: 0x3498db)
+        
+    }
+    
+    func showSideBySideScreen() {
         compareView = JXTCompareView(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, UIScreen.mainScreen().bounds.size.height), photos: self.photos!)
         compareView?.delegate = self
         self.tableView.userInteractionEnabled = false
         self.navigationController?.view.addSubview(compareView!)
-        JXTConstants.fadeInWidthDuration(compareView!, duration: 0.3)
+        JXTConstants.fadeInWidthDuration(compareView!, duration: 0.6)
         self.tableView.userInteractionEnabled = false
         if self.navigationController?.respondsToSelector("interactivePopGestureRecognizer") == true {
             self.navigationController?.interactivePopGestureRecognizer.enabled = false
         }
+    }
+    
+    func showGIFScreen() {
         
     }
     
@@ -198,11 +216,28 @@ class JXTJuxtViewController: UIViewController {
 
     }
     
+    @IBAction func GIFButtonPressed(sender: UIButton) {
+        
+        self.juxt?.downloadPhotos() { images in
+            if let gifHelper = self.gifHelper, juxt = self.juxt, images = images {
+                gifHelper.createGIFWithImages(images) { gifData in
+                    
+                    gifHelper.postGIFToImgur(gifData, title: juxt.title, description: juxt.desc)
+                    
+                }
+            }
+        }
+        
+    }
+    
+    
     func showShareDialog() {
 
         FBSDKShareDialog.showFromViewController(self, withContent: self.content, delegate: self)
         
     }
+    
+    // MARK: Setup Coachmarks
     
     func setupCoachmarks() {
         
@@ -272,20 +307,20 @@ class JXTJuxtViewController: UIViewController {
         self.navigationItem.title = "juxt"
         self.navigationItem.titleView?.tintColor = UIColor(white: 0.97, alpha: 1.0)
         
-        let compareButton = UIBarButtonItem(image: UIImage(named: "share"), landscapeImagePhone: nil, style: .Plain, target: self, action: "compareButtonTapped:")
-        compareButton.imageInsets = UIEdgeInsetsMake(5, 5, 5, 5)
+        let shareButton = UIBarButtonItem(image: UIImage(named: "share"), landscapeImagePhone: nil, style: .Plain, target: self, action: "shareButtonTapped:")
+        shareButton.imageInsets = UIEdgeInsetsMake(5, 5, 5, 5)
         if PFUser.currentUser()?.objectId == juxt?.user?.objectId {
             
             let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addPhotoButtonPressed:")
             addButton.tintColor = UIColor.whiteColor()
             
-            self.navigationItem.rightBarButtonItems = [addButton, compareButton]
+            self.navigationItem.rightBarButtonItems = [addButton, shareButton]
             self.addButton = addButton
         } else {
-            self.navigationItem.rightBarButtonItem = compareButton
+            self.navigationItem.rightBarButtonItem = shareButton
         }
         
-        self.shareButton = compareButton
+        self.shareButton = shareButton
         
         imageLoadQueue = dispatch_queue_create("imageLoad", DISPATCH_QUEUE_SERIAL)
         
@@ -305,6 +340,9 @@ class JXTJuxtViewController: UIViewController {
         } else {
             self.setupCoachmarks_notUser()
         }
+        
+        self.gifHelper = GIFHelper()
+        self.gifHelper?.viewController = self
     }
     
     override func viewWillAppear(animated: Bool) {

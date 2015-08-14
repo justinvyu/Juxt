@@ -26,6 +26,7 @@ target 'Juxt' do
 	pod 'TwitterCore'
 	pod 'MPCoachMarks'
 	pod 'Bond'
+	pod 'SCLAlertView'
 
 end
 
