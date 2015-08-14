@@ -35,10 +35,11 @@ class JXTJuxtViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     var compareView: JXTCompareView?
+    var GIFView: JXTGIFView?
     
     @IBOutlet weak var compareButton: UIButton!
     var photoTakingHelper: PhotoTakingHelper?
-    var gifHelper: GIFHelper?
+//    var gifHelper: GIFHelper?
     var backgroundActivityView: UIActivityIndicatorView?
     var content: FBSDKSharePhotoContent?
     
@@ -195,7 +196,16 @@ class JXTJuxtViewController: UIViewController {
     }
     
     func showGIFScreen() {
-        
+        if let juxt = self.juxt {
+            GIFView = JXTGIFView(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, UIScreen.mainScreen().bounds.size.height), juxt: juxt)
+            GIFView?.delegate = self
+            self.navigationController?.view.addSubview(GIFView!)
+            JXTConstants.fadeInWidthDuration(GIFView!, duration: 0.6)
+            if self.navigationController?.respondsToSelector("interactivePopGestureRecognizer") == true {
+                self.navigationController?.interactivePopGestureRecognizer.enabled = false
+            }
+            self.tableView.userInteractionEnabled = false
+        }
     }
     
     func fullScreenCancelButtonPressed(sender: UIButton) {
@@ -216,19 +226,19 @@ class JXTJuxtViewController: UIViewController {
 
     }
     
-    @IBAction func GIFButtonPressed(sender: UIButton) {
-        
-        self.juxt?.downloadPhotos() { images in
-            if let gifHelper = self.gifHelper, juxt = self.juxt, images = images {
-                gifHelper.createGIFWithImages(images) { gifData in
-                    
-                    gifHelper.postGIFToImgur(gifData, title: juxt.title, description: juxt.desc)
-                    
-                }
-            }
-        }
-        
-    }
+//    @IBAction func GIFButtonPressed(sender: UIButton) {
+//        
+//        self.juxt?.downloadPhotos() { images in
+//            if let gifHelper = self.gifHelper, juxt = self.juxt, images = images {
+//                gifHelper.createGIFWithImages(images) { gifData in
+//                    
+//                    gifHelper.postGIFToImgur(gifData, title: juxt.title, description: juxt.desc)
+//                    
+//                }
+//            }
+//        }
+//        
+//    }
     
     
     func showShareDialog() {
@@ -341,8 +351,8 @@ class JXTJuxtViewController: UIViewController {
             self.setupCoachmarks_notUser()
         }
         
-        self.gifHelper = GIFHelper()
-        self.gifHelper?.viewController = self
+//        self.gifHelper = GIFHelper()
+//        self.gifHelper?.viewController = self
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -382,10 +392,16 @@ extension JXTJuxtViewController: FBSDKSharingDelegate {
     
 }
 
-extension JXTJuxtViewController: JXTCompareViewDelegate {
+extension JXTJuxtViewController: JXTPopupViewDelegate {
     
-    func compareViewDidCancel(button: UIButton) {
-        JXTConstants.fadeOutWithDuration(self.compareView!, duration: 0.25)
+    func popupViewDidCancel(button: UIButton) {
+        if let compareView = self.compareView {
+            JXTConstants.fadeOutWithDuration(compareView, duration: 0.25)
+        }
+        
+        if let gifView = self.GIFView {
+            JXTConstants.fadeOutWithDuration(gifView, duration: 0.25)
+        }
         
 //        self.navigationController?.view.subviews.map { JXTConstants.fadeInWidthDuration($0 as! UIView, duration: 0.25) }
         self.navigationItem.hidesBackButton = false

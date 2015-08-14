@@ -9,11 +9,16 @@
 import UIKit
 import MPCoachMarks
 
-protocol JXTCompareViewDelegate {
-    func compareViewDidCancel(button: UIButton)
+protocol JXTPopupViewDelegate {
+    func popupViewDidCancel(button: UIButton)
+    
+    // Side by Side
     func compareButtonWasPressedWithImages(compareView: JXTCompareView, firstImage: UIImage, secondImage: UIImage)
     func shareButtonWasPressed(button: UIButton)
     func saveToCameraRoll(compareView: JXTCompareView, firstImage: UIImage, secondImage: UIImage)
+    
+    // GIF
+
 }
 
 class JXTCompareView: UIView {
@@ -41,12 +46,10 @@ class JXTCompareView: UIView {
     var topView: UIView?
     var bottomView: UIView?
     
-    var delegate: JXTCompareViewDelegate?
+    var delegate: JXTPopupViewDelegate?
     
     init(frame: CGRect, photos: [Photo]) {
         super.init(frame: frame)
-        
-        self.backgroundColor = UIColor.whiteColor()
         
         self.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
         let blur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
@@ -62,7 +65,7 @@ class JXTCompareView: UIView {
         compareLabel = UILabel(frame: CGRectMake(0, 0, 200, 40))
         compareLabel?.center = self.center
         compareLabel?.frame.origin.y = 20
-        compareLabel?.text = "share"
+        compareLabel?.text = "create a side by side"
         compareLabel?.font = UIFont.systemFontOfSize(18.0)
         compareLabel?.textAlignment = .Center
         compareLabel?.textColor = UIColor.whiteColor()
@@ -235,7 +238,7 @@ class JXTCompareView: UIView {
     }
     
     func cancelButtonPressed(button: UIButton) {
-        self.delegate?.compareViewDidCancel(button)
+        self.delegate?.popupViewDidCancel(button)
     }
     
     func getCurrentLeftGalleryImage() -> UIImage {

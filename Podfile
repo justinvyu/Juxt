@@ -27,6 +27,7 @@ target 'Juxt' do
 	pod 'MPCoachMarks'
 	pod 'Bond'
 	pod 'SCLAlertView'
+	pod 'FLAnimatedImage'
 
 end
 
