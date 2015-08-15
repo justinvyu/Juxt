@@ -24,7 +24,7 @@ class GIFHelper: NSObject {
             let destination = CGImageDestinationCreateWithURL(NSURL(fileURLWithPath: path!) as! CFURLRef, kUTTypeGIF, images.count, nil)
             let frameProperties = [
                 kCGImagePropertyGIFDictionary as String : [
-                    kCGImagePropertyGIFDelayTime as String : NSNumber(float: 0.15)
+                    kCGImagePropertyGIFDelayTime as String : NSNumber(float: 0.3)
                 ]
             ]
             let gifProperties = [

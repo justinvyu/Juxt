@@ -163,6 +163,13 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         
         let destroyAction = UIAlertAction(title: "Flag", style: .Destructive) { (action) in
             post.flagPost(PFUser.currentUser()!)
+            self.loadObjects()
+            self.tableView.reloadData()
+            
+            let alertController = UIAlertController(title: "Flag Post", message: "The post has been hidden and will be reviewed by a moderator within 24 hours. Contact the developer at justin.v.yu@gmail.com if you have any questions.", preferredStyle: .Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: .Default, handler: nil))
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
         }
         
         alertController.addAction(destroyAction)
@@ -208,7 +215,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         self.navigationController?.navigationBar.tintColor = UIColor(white: 0.97, alpha: 1.0)
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         
-        self.setupCoachmarks()
+//        self.setupCoachmarks()
         
     }
     
@@ -327,7 +334,18 @@ extension JXTHomeTableViewController: JXTJuxtViewControllerDelegate {
     func deletedJuxt() {
         self.loadObjects()
         self.tableView.reloadData()
+        
 //        self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: .Fade)
+    }
+    
+    func flaggedJuxt() {
+        self.loadObjects()
+        self.tableView.reloadData()
+        
+        let alertController = UIAlertController(title: "Flag Post", message: "The post has been hidden and will be reviewed by a moderator within 24 hours. Contact the developer at justin.v.yu@gmail.com if you have any questions.", preferredStyle: .Alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: .Default, handler: nil))
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
 }

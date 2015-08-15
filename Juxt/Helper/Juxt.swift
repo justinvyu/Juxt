@@ -107,6 +107,7 @@ class Juxt: PFObject, PFSubclassing {
             let acl = PFACL()
             acl.setPublicReadAccess(true)
             acl.setWriteAccess(true, forUser: currentUser)
+            self.ACL = acl
             self.user = currentUser
         }
         saveInBackgroundWithBlock(completion)

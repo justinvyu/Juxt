@@ -76,4 +76,12 @@ class JXTHeaderTableViewCell: UITableViewCell {
         }
         
     }
+    
+    @IBAction func compareButtonPressed(sender: UIButton) {
+        self.juxtViewController?.showSideBySideScreen()
+    }
+    
+    @IBAction func gifButtonPressed(sender: UIButton) {
+        self.juxtViewController?.showGIFScreen()
+    }
 }

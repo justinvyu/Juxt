@@ -17,6 +17,7 @@ import SCLAlertView
 protocol JXTJuxtViewControllerDelegate {
     
     func deletedJuxt()
+    func flaggedJuxt()
     
 }
 
@@ -114,6 +115,7 @@ class JXTJuxtViewController: UIViewController {
         let destroyAction = UIAlertAction(title: "Flag", style: .Destructive) { (action) in
             post.flagPost(PFUser.currentUser()!)
             self.navigationController?.popToRootViewControllerAnimated(true)
+            self.delegate?.flaggedJuxt()
         }
         
         alertController.addAction(destroyAction)
@@ -317,20 +319,21 @@ class JXTJuxtViewController: UIViewController {
         self.navigationItem.title = "juxt"
         self.navigationItem.titleView?.tintColor = UIColor(white: 0.97, alpha: 1.0)
         
-        let shareButton = UIBarButtonItem(image: UIImage(named: "share"), landscapeImagePhone: nil, style: .Plain, target: self, action: "shareButtonTapped:")
-        shareButton.imageInsets = UIEdgeInsetsMake(5, 5, 5, 5)
+//        let shareButton = UIBarButtonItem(image: UIImage(named: "share"), landscapeImagePhone: nil, style: .Plain, target: self, action: "shareButtonTapped:")
+//        shareButton.imageInsets = UIEdgeInsetsMake(5, 5, 5, 5)
         if PFUser.currentUser()?.objectId == juxt?.user?.objectId {
             
             let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addPhotoButtonPressed:")
             addButton.tintColor = UIColor.whiteColor()
             
-            self.navigationItem.rightBarButtonItems = [addButton, shareButton]
+            self.navigationItem.rightBarButtonItem = addButton
+//            self.navigationItem.rightBarButtonItems = [addButton, shareButton]
             self.addButton = addButton
         } else {
-            self.navigationItem.rightBarButtonItem = shareButton
+//            self.navigationItem.rightBarButtonItem = shareButton
         }
         
-        self.shareButton = shareButton
+//        self.shareButton = shareButton
         
         imageLoadQueue = dispatch_queue_create("imageLoad", DISPATCH_QUEUE_SERIAL)
         
@@ -345,12 +348,12 @@ class JXTJuxtViewController: UIViewController {
             self.photos = juxt.photos
         }
         
-        if PFUser.currentUser() == juxt?.user {
-            self.setupCoachmarks()
-        } else {
-            self.setupCoachmarks_notUser()
-        }
-        
+//        if PFUser.currentUser() == juxt?.user {
+//            self.setupCoachmarks()
+//        } else {
+//            self.setupCoachmarks_notUser()
+//        }
+//        
 //        self.gifHelper = GIFHelper()
 //        self.gifHelper?.viewController = self
     }

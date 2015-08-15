@@ -126,6 +126,7 @@ class ParseHelper: NSObject {
         let postACL = PFACL(user: post.user!)
         postACL.setPublicReadAccess(false)
         post.ACL = postACL
+        
         post.saveInBackground()
         
         //TODO: add error handling

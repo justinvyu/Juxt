@@ -17,8 +17,8 @@ class JXTProfileViewController: UIViewController {
 
     // Properties
     
-    @IBOutlet weak var profilePicture: PFImageView!
-    @IBOutlet weak var nameLabel: UILabel!
+//    @IBOutlet weak var profilePicture: PFImageView!
+//    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
     var juxts: [Juxt]?
@@ -28,13 +28,13 @@ class JXTProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.nameLabel.text = ParseHelper.userName(PFUser.currentUser()!)
+//        self.nameLabel.text = ParseHelper.userName(PFUser.currentUser()!)
         
         let file = ParseHelper.userProfilePicture(PFUser.currentUser()!)
-        self.profilePicture.file = file
-        self.profilePicture.loadInBackground()
+//        self.profilePicture.file = file
+//        self.profilePicture.loadInBackground()
         
-        self.profilePicture.layer.cornerRadius = 5.0
+//        self.profilePicture.layer.cornerRadius = 5.0
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -69,20 +69,20 @@ class JXTProfileViewController: UIViewController {
     
     @IBAction func settingsButtonTapped(sender: UIBarButtonItem) {
         
-        let alertController = UIAlertController(title: self.nameLabel.text, message: nil, preferredStyle: .ActionSheet)
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
         let logoutAction = UIAlertAction(title: "Log Out", style: .Default) { (action) in
             ParseHelper.logoutUser() {
                 self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
             }
         }
-        let tutorialAction = UIAlertAction(title: "Reset Tutorial", style: .Default) { (action) in
-            CoachmarksHelper.resetCoachmarksHaveBeenViewed()
-        }
+//        let tutorialAction = UIAlertAction(title: "Reset Tutorial", style: .Default) { (action) in
+//            CoachmarksHelper.resetCoachmarksHaveBeenViewed()
+//        }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
         alertController.addAction(cancelAction)
         
-        alertController.addAction(tutorialAction)
+//        alertController.addAction(tutorialAction)
         alertController.addAction(logoutAction)
         self.presentViewController(alertController, animated: true, completion: nil)
     }
@@ -174,6 +174,10 @@ extension JXTProfileViewController: JXTJuxtViewControllerDelegate {
     
     func deletedJuxt() {
         self.loadData()
+    }
+    
+    func flaggedJuxt() {
+        println("This is not possible...")
     }
     
 }

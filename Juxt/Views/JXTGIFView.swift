@@ -25,6 +25,8 @@ class JXTGIFView: UIView {
     var whiteBackgroundView: UIView?
     var gifPreview: FLAnimatedImageView?
     
+    var delaySlider: UISlider?
+    
     // Delegate
     
     var delegate: JXTPopupViewDelegate?
@@ -87,18 +89,21 @@ class JXTGIFView: UIView {
         bottomBar?.backgroundColor = JXTConstants.defaultBlueColor().colorWithAlphaComponent(0.9)
         self.addSubview(bottomBar!)
         
-        saveButton = UIButton(frame: CGRectMake(bottomBar!.frame.size.width / 2 - 44 - 30, 5, 44, 44))
-        saveButton?.setImage(UIImage(named: "download"), forState: .Normal)
-        saveButton?.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
-        bottomBar?.addSubview(saveButton!)
-        saveButton?.addTarget(self, action: "saveToCameraRoll:", forControlEvents: .TouchUpInside)
+//        saveButton = UIButton(frame: CGRectMake(bottomBar!.frame.size.width / 2 - 44 - 30, 5, 44, 44))
+//        saveButton?.setImage(UIImage(named: "download"), forState: .Normal)
+//        saveButton?.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
+//        bottomBar?.addSubview(saveButton!)
+//        saveButton?.addTarget(self, action: "saveToCameraRoll:", forControlEvents: .TouchUpInside)
         
-        facebookButton = UIButton(frame: CGRectMake(bottomBar!.frame.size.width / 2 + 30, 5, 44, 44))
+        facebookButton = UIButton(frame: CGRectMake(bottomBar!.frame.size.width / 2 - 22, 5, 44, 44))
+//        facebookButton?.center = bottomBar!.center
         facebookButton?.setImage(UIImage(named: "facebook"), forState: .Normal)
         facebookButton?.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
         bottomBar?.addSubview(facebookButton!)
         //        facebookButton?.center.x = bottomBar!.center.x
-        facebookButton?.addTarget(self, action: "compareFacebook:", forControlEvents: .TouchUpInside)
+        facebookButton?.addTarget(self, action: "shareFacebook:", forControlEvents: .TouchUpInside)
+        
+//        delaySlider = UISlider(frame: <#CGRect#>)
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -126,6 +131,15 @@ class JXTGIFView: UIView {
                     
                 }
             }
+        }
+        
+    }
+    
+    func shareFacebook(button: UIButton) {
+        
+        if let juxt = self.juxt, data = self.gifPreview?.animatedImage.data {
+            gifHelper?.postGIFToImgur(data, title: juxt.title, description: juxt.desc)
+
         }
         
     }

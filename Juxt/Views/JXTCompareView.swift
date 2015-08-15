@@ -195,7 +195,7 @@ class JXTCompareView: UIView {
         self.bringSubviewToFront(saveButton!)
         self.bringSubviewToFront(facebookButton!)
 
-        self.setupCoachmarks()
+//        self.setupCoachmarks()
         
     }
     
