@@ -238,7 +238,7 @@ class JXTCameraViewController: UIViewController {
                 addPhotoController.returnHome = self.returnHome
                 self.presentViewController(navigationController, animated: true, completion: nil)
             }
-        }, exactSeenImage: true)
+        }, exactSeenImage: false)
         
     }
     

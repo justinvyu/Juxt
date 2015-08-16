@@ -12,12 +12,22 @@ import FBSDKLoginKit
 import TwitterKit
 import Parse
 import ParseFacebookUtils
+import ConvenienceKit
 
 class JXTLandingViewController: UIViewController {
 
-    @IBOutlet weak var facebookButton: UIButton!
+//    @IBOutlet weak var facebookButton: UIButton!
 //    @IBOutlet weak var twitterButton: UIButton!
-    @IBOutlet weak var facebookImage: UIImageView!
+//    @IBOutlet weak var facebookImage: UIImageView!
+    
+    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var bottomSpaceConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var signupButton: UIButton!
+    
+    var keyboardNotificationHandler: KeyboardNotificationHandler?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,9 +35,10 @@ class JXTLandingViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         self.view.backgroundColor = JXTConstants.defaultBlueColor()
-        facebookButton.layer.cornerRadius = 5.0
+//        facebookButton.layer.cornerRadius = 5.0
 //        twitterButton.layer.cornerRadius = 5.0
-        self.view.bringSubviewToFront(facebookImage)
+//        self.view.bringSubviewToFront(facebookImage)
+        
         
 //        let logInButton = TWTRLogInButton { (session, error) in
 //            // play with Twitter session
@@ -35,13 +46,33 @@ class JXTLandingViewController: UIViewController {
 //        }
 //        logInButton.center = self.view.center
 //        self.view.addSubview(logInButton)
-
+        
+        self.usernameTextField.returnKeyType = .Next
+        self.passwordTextField.returnKeyType = .Done
+        
+        keyboardNotificationHandler = KeyboardNotificationHandler()
+        
+        keyboardNotificationHandler?.keyboardWillBeShownHandler = { height in
+            
+            UIView.animateWithDuration(0.25) {
+                self.loginButton.frame.origin.y -= height
+                self.signupButton.frame.origin.y -= height
+            }
+        }
+        
+        keyboardNotificationHandler?.keyboardWillBeHiddenHandler = { height in
+            UIView.animateWithDuration(0.25) {
+                self.loginButton.frame.origin.y += height
+                self.signupButton.frame.origin.y += height
+            }
+        }
+        
+        self.usernameTextField.becomeFirstResponder()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -55,36 +86,46 @@ class JXTLandingViewController: UIViewController {
         }
         
     }
-
-    @IBAction func facebookAction(sender: FBSDKLoginButton) {
-        if PFUser.currentUser() != nil {
-                let mainNav = self.storyboard?.instantiateViewControllerWithIdentifier("MainNav") as? UINavigationController
-                self.presentViewController(mainNav!, animated: true, completion: nil)
-        } else {
-            ParseHelper.loginWithFacebook({ (user, error) -> Void in
-                if user == nil {
-                    println("Uh oh. The user cancelled the Facebook login.")
-                } else if user!.isNew == true {
-                    
-                    MixpanelHelper.trackFacebookSignup()
-                    
-                    ParseHelper.getUserInformationFromFB()
-                    
-                    println("User signed up and logged in through Facebook!")
-                    let mainNav = self.storyboard?.instantiateViewControllerWithIdentifier("MainNav") as? UINavigationController
-                    self.presentViewController(mainNav!, animated: true, completion: nil)
-                } else {
-                    println("User logged in through Facebook!")
-                    
-                    MixpanelHelper.trackFacebookLogin()
-                    ParseHelper.getUserInformationFromFB()
-                    
-                    let mainNav = self.storyboard?.instantiateViewControllerWithIdentifier("MainNav") as? UINavigationController
-                    self.presentViewController(mainNav!, animated: true, completion: nil)
-                }
-            })
-        }
+    
+    // MARK: Button Actions
+    
+    @IBAction func loginAction(sender: UIButton) {
+        
     }
+    
+    @IBAction func signupAction(sender: UIButton) {
+        
+    }
+
+//    @IBAction func facebookAction(sender: FBSDKLoginButton) {
+//        if PFUser.currentUser() != nil {
+//                let mainNav = self.storyboard?.instantiateViewControllerWithIdentifier("MainNav") as? UINavigationController
+//                self.presentViewController(mainNav!, animated: true, completion: nil)
+//        } else {
+//            ParseHelper.loginWithFacebook({ (user, error) -> Void in
+//                if user == nil {
+//                    println("Uh oh. The user cancelled the Facebook login.")
+//                } else if user!.isNew == true {
+//                    
+//                    MixpanelHelper.trackFacebookSignup()
+//                    
+//                    ParseHelper.getUserInformationFromFB()
+//                    
+//                    println("User signed up and logged in through Facebook!")
+//                    let mainNav = self.storyboard?.instantiateViewControllerWithIdentifier("MainNav") as? UINavigationController
+//                    self.presentViewController(mainNav!, animated: true, completion: nil)
+//                } else {
+//                    println("User logged in through Facebook!")
+//                    
+//                    MixpanelHelper.trackFacebookLogin()
+//                    ParseHelper.getUserInformationFromFB()
+//                    
+//                    let mainNav = self.storyboard?.instantiateViewControllerWithIdentifier("MainNav") as? UINavigationController
+//                    self.presentViewController(mainNav!, animated: true, completion: nil)
+//                }
+//            })
+//        }
+//    }
     
 //    @IBAction func twitterAction(sender: UIButton) {
 //        
