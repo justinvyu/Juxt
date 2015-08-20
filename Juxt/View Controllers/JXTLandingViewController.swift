@@ -26,6 +26,8 @@ class JXTLandingViewController: UIViewController {
     
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signupButton: UIButton!
+    @IBOutlet weak var logoView: UIView!
+    @IBOutlet weak var taglineLabel: UILabel!
     
     var keyboardNotificationHandler: KeyboardNotificationHandler?
     
@@ -47,37 +49,23 @@ class JXTLandingViewController: UIViewController {
 //        logInButton.center = self.view.center
 //        self.view.addSubview(logInButton)
         
-        self.usernameTextField.returnKeyType = .Next
-        self.passwordTextField.returnKeyType = .Done
+//        self.usernameTextField.returnKeyType = .Next
+//        self.passwordTextField.returnKeyType = .Done
         
-        keyboardNotificationHandler = KeyboardNotificationHandler()
         
-        keyboardNotificationHandler?.keyboardWillBeShownHandler = { height in
-            
-            UIView.animateWithDuration(0.25) {
-                self.loginButton.frame.origin.y -= height
-                self.signupButton.frame.origin.y -= height
-            }
-        }
-        
-        keyboardNotificationHandler?.keyboardWillBeHiddenHandler = { height in
-            UIView.animateWithDuration(0.25) {
-                self.loginButton.frame.origin.y += height
-                self.signupButton.frame.origin.y += height
-            }
-        }
-        
-        self.usernameTextField.becomeFirstResponder()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
         
     }
 
     override func viewDidAppear(animated: Bool) {
         
         super.viewDidAppear(animated)
+//        self.usernameTextField.becomeFirstResponder()
+
         if PFUser.currentUser() != nil {
             
             let mainNav = self.storyboard?.instantiateViewControllerWithIdentifier("MainNav") as? UINavigationController

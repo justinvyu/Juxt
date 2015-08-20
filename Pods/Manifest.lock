@@ -28,6 +28,7 @@ PODS:
     - FBSDKCoreKit
   - FLAnimatedImage (1.0.8)
   - LLSimpleCamera (3.0.0)
+  - MBSimpleLoadingIndicator (0.1.0)
   - Mixpanel (2.8.2):
     - Mixpanel/Mixpanel (= 2.8.2)
   - Mixpanel/Mixpanel (2.8.2)
@@ -42,6 +43,7 @@ PODS:
     - Parse (~> 1.7)
   - SCLAlertView (0.4.1)
   - TGCameraViewController (2.2.1)
+  - TPKeyboardAvoiding (1.2.9)
   - TwitterCore (1.9.0)
   - TwitterKit (1.9.0)
 
@@ -55,6 +57,7 @@ DEPENDENCIES:
   - FBSDKShareKit
   - FLAnimatedImage
   - LLSimpleCamera (~> 3.0)
+  - MBSimpleLoadingIndicator
   - Mixpanel
   - MPCoachMarks
   - Parse
@@ -62,6 +65,7 @@ DEPENDENCIES:
   - ParseUI
   - SCLAlertView
   - TGCameraViewController
+  - TPKeyboardAvoiding
   - TwitterCore
   - TwitterKit
 
@@ -77,6 +81,7 @@ SPEC CHECKSUMS:
   FBSDKShareKit: a42865f20ba2d1cc548c4d0f73ad22cff6377ddb
   FLAnimatedImage: f9422f796135aff80d8c00b2afc48015bb746e24
   LLSimpleCamera: 3c41b46917f9ca53b91ef9c0cf24a75ce0ab4cd8
+  MBSimpleLoadingIndicator: bb386548fda4a75fd792b1793ac1cd8ff2862cf7
   Mixpanel: f4d71ac2a306e7cda6ad03d4a2be249a0fd7a967
   MPCoachMarks: 71e28c2841a4f3e89331cb9f4124dc33ec4c3f0b
   Parse: 373adbb1ad2e34d383542c3b28f678c49ebe4881
@@ -84,7 +89,8 @@ SPEC CHECKSUMS:
   ParseUI: d1228541b02a36a7354c8f47747f5f7a89cf1ff0
   SCLAlertView: 9e60641edd9efcfc6d58227558eb7b03678dbcf3
   TGCameraViewController: 06bc4b742f2524fbf60f92cade61df595e8b8678
+  TPKeyboardAvoiding: ff1ee4e5a5a0c119b965552af8f183868ea20207
   TwitterCore: 98ed97a6047c4ef109522840337e815683ead7e5
   TwitterKit: 1492792649dee11c2087498f7993f529bdb6c870
 
-COCOAPODS: 0.37.2
+COCOAPODS: 0.38.2

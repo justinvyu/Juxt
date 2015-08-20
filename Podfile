@@ -28,7 +28,8 @@ target 'Juxt' do
 	pod 'Bond'
 	pod 'SCLAlertView'
 	pod 'FLAnimatedImage'
-
+	pod 'TPKeyboardAvoiding'
+	pod 'MBSimpleLoadingIndicator'
 end
 
 target 'JuxtTests' do

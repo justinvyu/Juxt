@@ -1,1 +1,0 @@
-PODS_JUXT_LLSIMPLECAMERA_OTHER_LDFLAGS = -framework "AVFoundation"

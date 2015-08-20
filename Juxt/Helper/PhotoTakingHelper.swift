@@ -19,7 +19,7 @@ class PhotoTakingHelper : NSObject {
     var juxt: Juxt?
 //    var cancelButtonHidden: Bool?
     
-//    var callback: PhotoTakingHelperCallback
+    var callback: PhotoTakingHelperCallback?
     var imagePickerController: UIImagePickerController?
     
     init(viewController: UIViewController, juxt: Juxt, cameraOnly: Bool, returnHome: Bool/*, cancelButtonHidden: Bool, addPhotoCancelButton: Bool, callback: PhotoTakingHelperCallback*/) {
@@ -37,6 +37,16 @@ class PhotoTakingHelper : NSObject {
             showPhotoSourceSelection()
         }
         // showImagePickerController(.Camera) // switch after download to phone
+    }
+    
+    init(viewController: UIViewController, photoCallback: PhotoTakingHelperCallback) {
+        
+        self.viewController = viewController
+        self.callback = photoCallback
+        
+        super.init()
+        
+        showPhotoSourceSelection()
     }
     
     func presentCamera() {

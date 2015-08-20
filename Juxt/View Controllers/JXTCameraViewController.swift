@@ -14,6 +14,12 @@ import Parse
 import ParseUI
 import MPCoachMarks
 
+protocol JXTCameraViewControllerDelegate {
+    
+    func capturedImage(image: UIImage)
+    
+}
+
 class JXTCameraViewController: UIViewController {
 
     // MARK: PROPERTIES
@@ -30,6 +36,9 @@ class JXTCameraViewController: UIViewController {
     var toggleButton: UIButton?
     
     var returnHome: Bool?
+    var isProfilePicture: Bool?
+    
+    var delegate: JXTCameraViewControllerDelegate?
 //    var cancelButtonHidden: Bool? = false
 //    var addPhotoCancelButtonHidden: Bool? = false
     
@@ -229,14 +238,23 @@ class JXTCameraViewController: UIViewController {
                 camera.stop()
                 
                 // Present VC   
-                let addPhotoController = JXTAddPhotoViewController()
-                addPhotoController.delegate = self
-                addPhotoController.juxt = self.juxt
-//                addPhotoController.addPhotoCancelButtonHidden = self.addPhotoCancelButtonHidden
-                let navigationController = UINavigationController(rootViewController: addPhotoController)
-                addPhotoController.image = image
-                addPhotoController.returnHome = self.returnHome
-                self.presentViewController(navigationController, animated: true, completion: nil)
+                if self.isProfilePicture == false {
+                    let addPhotoController = JXTAddPhotoViewController()
+                    addPhotoController.delegate = self
+                    addPhotoController.juxt = self.juxt
+                    //                addPhotoController.addPhotoCancelButtonHidden = self.addPhotoCancelButtonHidden
+                    let navigationController = UINavigationController(rootViewController: addPhotoController)
+                    addPhotoController.image = image
+                    addPhotoController.returnHome = self.returnHome
+                    self.presentViewController(navigationController, animated: true, completion: nil)
+                } else {
+                    // Dismiss & send to delegate
+                    if let image = image {
+                        self.delegate?.capturedImage(image)
+                    }
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                }
+                
             }
         }, exactSeenImage: false)
         

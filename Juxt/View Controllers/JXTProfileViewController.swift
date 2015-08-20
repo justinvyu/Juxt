@@ -72,6 +72,7 @@ class JXTProfileViewController: UIViewController {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
         let logoutAction = UIAlertAction(title: "Log Out", style: .Default) { (action) in
             ParseHelper.logoutUser() {
+                self.presentingViewController?.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
                 self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
             }
         }
