@@ -21,6 +21,7 @@ class PhotoTakingHelper : NSObject {
     
     var callback: PhotoTakingHelperCallback?
     var imagePickerController: UIImagePickerController?
+    var isProfilePicture: Bool?
     
     init(viewController: UIViewController, juxt: Juxt, cameraOnly: Bool, returnHome: Bool/*, cancelButtonHidden: Bool, addPhotoCancelButton: Bool, callback: PhotoTakingHelperCallback*/) {
         self.viewController = viewController
@@ -28,6 +29,7 @@ class PhotoTakingHelper : NSObject {
         //        self.callback = callback
 //        self.cancelButtonHidden = cancelButtonHidden
         self.juxt = juxt
+        self.isProfilePicture = false
         
         super.init()
         
@@ -43,6 +45,7 @@ class PhotoTakingHelper : NSObject {
         
         self.viewController = viewController
         self.callback = photoCallback
+        self.isProfilePicture = true
         
         super.init()
         
@@ -51,12 +54,17 @@ class PhotoTakingHelper : NSObject {
     
     func presentCamera() {
         
-        let cameraViewController = JXTCameraViewController()
-        cameraViewController.juxt = self.juxt
-        cameraViewController.returnHome = self.returnHome
-        //        cameraViewController.cancelButtonHidden = self.cancelButtonHidden
-        viewController.presentViewController(cameraViewController, animated: true, completion: nil)
-        
+        if self.isProfilePicture == false {
+            let cameraViewController = JXTCameraViewController()
+            cameraViewController.juxt = self.juxt
+            cameraViewController.returnHome = self.returnHome
+            //        cameraViewController.cancelButtonHidden = self.cancelButtonHidden
+            viewController.presentViewController(cameraViewController, animated: true, completion: nil)
+        } else {
+            let cameraViewController = JXTCameraViewController()
+            cameraViewController.delegate = self
+            viewController.presentViewController(cameraViewController, animated: true, completion: nil)
+        }
     }
     
     func showImagePickerController(sourceType: UIImagePickerControllerSourceType) {
@@ -95,15 +103,29 @@ class PhotoTakingHelper : NSObject {
     
 }
 
+extension PhotoTakingHelper: JXTCameraViewControllerDelegate {
+    
+    func capturedImage(image: UIImage) {
+        callback?(image)
+    }
+    
+}
+
 extension PhotoTakingHelper: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         
-        let addPhotoVC = JXTAddPhotoViewController()
-        let navController = UINavigationController(rootViewController: addPhotoVC)
-        addPhotoVC.image = image
-        addPhotoVC.juxt = self.juxt
-        picker.presentViewController(navController, animated: true, completion: nil)
+        if self.isProfilePicture == false {
+            let addPhotoVC = JXTAddPhotoViewController()
+            let navController = UINavigationController(rootViewController: addPhotoVC)
+            addPhotoVC.image = image
+            addPhotoVC.juxt = self.juxt
+            picker.presentViewController(navController, animated: true, completion: nil)
+        } else {
+            self.callback?(image)
+            self.viewController.dismissViewControllerAnimated(true, completion: nil)
+        }
+        
         
         //callback(image)
     }

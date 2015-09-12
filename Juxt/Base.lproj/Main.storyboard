@@ -1542,6 +1542,19 @@
                                     <constraint firstItem="oqn-gZ-b3H" firstAttribute="trailing" secondItem="LX6-Lz-9fk" secondAttribute="trailing" id="zx0-Is-afp"/>
                                 </constraints>
                             </scrollView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pPG-58-EU1">
+                                <rect key="frame" x="7" y="21" width="42" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="42" id="adM-gd-r3J"/>
+                                </constraints>
+                                <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                <state key="normal" image="back">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backAction:" destination="aG3-sA-OXy" eventType="touchUpInside" id="Kgd-YB-KdN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.18469271879999999" green="0.50855052010000001" blue="0.79112990360000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -1551,10 +1564,13 @@
                             <constraint firstItem="aFZ-ZA-lMs" firstAttribute="top" secondItem="ZKu-6H-Cpw" secondAttribute="bottom" constant="8" symbolic="YES" id="FeR-ht-8Hk"/>
                             <constraint firstItem="18d-UN-asj" firstAttribute="centerX" secondItem="2sA-18-0QM" secondAttribute="centerX" id="PNU-j7-2T7"/>
                             <constraint firstItem="ZKu-6H-Cpw" firstAttribute="top" secondItem="mu5-5J-Hhi" secondAttribute="bottom" id="Uo6-yK-jq8"/>
+                            <constraint firstItem="pPG-58-EU1" firstAttribute="top" secondItem="mu5-5J-Hhi" secondAttribute="bottom" constant="1" id="Vnp-mz-tbh"/>
                             <constraint firstItem="aFZ-ZA-lMs" firstAttribute="leading" secondItem="ynZ-eb-Ceu" secondAttribute="leading" id="aWe-K5-6xh"/>
                             <constraint firstItem="ynZ-eb-Ceu" firstAttribute="bottom" secondItem="MsU-jZ-M71" secondAttribute="top" id="c4t-JZ-7LW"/>
+                            <constraint firstItem="pPG-58-EU1" firstAttribute="centerY" secondItem="ZKu-6H-Cpw" secondAttribute="centerY" id="dIF-bK-JHf"/>
                             <constraint firstItem="18d-UN-asj" firstAttribute="top" secondItem="mu5-5J-Hhi" secondAttribute="bottom" constant="8" id="dqN-1Z-M9M"/>
                             <constraint firstAttribute="bottom" secondItem="aFZ-ZA-lMs" secondAttribute="bottom" constant="400" id="efc-hv-sMI"/>
+                            <constraint firstItem="pPG-58-EU1" firstAttribute="leading" secondItem="ZKu-6H-Cpw" secondAttribute="leading" id="t9E-za-u76"/>
                             <constraint firstItem="ZKu-6H-Cpw" firstAttribute="leading" secondItem="2sA-18-0QM" secondAttribute="leadingMargin" constant="-9" id="un1-Wn-RLG"/>
                         </constraints>
                         <variation key="default">
@@ -1564,8 +1580,12 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="pPG-58-EU1" id="SKa-Dh-WV6"/>
                         <outlet property="bottomSpaceConstraint" destination="c4t-JZ-7LW" id="XV2-pn-MCA"/>
+                        <outlet property="cancelButton" destination="ZKu-6H-Cpw" id="Qhg-TX-mfB"/>
+                        <outlet property="confirmPasswordTextField" destination="oqn-gZ-b3H" id="sWD-Ah-lgL"/>
                         <outlet property="contentScrollView" destination="aFZ-ZA-lMs" id="P34-OU-vPd"/>
+                        <outlet property="nextButton" destination="ynZ-eb-Ceu" id="6rT-eZ-nzc"/>
                         <outlet property="passwordTextField" destination="LX6-Lz-9fk" id="uJI-Be-TBE"/>
                         <outlet property="usernameTextField" destination="3o8-QG-f4a" id="ylc-qd-0yK"/>
                     </connections>
@@ -1576,6 +1596,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="back" width="42" height="42"/>
         <image name="cancel" width="32" height="32"/>
         <image name="compare" width="32" height="32"/>
         <image name="default-placeholder" width="50" height="50"/>

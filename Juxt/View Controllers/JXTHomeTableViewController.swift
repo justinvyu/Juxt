@@ -186,7 +186,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ParseHelper.getUserInformationFromFB()
+//        ParseHelper.getUserInformationFromFB()
         
         self.followScrollView(self.tableView)
         self.setUseSuperview(false)

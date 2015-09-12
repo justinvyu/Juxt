@@ -53,7 +53,7 @@ class JXTJuxtTableViewCell: PFTableViewCell {
                         dispatch_async(dispatch_get_main_queue()) {
                             self.usernameLabel.text = user?[ParseHelper.UserName] as? String
                             self.profilePictureImageView.file = user?[ParseHelper.UserProfilePicture] as? PFFile
-                            self.profilePictureImageView.loadInBackground()
+//                            self.profilePictureImageView.image = UIImage(named: "splash")
                         }
                     }
                 })
