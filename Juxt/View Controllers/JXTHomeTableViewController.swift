@@ -32,7 +32,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
     }
     
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
         
         // Configure the PFQueryTableView
         self.parseClassName = ParseHelper.ProjectClassName
@@ -46,7 +46,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
     // MARK: PFQueryTableViewController
     
     override func queryForTable() -> PFQuery {
-        var query = PFQuery(className: ParseHelper.ProjectClassName)
+        let query = PFQuery(className: ParseHelper.ProjectClassName)
         query.orderByDescending("createdAt")
         
         // If no objects are loaded in memory, we look to the cache first to fill the table
@@ -96,8 +96,8 @@ class JXTHomeTableViewController: PFQueryTableViewController {
     
     func presentProfileViewController(button: UIBarButtonItem) {
         
-        let profileViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileVC") as! UIViewController
-        self.presentViewController(profileViewController, animated: true, completion: nil)
+        let profileViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileVC")
+        self.presentViewController(profileViewController!, animated: true, completion: nil)
         
     }
     
@@ -193,12 +193,12 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         
         UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
         
-        var profileButton = UIBarButtonItem(image: UIImage(named: "profile"), landscapeImagePhone: nil, style: .Plain, target: self, action: "presentProfileViewController:")
+        let profileButton = UIBarButtonItem(image: UIImage(named: "profile"), landscapeImagePhone: nil, style: .Plain, target: self, action: "presentProfileViewController:")
         
         profileButton.tintColor = UIColor(white: 0.97, alpha: 1.0)
         profileButton.imageInsets = UIEdgeInsetsMake(3, 3, 3, 3)
         
-        var addJuxtButton = UIBarButtonItem(barButtonSystemItem: .Compose, target: self, action: "presentAddJuxtViewController:")
+        let addJuxtButton = UIBarButtonItem(barButtonSystemItem: .Compose, target: self, action: "presentAddJuxtViewController:")
         addJuxtButton.tintColor = UIColor(white: 0.97, alpha: 1.0)
         
         self.navigationItem.rightBarButtonItems = [addJuxtButton, profileButton]
@@ -258,7 +258,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> JXTJuxtTableViewCell {
         
-        var cell = tableView.dequeueReusableCellWithIdentifier("JuxtCell") as! JXTJuxtTableViewCell!
+        let cell = tableView.dequeueReusableCellWithIdentifier("JuxtCell") as! JXTJuxtTableViewCell!
 
         cell.profilePictureImageView.layer.cornerRadius = 5.0
         

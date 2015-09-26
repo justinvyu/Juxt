@@ -82,9 +82,9 @@ class JXTLoginViewController: UIViewController {
             return
         }
         
-        PFUser.logInWithUsernameInBackground(self.usernameTextField.text, password: self.passwordTextField.text) { (user, error) -> Void in
+        PFUser.logInWithUsernameInBackground(self.usernameTextField.text!, password: self.passwordTextField.text!) { (user, error) -> Void in
             if error != nil {
-                println("\(error)")
+                print("\(error)")
                 
                 // Display alert
                 

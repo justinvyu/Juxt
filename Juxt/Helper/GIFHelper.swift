@@ -20,8 +20,10 @@ class GIFHelper: NSObject {
     func createGIFWithImages(images: [UIImage], completion: NSData -> Void) {
         
         dispatch_async(dispatch_queue_create("createGIF", DISPATCH_QUEUE_SERIAL)) {
-            let path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last?.stringByAppendingPathComponent("animated.gif")
-            let destination = CGImageDestinationCreateWithURL(NSURL(fileURLWithPath: path!) as! CFURLRef, kUTTypeGIF, images.count, nil)
+//            let path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last?.stringByAppendingPathComponent("animated.gif")
+            let path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last?.stringByAppendingString("animated.gif")
+
+            let destination = CGImageDestinationCreateWithURL(NSURL(fileURLWithPath: path!) as CFURLRef, kUTTypeGIF, images.count, nil)!
             let frameProperties = [
                 kCGImagePropertyGIFDictionary as String : [
                     kCGImagePropertyGIFDelayTime as String : NSNumber(float: 0.3)
@@ -34,11 +36,11 @@ class GIFHelper: NSObject {
             ]
             
             for image in images {
-                CGImageDestinationAddImage(destination, image.CGImage, frameProperties)
+                CGImageDestinationAddImage(destination, image.CGImage!, frameProperties)
             }
             CGImageDestinationSetProperties(destination, gifProperties)
             CGImageDestinationFinalize(destination)
-            println("animated GIF file created at \(path)")
+            print("animated GIF file created at \(path)")
             
             let gif = NSData(contentsOfFile: path!)
             completion(gif!)
@@ -59,7 +61,7 @@ class GIFHelper: NSObject {
                     FBSDKShareDialog.showFromViewController(self.viewController, withContent: url, delegate: nil)
                     
                     }, failureBlock: { (response, error, status) -> Void in
-                        println("\(error)")
+                        print("\(error)")
                 })
             }
         }

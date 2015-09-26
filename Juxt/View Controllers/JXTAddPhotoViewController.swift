@@ -58,7 +58,7 @@ class JXTAddPhotoViewController: UIViewController {
 //        }
         
         keyboardNotificationHandler?.keyboardWillBeShownHandler = { (height: CGFloat) in
-            println(height)
+            print(height)
             UIView.animateWithDuration(0.3, animations: { () -> Void in
                 self.doneButton?.frame.origin.y -= height
             })
@@ -183,7 +183,7 @@ class JXTAddPhotoViewController: UIViewController {
 
         MixpanelHelper.trackCancelAtDescribeImage()
         self.titleTextField?.resignFirstResponder()
-        println(returnHome)
+        print(returnHome)
         if returnHome == true {
             self.presentingViewController?.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
         } else {
@@ -210,7 +210,7 @@ class JXTAddPhotoViewController: UIViewController {
 
             juxt.uploadJuxt({ (finished, error) -> Void in
                 if error != nil {
-                    println("\(error)")
+                    print("\(error)")
                 } else {
                     juxt.toggleLikePost(PFUser.currentUser()!)
                     if juxt.photos?.count == 0 {

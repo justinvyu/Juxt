@@ -19,7 +19,7 @@ class Juxt: PFObject, PFSubclassing {
     var images: [UIImage]?
 //    var likes: [PFUser]?
 
-    var likes =  Dynamic<[PFUser]?>(nil)
+    var likes =  Observable<[PFUser]?>(nil)
 
 //    var usersFlagged: [PFUser]?
     
@@ -52,7 +52,7 @@ class Juxt: PFObject, PFSubclassing {
     
     func doesUserLikePost(user: PFUser) -> Bool {
         if let likes = likes.value {
-            return contains(likes, user)
+            return likes.contains(user)
         } else {
             return false
         }

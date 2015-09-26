@@ -26,8 +26,8 @@ class Photo: PFObject, PFSubclassing {
     
     func uploadPhoto(completion: PFBooleanResultBlock) {
         
-        let imageData = UIImageJPEGRepresentation(image, 0.8)
-        let imageFile = PFFile(data: imageData)
+        let imageData = UIImageJPEGRepresentation(image!, 0.8)
+        let imageFile = PFFile(data: imageData!)
         
         photoUploadTask = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler { () -> Void in
             

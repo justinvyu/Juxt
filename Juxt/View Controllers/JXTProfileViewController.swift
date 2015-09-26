@@ -54,9 +54,9 @@ class JXTProfileViewController: UIViewController {
     func loadData() {
         ParseHelper.juxtsFromUser(PFUser.currentUser()!) { (objects, error) -> Void in
             if error != nil {
-                println("\(error)")
+                print("\(error)")
             } else {
-                println(self.juxts)
+                print(self.juxts)
                 self.juxts = objects as! [Juxt]?
                 self.tableView.reloadData()
             }
@@ -149,7 +149,7 @@ extension JXTProfileViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        println(self.juxts?.count)
+        print(self.juxts?.count)
         return Int(self.juxts?.count ?? 0)
     }
     
@@ -178,7 +178,7 @@ extension JXTProfileViewController: JXTJuxtViewControllerDelegate {
     }
     
     func flaggedJuxt() {
-        println("This is not possible...")
+        print("This is not possible...")
     }
     
 }

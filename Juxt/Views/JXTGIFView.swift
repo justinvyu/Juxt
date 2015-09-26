@@ -63,7 +63,7 @@ class JXTGIFView: UIView {
         compareLabel?.layer.zPosition = 4
         self.addSubview(compareLabel!)
         
-        cancelButton = UIButton.buttonWithType(.Custom) as? UIButton
+        cancelButton = UIButton(type: .Custom)
         cancelButton?.frame = CGRectMake(5, 20, 44, 44)
         cancelButton?.tintColor = JXTConstants.defaultBlueColor()
         cancelButton?.setImage(UIImage(named: "cancel"), forState: .Normal)
@@ -106,7 +106,7 @@ class JXTGIFView: UIView {
 //        delaySlider = UISlider(frame: <#CGRect#>)
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     

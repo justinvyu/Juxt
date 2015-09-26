@@ -65,7 +65,7 @@ class JXTImageGalleryScrollView: UIScrollView {
                         yPos = 2 * self.imagePadding * CGFloat(i)/*CGFloat(padding)*/ + CGFloat(i) * self.imageSize!.height
                     }
                     
-                    var imageView = PFImageView(frame: CGRectMake(xPos, yPos, self.imageSize!.width, self.imageSize!.height))
+                    let imageView = PFImageView(frame: CGRectMake(xPos, yPos, self.imageSize!.width, self.imageSize!.height))
                     imageView.contentMode = .ScaleAspectFill
                     imageView.image = UIImage(named: "default-placeholder")
                     self.addSubview(imageView)

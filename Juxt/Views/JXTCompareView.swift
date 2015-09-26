@@ -72,7 +72,7 @@ class JXTCompareView: UIView {
         compareLabel?.layer.zPosition = 4
         self.addSubview(compareLabel!)
 
-        cancelButton = UIButton.buttonWithType(.Custom) as? UIButton
+        cancelButton = UIButton(type: .Custom) as? UIButton
         cancelButton?.frame = CGRectMake(5, 20, 44, 44)
         cancelButton?.tintColor = JXTConstants.defaultBlueColor()
         cancelButton?.setImage(UIImage(named: "cancel"), forState: .Normal)
@@ -111,7 +111,7 @@ class JXTCompareView: UIView {
         rightCompareView?.frame = CGRectMake(self.frame.size.width / 2, topView!.frame.origin.y + topView!.frame.size.height + imagePadding, self.frame.size.width / 2, imageSize.height+20)
         rightCompareView?.direction = .Vertical
         rightCompareView?.imageSize = imageSize
-        rightCompareView?.photos = photos.reverse()
+        rightCompareView?.photos = Array(photos.reverse())
         rightCompareView?.clipsToBounds = false
         rightCompareView?.pagingEnabled = true
         rightCompareView?.bounces = false
@@ -199,7 +199,7 @@ class JXTCompareView: UIView {
         
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     

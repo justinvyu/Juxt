@@ -31,11 +31,11 @@ class ImageHelper: NSObject {
     static func combineImage(image firstImage: UIImage, withImage secondImage: UIImage) -> UIImage {
         var image: UIImage
         
-        var newImageSize = CGSizeMake(firstImage.size.width + secondImage.size.width, max(firstImage.size.height, secondImage.size.height))
+        let newImageSize = CGSizeMake(firstImage.size.width + secondImage.size.width, max(firstImage.size.height, secondImage.size.height))
         UIGraphicsBeginImageContextWithOptions(newImageSize, false, UIScreen.mainScreen().scale)
         
-        var borderedFirstImage = firstImage.borderImage(UIColor(white: 0.97, alpha: 1.0), borderWidth: 30)
-        var borderedSecondImage = secondImage.borderImage(UIColor(white: 0.97, alpha: 1.0), borderWidth: 30)
+        let borderedFirstImage = firstImage.borderImage(UIColor(white: 0.97, alpha: 1.0), borderWidth: 30)
+        let borderedSecondImage = secondImage.borderImage(UIColor(white: 0.97, alpha: 1.0), borderWidth: 30)
         borderedFirstImage.drawAtPoint(CGPointMake(0, 0))
         borderedSecondImage.drawAtPoint(CGPointMake(firstImage.size.width - 15, 0))
         
@@ -53,10 +53,10 @@ extension UIImage {
         UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
         self.drawAtPoint(CGPointZero)
         color.setStroke()
-        var path = UIBezierPath(rect: CGRectMake(0, 0, self.size.width, self.size.height))
+        let path = UIBezierPath(rect: CGRectMake(0, 0, self.size.width, self.size.height))
         path.lineWidth = borderWidth
         path.stroke()
-        var result = UIGraphicsGetImageFromCurrentImageContext()
+        let result = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return result
     }

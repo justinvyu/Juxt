@@ -17,8 +17,8 @@ class JXTJuxtTableViewCell: PFTableViewCell {
     
     weak var homeViewController: JXTHomeTableViewController?
     weak var profileViewController: JXTProfileViewController?
-    var likeBond: Bond<[PFUser]?>!
-    
+//    var likeBond: Bond<[PFUser]?>!
+
     var currentPage: Int?
     
     var juxt: Juxt? {
@@ -48,7 +48,7 @@ class JXTJuxtTableViewCell: PFTableViewCell {
                 
                 juxt.user?.fetchIfNeededInBackgroundWithBlock({ (user, error) -> Void in
                     if error != nil {
-                        println("\(error)")
+                        print("\(error)")
                     } else {
                         dispatch_async(dispatch_get_main_queue()) {
                             self.usernameLabel.text = user?[ParseHelper.UserName] as? String
@@ -60,25 +60,37 @@ class JXTJuxtTableViewCell: PFTableViewCell {
                 
 //                self.likeButton.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5)
                 
-                juxt.likes ->> likeBond
+//                juxt.likes ->> likeBond
             }
         }
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        likeBond = Bond<[PFUser]?>() { [unowned self] likeList in
+//        likeBond = Bond<[PFUser]?>() { [unowned self] likeList in
+//            if let likeList = likeList {
+//                print(likeList.count)
+////                self.likeButton.setTitle("\(likeList.count)", forState: .Normal)
+//                self.likesLabel.text = "\(likeList.count)"
+//                if let user = PFUser.currentUser() {
+//                    self.likeButton.selected = likeList.contains(user)
+//                }
+////                self.likeButton.selected = contains(likeList, PFUser.currentUser()!)
+//            }
+//        }
+
+        juxt!.likes.observe({ likeList in
             if let likeList = likeList {
-                println(likeList.count)
-//                self.likeButton.setTitle("\(likeList.count)", forState: .Normal)
+                print(likeList.count)
+                self.likeButton.setTitle("\(likeList.count)", forState: .Normal)
                 self.likesLabel.text = "\(likeList.count)"
                 if let user = PFUser.currentUser() {
-                    self.likeButton.selected = contains(likeList, user)
+                    self.likeButton.selected = likeList.contains(user)
                 }
-//                self.likeButton.selected = contains(likeList, PFUser.currentUser()!)
+            self.likeButton.selected = likeList.contains(PFUser.currentUser()!) //contains(likeList, PFUser.currentUser()!)
             }
-        }
+        })
     }
     
     @IBOutlet weak var dateLabel: UILabel!

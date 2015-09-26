@@ -40,6 +40,7 @@
 		D0BE3D1F1B73C6A20062B5B0 /* JXTHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BE3D1E1B73C6A20062B5B0 /* JXTHeaderTableViewCell.swift */; };
 		D0E4E23D1B75455D00586B0E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D0E4E23C1B75455D00586B0E /* Settings.bundle */; };
 		D0E9C8291B8450CA00ED5EC0 /* JXTSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E9C8281B8450CA00ED5EC0 /* JXTSignupViewController.swift */; };
+		D0F714FC1BA4CCDA007DB693 /* eula.txt in Resources */ = {isa = PBXBuildFile; fileRef = D0F714FB1BA4CCDA007DB693 /* eula.txt */; };
 		D0F7C5E91B586949004E2F3E /* JXTAddPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F7C5E81B586949004E2F3E /* JXTAddPhotoViewController.swift */; };
 		D0F7C5EF1B596496004E2F3E /* JXTImageGalleryScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F7C5EE1B596496004E2F3E /* JXTImageGalleryScrollView.swift */; };
 		D0F7C5F31B596F48004E2F3E /* Juxt.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F7C5F11B596F48004E2F3E /* Juxt.swift */; };
@@ -2127,6 +2128,7 @@
 		D0BE3D1E1B73C6A20062B5B0 /* JXTHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JXTHeaderTableViewCell.swift; path = Juxt/Views/JXTHeaderTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		D0E4E23C1B75455D00586B0E /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		D0E9C8281B8450CA00ED5EC0 /* JXTSignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTSignupViewController.swift; sourceTree = "<group>"; };
+		D0F714FB1BA4CCDA007DB693 /* eula.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = eula.txt; sourceTree = "<group>"; };
 		D0F7C5E81B586949004E2F3E /* JXTAddPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTAddPhotoViewController.swift; sourceTree = "<group>"; };
 		D0F7C5EE1B596496004E2F3E /* JXTImageGalleryScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTImageGalleryScrollView.swift; sourceTree = "<group>"; };
 		D0F7C5F11B596F48004E2F3E /* Juxt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Juxt.swift; path = ../Helper/Juxt.swift; sourceTree = "<group>"; };
@@ -2209,6 +2211,7 @@
 		D0AFDC7F1B556E630097228E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D0F714FB1BA4CCDA007DB693 /* eula.txt */,
 				D0AFDC801B556E630097228E /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -5620,7 +5623,9 @@
 		D0AFDC741B556E630097228E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Justin Yu";
 				TargetAttributes = {
 					D0AFDC7B1B556E630097228E = {
@@ -5824,6 +5829,7 @@
 				D0E4E23D1B75455D00586B0E /* Settings.bundle in Resources */,
 				D0AFDC8C1B556E630097228E /* LaunchScreen.xib in Resources */,
 				D0AFDC891B556E630097228E /* Images.xcassets in Resources */,
+				D0F714FC1BA4CCDA007DB693 /* eula.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6024,6 +6030,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -6101,6 +6108,7 @@
 				INFOPLIST_FILE = Juxt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.juxtapp.juxt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Juxt/Juxt-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -6123,6 +6131,7 @@
 				INFOPLIST_FILE = Juxt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.juxtapp.juxt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Juxt/Juxt-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -6143,6 +6152,7 @@
 				);
 				INFOPLIST_FILE = JuxtTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "JYU.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Juxt.app/Juxt";
 			};
@@ -6158,6 +6168,7 @@
 				);
 				INFOPLIST_FILE = JuxtTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "JYU.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Juxt.app/Juxt";
 			};

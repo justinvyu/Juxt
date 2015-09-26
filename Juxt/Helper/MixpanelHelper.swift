@@ -92,7 +92,7 @@ class MixpanelHelper: NSObject {
         case .ShareToFacebook:
             self.mixpanel.track(CompareAction, properties: [Action: CompareActionType.ShareToFacebook.rawValue])
         default:
-            println("Nothing to track")
+            print("Nothing to track")
         }
     }
     

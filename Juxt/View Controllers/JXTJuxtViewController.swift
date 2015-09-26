@@ -60,7 +60,7 @@ class JXTJuxtViewController: UIViewController {
         
         let retakeAction = UIAlertAction(title: "Retake", style: .Default) { (action) in
             
-            println("retake")
+            print("retake")
             
         }
         alertController.addAction(retakeAction)
@@ -136,7 +136,7 @@ class JXTJuxtViewController: UIViewController {
         self.fullScreenImageView?.image = image
         self.navigationController?.view.addSubview(self.fullScreenImageView!)
         
-        fullScreenCancelButton = UIButton.buttonWithType(.Custom) as? UIButton
+        fullScreenCancelButton = UIButton(type: .Custom) as? UIButton
         fullScreenCancelButton?.frame = CGRectMake(10, 20, 44, 44)
         fullScreenCancelButton?.tintColor = JXTConstants.defaultBlueColor()
         fullScreenCancelButton?.setImage(UIImage(named: "cancel"), forState: .Normal)
@@ -152,7 +152,7 @@ class JXTJuxtViewController: UIViewController {
         
         self.tableView.userInteractionEnabled = false
         if self.navigationController?.respondsToSelector("interactivePopGestureRecognizer") == true {
-            self.navigationController?.interactivePopGestureRecognizer.enabled = false
+            self.navigationController?.interactivePopGestureRecognizer!.enabled = false
         }
     }
     
@@ -193,7 +193,7 @@ class JXTJuxtViewController: UIViewController {
         JXTConstants.fadeInWidthDuration(compareView!, duration: 0.6)
         self.tableView.userInteractionEnabled = false
         if self.navigationController?.respondsToSelector("interactivePopGestureRecognizer") == true {
-            self.navigationController?.interactivePopGestureRecognizer.enabled = false
+            self.navigationController?.interactivePopGestureRecognizer!.enabled = false
         }
     }
     
@@ -204,7 +204,7 @@ class JXTJuxtViewController: UIViewController {
             self.navigationController?.view.addSubview(GIFView!)
             JXTConstants.fadeInWidthDuration(GIFView!, duration: 0.6)
             if self.navigationController?.respondsToSelector("interactivePopGestureRecognizer") == true {
-                self.navigationController?.interactivePopGestureRecognizer.enabled = false
+                self.navigationController?.interactivePopGestureRecognizer!.enabled = false
             }
             self.tableView.userInteractionEnabled = false
         }
@@ -218,7 +218,7 @@ class JXTJuxtViewController: UIViewController {
         JXTConstants.fadeOutWithDuration(fullScreenCancelButton!, duration: 0.3)
         self.tableView.userInteractionEnabled = true
         if self.navigationController?.respondsToSelector("interactivePopGestureRecognizer") == true {
-            self.navigationController?.interactivePopGestureRecognizer.enabled = true
+            self.navigationController?.interactivePopGestureRecognizer!.enabled = true
         }
         self.shareButton?.enabled = true
         self.addButton?.enabled = true
@@ -410,7 +410,7 @@ extension JXTJuxtViewController: JXTPopupViewDelegate {
         self.navigationItem.hidesBackButton = false
         self.tableView.userInteractionEnabled = true
         if self.navigationController?.respondsToSelector("interactivePopGestureRecognizer") == true {
-            self.navigationController?.interactivePopGestureRecognizer.enabled = true
+            self.navigationController?.interactivePopGestureRecognizer!.enabled = true
         }
     }
     
@@ -468,7 +468,7 @@ extension JXTJuxtViewController: UITableViewDataSource {
         case 1:
             return Int(photos?.count ?? 0)
         default:
-            println("Out of bounds??")
+            print("Out of bounds??")
             return 0
         }
     }

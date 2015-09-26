@@ -1494,8 +1494,21 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pPG-58-EU1">
+                                <rect key="frame" x="7" y="21" width="42" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="42" id="adM-gd-r3J"/>
+                                </constraints>
+                                <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                <state key="normal" image="back">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backAction:" destination="aG3-sA-OXy" eventType="touchUpInside" id="Kgd-YB-KdN"/>
+                                </connections>
+                            </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aFZ-ZA-lMs">
-                                <rect key="frame" x="0.0" y="72" width="600" height="128"/>
+                                <rect key="frame" x="0.0" y="72" width="600" height="447"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3o8-QG-f4a">
                                         <rect key="frame" x="44" y="8" width="512" height="30"/>
@@ -1541,20 +1554,12 @@
                                     <constraint firstItem="3o8-QG-f4a" firstAttribute="top" secondItem="aFZ-ZA-lMs" secondAttribute="top" constant="8" id="yLL-9z-5pD"/>
                                     <constraint firstItem="oqn-gZ-b3H" firstAttribute="trailing" secondItem="LX6-Lz-9fk" secondAttribute="trailing" id="zx0-Is-afp"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="dOz-Xl-f9X"/>
+                                    </mask>
+                                </variation>
                             </scrollView>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pPG-58-EU1">
-                                <rect key="frame" x="7" y="21" width="42" height="42"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="42" id="adM-gd-r3J"/>
-                                </constraints>
-                                <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
-                                <state key="normal" image="back">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="backAction:" destination="aG3-sA-OXy" eventType="touchUpInside" id="Kgd-YB-KdN"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.18469271879999999" green="0.50855052010000001" blue="0.79112990360000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -1572,6 +1577,7 @@
                             <constraint firstAttribute="bottom" secondItem="aFZ-ZA-lMs" secondAttribute="bottom" constant="400" id="efc-hv-sMI"/>
                             <constraint firstItem="pPG-58-EU1" firstAttribute="leading" secondItem="ZKu-6H-Cpw" secondAttribute="leading" id="t9E-za-u76"/>
                             <constraint firstItem="ZKu-6H-Cpw" firstAttribute="leading" secondItem="2sA-18-0QM" secondAttribute="leadingMargin" constant="-9" id="un1-Wn-RLG"/>
+                            <constraint firstItem="ynZ-eb-Ceu" firstAttribute="top" secondItem="aFZ-ZA-lMs" secondAttribute="bottom" constant="29" id="vWS-xf-8Af"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">

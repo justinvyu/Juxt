@@ -15,13 +15,13 @@ class JXTHeaderTableViewCell: UITableViewCell {
 
     weak var juxtViewController: JXTJuxtViewController?
     
-    var likeBond: Bond<[PFUser]?>!
+//    var likeBond: Bond<[PFUser]?>!
     var juxt: Juxt? {
         didSet {
             if let user = juxt?.user {
                 user.fetchIfNeededInBackgroundWithBlock({ (user, error) -> Void in
                     if error != nil {
-                        println("\(error)")
+                        print("\(error)")
                     } else {
                         self.usernameLabel.text = ParseHelper.userName(user as! PFUser)
                         self.profilePicture.file = ParseHelper.userProfilePicture(user as! PFUser)
@@ -37,23 +37,36 @@ class JXTHeaderTableViewCell: UITableViewCell {
             otherButton.setImage(juxt?.user == PFUser.currentUser() ? UIImage(named: "delete") : UIImage(named: "flag"), forState: .Selected)
             otherButton.setImage(juxt?.user == PFUser.currentUser() ? UIImage(named: "delete") : UIImage(named: "flag"), forState: .Highlighted)
             
+//            if let juxt = juxt {
+//                juxt.likes ->> likeBond
+//            }
+
             if let juxt = juxt {
-                juxt.likes ->> likeBond
+                juxt.likes.observe({ likeList in
+                    if let likeList = likeList {
+                        print(likeList.count)
+                        //                self.likeButton.setTitle("\(likeList.count)", forState: .Normal)
+                        self.likesLabel.text = "\(likeList.count)"
+                        self.likeButton.selected = likeList.contains(PFUser.currentUser()!)
+                    }
+                })
             }
         }
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        likeBond = Bond<[PFUser]?>() { [unowned self] likeList in
-            if let likeList = likeList {
-                println(likeList.count)
-                //                self.likeButton.setTitle("\(likeList.count)", forState: .Normal)
-                self.likesLabel.text = "\(likeList.count)"
-                self.likeButton.selected = contains(likeList, PFUser.currentUser()!)
-            }
-        }
+//        likeBond = Bond<[PFUser]?>() { [unowned self] likeList in
+//            if let likeList = likeList {
+//                print(likeList.count)
+//                //                self.likeButton.setTitle("\(likeList.count)", forState: .Normal)
+//                self.likesLabel.text = "\(likeList.count)"
+//                self.likeButton.selected = likeList.contains(PFUser.currentUser()!)
+//            }
+//        }
+
+
     }
     
     @IBOutlet weak var profilePicture: PFImageView!

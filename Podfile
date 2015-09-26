@@ -25,7 +25,7 @@ target 'Juxt' do
 	pod 'TwitterKit'
 	pod 'TwitterCore'
 	pod 'MPCoachMarks'
-	pod 'Bond'
+	pod 'Bond', '4.0.0-beta3'
 	pod 'SCLAlertView'
 	pod 'FLAnimatedImage'
 	pod 'TPKeyboardAvoiding'

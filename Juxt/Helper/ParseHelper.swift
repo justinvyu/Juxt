@@ -76,7 +76,7 @@ class ParseHelper: NSObject {
         nameRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
             if error != nil {
                 // Process error
-                println("Error: \(error)")
+                print("Error: \(error)")
             } else {
                 PFUser.currentUser()?.setValue(result.valueForKey(self.UserName) as? String, forKey: self.UserName)
                 
@@ -90,7 +90,7 @@ class ParseHelper: NSObject {
                 
                 imageFile.saveInBackgroundWithBlock() { (finished, error) -> Void in
                     if error != nil {
-                        println("\(error)")
+                        print("\(error)")
                     }
                     PFUser.currentUser()?.setObject(imageFile, forKey: self.UserProfilePicture)
                     PFUser.currentUser()?.saveEventually()
@@ -152,7 +152,7 @@ class ParseHelper: NSObject {
         query.findObjectsInBackgroundWithBlock {
             (results: [AnyObject]?, error: NSError?) -> Void in
             if let error = error {
-                println("\(error)")
+                print("\(error)")
             }
             
             if let results = results as? [PFObject] {
@@ -192,15 +192,11 @@ class ParseHelper: NSObject {
             juxtQuery.orderByDescending(PhotoCreatedAt)
         }
         
-        var photos: [Photo]? = juxtQuery.findObjects() as? [Photo]
+        let photos: [Photo]? = juxtQuery.findObjects() as? [Photo]
         
         return photos
         
     }
-    
-}
-
-extension PFObject: Equatable {
     
 }
 

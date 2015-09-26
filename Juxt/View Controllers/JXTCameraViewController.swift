@@ -135,7 +135,7 @@ class JXTCameraViewController: UIViewController {
     
     func setupCaptureUI() {
         
-        snapButton = UIButton.buttonWithType(.Custom) as? UIButton
+        snapButton = UIButton(type: .Custom) as? UIButton
         snapButton?.frame = CGRectMake(0, 0, 70, 70)
         snapButton?.clipsToBounds = true
         snapButton?.layer.cornerRadius = snapButton!.frame.width / 2.0
@@ -169,7 +169,7 @@ class JXTCameraViewController: UIViewController {
             }
         }
         
-        flashButton = UIButton.buttonWithType(.Custom) as? UIButton
+        flashButton = UIButton(type: .Custom) as? UIButton
         flashButton?.frame = CGRectMake(0, 0, 16.0 + 20.0, 24.0 + 20.0)
         flashButton?.tintColor = UIColor.whiteColor()
         flashButton?.setImage(UIImage(named: "camera-flash"), forState: .Normal)
@@ -178,7 +178,7 @@ class JXTCameraViewController: UIViewController {
         flashButton?.addTarget(self, action: Selector("flashButtonPressed:"), forControlEvents: .TouchUpInside)
         self.view.addSubview(flashButton!)
         
-        switchButton = UIButton.buttonWithType(.Custom) as? UIButton
+        switchButton = UIButton(type: .Custom) as? UIButton
         switchButton?.frame = CGRectMake(0, 0, 29.0 + 20.0, 22.0 + 20.0)
         switchButton?.tintColor = UIColor.whiteColor()
         switchButton?.setImage(UIImage(named: "camera-switch"), forState: .Normal)
@@ -186,7 +186,7 @@ class JXTCameraViewController: UIViewController {
         switchButton?.addTarget(self, action: Selector("switchButtonPressed:"), forControlEvents: .TouchUpInside)
         self.view.addSubview(switchButton!)
         
-        cancelButton = UIButton.buttonWithType(.Custom) as? UIButton
+        cancelButton = UIButton(type: .Custom) as? UIButton
         cancelButton?.frame = CGRectMake(5, 4, 44, 44)
         cancelButton?.tintColor = JXTConstants.defaultBlueColor()
         cancelButton?.setImage(UIImage(named: "cancel-blue"), forState: .Normal)
@@ -194,7 +194,7 @@ class JXTCameraViewController: UIViewController {
         cancelButton?.addTarget(self, action: Selector("cancelButtonPressed:"), forControlEvents: .TouchUpInside)
         self.view.addSubview(cancelButton!)
         
-        if camera?.flash.value == CameraFlashOn.value {
+        if camera?.flash.rawValue == CameraFlashOn.rawValue {
             flashButton?.selected = true
             flashButton?.backgroundColor = JXTConstants.defaultBlueColor()
         } else {
@@ -262,7 +262,7 @@ class JXTCameraViewController: UIViewController {
     
     func flashButtonPressed(button: UIButton) {
         
-        if camera!.flash.value == CameraFlashOff.value {
+        if camera!.flash.rawValue == CameraFlashOff.rawValue {
             let done = self.camera?.updateFlashMode(CameraFlashOn)
             if done == true {
                 flashButton?.selected = true
