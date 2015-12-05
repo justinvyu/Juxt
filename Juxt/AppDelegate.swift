@@ -1,4 +1,4 @@
-    //
+//
 //  AppDelegate.swift
 //  Juxt
 //
@@ -10,13 +10,10 @@ import UIKit
 import FBSDKCoreKit
 import Parse
 import Bolts
-import ParseFacebookUtils
+import ParseFacebookUtilsV4
 import FBSDKCoreKit
 import FBSDKLoginKit
 import Mixpanel
-
-import Fabric
-import TwitterKit
     
 //import Realm
 //import RealmSwift
@@ -61,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
         
         // Setup Parse Facebook Utils
-        PFFacebookUtils.initializeFacebook()
+        PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
         
 //        FBSession.openActiveSessionWithPublishPermissions(["publish_actions"], defaultAudience: FBSessionDefaultAudience.Friends, allowLoginUI: true, completionHandler: nil)
         
@@ -78,9 +75,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-//        return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
-        
-        return FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication, withSession: PFFacebookUtils.session())
+        return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
+//        return FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication, withSession: PFFacebookUtils.session())
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -101,8 +97,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         
         FBSDKAppEvents.activateApp()
-        PFFacebookUtils.session()?.handleDidBecomeActive()
-        
+//        PFFacebookUtils.session()?.handleDidBecomeActive()
+
     }
 
     func applicationWillTerminate(application: UIApplication) {

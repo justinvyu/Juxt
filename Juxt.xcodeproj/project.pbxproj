@@ -113,13 +113,6 @@
 			remoteGlobalIDString = DE41E2A27E5602A4DFBFDA294C037ADF;
 			remoteInfo = FLAnimatedImage;
 		};
-		D057A19A1B819F2000702E72 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D0BE3AC41B71839D0062B5B0 /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 42F7F681DCFF1B00C821170E0C6099EA;
-			remoteInfo = "Facebook-iOS-SDK";
-		};
 		D057A19C1B819F2000702E72 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D0BE3AC41B71839D0062B5B0 /* Pods.xcodeproj */;
@@ -147,13 +140,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 8DE4AD9DE80DC180A83614AF09AA57DB;
 			remoteInfo = Parse;
-		};
-		D057A1A41B819F2000702E72 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D0BE3AC41B71839D0062B5B0 /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = DFFC8658FCA28CA277DB81F68A25355E;
-			remoteInfo = ParseFacebookUtils;
 		};
 		D057A1A61B819F2000702E72 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -189,6 +175,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = D0AFDC7B1B556E630097228E;
 			remoteInfo = Juxt;
+		};
+		D0B932E11C12987B00BEDDD3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0BE3AC41B71839D0062B5B0 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D7A32F73B0E26C7B4B3C53A321F69D43;
+			remoteInfo = ParseFacebookUtilsV4;
 		};
 		D0BE3CAD1B71839E0062B5B0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -4775,7 +4768,6 @@
 				D057A18D1B819F2000702E72 /* Bond.framework */,
 				D057A18F1B819F2000702E72 /* ConvenienceKit.framework */,
 				D057A1911B819F2000702E72 /* ConvenienceKit.bundle */,
-				D057A19B1B819F2000702E72 /* FacebookSDK.framework */,
 				D057A1931B819F2000702E72 /* FBSDKCoreKit.framework */,
 				D057A1951B819F2000702E72 /* FBSDKLoginKit.framework */,
 				D057A1971B819F2000702E72 /* FBSDKShareKit.framework */,
@@ -4786,7 +4778,7 @@
 				D057A1A11B819F2000702E72 /* Mixpanel.framework */,
 				D057A19F1B819F2000702E72 /* MPCoachMarks.framework */,
 				D057A1A31B819F2000702E72 /* Parse.framework */,
-				D057A1A51B819F2000702E72 /* ParseFacebookUtils.framework */,
+				D0B932E21C12987B00BEDDD3 /* ParseFacebookUtilsV4.framework */,
 				D057A1A71B819F2000702E72 /* ParseUI.framework */,
 				D0BE3CAE1B71839E0062B5B0 /* Pods_Juxt.framework */,
 				D057A1A91B819F2000702E72 /* SCLAlertView.framework */,
@@ -5588,7 +5580,6 @@
 				6850756DBEB048C41E2990DF /* Embed Pods Frameworks */,
 				B18105D8762C711D23496DE0 /* Copy Pods Resources */,
 				D0BE34811B7183400062B5B0 /* Embed Frameworks */,
-				D02C94C61B7912D4005C8B7F /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -5727,13 +5718,6 @@
 			remoteRef = D057A1981B819F2000702E72 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		D057A19B1B819F2000702E72 /* FacebookSDK.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = FacebookSDK.framework;
-			remoteRef = D057A19A1B819F2000702E72 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		D057A19D1B819F2000702E72 /* LLSimpleCamera.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -5762,13 +5746,6 @@
 			remoteRef = D057A1A21B819F2000702E72 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		D057A1A51B819F2000702E72 /* ParseFacebookUtils.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = ParseFacebookUtils.framework;
-			remoteRef = D057A1A41B819F2000702E72 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		D057A1A71B819F2000702E72 /* ParseUI.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -5795,6 +5772,13 @@
 			fileType = wrapper.framework;
 			path = TPKeyboardAvoiding.framework;
 			remoteRef = D057A1AC1B819F2000702E72 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D0B932E21C12987B00BEDDD3 /* ParseFacebookUtilsV4.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ParseFacebookUtilsV4.framework;
+			remoteRef = D0B932E11C12987B00BEDDD3 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		D0BE3CAE1B71839E0062B5B0 /* Pods_Juxt.framework */ = {
@@ -5887,19 +5871,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Juxt/Pods-Juxt-resources.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		D02C94C61B7912D4005C8B7F /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/Fabric.framework/run\" fdc171f023f673b190f8afa8a10bf47cb0e6ff5d 40c6b73e8499b6af81eb393684ca821f6cf586b6fbe65d0505caba06c9147047";
 		};
 /* End PBXShellScriptBuildPhase section */
 

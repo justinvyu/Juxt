@@ -8,7 +8,7 @@
 
 import UIKit
 import Parse
-import ParseFacebookUtils
+import ParseFacebookUtilsV4
 import FBSDKCoreKit
 
 typealias LogoutCallback = () -> Void // returning a block
@@ -56,7 +56,8 @@ class ParseHelper: NSObject {
     static func loginWithFacebook(completion: PFUserResultBlock) {
         let permissionsArray = ["email", "public_profile"]
         
-        PFFacebookUtils.logInWithPermissions(permissionsArray, block: completion)
+//        PFFacebookUtils.logInWithPermissions(permissionsArray, block: completion)
+        PFFacebookUtils.logInInBackgroundWithReadPermissions(permissionsArray, block: completion)
 
     }
     
