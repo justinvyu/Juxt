@@ -300,6 +300,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
             if let juxtCell = sender as? JXTJuxtTableViewCell {
                 if let juxtViewController = segue.destinationViewController as? JXTJuxtViewController {
                     juxtViewController.juxt = juxtCell.juxt
+                    juxtViewController.juxt?.fetchLikes()
                     juxtViewController.delegate = self
                     juxtViewController.presentingTableViewCell = sender as? JXTJuxtTableViewCell
                 }

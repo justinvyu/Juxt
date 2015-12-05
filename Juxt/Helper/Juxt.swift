@@ -52,7 +52,13 @@ class Juxt: PFObject, PFSubclassing {
     
     func doesUserLikePost(user: PFUser) -> Bool {
         if let likes = likes.value {
-            return likes.contains(user)
+//            return likes.contains(user)
+            for userWhoLikes in likes {
+                if userWhoLikes.objectId == user.objectId {
+                    return true
+                }
+            }
+            return false
         } else {
             return false
         }
@@ -62,7 +68,9 @@ class Juxt: PFObject, PFSubclassing {
         if (doesUserLikePost(user)) {
             // if image is liked, unlike it now
             // 1
-            likes.value = likes.value?.filter { $0 != user }
+            likes.value = likes.value?.filter { userWhoLikes in
+                return userWhoLikes.objectId != user.objectId
+            }
             ParseHelper.unlikePost(user, post: self)
         } else {
             // if this image is not liked yet, like it now

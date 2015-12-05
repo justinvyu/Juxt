@@ -347,7 +347,7 @@ class JXTJuxtViewController: UIViewController {
 //            }
             self.photos = juxt.photos
         }
-        
+
 //        if PFUser.currentUser() == juxt?.user {
 //            self.setupCoachmarks()
 //        } else {
@@ -483,7 +483,11 @@ extension JXTJuxtViewController: UITableViewDataSource {
             cell.juxt = self.juxt
             cell.profilePicture.layer.cornerRadius = 5.0
             cell.juxtViewController = self
-            
+
+            if juxt!.doesUserLikePost(PFUser.currentUser()!) {
+                cell.likeButton.selected = true
+            }
+
             return cell
         case 1:
             let cell = tableView.dequeueReusableCellWithIdentifier("PhotoCell") as! JXTPhotoTableViewCell

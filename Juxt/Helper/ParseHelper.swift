@@ -201,6 +201,10 @@ class ParseHelper: NSObject {
     
 }
 
+extension Equatable {
+
+}
+
 public func ==(lhs: PFObject, rhs: PFObject) -> Bool {
     return lhs.objectId == rhs.objectId
 }
