@@ -72,7 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            self.window?.rootViewController = mainNav
 //        }
         
-        Fabric.with([Twitter()])
+        //Fabric.with([Twitter()])
 
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }

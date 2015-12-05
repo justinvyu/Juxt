@@ -8,7 +8,6 @@
 
 import UIKit
 
-//(KeyboardNotificationHandler)
 public class KeyboardNotificationHandler {
   
   public typealias KeyboardHandlerCallback = (CGFloat) -> ()

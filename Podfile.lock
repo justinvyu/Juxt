@@ -8,11 +8,6 @@ PODS:
   - Bolts/Tasks (1.2.0)
   - Bond (4.0.0-beta3)
   - ConvenienceKit (0.2.0)
-  - Fabric (1.2.8):
-    - Fabric/Base (= 1.2.8)
-  - Fabric/Base (1.2.8)
-  - Facebook-iOS-SDK (3.23.2):
-    - Bolts (~> 1.0)
   - FBSDKCoreKit (4.4.0):
     - Bolts (~> 1.1)
     - FBSDKCoreKit/arc (= 4.4.0)
@@ -35,23 +30,21 @@ PODS:
   - MPCoachMarks (0.0.7)
   - Parse (1.7.5.3):
     - Bolts/Tasks (>= 1.2.0)
-  - ParseFacebookUtils (1.7.5.3):
+  - ParseFacebookUtilsV4 (1.7.5.3):
     - Bolts/Tasks (>= 1.2.0)
-    - Facebook-iOS-SDK (~> 3.23)
+    - FBSDKCoreKit (~> 4.0)
+    - FBSDKLoginKit (~> 4.0)
     - Parse (~> 1.7.5.3)
   - ParseUI (1.1.4):
     - Parse (~> 1.7)
   - SCLAlertView (0.4.1)
   - TGCameraViewController (2.2.1)
   - TPKeyboardAvoiding (1.2.9)
-  - TwitterCore (1.9.0)
-  - TwitterKit (1.9.0)
 
 DEPENDENCIES:
   - AMScrollingNavbar
   - Bond (= 4.0.0-beta3)
   - ConvenienceKit
-  - Fabric
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
@@ -61,21 +54,17 @@ DEPENDENCIES:
   - Mixpanel
   - MPCoachMarks
   - Parse
-  - ParseFacebookUtils
+  - ParseFacebookUtilsV4
   - ParseUI
   - SCLAlertView
   - TGCameraViewController
   - TPKeyboardAvoiding
-  - TwitterCore
-  - TwitterKit
 
 SPEC CHECKSUMS:
   AMScrollingNavbar: 767ed2db60d927a809bddff5d01b739b7020b12b
   Bolts: d176cb1e0012175589e389a9db49b85e27787576
   Bond: bcc6816bb5b22c907197d5b4931cbcab5545d0a4
   ConvenienceKit: 947032f82c3d419d107e0cbde1fcb725e9c7ed62
-  Fabric: a9eabe53915e9f1db55a84dd2838737928675878
-  Facebook-iOS-SDK: cd87f0b2f0c1d9574b44e8fa2baacc275524bac3
   FBSDKCoreKit: 75bdd75c980e811db218488d99dd93b7740f4474
   FBSDKLoginKit: 02a9254a4c132412fa03577b0d53e936d068a7fb
   FBSDKShareKit: a42865f20ba2d1cc548c4d0f73ad22cff6377ddb
@@ -85,12 +74,10 @@ SPEC CHECKSUMS:
   Mixpanel: f4d71ac2a306e7cda6ad03d4a2be249a0fd7a967
   MPCoachMarks: 71e28c2841a4f3e89331cb9f4124dc33ec4c3f0b
   Parse: 373adbb1ad2e34d383542c3b28f678c49ebe4881
-  ParseFacebookUtils: 008a24dc35884519ed6a6750648beb5149f1fad9
+  ParseFacebookUtilsV4: ea5db22e87b91cbf99b9d156642e2b97a4db7d51
   ParseUI: d1228541b02a36a7354c8f47747f5f7a89cf1ff0
   SCLAlertView: 9e60641edd9efcfc6d58227558eb7b03678dbcf3
   TGCameraViewController: 06bc4b742f2524fbf60f92cade61df595e8b8678
   TPKeyboardAvoiding: ff1ee4e5a5a0c119b965552af8f183868ea20207
-  TwitterCore: 98ed97a6047c4ef109522840337e815683ead7e5
-  TwitterKit: 1492792649dee11c2087498f7993f529bdb6c870
 
-COCOAPODS: 0.38.2
+COCOAPODS: 0.39.0

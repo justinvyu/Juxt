@@ -29,23 +29,23 @@ class JXTLoginViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        keyboardNotificationHandler = KeyboardNotificationHandler()
-        keyboardNotificationHandler?.keyboardWillBeShownHandler = { height in
-            
-            UIView.animateWithDuration(0.25) {
-                self.bottomSpaceConstraint.constant = -height
-                self.view.layoutIfNeeded()
-            }
-            
-        }
-        keyboardNotificationHandler?.keyboardWillBeHiddenHandler = { height in
-            
-            UIView.animateWithDuration(0.25) {
-                self.bottomSpaceConstraint.constant = 0
-                self.view.layoutIfNeeded()
-            }
-            
-        }
+//        keyboardNotificationHandler = KeyboardNotificationHandler()
+//        keyboardNotificationHandler?.keyboardWillBeShownHandler = { height in
+//            
+//            UIView.animateWithDuration(0.25) {
+//                self.bottomSpaceConstraint.constant = -height
+//                self.view.layoutIfNeeded()
+//            }
+//            
+//        }
+//        keyboardNotificationHandler?.keyboardWillBeHiddenHandler = { height in
+//            
+//            UIView.animateWithDuration(0.25) {
+//                self.bottomSpaceConstraint.constant = 0
+//                self.view.layoutIfNeeded()
+//            }
+//            
+//        }
     }
     
     override func viewDidAppear(animated: Bool) {

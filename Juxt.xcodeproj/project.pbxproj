@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1B64EA95EE41C72586264E43 /* Pods_Juxt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7219618C4A5AA4482001067C /* Pods_Juxt.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		1B64EA95EE41C72586264E43 /* Pods_Juxt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7219618C4A5AA4482001067C /* Pods_Juxt.framework */; };
 		D00360C71B6AA17D003DCB3D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D00360C61B6AA17D003DCB3D /* Social.framework */; };
 		D00360CC1B6AD782003DCB3D /* JYProgressButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00360CB1B6AD782003DCB3D /* JYProgressButton.swift */; };
 		D0092D371B581FFD00769490 /* JXTJuxtTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0092D361B581FFD00769490 /* JXTJuxtTableViewCell.swift */; };
@@ -4775,16 +4775,16 @@
 				D057A18D1B819F2000702E72 /* Bond.framework */,
 				D057A18F1B819F2000702E72 /* ConvenienceKit.framework */,
 				D057A1911B819F2000702E72 /* ConvenienceKit.bundle */,
+				D057A19B1B819F2000702E72 /* FacebookSDK.framework */,
 				D057A1931B819F2000702E72 /* FBSDKCoreKit.framework */,
 				D057A1951B819F2000702E72 /* FBSDKLoginKit.framework */,
 				D057A1971B819F2000702E72 /* FBSDKShareKit.framework */,
 				D057A1991B819F2000702E72 /* FLAnimatedImage.framework */,
-				D057A19B1B819F2000702E72 /* FacebookSDK.framework */,
 				D057A19D1B819F2000702E72 /* LLSimpleCamera.framework */,
 				D0E9C8411B8450CB00ED5EC0 /* MBSimpleLoadingIndicator.framework */,
 				D0E9C8431B8450CB00ED5EC0 /* MBSimpleLoadingIndicator.bundle */,
-				D057A19F1B819F2000702E72 /* MPCoachMarks.framework */,
 				D057A1A11B819F2000702E72 /* Mixpanel.framework */,
+				D057A19F1B819F2000702E72 /* MPCoachMarks.framework */,
 				D057A1A31B819F2000702E72 /* Parse.framework */,
 				D057A1A51B819F2000702E72 /* ParseFacebookUtils.framework */,
 				D057A1A71B819F2000702E72 /* ParseUI.framework */,

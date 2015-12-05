@@ -42,23 +42,23 @@ class JXTAddJuxtViewController: UIViewController {
         
         UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
         
-        keyboardNotificationHandler = KeyboardNotificationHandler()
-        
-        keyboardNotificationHandler!.keyboardWillBeHiddenHandler = { (height: CGFloat) in
-            UIView.animateWithDuration(0.3) {
-                self.descriptionHeight.constant -= height
-                self.nextBottomSpace.constant = 20
-//                self.view.layoutIfNeeded()
-            }
-        }
-        
-        keyboardNotificationHandler!.keyboardWillBeShownHandler = { (height: CGFloat) in
-            UIView.animateWithDuration(0.3) {
-                self.descriptionHeight.constant += height
-                self.nextBottomSpace.constant = height + 10
-//                self.view.layoutIfNeeded()
-            }
-        }
+//        keyboardNotificationHandler = KeyboardNotificationHandler()
+//        
+//        keyboardNotificationHandler!.keyboardWillBeHiddenHandler = { (height: CGFloat) in
+//            UIView.animateWithDuration(0.3) {
+//                self.descriptionHeight.constant -= height
+//                self.nextBottomSpace.constant = 20
+////                self.view.layoutIfNeeded()
+//            }
+//        }
+//        
+//        keyboardNotificationHandler!.keyboardWillBeShownHandler = { (height: CGFloat) in
+//            UIView.animateWithDuration(0.3) {
+//                self.descriptionHeight.constant += height
+//                self.nextBottomSpace.constant = height + 10
+////                self.view.layoutIfNeeded()
+//            }
+//        }
     }
     
     override func viewWillDisappear(animated: Bool) {

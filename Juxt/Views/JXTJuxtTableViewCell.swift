@@ -80,7 +80,7 @@ class JXTJuxtTableViewCell: PFTableViewCell {
 //            }
 //        }
 
-        juxt!.likes.observe({ likeList in
+        juxt?.likes.observe({ likeList in
             if let likeList = likeList {
                 print(likeList.count)
                 self.likeButton.setTitle("\(likeList.count)", forState: .Normal)
