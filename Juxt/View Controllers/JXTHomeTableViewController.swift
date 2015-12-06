@@ -120,7 +120,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
     // MARK: UIActionSheets
     
     func showActionSheetForPost(post: Juxt) {
-        if (post.user == PFUser.currentUser()) {
+        if (post.user?.objectId == PFUser.currentUser()!.objectId) {
             showDeleteActionSheetForPost(post)
         } else {
             showFlagActionSheetForPost(post)
@@ -208,7 +208,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         tableView.scrollsToTop = true
         imageLoadQueue = dispatch_queue_create("imageLoad", DISPATCH_QUEUE_SERIAL)
         
-        tableView.estimatedRowHeight = 340
+        tableView.estimatedRowHeight = 600
         tableView.rowHeight = UITableViewAutomaticDimension
         
         self.navigationItem.titleView?.tintColor = UIColor(white: 0.97, alpha: 1.0)

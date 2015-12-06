@@ -499,7 +499,7 @@ extension JXTJuxtViewController: UITableViewDataSource {
             
             cell.juxtViewController = self
             cell.layoutIfNeeded()
-            
+
             return cell
         default:
             return UITableViewCell()

@@ -121,17 +121,14 @@ class ParseHelper: NSObject {
         flagObject.setObject(post, forKey: FlaggedContentToJuxt)
         
         let ACL = PFACL(user: PFUser.currentUser()!)
-        ACL.setPublicReadAccess(true)
         flagObject.ACL = ACL
-        
-        let postACL = PFACL(user: post.user!)
-        postACL.setPublicReadAccess(false)
-        post.ACL = postACL
-        
-        post.saveInBackground()
-        
-        //TODO: add error handling
-        flagObject.saveInBackgroundWithBlock(nil)
+
+        post.ACL?.setPublicReadAccess(false)
+//        post.ACL?.setReadAccess(false, forUser: user)
+
+        post.saveInBackgroundWithBlock() { result in
+            flagObject.saveInBackground()
+        }
     }
     
     // MARK: Likes
