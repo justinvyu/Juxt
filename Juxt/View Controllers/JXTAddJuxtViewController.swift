@@ -21,8 +21,8 @@ class JXTAddJuxtViewController: UIViewController {
     @IBOutlet weak var uploadActivityIndicator: UIActivityIndicatorView!
     
     var photoTakingHelper: PhotoTakingHelper?
-    var keyboardNotificationHandler : KeyboardNotificationHandler?
-    
+    var keyboardNotificationHandler: KeyboardHelper?
+
     weak var originalVC: UIViewController?
     
     override func viewDidLoad() {
@@ -42,23 +42,23 @@ class JXTAddJuxtViewController: UIViewController {
         
         UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
         
-//        keyboardNotificationHandler = KeyboardNotificationHandler()
-//        
-//        keyboardNotificationHandler!.keyboardWillBeHiddenHandler = { (height: CGFloat) in
-//            UIView.animateWithDuration(0.3) {
-//                self.descriptionHeight.constant -= height
-//                self.nextBottomSpace.constant = 20
-////                self.view.layoutIfNeeded()
-//            }
-//        }
-//        
-//        keyboardNotificationHandler!.keyboardWillBeShownHandler = { (height: CGFloat) in
-//            UIView.animateWithDuration(0.3) {
-//                self.descriptionHeight.constant += height
-//                self.nextBottomSpace.constant = height + 10
-////                self.view.layoutIfNeeded()
-//            }
-//        }
+        keyboardNotificationHandler = KeyboardHelper(view: self.view)
+        
+        keyboardNotificationHandler!.keyboardWillShowHandler = { height in
+            UIView.animateWithDuration(0.3) {
+                self.descriptionHeight.constant -= height
+                self.nextBottomSpace.constant = 20
+//                self.view.layoutIfNeeded()
+            }
+        }
+        
+        keyboardNotificationHandler!.keyboardWillShowHandler = { height in
+            UIView.animateWithDuration(0.3) {
+                self.descriptionHeight.constant += height
+                self.nextBottomSpace.constant = height + 10
+//                self.view.layoutIfNeeded()
+            }
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {

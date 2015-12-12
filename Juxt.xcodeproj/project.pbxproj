@@ -33,6 +33,7 @@
 		D0AFDC891B556E630097228E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0AFDC881B556E630097228E /* Images.xcassets */; };
 		D0AFDC8C1B556E630097228E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0AFDC8A1B556E630097228E /* LaunchScreen.xib */; };
 		D0AFDC981B556E630097228E /* JuxtTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AFDC971B556E630097228E /* JuxtTests.swift */; };
+		D0B932E81C14042100BEDDD3 /* KeyboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B932E71C14042100BEDDD3 /* KeyboardHelper.swift */; };
 		D0BD46531B602EAA0007943E /* JXTPhotoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BD46521B602EAA0007943E /* JXTPhotoTableViewCell.swift */; };
 		D0BE34801B7183400062B5B0 /* Pods_Juxt.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7219618C4A5AA4482001067C /* Pods_Juxt.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D0BE3CBA1B727E1F0062B5B0 /* MixpanelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BE3CB91B727E1F0062B5B0 /* MixpanelHelper.swift */; };
@@ -255,6 +256,7 @@
 		D0AFDC911B556E630097228E /* JuxtTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JuxtTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0AFDC961B556E630097228E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0AFDC971B556E630097228E /* JuxtTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JuxtTests.swift; sourceTree = "<group>"; };
+		D0B932E71C14042100BEDDD3 /* KeyboardHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardHelper.swift; sourceTree = "<group>"; };
 		D0BD46521B602EAA0007943E /* JXTPhotoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTPhotoTableViewCell.swift; sourceTree = "<group>"; };
 		D0BE34851B71839B0062B5B0 /* AMScrollingNavbar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMScrollingNavbar.h; sourceTree = "<group>"; };
 		D0BE34861B71839B0062B5B0 /* UIViewController+ScrollingNavbar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ScrollingNavbar.h"; sourceTree = "<group>"; };
@@ -5531,6 +5533,7 @@
 				D02C94CA1B791FD1005C8B7F /* CoachmarksHelper.swift */,
 				D09E7B971B7B0E9C001397E1 /* ImageHelper.swift */,
 				D08EA3611B7D2DA4008D2ADD /* GIFHelper.swift */,
+				D0B932E71C14042100BEDDD3 /* KeyboardHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -5891,6 +5894,7 @@
 				D08978221B59C2C4009FB6A2 /* PhotoTakingHelper.swift in Sources */,
 				D08EA3781B7D2E9C008D2ADD /* MLIMGURUploader.m in Sources */,
 				D04E26B01B741D9E006AC1A3 /* JXTSideBySideView.swift in Sources */,
+				D0B932E81C14042100BEDDD3 /* KeyboardHelper.swift in Sources */,
 				D0F7C5E91B586949004E2F3E /* JXTAddPhotoViewController.swift in Sources */,
 				D08978281B5D589B009FB6A2 /* ParseHelper.swift in Sources */,
 				D0F7C5EF1B596496004E2F3E /* JXTImageGalleryScrollView.swift in Sources */,

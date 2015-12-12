@@ -16,7 +16,7 @@ class JXTLoginViewController: UIViewController {
     
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var usernameTextField: UITextField!
-    var keyboardNotificationHandler: KeyboardNotificationHandler?
+    var keyboardNotificationHandler: KeyboardHelper?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,23 +29,23 @@ class JXTLoginViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-//        keyboardNotificationHandler = KeyboardNotificationHandler()
-//        keyboardNotificationHandler?.keyboardWillBeShownHandler = { height in
-//            
-//            UIView.animateWithDuration(0.25) {
-//                self.bottomSpaceConstraint.constant = -height
-//                self.view.layoutIfNeeded()
-//            }
-//            
-//        }
-//        keyboardNotificationHandler?.keyboardWillBeHiddenHandler = { height in
-//            
-//            UIView.animateWithDuration(0.25) {
-//                self.bottomSpaceConstraint.constant = 0
-//                self.view.layoutIfNeeded()
-//            }
-//            
-//        }
+        keyboardNotificationHandler = KeyboardHelper(view: self.view)
+        keyboardNotificationHandler?.keyboardWillShowHandler = { height in
+            
+            UIView.animateWithDuration(0.25) {
+                self.bottomSpaceConstraint.constant = -height
+                self.view.layoutIfNeeded()
+            }
+            
+        }
+        keyboardNotificationHandler?.keyboardWillHideHandler = { height in
+            
+            UIView.animateWithDuration(0.25) {
+                self.bottomSpaceConstraint.constant = 0
+                self.view.layoutIfNeeded()
+            }
+            
+        }
     }
     
     override func viewDidAppear(animated: Bool) {

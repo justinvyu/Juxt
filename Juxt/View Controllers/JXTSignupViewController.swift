@@ -22,7 +22,7 @@ class JXTSignupViewController: UIViewController {
     
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var usernameTextField: UITextField!
-    var keyboardNotificationHandler: KeyboardNotificationHandler?
+    var keyboardNotificationHandler: KeyboardHelper?
     
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
@@ -82,23 +82,23 @@ class JXTSignupViewController: UIViewController {
         
         self.setupScrollView()
         
-//        keyboardNotificationHandler = KeyboardNotificationHandler()
-//        keyboardNotificationHandler?.keyboardWillBeShownHandler = { height in
-//            
-//            UIView.animateWithDuration(0.25) {
-//                self.bottomSpaceConstraint.constant = -height
-//                self.view.layoutIfNeeded()
-//            }
-//            
-//        }
-//        keyboardNotificationHandler?.keyboardWillBeHiddenHandler = { height in
-//            
-//            UIView.animateWithDuration(0.25) {
-//                self.bottomSpaceConstraint.constant = 0
-//                self.view.layoutIfNeeded()
-//            }
-//            
-//        }
+        keyboardNotificationHandler = KeyboardHelper(view: self.view)
+        keyboardNotificationHandler?.keyboardWillShowHandler = { height in
+            
+            UIView.animateWithDuration(0.25) {
+                self.bottomSpaceConstraint.constant = -height
+                self.view.layoutIfNeeded()
+            }
+            
+        }
+        keyboardNotificationHandler?.keyboardWillHideHandler = { height in
+            
+            UIView.animateWithDuration(0.25) {
+                self.bottomSpaceConstraint.constant = 0
+                self.view.layoutIfNeeded()
+            }
+            
+        }
 
         usernameTextField.becomeFirstResponder()
 
