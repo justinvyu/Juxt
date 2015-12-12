@@ -39,7 +39,7 @@ class JXTLoginViewController: UIViewController {
             
         }
         keyboardNotificationHandler?.keyboardWillHideHandler = { height in
-            
+
             UIView.animateWithDuration(0.25) {
                 self.bottomSpaceConstraint.constant = 0
                 self.view.layoutIfNeeded()

@@ -6,7 +6,7 @@ See change happen
 - [x] Likes
 - [x] Flagging
 - [x] Deleting
-- [ ] Add keyboard notification handler to slide the buttons up
-- [ ] Login
+- [x] Add keyboard notification handler to slide the buttons up
+- [x] Login
 - [ ] Signup
 - [ ] Show a spinning circle when downloading the side-by-side photo.

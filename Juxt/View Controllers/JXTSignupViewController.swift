@@ -26,15 +26,13 @@ class JXTSignupViewController: UIViewController {
     
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
-    
+    @IBOutlet weak var eulaTextView: UITextView!
+
     var profilePicture: UIButton?
     var profileLabel: UILabel?
-    var eulaTextView: UITextView?
-    
     var errorLabel: UILabel?
     
     @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var contentScrollView: UIScrollView!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     
     var photoTakingHelper: PhotoTakingHelper?
@@ -43,25 +41,28 @@ class JXTSignupViewController: UIViewController {
         didSet {
             switch state {
             case 0: // username password
-                self.contentScrollView.setContentOffset(CGPointMake(0, 0), animated: true)
                 self.backButton.hidden = true
                 self.cancelButton.hidden = false
+
+                setTextFieldsHidden(false)
             case 1: // profile picture
                 if self.checkValidSignup() == true {
-
-                    self.contentScrollView.setContentOffset(CGPointMake(self.view.frame.size.width, 0), animated: true)
                     self.errorLabel?.hidden = true
-                    self.backButton.hidden = false
                     self.cancelButton.hidden = true
+                    self.backButton.hidden = false
+
                     self.profilePicture?.hidden = false
                     self.profileLabel?.hidden = false
                     self.confirmPasswordTextField.resignFirstResponder()
+
+                    self.eulaTextView.hidden = true
+                    setTextFieldsHidden(true)
                 } else {
                     self.state = 0
                 }
             case 2: // license agreement
-                self.contentScrollView.setContentOffset(CGPointMake(2 * self.view.frame.size.width, 0), animated: true)
                 self.eulaTextView?.hidden = false
+
             case 3:
                 print("done")
             default:
@@ -75,69 +76,49 @@ class JXTSignupViewController: UIViewController {
         
         self.usernameTextField.returnKeyType = .Next
         self.passwordTextField.returnKeyType = .Done
-        
         self.state = 0
-        
         self.automaticallyAdjustsScrollViewInsets = false
-        
-        self.setupScrollView()
-        
-        keyboardNotificationHandler = KeyboardHelper(view: self.view)
-        keyboardNotificationHandler?.keyboardWillShowHandler = { height in
-            
-            UIView.animateWithDuration(0.25) {
-                self.bottomSpaceConstraint.constant = -height
-                self.view.layoutIfNeeded()
-            }
-            
-        }
-        keyboardNotificationHandler?.keyboardWillHideHandler = { height in
-            
-            UIView.animateWithDuration(0.25) {
-                self.bottomSpaceConstraint.constant = 0
-                self.view.layoutIfNeeded()
-            }
-            
-        }
 
-        usernameTextField.becomeFirstResponder()
-
+        eulaTextView.textColor = UIColor.whiteColor()
+        let path = NSBundle.mainBundle().pathForResource("eula", ofType: "txt")
+        eulaTextView?.text = try? String(contentsOfFile: path!, encoding: NSUTF8StringEncoding)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         let temp = self.state
         self.state = temp
+
+        keyboardNotificationHandler = KeyboardHelper(view: self.view)
+        keyboardNotificationHandler?.keyboardWillShowHandler = { height in
+
+            UIView.animateWithDuration(0.25) {
+                self.bottomSpaceConstraint.constant = -height
+                self.view.layoutIfNeeded()
+            }
+
+        }
+        keyboardNotificationHandler?.keyboardWillHideHandler = { height in
+
+            UIView.animateWithDuration(0.25) {
+                self.bottomSpaceConstraint.constant = 0
+                self.view.layoutIfNeeded()
+            }
+
+        }
+
     }
-    
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
+        usernameTextField.becomeFirstResponder()
     }
-    
+
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
         self.usernameTextField.resignFirstResponder()
         self.passwordTextField.resignFirstResponder()
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        profilePicture?.center = self.contentScrollView.center
-        profilePicture?.center.y = self.passwordTextField.center.y - 10
-        profilePicture?.center.x += self.view.frame.size.width
-        
-        profileLabel?.center = self.contentScrollView.center
-        profileLabel?.center.y = self.passwordTextField.center.y
-        profileLabel?.center.y += (40 + 10)
-        profileLabel?.center.x += self.view.frame.size.width
-        
-        eulaTextView?.frame.origin.x = 3 * self.view.frame.size.width - 10 - eulaTextView!.frame.size.width
-        eulaTextView?.frame.origin.y = 20
-        eulaTextView?.frame.size.height = self.view.frame.size.height - 80
-        
     }
     
     func checkValidSignup() -> Bool {
@@ -185,63 +166,64 @@ class JXTSignupViewController: UIViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    @IBAction func nextAction(sender: UIButton) {
-        self.state = self.state == 3 ? self.state : self.state + 1
-    }
-    
     @IBAction func backAction(sender: UIButton) {
-        self.state = self.state == 0 ? self.state : self.state - 1
+        state = state == 0 ? state : state - 1
     }
-    func setupScrollView() {
-        self.contentScrollView.contentSize = CGSizeMake(3 * self.view.frame.size.width, self.contentScrollView.frame.size.height)
-        
-        // Profile Image
-        
-        profilePicture = UIButton(type: .Custom) as? UIButton
-        profilePicture?.setImage(UIImage(named: "splash"), forState: .Normal)
-        profilePicture?.imageView?.contentMode = .ScaleAspectFill
-        profilePicture?.frame = CGRectMake(0, 0, 80, 80)
-        profilePicture?.layer.cornerRadius = 16.0
-        profilePicture?.clipsToBounds = true
-        profilePicture?.addTarget(self, action: "setProfilePicture", forControlEvents: .TouchUpInside)
-        self.contentScrollView.addSubview(profilePicture!)
-        self.profilePicture?.hidden = true
-        
-        let profileLabel = UILabel(frame: CGRectMake(0, 0, 300, 44))
-        profileLabel.text = "tap to your own profile picture"
-        profileLabel.textAlignment = .Center
-        profileLabel.font = UIFont.systemFontOfSize(15.0)
-        profileLabel.textColor = UIColor.whiteColor()
-        self.contentScrollView.addSubview(profileLabel)
-        self.profileLabel = profileLabel
-        self.profileLabel?.hidden = true
-        
-        self.eulaTextView = UITextView(frame: CGRectMake(0, 0, self.view.frame.size.width - 20, 0))
-        eulaTextView?.backgroundColor = UIColor.clearColor()
-        eulaTextView?.textColor = UIColor.whiteColor()
-        eulaTextView?.font = UIFont.systemFontOfSize(14.0)
-        eulaTextView?.editable = false
-        eulaTextView?.selectable = false
-        let file = "eula.txt"
-        
-        let path = NSBundle.mainBundle().pathForResource("eula", ofType: "txt")
-        eulaTextView?.text = try? String(contentsOfFile: path!, encoding: NSUTF8StringEncoding)
-        self.contentScrollView.addSubview(eulaTextView!)
-        eulaTextView?.hidden = true
+
+    @IBAction func nextAction(sender: UIButton) {
+        state = state == 3 ? state : state + 1
     }
-    
+
+//    func setupScrollView() {
+//
+//        // Profile Image
+//        
+//        profilePicture = UIButton(type: .Custom) as? UIButton
+//        profilePicture?.setImage(UIImage(named: "splash"), forState: .Normal)
+//        profilePicture?.imageView?.contentMode = .ScaleAspectFill
+//        profilePicture?.frame = CGRectMake(0, 0, 80, 80)
+//        profilePicture?.layer.cornerRadius = 16.0
+//        profilePicture?.clipsToBounds = true
+//        profilePicture?.addTarget(self, action: "setProfilePicture", forControlEvents: .TouchUpInside)
+////        self.contentScrollView.addSubview(profilePicture!)
+//        self.profilePicture?.hidden = true
+//        
+//        let profileLabel = UILabel(frame: CGRectMake(0, 0, 300, 44))
+//        profileLabel.text = "tap to your own profile picture"
+//        profileLabel.textAlignment = .Center
+//        profileLabel.font = UIFont.systemFontOfSize(15.0)
+//        profileLabel.textColor = UIColor.whiteColor()
+////        self.contentScrollView.addSubview(profileLabel)
+//        self.profileLabel = profileLabel
+//        self.profileLabel?.hidden = true
+//        
+//        self.eulaTextView = UITextView(frame: CGRectMake(0, 0, self.view.frame.size.width - 20, 0))
+//        eulaTextView?.backgroundColor = UIColor.clearColor()
+//        eulaTextView?.textColor = UIColor.whiteColor()
+//        eulaTextView?.font = UIFont.systemFontOfSize(14.0)
+//        eulaTextView?.editable = false
+//        eulaTextView?.selectable = false
+//        let file = "eula.txt"
+//        
+//        let path = NSBundle.mainBundle().pathForResource("eula", ofType: "txt")
+//        eulaTextView?.text = try? String(contentsOfFile: path!, encoding: NSUTF8StringEncoding)
+//        eulaTextView?.hidden = true
+//    }
+
     func setProfilePicture() {
-//        self.usernameTextField.resignFirstResponder()
-//        self.passwordTextField.resignFirstResponder()
-        
+
         self.state = 1
-        self.contentScrollView.setContentOffset(CGPointMake(self.view.frame.size.width, 0), animated: false)
-        print(self.contentScrollView?.contentOffset)
 
         self.photoTakingHelper = PhotoTakingHelper(viewController: self) { image in
             let resized = ImageHelper.scaleImage(image!, width: 300.0)
             self.profilePicture?.setImage(resized, forState: .Normal)
         }
+    }
+
+    func setTextFieldsHidden(hidden: Bool) {
+        usernameTextField.hidden = hidden
+        passwordTextField.hidden = hidden
+        confirmPasswordTextField.hidden = hidden
     }
     
 }

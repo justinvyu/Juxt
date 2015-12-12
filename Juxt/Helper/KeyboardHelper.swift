@@ -15,6 +15,8 @@ class KeyboardHelper: NSObject {
     var keyboardWillShowHandler: KeyboardHelperCallback?
     var keyboardWillHideHandler: KeyboardHelperCallback?
 
+    private var keyboardHeight: CGFloat?
+
     init(view: UIView) {
         super.init()
 
@@ -28,12 +30,17 @@ class KeyboardHelper: NSObject {
         let userInfo = notification.userInfo
 
         if let keyboardSize = (userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            self.keyboardHeight = keyboardSize.height
             keyboardWillShowHandler?(height: keyboardSize.height)
         }
     }
 
     func keyboardWillHide(notification: NSNotification) {
+        let userInfo = notification.userInfo
 
+        if let keyboardSize = (userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue() {
+            keyboardWillHideHandler?(height: keyboardSize.height)
+        }
     }
 
 }
