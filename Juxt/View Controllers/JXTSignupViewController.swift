@@ -14,6 +14,7 @@ enum ErrorType {
     case UsernameTooShort
     case Missing
     case NotMatching
+    case UsernameAlreadyExists
 }
 
 class JXTSignupViewController: UIViewController {
@@ -27,9 +28,9 @@ class JXTSignupViewController: UIViewController {
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var eulaTextView: UITextView!
+    @IBOutlet weak var profilePictureButton: UIButton!
+    @IBOutlet weak var previewImageView: UIImageView!
 
-    var profilePicture: UIButton?
-    var profileLabel: UILabel?
     var errorLabel: UILabel?
     
     @IBOutlet weak var nextButton: UIButton!
@@ -41,27 +42,34 @@ class JXTSignupViewController: UIViewController {
         didSet {
             switch state {
             case 0: // username password
-                self.backButton.hidden = true
-                self.cancelButton.hidden = false
+                backButton.hidden = true
+                cancelButton.hidden = false
+                nextButton.setTitle("next", forState: .Normal)
+
+                profilePictureButton.hidden = true
+//                instructionLabel.hidden = true
 
                 setTextFieldsHidden(false)
             case 1: // profile picture
-                if self.checkValidSignup() == true {
-                    self.errorLabel?.hidden = true
-                    self.cancelButton.hidden = true
-                    self.backButton.hidden = false
+                if checkValidSignup() {
+                    errorLabel?.hidden = true
+                    cancelButton.hidden = true
+                    backButton.hidden = false
 
-                    self.profilePicture?.hidden = false
-                    self.profileLabel?.hidden = false
-                    self.confirmPasswordTextField.resignFirstResponder()
+                    profilePictureButton.hidden = false
+//                    instructionLabel.hidden = false
+                    nextButton.setTitle("next", forState: .Normal)
 
-                    self.eulaTextView.hidden = true
+                    eulaTextView.hidden = true
                     setTextFieldsHidden(true)
                 } else {
                     self.state = 0
                 }
             case 2: // license agreement
-                self.eulaTextView?.hidden = false
+                profilePictureButton.hidden = true
+//                instructionLabel.hidden = true
+                nextButton.setTitle("done", forState: .Normal)
+                eulaTextView.hidden = false
 
             case 3:
                 print("done")
@@ -77,18 +85,32 @@ class JXTSignupViewController: UIViewController {
         self.usernameTextField.returnKeyType = .Next
         self.passwordTextField.returnKeyType = .Done
         self.state = 0
-        self.automaticallyAdjustsScrollViewInsets = false
 
-        eulaTextView.textColor = UIColor.whiteColor()
+        // Set TextView EULA text
         let path = NSBundle.mainBundle().pathForResource("eula", ofType: "txt")
-        eulaTextView?.text = try? String(contentsOfFile: path!, encoding: NSUTF8StringEncoding)
+        eulaTextView.text = try? String(contentsOfFile: path!, encoding: NSUTF8StringEncoding)
+
+        let resized = ImageHelper.scaleImage(UIImage(named: "splash")!, width: 300.0)
+        previewImageView.image = reesized
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+
+        // Reset state (maybe not necessary)
         let temp = self.state
         self.state = temp
 
+        // Set Text View Options
+        eulaTextView.font = UIFont.systemFontOfSize(15)
+        eulaTextView.textColor = UIColor.whiteColor()
+
+        // Prof. Picture
+        profilePictureButton.layer.cornerRadius = 8.0
+        profilePictureButton.clipsToBounds = true
+        previewImageView.layer.cornerRadius = 8.0
+        previewImageView.clipsToBounds = true
+        
         keyboardNotificationHandler = KeyboardHelper(view: self.view)
         keyboardNotificationHandler?.keyboardWillShowHandler = { height in
 
@@ -111,7 +133,14 @@ class JXTSignupViewController: UIViewController {
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        usernameTextField.becomeFirstResponder()
+
+        if state == 0 {
+            usernameTextField.becomeFirstResponder()
+        }
+    }
+
+    override func viewWillLayoutSubviews() {
+        eulaTextView.contentOffset = CGPointMake(0, 0)
     }
 
     override func viewWillDisappear(animated: Bool) {
@@ -174,49 +203,13 @@ class JXTSignupViewController: UIViewController {
         state = state == 3 ? state : state + 1
     }
 
-//    func setupScrollView() {
-//
-//        // Profile Image
-//        
-//        profilePicture = UIButton(type: .Custom) as? UIButton
-//        profilePicture?.setImage(UIImage(named: "splash"), forState: .Normal)
-//        profilePicture?.imageView?.contentMode = .ScaleAspectFill
-//        profilePicture?.frame = CGRectMake(0, 0, 80, 80)
-//        profilePicture?.layer.cornerRadius = 16.0
-//        profilePicture?.clipsToBounds = true
-//        profilePicture?.addTarget(self, action: "setProfilePicture", forControlEvents: .TouchUpInside)
-////        self.contentScrollView.addSubview(profilePicture!)
-//        self.profilePicture?.hidden = true
-//        
-//        let profileLabel = UILabel(frame: CGRectMake(0, 0, 300, 44))
-//        profileLabel.text = "tap to your own profile picture"
-//        profileLabel.textAlignment = .Center
-//        profileLabel.font = UIFont.systemFontOfSize(15.0)
-//        profileLabel.textColor = UIColor.whiteColor()
-////        self.contentScrollView.addSubview(profileLabel)
-//        self.profileLabel = profileLabel
-//        self.profileLabel?.hidden = true
-//        
-//        self.eulaTextView = UITextView(frame: CGRectMake(0, 0, self.view.frame.size.width - 20, 0))
-//        eulaTextView?.backgroundColor = UIColor.clearColor()
-//        eulaTextView?.textColor = UIColor.whiteColor()
-//        eulaTextView?.font = UIFont.systemFontOfSize(14.0)
-//        eulaTextView?.editable = false
-//        eulaTextView?.selectable = false
-//        let file = "eula.txt"
-//        
-//        let path = NSBundle.mainBundle().pathForResource("eula", ofType: "txt")
-//        eulaTextView?.text = try? String(contentsOfFile: path!, encoding: NSUTF8StringEncoding)
-//        eulaTextView?.hidden = true
-//    }
+    @IBAction func setProfilePicture() {
 
-    func setProfilePicture() {
-
-        self.state = 1
+        state = 1
 
         self.photoTakingHelper = PhotoTakingHelper(viewController: self) { image in
             let resized = ImageHelper.scaleImage(image!, width: 300.0)
-            self.profilePicture?.setImage(resized, forState: .Normal)
+            self.profilePictureButton.setImage(resized, forState: .Normal)
         }
     }
 
@@ -224,6 +217,13 @@ class JXTSignupViewController: UIViewController {
         usernameTextField.hidden = hidden
         passwordTextField.hidden = hidden
         confirmPasswordTextField.hidden = hidden
+
+        if hidden {
+            confirmPasswordTextField.resignFirstResponder()
+            passwordTextField.resignFirstResponder()
+            usernameTextField.resignFirstResponder()
+        }
+
     }
-    
+
 }
