@@ -91,7 +91,7 @@ class JXTSignupViewController: UIViewController {
         eulaTextView.text = try? String(contentsOfFile: path!, encoding: NSUTF8StringEncoding)
 
         let resized = ImageHelper.scaleImage(UIImage(named: "splash")!, width: 300.0)
-        previewImageView.image = reesized
+        previewImageView.image = resized
     }
     
     override func viewWillAppear(animated: Bool) {
