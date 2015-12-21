@@ -165,7 +165,7 @@ class JXTCameraViewController: UIViewController {
                 toggleButton?.addTarget(self, action: "toggleButtonPressed:", forControlEvents: .TouchUpInside)
                 self.view.addSubview(toggleButton!)
                 
-                self.setupCoachmarks()
+//                self.setupCoachmarks()
             }
         }
         
@@ -204,25 +204,25 @@ class JXTCameraViewController: UIViewController {
         
     }
     
-    func setupCoachmarks() {
-        
-        if !CoachmarksHelper.coachmarkHasBeenViewed(CoachmarksHelper.keys.OverlayToggle) {
-            let overlayToggleCoachmarkRect = CGRectMake(self.view.center.x - 78, 0, 55, 55)
-            let overlayToggleCoachmark = CoachmarksHelper.generateCoachmark(rect: overlayToggleCoachmarkRect, caption: "The guide view is meant to help you take your picture from the best angle and position possible. This button will toggle ", shape: MaskShape.SHAPE_CIRCLE, position: LabelPosition.LABEL_POSITION_BOTTOM, alignment: LabelAligment.LABEL_ALIGNMENT_CENTER, showArrow: true)
-            
-            var coachmarks: [CoachmarksHelper.mark] = []
-            
-            coachmarks = CoachmarksHelper.addMarkToCoachmarks(coachmarks, newMark: overlayToggleCoachmark)
-            let coachmarkView = CoachmarksHelper.generateCoachmarksViewWithMarks(marks: coachmarks, withFrame: self.view.frame)
-            self.view.addSubview(coachmarkView)
-            coachmarkView.enableContinueLabel = false
-            coachmarkView.enableSkipButton = false
-            coachmarkView.start()
-            
-            CoachmarksHelper.setCoachmarkHasBeenViewedToTrue(CoachmarksHelper.keys.OverlayToggle)
-        }
-    }
-    
+//    func setupCoachmarks() {
+//        
+//        if !CoachmarksHelper.coachmarkHasBeenViewed(CoachmarksHelper.keys.OverlayToggle) {
+//            let overlayToggleCoachmarkRect = CGRectMake(self.view.center.x - 78, 0, 55, 55)
+//            let overlayToggleCoachmark = CoachmarksHelper.generateCoachmark(rect: overlayToggleCoachmarkRect, caption: "The guide view is meant to help you take your picture from the best angle and position possible. This button will toggle ", shape: MaskShape.SHAPE_CIRCLE, position: LabelPosition.LABEL_POSITION_BOTTOM, alignment: LabelAligment.LABEL_ALIGNMENT_CENTER, showArrow: true)
+//            
+//            var coachmarks: [CoachmarksHelper.mark] = []
+//            
+//            coachmarks = CoachmarksHelper.addMarkToCoachmarks(coachmarks, newMark: overlayToggleCoachmark)
+//            let coachmarkView = CoachmarksHelper.generateCoachmarksViewWithMarks(marks: coachmarks, withFrame: self.view.frame)
+//            self.view.addSubview(coachmarkView)
+//            coachmarkView.enableContinueLabel = false
+//            coachmarkView.enableSkipButton = false
+//            coachmarkView.start()
+//            
+//            CoachmarksHelper.setCoachmarkHasBeenViewedToTrue(CoachmarksHelper.keys.OverlayToggle)
+//        }
+//    }
+
     func toggleButtonPressed(button: UIButton) {
         
         self.translucentGuideView?.hidden = self.translucentGuideView!.hidden == true ? false : true

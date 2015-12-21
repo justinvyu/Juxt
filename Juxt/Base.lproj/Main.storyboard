@@ -685,6 +685,7 @@
                                             <outlet property="sideBySideView" destination="sSl-06-TmP" id="3kp-5q-Ris"/>
                                             <outlet property="titleLabel" destination="Vpo-2c-Ouj" id="Pxm-07-x7I"/>
                                             <outlet property="usernameLabel" destination="6rc-cF-2JV" id="F59-MA-8Uz"/>
+                                            <segue destination="tI9-EZ-yIc" kind="show" identifier="ShowJuxt" id="Yvm-Xs-VVJ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1753,5 +1754,8 @@
         <image name="star" width="32" height="32"/>
         <image name="star-selected" width="32" height="32"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Yvm-Xs-VVJ"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.39368876870000002" green="0.76120675329999998" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
 </document>

@@ -70,7 +70,7 @@ class JXTJuxtViewController: UIViewController {
     }
     
     func showActionSheetForPost(post: Juxt) {
-        if (post.user == PFUser.currentUser()) {
+        if (post.user?.objectId == PFUser.currentUser()?.objectId) {
             showDeleteActionSheetForPost(post)
         } else {
             showFlagActionSheetForPost(post)

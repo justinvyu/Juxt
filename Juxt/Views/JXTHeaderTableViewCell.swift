@@ -33,9 +33,9 @@ class JXTHeaderTableViewCell: UITableViewCell {
             self.profilePicture.layer.cornerRadius = 5.0
             self.titleLabel.text = juxt?.title
             
-            otherButton.setImage(juxt?.user == PFUser.currentUser() ? UIImage(named: "delete") : UIImage(named: "flag"), forState: .Normal)
-            otherButton.setImage(juxt?.user == PFUser.currentUser() ? UIImage(named: "delete") : UIImage(named: "flag"), forState: .Selected)
-            otherButton.setImage(juxt?.user == PFUser.currentUser() ? UIImage(named: "delete") : UIImage(named: "flag"), forState: .Highlighted)
+            otherButton.setImage(juxt?.user?.objectId == PFUser.currentUser()?.objectId ? UIImage(named: "delete") : UIImage(named: "flag"), forState: .Normal)
+            otherButton.setImage(juxt?.user?.objectId == PFUser.currentUser()?.objectId ? UIImage(named: "delete") : UIImage(named: "flag"), forState: .Selected)
+            otherButton.setImage(juxt?.user?.objectId == PFUser.currentUser()?.objectId ? UIImage(named: "delete") : UIImage(named: "flag"), forState: .Highlighted)
 
             juxt?.likes.observe({ likeList in
                 if let likeList = likeList {
