@@ -242,7 +242,6 @@ class JXTJuxtViewController: UIViewController {
 //        
 //    }
     
-    
     func showShareDialog() {
 
         FBSDKShareDialog.showFromViewController(self, withContent: self.content, delegate: self)
@@ -426,7 +425,6 @@ extension JXTJuxtViewController: JXTPopupViewDelegate {
         self.content = content
         
         self.showShareDialog()
-        
     }
     
     func saveToCameraRoll(compareView: JXTCompareView, firstImage: UIImage, secondImage: UIImage) {

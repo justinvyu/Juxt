@@ -31,9 +31,10 @@ class JXTSignupViewController: UIViewController {
     @IBOutlet weak var profilePictureButton: UIButton!
     @IBOutlet weak var previewImageView: UIImageView!
 
+    var profileImage: UIImage!
     var errorLabel: UILabel?
     
-    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var nextButton: JYProgressButton!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     
     var photoTakingHelper: PhotoTakingHelper?
@@ -47,16 +48,19 @@ class JXTSignupViewController: UIViewController {
                 nextButton.setTitle("next", forState: .Normal)
 
                 profilePictureButton.hidden = true
+                previewImageView.hidden = true
 //                instructionLabel.hidden = true
 
                 setTextFieldsHidden(false)
             case 1: // profile picture
                 if checkValidSignup() {
-                    errorLabel?.hidden = true
+                    errorLabel?.text = ""
+                    
                     cancelButton.hidden = true
                     backButton.hidden = false
 
                     profilePictureButton.hidden = false
+                    previewImageView.hidden = false
 //                    instructionLabel.hidden = false
                     nextButton.setTitle("next", forState: .Normal)
 
@@ -67,12 +71,14 @@ class JXTSignupViewController: UIViewController {
                 }
             case 2: // license agreement
                 profilePictureButton.hidden = true
+                previewImageView.hidden = true
 //                instructionLabel.hidden = true
-                nextButton.setTitle("done", forState: .Normal)
+                nextButton.setTitle("agree", forState: .Normal)
                 eulaTextView.hidden = false
 
             case 3:
-                print("done")
+//                nextButton.startAnimating()
+                signupUser()
             default:
                 print("invalid state")
             }
@@ -91,7 +97,7 @@ class JXTSignupViewController: UIViewController {
         eulaTextView.text = try? String(contentsOfFile: path!, encoding: NSUTF8StringEncoding)
 
         let resized = ImageHelper.scaleImage(UIImage(named: "splash")!, width: 300.0)
-        previewImageView.image = resized
+        profileImage = resized
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -110,6 +116,7 @@ class JXTSignupViewController: UIViewController {
         profilePictureButton.clipsToBounds = true
         previewImageView.layer.cornerRadius = 8.0
         previewImageView.clipsToBounds = true
+        previewImageView.contentMode = .ScaleAspectFill
         
         keyboardNotificationHandler = KeyboardHelper(view: self.view)
         keyboardNotificationHandler?.keyboardWillShowHandler = { height in
@@ -173,21 +180,26 @@ class JXTSignupViewController: UIViewController {
     }
     
     func showError(errorType: ErrorType) {
-        
+
+        usernameTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+        confirmPasswordTextField.resignFirstResponder()
+
         if self.errorLabel == nil {
-            self.errorLabel = UILabel(frame: CGRectMake(20, self.nextButton.frame.origin.y - 70, self.view.frame.size.width - 40, 50))
-            self.errorLabel?.textColor = UIColor.whiteColor()
-            self.errorLabel?.textAlignment = .Center
-            
+            errorLabel = UILabel(frame: CGRectMake(20, self.nextButton.frame.origin.y - 70, self.view.frame.size.width - 40, 50))
+            errorLabel?.textColor = UIColor.whiteColor()
+            errorLabel?.textAlignment = .Center
+            errorLabel?.numberOfLines = 0
+
             self.view.addSubview(errorLabel!)
         }
         
         if errorType == .UsernameTooShort {
-            self.errorLabel?.text = "Your username should be 6+ characters."
+            self.errorLabel?.text = "Your username should be 6+\ncharacters."
         } else if errorType == .Missing {
             self.errorLabel?.text = "One or more text fields are empty."
         } else if errorType == .NotMatching {
-            self.errorLabel?.text = "The passwords you provided to not match."
+            self.errorLabel?.text = "The passwords you provided\ndo not match."
         }
     }
     
@@ -209,7 +221,8 @@ class JXTSignupViewController: UIViewController {
 
         self.photoTakingHelper = PhotoTakingHelper(viewController: self) { image in
             let resized = ImageHelper.scaleImage(image!, width: 300.0)
-            self.profilePictureButton.setImage(resized, forState: .Normal)
+            self.profileImage = resized
+            self.previewImageView.image = image
         }
     }
 
@@ -224,6 +237,40 @@ class JXTSignupViewController: UIViewController {
             usernameTextField.resignFirstResponder()
         }
 
+    }
+
+    func signupUser() {
+        if let username = usernameTextField.text, password = passwordTextField.text,
+            profileImage = profileImage {
+            ParseHelper.createUser(username, password: password, profilePicture: profileImage) { success, error in
+                if success {
+                    PFUser.logInWithUsernameInBackground(username, password: password) { user, error -> Void in
+                        if error != nil {
+                            print("\(error)")
+
+                            // Display alert
+
+                           self.displayErrorAlert("Unable to Login")
+                        } else if user != nil {
+
+                            let mainNav = self.storyboard?.instantiateViewControllerWithIdentifier("MainNav") as? UINavigationController
+                            self.presentViewController(mainNav!, animated: true, completion: nil)
+                        }
+//                        self.nextButton.stopAnimating()
+                    }
+                } else {
+                    self.displayErrorAlert("Unable to Create Account")
+                }
+//                self.nextButton.stopAnimating()
+            }
+        }
+    }
+
+    func displayErrorAlert(text: String) {
+        let alertController = UIAlertController(title: text, message: nil, preferredStyle: .Alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: .Default, handler: nil))
+
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
 
 }

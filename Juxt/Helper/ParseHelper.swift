@@ -20,7 +20,7 @@ class ParseHelper: NSObject {
     // User
     
     static let UserClassName = "_User"
-    static let UserName = "name"
+    static let UserName = "username"
     static let UserProfilePicture = "profilePicture"
     
     // Project
@@ -52,7 +52,7 @@ class ParseHelper: NSObject {
     static let LikeToJuxt = "toJuxt"
     
     // FB
-    
+
     static func loginWithFacebook(completion: PFUserResultBlock) {
         let permissionsArray = ["email", "public_profile"]
         
@@ -102,7 +102,28 @@ class ParseHelper: NSObject {
             }
         })
     }
-    
+
+    // User Static Functions
+
+    static func createUser(username: String, password: String, profilePicture: UIImage, callback: PFBooleanResultBlock) {
+        let user = PFUser()
+        user.username = username
+        user.password = password
+
+        let imageData = UIImageJPEGRepresentation(profilePicture, 0.8)
+        let profilePictureFile = PFFile(data: imageData!)
+        profilePictureFile.saveInBackgroundWithBlock() { success, error in
+            
+            if success {
+                user["profilePicture"] = profilePictureFile
+                user.signUpInBackgroundWithBlock(callback)
+            } else {
+                print(error)
+            }
+        }
+
+    }
+
     static func logoutUser(completion: LogoutCallback) {
         PFUser.logOutInBackgroundWithBlock({ (error) -> Void in
             if error == nil {

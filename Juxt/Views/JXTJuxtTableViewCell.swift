@@ -46,13 +46,14 @@ class JXTJuxtTableViewCell: PFTableViewCell {
 //                    })
 //                }
                 
-                juxt.user?.fetchIfNeededInBackgroundWithBlock({ (user, error) -> Void in
+                juxt.user?.fetchInBackgroundWithBlock({ (user, error) -> Void in
                     if error != nil {
                         print("\(error)")
                     } else {
                         dispatch_async(dispatch_get_main_queue()) {
                             self.usernameLabel.text = user?[ParseHelper.UserName] as? String
                             self.profilePictureImageView.file = user?[ParseHelper.UserProfilePicture] as? PFFile
+                            self.profilePictureImageView.loadInBackground()
 //                            self.profilePictureImageView.image = UIImage(named: "splash")
                         }
                     }

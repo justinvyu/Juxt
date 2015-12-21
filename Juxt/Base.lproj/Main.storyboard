@@ -1535,7 +1535,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ynZ-eb-Ceu">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ynZ-eb-Ceu" customClass="JYProgressButton" customModule="Juxt" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="548" width="600" height="52"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.3645085173" green="0.7609224738" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -1649,7 +1649,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hb9-ro-3Cf">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hb9-ro-3Cf">
                                 <rect key="frame" x="190" y="327" width="220" height="44"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.95566724159512817" green="0.9428970490065105" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1658,7 +1658,9 @@
                                     <constraint firstAttribute="width" constant="220" id="UGc-Cg-8iM"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="set a profile picture"/>
+                                <state key="normal" title="set a profile picture">
+                                    <color key="titleShadowColor" red="0.11977261910000001" green="0.32381674440000002" blue="0.58694319230000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="setProfilePicture" destination="aG3-sA-OXy" eventType="touchUpInside" id="b4m-kq-wT4"/>
                                 </connections>
