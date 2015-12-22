@@ -23,7 +23,7 @@ class JXTLoginViewController: UIViewController {
 
         self.usernameTextField.returnKeyType = .Next
         self.passwordTextField.returnKeyType = .Done
-        
+        passwordTextField.delegate = self
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -102,4 +102,12 @@ class JXTLoginViewController: UIViewController {
         
     }
     
+}
+
+extension JXTLoginViewController: UITextFieldDelegate {
+
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.doneAction(UIButton())
+        return false
+    }
 }

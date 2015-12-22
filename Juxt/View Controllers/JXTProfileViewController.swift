@@ -18,6 +18,8 @@ class JXTProfileViewController: UIViewController {
     // Properties
 
     @IBOutlet weak var tableView: UITableView!
+    var spinner: UIActivityIndicatorView!
+
     var token: dispatch_once_t = 0
     var hasInitialized = false
 
@@ -28,7 +30,11 @@ class JXTProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let file = ParseHelper.userProfilePicture(PFUser.currentUser()!)
+//        let file = ParseHelper.userProfilePicture(PFUser.currentUser()!)
+        spinner = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+        spinner.center = view.center
+        view.addSubview(spinner)
+        spinner.hidesWhenStopped = true
 
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -41,6 +47,7 @@ class JXTProfileViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
 
         if !hasInitialized {
+            spinner.startAnimating()
             self.loadData()
         }
         hasInitialized = true
@@ -49,12 +56,24 @@ class JXTProfileViewController: UIViewController {
     // Helper Funcs
     
     func loadData() {
+
         ParseHelper.juxtsFromUser(PFUser.currentUser()!) { (objects, error) -> Void in
             if error != nil {
                 print("\(error)")
             } else {
                 self.juxts = objects as! [Juxt]?
+                if self.juxts?.count == 0 {
+                    let message = UILabel(frame: CGRectMake(0, 0, 100, 80))
+                    message.text = "You currently have no posts. \nReturn to the home screen to\ncreate one."
+                    message.numberOfLines = 0
+                    message.center = self.tableView.center
+                    message.textAlignment = .Center
+                    message.textColor = UIColor.lightGrayColor()
+                    message.font = UIFont.systemFontOfSize(20)
+                    self.tableView.backgroundView = message
+                }
                 self.tableView.reloadData()
+                self.spinner.stopAnimating()
             }
         }
     }

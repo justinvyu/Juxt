@@ -89,7 +89,10 @@ class JXTSignupViewController: UIViewController {
         super.viewDidLoad()
         
         self.usernameTextField.returnKeyType = .Next
-        self.passwordTextField.returnKeyType = .Done
+        self.passwordTextField.returnKeyType = .Next
+        self.confirmPasswordTextField.returnKeyType = .Done
+        confirmPasswordTextField.delegate = self
+
         self.state = 0
 
         // Set TextView EULA text
@@ -266,4 +269,11 @@ class JXTSignupViewController: UIViewController {
         }
     }
 
+}
+
+extension JXTSignupViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.nextAction(UIButton())
+        return falseg
+    }
 }
