@@ -16,26 +16,20 @@ import ParseFacebookUtilsV4
 class JXTProfileViewController: UIViewController {
 
     // Properties
-    
-//    @IBOutlet weak var profilePicture: PFImageView!
-//    @IBOutlet weak var nameLabel: UILabel!
+
     @IBOutlet weak var tableView: UITableView!
-    
+    var token: dispatch_once_t = 0
+    var hasInitialized = false
+
     var juxts: [Juxt]?
     
     // VC Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        self.nameLabel.text = ParseHelper.userName(PFUser.currentUser()!)
-        
+
         let file = ParseHelper.userProfilePicture(PFUser.currentUser()!)
-//        self.profilePicture.file = file
-//        self.profilePicture.loadInBackground()
-        
-//        self.profilePicture.layer.cornerRadius = 5.0
-        
+
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
@@ -45,8 +39,11 @@ class JXTProfileViewController: UIViewController {
         self.navigationItem.titleView?.tintColor = UIColor(white: 0.97, alpha: 1.0)
         self.navigationController?.navigationBar.tintColor = UIColor(white: 0.97, alpha: 1.0)
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
-        
-        self.loadData()
+
+        if !hasInitialized {
+            self.loadData()
+        }
+        hasInitialized = true
     }
     
     // Helper Funcs
@@ -56,7 +53,6 @@ class JXTProfileViewController: UIViewController {
             if error != nil {
                 print("\(error)")
             } else {
-                print(self.juxts)
                 self.juxts = objects as! [Juxt]?
                 self.tableView.reloadData()
             }
@@ -149,7 +145,6 @@ extension JXTProfileViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(self.juxts?.count)
         return Int(self.juxts?.count ?? 0)
     }
     

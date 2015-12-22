@@ -89,12 +89,6 @@ class JXTGIFView: UIView {
         bottomBar?.backgroundColor = JXTConstants.defaultBlueColor().colorWithAlphaComponent(0.9)
         self.addSubview(bottomBar!)
         
-//        saveButton = UIButton(frame: CGRectMake(bottomBar!.frame.size.width / 2 - 44 - 30, 5, 44, 44))
-//        saveButton?.setImage(UIImage(named: "download"), forState: .Normal)
-//        saveButton?.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
-//        bottomBar?.addSubview(saveButton!)
-//        saveButton?.addTarget(self, action: "saveToCameraRoll:", forControlEvents: .TouchUpInside)
-        
         facebookButton = UIButton(frame: CGRectMake(bottomBar!.frame.size.width / 2 - 22, 5, 44, 44))
 //        facebookButton?.center = bottomBar!.center
         facebookButton?.setImage(UIImage(named: "facebook"), forState: .Normal)
@@ -102,8 +96,7 @@ class JXTGIFView: UIView {
         bottomBar?.addSubview(facebookButton!)
         //        facebookButton?.center.x = bottomBar!.center.x
         facebookButton?.addTarget(self, action: "shareFacebook:", forControlEvents: .TouchUpInside)
-        
-//        delaySlider = UISlider(frame: <#CGRect#>)
+
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -117,21 +110,24 @@ class JXTGIFView: UIView {
     }
     
     func generateGIF() {
-        
-        self.juxt?.downloadPhotos() { images in
-            if let gifHelper = self.gifHelper, juxt = self.juxt, images = images {
-                gifHelper.createGIFWithImages(images) { gifData in
-                    
-                    // Show GIF
-                    
-                    let animatedImage = FLAnimatedImage(animatedGIFData: gifData)
-                    self.gifPreview?.animatedImage = animatedImage
-                    
-//                    gifHelper.postGIFToImgur(gifData, title: juxt.title, description: juxt.desc)
-                    
+
+        dispatch_async(dispatch_queue_create("gifThread", DISPATCH_QUEUE_SERIAL)) {
+            self.juxt?.downloadPhotos() { images in
+                if let gifHelper = self.gifHelper, images = images {
+                    gifHelper.createGIFWithImages(images) { gifData in
+
+                        // Show GIF
+
+                        let animatedImage = FLAnimatedImage(animatedGIFData: gifData)
+                        self.gifPreview?.animatedImage = animatedImage
+
+                        //                    gifHelper.postGIFToImgur(gifData, title: juxt.title, description: juxt.desc)
+                        
+                    }
                 }
             }
         }
+
         
     }
     

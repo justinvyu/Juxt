@@ -35,7 +35,7 @@ class Photo: PFObject, PFSubclassing {
             
         }
         
-        imageFile.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+        imageFile!.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
             
             UIApplication.sharedApplication().endBackgroundTask(self.photoUploadTask!)
             

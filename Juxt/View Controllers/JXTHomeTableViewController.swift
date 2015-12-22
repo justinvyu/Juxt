@@ -95,7 +95,7 @@ class JXTHomeTableViewController: PFQueryTableViewController {
     }
     
     func presentProfileViewController(button: UIBarButtonItem) {
-        
+
         let profileViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileVC")
         self.presentViewController(profileViewController!, animated: true, completion: nil)
         
@@ -187,10 +187,13 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         super.viewDidLoad()
         
 //        ParseHelper.getUserInformationFromFB()
-        
-        self.followScrollView(self.tableView)
-        self.setUseSuperview(false)
-        
+
+        if let navigationController = self.navigationController as? ScrollingNavigationController {
+            navigationController.followScrollView(tableView, delay: 50.0)
+        }
+//        self.followScrollView(self.tableView)
+//        self.setUseSuperview(false)
+
         UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
         
         let profileButton = UIBarButtonItem(image: UIImage(named: "profile"), landscapeImagePhone: nil, style: .Plain, target: self, action: "presentProfileViewController:")
@@ -240,8 +243,9 @@ class JXTHomeTableViewController: PFQueryTableViewController {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
-        self.showNavBarAnimated(true)
-
+        if let navigationController = self.navigationController as? ScrollingNavigationController {
+            navigationController.stopFollowingScrollView()
+        }
     }
     
     override func viewWillLayoutSubviews() {

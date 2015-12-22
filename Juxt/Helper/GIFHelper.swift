@@ -23,6 +23,7 @@ class GIFHelper: NSObject {
 //            let path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last?.stringByAppendingPathComponent("animated.gif")
             let path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last?.stringByAppendingString("animated.gif")
 
+            print(path)
             let destination = CGImageDestinationCreateWithURL(NSURL(fileURLWithPath: path!) as CFURLRef, kUTTypeGIF, images.count, nil)!
             let frameProperties = [
                 kCGImagePropertyGIFDictionary as String : [

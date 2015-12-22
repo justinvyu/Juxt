@@ -30,24 +30,30 @@ class Juxt: PFObject, PFSubclassing {
     
     // MARK: Liking
     func fetchLikes() {
-        // 1
         if (likes.value != nil) {
             return
         }
         
-        // 2
-        ParseHelper.likesForPost(self, completionBlock: { (var likes: [AnyObject]?, error: NSError?) -> Void in
-            // 3
+//        ParseHelper.likesForPost(self, completionBlock: { (var likes: [AnyObject]?, error: NSError?) -> Void in
+//            likes = likes?.filter { like in like[ParseHelper.LikeFromUser] != nil }
+//            
+//            self.likes.value = likes?.map { like in
+//                let like = like as! PFObject
+//                let fromUser = like[ParseHelper.LikeFromUser] as! PFUser
+//                
+//                return fromUser
+//            }
+//        })
+
+        ParseHelper.likesForPost(self) { (var likes, error) in
             likes = likes?.filter { like in like[ParseHelper.LikeFromUser] != nil }
-            
-            // 4
+
             self.likes.value = likes?.map { like in
-                let like = like as! PFObject
                 let fromUser = like[ParseHelper.LikeFromUser] as! PFUser
-                
+
                 return fromUser
             }
-        })
+        }
     }
     
     func doesUserLikePost(user: PFUser) -> Bool {
@@ -113,7 +119,7 @@ class Juxt: PFObject, PFSubclassing {
         if let currentUser = PFUser.currentUser() {
          
             let acl = PFACL()
-            acl.setPublicReadAccess(true)
+            acl.publicReadAccess = true
             acl.setWriteAccess(true, forUser: currentUser)
             self.ACL = acl
             self.user = currentUser
@@ -127,17 +133,19 @@ class Juxt: PFObject, PFSubclassing {
         if let photos = self.photos {
             
             self.images = []
-            dispatch_async(dispatch_queue_create("photoDownload", DISPATCH_QUEUE_SERIAL)) {
-                for photo in photos {
-                    
-                    let imageData = photo.imageFile?.getData()
-                    self.images?.append(UIImage(data: imageData!)!)
-                    
+            for photo in photos {
+                let imageData: NSData?
+                do {
+                    imageData = try photo.imageFile?.getData()
+                } catch _ {
+                    continue
                 }
+                self.images?.append(UIImage(data: imageData!)!)
                 
-                completion(self.images)
             }
             
+            completion(self.images)
+
         }
         
     }

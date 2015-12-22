@@ -8,14 +8,17 @@
 
 import UIKit
 
-public class KeyboardNotificationHandler {
+@objc(KeyboardNotificationHandler)
+public class KeyboardNotificationHandler: NSObject {
   
   public typealias KeyboardHandlerCallback = (CGFloat) -> ()
   
   public var keyboardWillBeHiddenHandler: KeyboardHandlerCallback?
   public var keyboardWillBeShownHandler:  KeyboardHandlerCallback?
   
-  public required init() {
+  public required override init() {
+    super.init()
+    
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "keyboardWillBeShown:",
       name: "UIKeyboardWillShowNotification",

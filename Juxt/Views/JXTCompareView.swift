@@ -175,21 +175,7 @@ class JXTCompareView: UIView {
         bottomBar?.addSubview(facebookButton!)
 //        facebookButton?.center.x = bottomBar!.center.x
         facebookButton?.addTarget(self, action: "compareFacebook:", forControlEvents: .TouchUpInside)
-        
-//        sideBySideButton = UIButton(frame: CGRectMake(0, 0, 44, 44))
-//        sideBySideButton?.setImage(UIImage(named: "compare"), forState: .Normal)
-//        sideBySideButton?.imageEdgeInsets = UIEdgeInsetsMake(4, 4, 4, 4)
-//        self.addSubview(sideBySideButton!)
-//        sideBySideButton?.center = leftCompareView!.center
-//        sideBySideButton?.frame.origin.y = leftCompareView!.frame.origin.y - 80
-//        
-//        gifButton = UIButton(frame: CGRectMake(0, 0, 44, 44))
-//        gifButton?.setImage(UIImage(named: "gif"), forState: .Normal)
-//        gifButton?.imageEdgeInsets = UIEdgeInsetsMake(4, 4, 4, 4)
-//        self.addSubview(gifButton!)
-//        gifButton?.center = rightCompareView!.center
-//        gifButton?.frame.origin.y = rightCompareView!.frame.origin.y - 80
-        
+
         self.bringSubviewToFront(compareLabel!)
         self.bringSubviewToFront(cancelButton!)
         self.bringSubviewToFront(saveButton!)

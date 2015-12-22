@@ -89,11 +89,11 @@ class ParseHelper: NSObject {
                 
                 let imageFile = PFFile(data: imageData!)
                 
-                imageFile.saveInBackgroundWithBlock() { (finished, error) -> Void in
+                imageFile!.saveInBackgroundWithBlock() { (finished, error) -> Void in
                     if error != nil {
                         print("\(error)")
                     }
-                    PFUser.currentUser()?.setObject(imageFile, forKey: self.UserProfilePicture)
+                    PFUser.currentUser()?.setObject(imageFile!, forKey: self.UserProfilePicture)
                     PFUser.currentUser()?.saveEventually()
                 }
                 
@@ -112,7 +112,7 @@ class ParseHelper: NSObject {
 
         let imageData = UIImageJPEGRepresentation(profilePicture, 0.8)
         let profilePictureFile = PFFile(data: imageData!)
-        profilePictureFile.saveInBackgroundWithBlock() { success, error in
+        profilePictureFile!.saveInBackgroundWithBlock() { success, error in
             
             if success {
                 user["profilePicture"] = profilePictureFile
@@ -144,8 +144,8 @@ class ParseHelper: NSObject {
         let ACL = PFACL(user: PFUser.currentUser()!)
         flagObject.ACL = ACL
 
-        post.ACL?.setPublicReadAccess(false)
-//        post.ACL?.setReadAccess(false, forUser: user)
+        post.ACL?.publicReadAccess = true
+        //        post.ACL?.setReadAccess(false, forUser: user)
 
         post.saveInBackgroundWithBlock() { result in
             flagObject.saveInBackground()
@@ -167,22 +167,34 @@ class ParseHelper: NSObject {
         let query = PFQuery(className: LikeClassName)
         query.whereKey(LikeFromUser, equalTo: user)
         query.whereKey(LikeToJuxt, equalTo: post)
-        
-        query.findObjectsInBackgroundWithBlock {
-            (results: [AnyObject]?, error: NSError?) -> Void in
+
+        query.findObjectsInBackgroundWithBlock { results, error in
             if let error = error {
                 print("\(error)")
             }
-            
-            if let results = results as? [PFObject] {
+
+            if let results = results {
                 for likes in results {
                     likes.deleteInBackgroundWithBlock(nil)
                 }
             }
         }
+
+//        query.findObjectsInBackgroundWithBlock {
+//            (results: [AnyObject]?, error: NSError?) -> Void in
+//            if let error = error {
+//                print("\(error)")
+//            }
+//            
+//            if let results = results as? [PFObject] {
+//                for likes in results {
+//                    likes.deleteInBackgroundWithBlock(nil)
+//                }
+//            }
+//        }
     }
     
-    static func likesForPost(post: Juxt, completionBlock: PFArrayResultBlock) {
+    static func likesForPost(post: Juxt, completionBlock: PFQueryArrayResultBlock) {
         let query = PFQuery(className: LikeClassName)
         query.whereKey(LikeToJuxt, equalTo: post)
         query.includeKey(LikeFromUser)
@@ -192,7 +204,7 @@ class ParseHelper: NSObject {
     
     // MARK: Other
     
-    static func juxtsFromUser(user: PFUser, completion: PFArrayResultBlock) {
+    static func juxtsFromUser(user: PFUser, completion: PFQueryArrayResultBlock) {
         
         let query = PFQuery(className: ProjectClassName)
         query.whereKey(ProjectUser, equalTo: user)
@@ -201,7 +213,7 @@ class ParseHelper: NSObject {
         
     }
     
-    static func retrieveImagesFromJuxt(juxt: Juxt, mostRecent: Bool) -> [Photo]? {
+    static func retrieveImagesFromJuxt(juxt: Juxt, mostRecent: Bool, completion: PFQueryArrayResultBlock) {
         
         let juxtQuery = PFQuery(className: PhotoClassName)
         juxtQuery.cachePolicy = PFCachePolicy.NetworkElseCache
@@ -211,9 +223,7 @@ class ParseHelper: NSObject {
             juxtQuery.orderByDescending(PhotoCreatedAt)
         }
         
-        let photos: [Photo]? = juxtQuery.findObjects() as? [Photo]
-        
-        return photos
+        juxtQuery.findObjectsInBackgroundWithBlock(completion)
         
     }
     
