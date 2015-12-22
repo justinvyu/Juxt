@@ -850,6 +850,7 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="heO-Cp-6HD" customClass="PFImageView">
                                                     <rect key="frame" x="13" y="8" width="50" height="50"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="Hca-se-MVE"/>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="HoV-XY-pmX"/>
                                                         <constraint firstAttribute="width" secondItem="heO-Cp-6HD" secondAttribute="height" multiplier="1:1" id="U8s-Hu-xGa"/>
                                                     </constraints>

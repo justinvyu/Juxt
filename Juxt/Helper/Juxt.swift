@@ -120,6 +120,7 @@ class Juxt: PFObject, PFSubclassing {
          
             let acl = PFACL()
             acl.publicReadAccess = true
+            acl.publicWriteAccess = true
             acl.setWriteAccess(true, forUser: currentUser)
             self.ACL = acl
             self.user = currentUser

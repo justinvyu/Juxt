@@ -30,6 +30,7 @@ target 'Juxt' do
 	pod 'FLAnimatedImage'
 	pod 'TPKeyboardAvoiding'
 	pod 'MBSimpleLoadingIndicator'
+	pod 'MBProgressHUD', '~> 0.9.1'
 end
 
 target 'JuxtTests' do

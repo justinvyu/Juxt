@@ -82,26 +82,8 @@ class JXTAddJuxtViewController: UIViewController {
         // Upload juxt
         let juxt = Juxt()
         juxt.title = self.titleTextView.text
-//        juxt.desc = self.descriptionTextView.text
         juxt.date = NSDate()
-//        sender.enabled = false
-//        juxt.uploadJuxt { (finished, error) -> Void in
-//            if error != nil {
-//                println("error: \(error?.localizedDescription)")
-//            }
-//            self.titleTextField.resignFirstResponder()
-//            self.descriptionTextView.resignFirstResponder()
-//            self.uploadActivityIndicator.stopAnimating()
-
-//        if let presentingVC = self.presentingViewController as? JXTHomeTableViewController {
-//            if let navController = presentingVC.navigationController {
         self.photoTakingHelper = PhotoTakingHelper(viewController: self, juxt: juxt, cameraOnly: true, returnHome: true/*, cancelButtonHidden: true, addPhotoCancelButton: true*/)
-//            }
-//        }
-    
-//            sender.enabled = true
-//            //self.dismissViewControllerAnimated(true, completion: nil)
-//        }
     }
 
     @IBAction func dismissButtonTapped(sender: UIBarButtonItem) {

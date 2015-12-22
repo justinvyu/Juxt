@@ -13,6 +13,7 @@ import FBSDKCoreKit
 import FBSDKShareKit
 import MPCoachMarks
 import SCLAlertView
+import MBProgressHUD
 
 protocol JXTJuxtViewControllerDelegate {
     
@@ -37,6 +38,7 @@ class JXTJuxtViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var compareView: JXTCompareView?
     var GIFView: JXTGIFView?
+    var hud: MBProgressHUD?
     
     @IBOutlet weak var compareButton: UIButton!
     var photoTakingHelper: PhotoTakingHelper?
@@ -428,10 +430,21 @@ extension JXTJuxtViewController: JXTPopupViewDelegate {
     
     func saveToCameraRoll(compareView: JXTCompareView, firstImage: UIImage, secondImage: UIImage) {
         let mergeImage = ImageHelper.combineImage(image: firstImage, withImage: secondImage)
-        
-        UIImageWriteToSavedPhotosAlbum(mergeImage, nil, nil, nil);
+
+        MBProgressHUD.showHUDAddedTo(compareView, animated: true)
+//        hud = MBProgressHUD(forView: compareView)
+//        hud?.show(false)
+
+//        UIImageWriteToSavedPhotosAlbum(mergeImage, nil, nil, nil);
+        UIImageWriteToSavedPhotosAlbum(mergeImage, self, "image:didFinishSavingWithError:contextInfo:", nil)
     }
-    
+
+    // Selector to disable HUD
+    func image(image: UIImage, didFinishSavingWithError error: NSErrorPointer, contextInfo: UnsafePointer<()>) {
+//        hud?.hide(true)
+        MBProgressHUD.hideHUDForView(compareView, animated: true)
+    }
+
     func shareButtonWasPressed(button: UIButton) {
     }
     

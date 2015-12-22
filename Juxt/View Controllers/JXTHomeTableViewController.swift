@@ -162,7 +162,8 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         alertController.addAction(cancelAction)
         
         let destroyAction = UIAlertAction(title: "Flag", style: .Destructive) { (action) in
-            post.flagPost(PFUser.currentUser()!)
+            ParseHelper.flagPost(PFUser.currentUser()!, post: post)
+
             self.loadObjects()
             self.tableView.reloadData()
             

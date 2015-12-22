@@ -124,14 +124,6 @@ class JXTCompareView: UIView {
         
         self.bringSubviewToFront(separatorView!)
         
-//        compareButton = UIButton(frame: CGRectMake(0, 0, 60, 60))
-//        compareButton?.center = self.center
-//        compareButton?.setImage(UIImage(named: "check"), forState: .Normal)
-//        compareButton?.addTarget(self, action: "compare:", forControlEvents: .TouchUpInside)
-//        compareButton?.backgroundColor = JXTConstants.defaultBlueColor()
-//        compareButton?.layer.cornerRadius = 30
-//        self.addSubview(compareButton!)
-        
         topDarkenView = UIView(frame: CGRectMake(0, 0, frame.size.width, topView!.frame.origin.y))
         topDarkenView?.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
         self.addSubview(topDarkenView!)

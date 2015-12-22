@@ -53,6 +53,7 @@ class JXTSideBySideView: UIView {
             let left = photos[0]
             
             leftPhoto?.file = left.imageFile
+            rightPhoto?.removeFromSuperview()
         }
         
         leftPhoto?.loadInBackground()
