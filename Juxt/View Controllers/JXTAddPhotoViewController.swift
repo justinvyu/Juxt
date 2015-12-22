@@ -205,7 +205,9 @@ class JXTAddPhotoViewController: UIViewController {
             }
             
             button.enabled = false
-            
+            navigationItem.leftBarButtonItem?.enabled = false
+            scrollView?.scrollEnabled = false
+
             button.startAnimating()
 
             juxt.uploadJuxt({ (finished, error) -> Void in
@@ -224,11 +226,17 @@ class JXTAddPhotoViewController: UIViewController {
                     
                     photo.uploadPhoto { (finished, error) -> Void in
                         
-                        self.doneButton?.stopAnimating()
-                        //                    self.uploadActivityIndicator?.stopAnimating()
-                        //self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
-                        MixpanelHelper.trackAddPhoto()
-                        self.dismissToJuxt()
+                        if finished {
+                            self.doneButton?.stopAnimating()
+                            //                    self.uploadActivityIndicator?.stopAnimating()
+                            //self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+                            MixpanelHelper.trackAddPhoto()
+                            self.dismissToJuxt()
+                        } else {
+                            self.navigationItem.leftBarButtonItem?.enabled = true
+                            self.scrollView?.scrollEnabled = true
+                            JXTConstants.displayErrorAlert(self, text: "Unable to Upload Photo", desc: "Try again later.")
+                        }
                     }
 
                 }

@@ -30,22 +30,6 @@ class JXTJuxtTableViewCell: PFTableViewCell {
                     dateLabel.text = JXTConstants.stringFromDate(date)
                 }
                 
-//                // Profile Picture WTF WAS I THINKING
-//                if let user = juxt.user {
-//                    let userQuery = PFQuery(className: "_User")
-//                    userQuery.getObjectInBackgroundWithId(user.objectId!, block: { (user, error) -> Void in
-//                        if error != nil {
-//                            println("\(error)")
-//                        } else {
-//                            self.usernameLabel.text = user?.objectForKey("name") as? String
-//                            
-//                            let file = user?.objectForKey("profilePicture") as? PFFile
-//                            self.profilePictureImageView.file = file
-//                            self.profilePictureImageView.loadInBackground()
-//                        }
-//                    })
-//                }
-                
                 juxt.user?.fetchInBackgroundWithBlock({ (user, error) -> Void in
                     if error != nil {
                         print("\(error)")
@@ -54,6 +38,7 @@ class JXTJuxtTableViewCell: PFTableViewCell {
                             self.usernameLabel.text = user?[ParseHelper.UserName] as? String
                             self.profilePictureImageView.file = user?[ParseHelper.UserProfilePicture] as? PFFile
                             self.profilePictureImageView.loadInBackground()
+                            self.profilePictureImageView.contentMode = .ScaleAspectFill
 //                            self.profilePictureImageView.image = UIImage(named: "splash")
                         }
                     }

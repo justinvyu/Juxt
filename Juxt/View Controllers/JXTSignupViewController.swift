@@ -250,7 +250,7 @@ class JXTSignupViewController: UIViewController {
 
                             // Display alert
 
-                            self.displayErrorAlert("Unable to Login", desc: "")
+                            JXTConstants.displayErrorAlert(self, text: "Unable to Login", desc: "")
                         } else if user != nil {
 
                             let mainNav = self.storyboard?.instantiateViewControllerWithIdentifier("MainNav") as? UINavigationController
@@ -259,18 +259,11 @@ class JXTSignupViewController: UIViewController {
 //                        self.nextButton.stopAnimating()
                     }
                 } else {
-                    self.displayErrorAlert("Unable to Create Account", desc: "Try a different username")
+                    JXTConstants.displayErrorAlert(self, text: "Unable to Create Account", desc: "Try a different username")
                 }
 //                self.nextButton.stopAnimating()
             }
         }
-    }
-
-    func displayErrorAlert(text: String, desc: String) {
-        let alertController = UIAlertController(title: text, message: desc, preferredStyle: .Alert)
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: .Default, handler: nil))
-
-        self.presentViewController(alertController, animated: true, completion: nil)
     }
 
 }

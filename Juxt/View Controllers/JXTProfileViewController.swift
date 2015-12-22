@@ -155,6 +155,7 @@ extension JXTProfileViewController: UITableViewDataSource {
         cell.juxt = self.juxts?[indexPath.row]
         cell.juxt?.fetchLikes()
         cell.profilePictureImageView.layer.cornerRadius = 5.0
+        cell.profilePictureImageView.contentMode = .ScaleAspectFill
         
         cell.juxt?.photosForJuxt() { (photos) -> Void in
             //                cell.galleryScrollView.photos = photos as [Photo]?

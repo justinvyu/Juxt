@@ -47,6 +47,11 @@ class JXTConstants: NSObject {
         return dateFormatter.stringFromDate(date)
     }
     
+    static func displayErrorAlert(vc: UIViewController, text: String, desc: String) {
+        let alertController = UIAlertController(title: text, message: desc, preferredStyle: .Alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: .Default, handler: nil))
 
+        vc.presentViewController(alertController, animated: true, completion: nil)
+    }
     
 }

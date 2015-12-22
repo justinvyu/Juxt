@@ -64,22 +64,6 @@ class JXTCameraViewController: UIViewController {
         
         self.setupCaptureUI()
         
-//        captureSession.sessionPreset = AVCaptureSessionPresetHigh
-//        
-//        let devices = AVCaptureDevice.devices()
-//        
-//        for device in devices {
-//            if device.hasMediaType(AVMediaTypeVideo) {
-//                if device.position == .Back {
-//                    captureDevice = device as? AVCaptureDevice
-//                    
-//                    if captureDevice != nil {
-//                        beginSession()
-//                    }
-//                }
-//            }
-//        }
-        
         self.camera?.start()
     }
     
@@ -242,21 +226,35 @@ class JXTCameraViewController: UIViewController {
                     let addPhotoController = JXTAddPhotoViewController()
                     addPhotoController.delegate = self
                     addPhotoController.juxt = self.juxt
-                    //                addPhotoController.addPhotoCancelButtonHidden = self.addPhotoCancelButtonHidden
-                    let navigationController = UINavigationController(rootViewController: addPhotoController)
-                    addPhotoController.image = image
                     addPhotoController.returnHome = self.returnHome
+
+                    let navigationController = UINavigationController(rootViewController: addPhotoController)
+                    if camera.position == CameraPositionFront {
+                        let flipCorrection = UIImage(CGImage: image.CGImage!, scale: 1.0, orientation: UIImageOrientation.LeftMirrored)
+                        addPhotoController.image = flipCorrection
+                    } else {
+                        addPhotoController.image = image
+                    }
                     self.presentViewController(navigationController, animated: true, completion: nil)
                 } else {
                     // Dismiss & send to delegate
                     if let image = image {
-                        self.delegate?.capturedImage(image)
+                        var profilePicture: UIImage
+                        // Correct "flipped" image (don't know why this happens)
+                        if camera.position == CameraPositionFront {
+                            profilePicture = UIImage(CGImage: image.CGImage!, scale: 1.0, orientation: .LeftMirrored)
+                        } else {
+                            profilePicture = image
+                        }
+
+                        self.delegate?.capturedImage(profilePicture)
+
                     }
                     self.dismissViewControllerAnimated(true, completion: nil)
                 }
                 
             }
-        }, exactSeenImage: false)
+        }, exactSeenImage: true)
         
     }
     

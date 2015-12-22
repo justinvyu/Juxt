@@ -40,7 +40,6 @@ class JXTJuxtViewController: UIViewController {
     
     @IBOutlet weak var compareButton: UIButton!
     var photoTakingHelper: PhotoTakingHelper?
-//    var gifHelper: GIFHelper?
     var backgroundActivityView: UIActivityIndicatorView?
     var content: FBSDKSharePhotoContent?
     
@@ -480,6 +479,7 @@ extension JXTJuxtViewController: UITableViewDataSource {
             
             cell.juxt = self.juxt
             cell.profilePicture.layer.cornerRadius = 5.0
+            cell.profilePicture.contentMode = .ScaleAspectFill
             cell.juxtViewController = self
 
             if juxt!.doesUserLikePost(PFUser.currentUser()!) {

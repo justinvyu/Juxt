@@ -766,7 +766,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mQt-Zu-1Yh">
-                                                            <rect key="frame" x="212" y="2" width="44" height="44"/>
+                                                            <rect key="frame" x="226" y="2" width="44" height="44"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="44" id="hBc-yc-d8H"/>
                                                             </constraints>
@@ -792,7 +792,7 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vci-rq-WMd">
-                                                            <rect key="frame" x="348" y="2" width="44" height="44"/>
+                                                            <rect key="frame" x="336" y="2" width="44" height="44"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="44" id="iQI-fB-3hO"/>
                                                             </constraints>
@@ -807,7 +807,7 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.92000000000000004" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstItem="vci-rq-WMd" firstAttribute="leading" secondItem="i78-O0-Om8" secondAttribute="trailing" constant="26" id="3vb-WI-f1i"/>
+                                                        <constraint firstItem="vci-rq-WMd" firstAttribute="leading" secondItem="i78-O0-Om8" secondAttribute="trailing" constant="14" id="3vb-WI-f1i"/>
                                                         <constraint firstItem="OKd-U2-KIs" firstAttribute="top" secondItem="iaF-Jp-yZr" secondAttribute="top" constant="14" id="Bzd-DZ-B43"/>
                                                         <constraint firstItem="vci-rq-WMd" firstAttribute="top" secondItem="i78-O0-Om8" secondAttribute="top" id="Ngb-LU-8kz"/>
                                                         <constraint firstItem="i78-O0-Om8" firstAttribute="centerY" secondItem="OKd-U2-KIs" secondAttribute="centerY" id="QMZ-g1-o66"/>
@@ -815,7 +815,7 @@
                                                         <constraint firstItem="i78-O0-Om8" firstAttribute="centerY" secondItem="iaF-Jp-yZr" secondAttribute="centerY" id="ctp-jC-6a7"/>
                                                         <constraint firstItem="vci-rq-WMd" firstAttribute="bottom" secondItem="i78-O0-Om8" secondAttribute="bottom" id="fMc-Ok-pnx"/>
                                                         <constraint firstItem="mQt-Zu-1Yh" firstAttribute="top" secondItem="i78-O0-Om8" secondAttribute="top" id="g3j-IG-ozy"/>
-                                                        <constraint firstItem="i78-O0-Om8" firstAttribute="leading" secondItem="mQt-Zu-1Yh" secondAttribute="trailing" constant="22" id="ifM-Rc-6dd"/>
+                                                        <constraint firstItem="i78-O0-Om8" firstAttribute="leading" secondItem="mQt-Zu-1Yh" secondAttribute="trailing" constant="8" id="ifM-Rc-6dd"/>
                                                         <constraint firstItem="mQt-Zu-1Yh" firstAttribute="bottom" secondItem="i78-O0-Om8" secondAttribute="bottom" id="lSt-Rq-ttx"/>
                                                         <constraint firstItem="i78-O0-Om8" firstAttribute="centerX" secondItem="OKd-U2-KIs" secondAttribute="centerX" id="npy-kz-ZCD"/>
                                                         <constraint firstItem="i78-O0-Om8" firstAttribute="top" secondItem="iaF-Jp-yZr" secondAttribute="top" constant="2" id="pcN-0l-UDH"/>

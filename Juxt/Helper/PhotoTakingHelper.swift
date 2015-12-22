@@ -58,11 +58,13 @@ class PhotoTakingHelper : NSObject {
             let cameraViewController = JXTCameraViewController()
             cameraViewController.juxt = self.juxt
             cameraViewController.returnHome = self.returnHome
+            cameraViewController.isProfilePicture = isProfilePicture
             //        cameraViewController.cancelButtonHidden = self.cancelButtonHidden
             viewController.presentViewController(cameraViewController, animated: true, completion: nil)
         } else {
             let cameraViewController = JXTCameraViewController()
             cameraViewController.delegate = self
+            cameraViewController.isProfilePicture = isProfilePicture
             viewController.presentViewController(cameraViewController, animated: true, completion: nil)
         }
     }

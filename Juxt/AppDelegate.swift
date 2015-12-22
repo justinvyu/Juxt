@@ -56,7 +56,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // [Optional] Track statistics around application opens.
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
-        
+        PFUser.enableRevocableSessionInBackground()
+
         // Setup Parse Facebook Utils
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
         

@@ -144,7 +144,7 @@ class ParseHelper: NSObject {
         let ACL = PFACL(user: PFUser.currentUser()!)
         flagObject.ACL = ACL
 
-        post.ACL?.publicReadAccess = true
+        post.ACL?.publicReadAccess = false
         //        post.ACL?.setReadAccess(false, forUser: user)
 
         post.saveInBackgroundWithBlock() { result in
