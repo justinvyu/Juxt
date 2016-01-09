@@ -140,6 +140,14 @@ class JXTHomeTableViewController: PFQueryTableViewController {
                     photo.deleteInBackgroundWithBlock(nil)
                 }
             }
+
+            ParseHelper.likesForPost(post, completionBlock: { likes, error in
+                if let likes = likes {
+                    for like in likes {
+                        like.deleteInBackground()
+                    }
+                }
+            })
             
             post.deleteInBackgroundWithBlock({ (success, error) -> Void in
                 if success {
@@ -192,9 +200,6 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         if let navigationController = self.navigationController as? ScrollingNavigationController {
             navigationController.followScrollView(tableView, delay: 50.0)
         }
-//        self.followScrollView(self.tableView)
-//        self.setUseSuperview(false)
-
         UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
         
         let profileButton = UIBarButtonItem(image: UIImage(named: "profile"), landscapeImagePhone: nil, style: .Plain, target: self, action: "presentProfileViewController:")
@@ -220,17 +225,13 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         
 //        self.setupCoachmarks()
-        
+
+        self.loadObjects()
+
     }
-    
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-        self.loadObjects()
-        
-//        self.tableView.reloadData()
-//        self.loadObjects()
-//        self.tableView.insertSections(NSIndexSet(index: 0), withRowAnimation: .Fade)
         
     }
     
@@ -247,16 +248,6 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         if let navigationController = self.navigationController as? ScrollingNavigationController {
             navigationController.stopFollowingScrollView()
         }
-    }
-    
-    override func viewWillLayoutSubviews() {
-        
-//        if tableView.respondsToSelector(Selector("setSeparatorInset:")) {
-//            tableView.separatorInset = UIEdgeInsetsZero
-//        }
-//        if tableView.respondsToSelector(Selector("setLayoutMargins:")) {
-//            tableView.layoutMargins = UIEdgeInsetsZero
-//        }
     }
 
     // MARK: - Table view data source
@@ -348,7 +339,7 @@ extension JXTHomeTableViewController: JXTJuxtViewControllerDelegate {
         self.loadObjects()
         self.tableView.reloadData()
         
-        let alertController = UIAlertController(title: "Flag Post", message: "The post has been hidden and will be reviewed by a moderator within 24 hours. Contact the developer at justin.v.yu@gmail.com if you have any questions.", preferredStyle: .Alert)
+        let alertController = UIAlertController(title: "Flagged Post", message: "The post has been hidden and will be reviewed by a moderator within 24 hours. Contact the developer at justin.v.yu@gmail.com if you have any questions.", preferredStyle: .Alert)
         alertController.addAction(UIAlertAction(title: "Dismiss", style: .Default, handler: nil))
         
         self.presentViewController(alertController, animated: true, completion: nil)

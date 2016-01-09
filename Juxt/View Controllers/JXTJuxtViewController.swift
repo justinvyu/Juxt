@@ -58,14 +58,39 @@ class JXTJuxtViewController: UIViewController {
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
         alertController.addAction(cancelAction)
-        
-        let retakeAction = UIAlertAction(title: "Retake", style: .Default) { (action) in
-            
-            print("retake")
-            
+
+        if juxt?.user?.objectId == PFUser.currentUser()?.objectId {
+            let deleteAction = UIAlertAction(title: "Delete", style: .Destructive) { action in
+//                let confirm = UIAlertController(title: nil, message: "Do you want to delete this photo?", preferredStyle: .Alert)
+//
+//                let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+//                confirm.addAction(cancelAction)
+//
+//                let destroyAction = UIAlertAction(title: "Delete", style: .Destructive) { action in
+//                    photo.deleteInBackground()
+//                }
+//                confirm.addAction(destroyAction)
+                photo.deleteInBackgroundWithBlock() { success, error in
+                    self.juxt?.reloadPhotos() { (photos) in
+                        self.photos = photos as [Photo]?
+                        self.presentingTableViewCell?.juxt?.photos = self.photos
+                        self.tableView.reloadData()
+                    }
+                }
+            }
+            alertController.addAction(deleteAction)
+        } else {
+            let flagAction = UIAlertAction(title: "Flag", style: .Default) { action in
+                photo.flag()
+                let alertController = UIAlertController(title: "Flagged Post", message: "The photo has been flagged and will be reviewed by a moderator within 24 hours. Contact the developer at justin.v.yu@gmail.com if you have any questions.", preferredStyle: .Alert)
+                alertController.addAction(UIAlertAction(title: "Dismiss", style: .Default, handler: nil))
+
+                self.presentViewController(alertController, animated: true, completion: nil)
+            }
+            alertController.addAction(flagAction)
         }
-        alertController.addAction(retakeAction)
-        
+
+
         self.presentViewController(alertController, animated: true, completion: nil)
         
     }
@@ -316,7 +341,7 @@ class JXTJuxtViewController: UIViewController {
         self.navigationItem.hidesBackButton = false
         self.navigationController?.navigationBar.tintColor = UIColor(white: 0.97, alpha: 1.0)
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
-        self.navigationItem.title = "juxt"
+        self.navigationItem.title = "Juxt"
         self.navigationItem.titleView?.tintColor = UIColor(white: 0.97, alpha: 1.0)
         
 //        let shareButton = UIBarButtonItem(image: UIImage(named: "share"), landscapeImagePhone: nil, style: .Plain, target: self, action: "shareButtonTapped:")
@@ -506,6 +531,11 @@ extension JXTJuxtViewController: UITableViewDataSource {
             if let photos = photos {
                 let photo = photos[photos.count - 1 - indexPath.row]
                 cell.photo = photo
+                if photos.count == 1 { // don't delete with only 1 photo
+                    cell.moreButton.hidden = true
+                } else {
+                    cell.moreButton.hidden = false
+                }
             }
             
             cell.juxtViewController = self

@@ -23,6 +23,15 @@ class Photo: PFObject, PFSubclassing {
     @NSManaged var date: NSDate?
     
     // MARK: Parse Functions
+
+    func flag() {
+        let flag = PFObject(className: ParseHelper.FlaggedContentClassName)
+        flag[ParseHelper.FlaggedContentFromUser] = PFUser.currentUser()
+        flag[ParseHelper.FlaggedContentToJuxt] = fromJuxt
+        flag[ParseHelper.FlaggedContentToPhoto] = self
+
+        flag.saveInBackground()
+    }
     
     func uploadPhoto(completion: PFBooleanResultBlock) {
         

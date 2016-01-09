@@ -11,7 +11,7 @@ import ConvenienceKit
 import Parse
 
 enum ErrorType {
-    case UsernameTooShort
+    case PasswordTooShort
     case Missing
     case NotMatching
     case UsernameAlreadyExists
@@ -168,14 +168,14 @@ class JXTSignupViewController: UIViewController {
             self.showError(.Missing)
             return false
         }
-        
-        if usernameTextField.text!.characters.count < 6 {
-            self.showError(.UsernameTooShort)
-            return false
-        }
-        
+
         if passwordTextField.text != confirmPasswordTextField.text {
             self.showError(.NotMatching)
+            return false
+        }
+
+        if passwordTextField.text!.characters.count < 6 {
+            self.showError(.PasswordTooShort)
             return false
         }
         
@@ -197,8 +197,8 @@ class JXTSignupViewController: UIViewController {
             self.view.addSubview(errorLabel!)
         }
         
-        if errorType == .UsernameTooShort {
-            self.errorLabel?.text = "Your username should be 6+\ncharacters."
+        if errorType == .PasswordTooShort {
+            self.errorLabel?.text = "Your password should be 6+\ncharacters."
         } else if errorType == .Missing {
             self.errorLabel?.text = "One or more text fields are empty."
         } else if errorType == .NotMatching {
@@ -274,6 +274,6 @@ class JXTSignupViewController: UIViewController {
 extension JXTSignupViewController: UITextFieldDelegate {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         self.nextAction(UIButton())
-        return falseg
+        return false
     }
 }

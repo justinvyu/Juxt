@@ -44,6 +44,7 @@ class ParseHelper: NSObject {
     static let FlaggedContentClassName = "FlaggedContent"
     static let FlaggedContentFromUser = "fromUser"
     static let FlaggedContentToJuxt = "toJuxt"
+    static let FlaggedContentToPhoto = "toPhoto"
     
     // Like
     

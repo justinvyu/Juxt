@@ -23,6 +23,9 @@ class JXTProfileViewController: UIViewController {
     var token: dispatch_once_t = 0
     var hasInitialized = false
 
+//    @IBOutlet weak var nameLabel: UILabel!
+//    @IBOutlet weak var postsLabel: UILabel!
+//    @IBOutlet weak var profilePicture: PFImageView!
     var juxts: [Juxt]?
     
     // VC Lifecycle
@@ -45,6 +48,13 @@ class JXTProfileViewController: UIViewController {
         self.navigationItem.titleView?.tintColor = UIColor(white: 0.97, alpha: 1.0)
         self.navigationController?.navigationBar.tintColor = UIColor(white: 0.97, alpha: 1.0)
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+
+//        nameLabel.text = PFUser.currentUser()!["username"] as? String
+//        profilePicture.file = PFUser.currentUser()!["profilePicture"] as? PFFile
+//        profilePicture.layer.cornerRadius = 8.0
+//        profilePicture.clipsToBounds = true
+//        profilePicture.loadInBackground()
+//        self.postsLabel.text = "\(self.juxts?.count)"
 
         if !hasInitialized {
             spinner.startAnimating()
@@ -81,28 +91,7 @@ class JXTProfileViewController: UIViewController {
     @IBAction func cancelButtonTapped(sender: UIBarButtonItem) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
-    @IBAction func settingsButtonTapped(sender: UIBarButtonItem) {
-        
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-        let logoutAction = UIAlertAction(title: "Log Out", style: .Default) { (action) in
-            ParseHelper.logoutUser() {
-                self.presentingViewController?.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
-                self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
-            }
-        }
-//        let tutorialAction = UIAlertAction(title: "Reset Tutorial", style: .Default) { (action) in
-//            CoachmarksHelper.resetCoachmarksHaveBeenViewed()
-//        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-        alertController.addAction(cancelAction)
-        
-//        alertController.addAction(tutorialAction)
-        alertController.addAction(logoutAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
-    }
-    
+
     func showActionSheetForPost(post: Juxt) {
         if (post.user == PFUser.currentUser()) {
             showDeleteActionSheetForPost(post)
@@ -193,7 +182,7 @@ extension JXTProfileViewController: JXTJuxtViewControllerDelegate {
     }
     
     func flaggedJuxt() {
-        print("This is not possible...")
+//        print("This is not possible...")
     }
     
 }

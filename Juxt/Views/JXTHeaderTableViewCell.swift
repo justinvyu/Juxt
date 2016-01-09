@@ -60,7 +60,6 @@ class JXTHeaderTableViewCell: UITableViewCell {
     
     @IBAction func likeButtonPressed(sender: UIButton) {
 
-        print(self.juxt?.likes.value)
         self.juxt?.toggleLikePost(PFUser.currentUser()!)
         
     }

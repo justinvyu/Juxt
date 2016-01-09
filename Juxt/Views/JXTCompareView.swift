@@ -65,7 +65,7 @@ class JXTCompareView: UIView {
         compareLabel = UILabel(frame: CGRectMake(0, 0, 200, 40))
         compareLabel?.center = self.center
         compareLabel?.frame.origin.y = 20
-        compareLabel?.text = "create a side by side"
+        compareLabel?.text = "create a comparison"
         compareLabel?.font = UIFont.systemFontOfSize(18.0)
         compareLabel?.textAlignment = .Center
         compareLabel?.textColor = UIColor.whiteColor()

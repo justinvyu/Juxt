@@ -183,7 +183,6 @@ class JXTAddPhotoViewController: UIViewController {
 
         MixpanelHelper.trackCancelAtDescribeImage()
         self.titleTextField?.resignFirstResponder()
-        print(returnHome)
         if returnHome == true {
             self.presentingViewController?.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
         } else {
