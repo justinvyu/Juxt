@@ -224,16 +224,13 @@ class JXTHomeTableViewController: PFQueryTableViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         
 //        self.setupCoachmarks()
-
-        self.loadObjects()
-
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
+        self.loadObjects()
     }
-    
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
