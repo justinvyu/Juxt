@@ -9,6 +9,7 @@
 import UIKit
 import ConvenienceKit
 import Parse
+import MBProgressHUD
 
 enum ErrorType {
     case PasswordTooShort
@@ -62,22 +63,13 @@ class JXTSignupViewController: UIViewController {
                     profilePictureButton.hidden = false
                     previewImageView.hidden = false
 //                    instructionLabel.hidden = false
-                    nextButton.setTitle("next", forState: .Normal)
+                    nextButton.setTitle("done", forState: .Normal)
 
-                    eulaTextView.hidden = true
                     setTextFieldsHidden(true)
                 } else {
                     self.state = 0
                 }
-            case 2: // license agreement
-                profilePictureButton.hidden = true
-                previewImageView.hidden = true
-//                instructionLabel.hidden = true
-                nextButton.setTitle("agree", forState: .Normal)
-                eulaTextView.hidden = false
-
-            case 3:
-//                nextButton.startAnimating()
+            case 2:
                 signupUser()
             default:
                 print("invalid state")
@@ -94,10 +86,6 @@ class JXTSignupViewController: UIViewController {
         confirmPasswordTextField.delegate = self
 
         self.state = 0
-
-        // Set TextView EULA text
-        let path = NSBundle.mainBundle().pathForResource("eula", ofType: "txt")
-        eulaTextView.text = try? String(contentsOfFile: path!, encoding: NSUTF8StringEncoding)
 
         let resized = ImageHelper.scaleImage(UIImage(named: "splash")!, width: 300.0)
         profileImage = resized
@@ -243,6 +231,7 @@ class JXTSignupViewController: UIViewController {
     }
 
     func signupUser() {
+        MBProgressHUD.showHUDAddedTo(view, animated: true)
         if let username = usernameTextField.text, password = passwordTextField.text,
             profileImage = profileImage {
             ParseHelper.createUser(username, password: password, profilePicture: profileImage) { success, error in
@@ -252,17 +241,17 @@ class JXTSignupViewController: UIViewController {
                             print("\(error)")
 
                             // Display alert
-
+                            MBProgressHUD.hideHUDForView(self.view, animated: true)
                             JXTConstants.displayErrorAlert(self, text: "Unable to Login", desc: "")
                         } else if user != nil {
 
                             let mainNav = self.storyboard?.instantiateViewControllerWithIdentifier("MainNav") as? UINavigationController
                             self.presentViewController(mainNav!, animated: true, completion: nil)
                         }
-//                        self.nextButton.stopAnimating()
                     }
                 } else {
                     JXTConstants.displayErrorAlert(self, text: "Unable to Create Account", desc: "Try a different username")
+                    MBProgressHUD.hideHUDForView(self.view, animated: true)
                 }
 //                self.nextButton.stopAnimating()
             }
