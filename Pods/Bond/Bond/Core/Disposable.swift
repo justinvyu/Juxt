@@ -31,6 +31,8 @@ public final class SimpleDisposable: DisposableType {
   public func dispose() {
     isDisposed = true
   }
+  
+  public init() {}
 }
 
 /// A disposable that executes the given block upon disposing.
@@ -40,10 +42,10 @@ public final class BlockDisposable: DisposableType {
     return handler == nil
   }
   
-  private var handler: (() -> ())?
+  private var handler: (() -> Void)?
   private let lock = NSRecursiveLock(name: "com.swift-bond.Bond.BlockDisposable")
   
-  public init(_ handler: () -> ()) {
+  public init(_ handler: () -> Void) {
     self.handler = handler
   }
   

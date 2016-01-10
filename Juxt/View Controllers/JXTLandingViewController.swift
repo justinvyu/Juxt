@@ -8,9 +8,7 @@
 
 import UIKit
 import FBSDKCoreKit
-import FBSDKLoginKit
 import Parse
-import ParseFacebookUtilsV4
 import ConvenienceKit
 
 class JXTLandingViewController: UIViewController {

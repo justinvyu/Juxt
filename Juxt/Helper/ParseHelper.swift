@@ -8,7 +8,6 @@
 
 import UIKit
 import Parse
-import ParseFacebookUtilsV4
 import FBSDKCoreKit
 
 typealias LogoutCallback = () -> Void // returning a block
@@ -54,14 +53,14 @@ class ParseHelper: NSObject {
     
     // FB
 
-    static func loginWithFacebook(completion: PFUserResultBlock) {
-        let permissionsArray = ["email", "public_profile"]
-        
-//        PFFacebookUtils.logInWithPermissions(permissionsArray, block: completion)
-        PFFacebookUtils.logInInBackgroundWithReadPermissions(permissionsArray, block: completion)
+//    static func loginWithFacebook(completion: PFUserResultBlock) {
+//        let permissionsArray = ["email", "public_profile"]
+//        
+////        PFFacebookUtils.logInWithPermissions(permissionsArray, block: completion)
+//        PFFacebookUtils.logInInBackgroundWithReadPermissions(permissionsArray, block: completion)
+//
+//    }
 
-    }
-    
     static func userName(user: PFUser) -> String? {
 //        return PFUser.currentUser()?[UserName] as? String
         return user[UserName] as? String
@@ -73,36 +72,36 @@ class ParseHelper: NSObject {
         return user[UserProfilePicture] as? PFFile
     }
     
-    static func getUserInformationFromFB() {
-        let nameRequest = FBSDKGraphRequest(graphPath: "/me?fields=name,picture", parameters: nil, HTTPMethod: "GET")
-        nameRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
-            if error != nil {
-                // Process error
-                print("Error: \(error)")
-            } else {
-                PFUser.currentUser()?.setValue(result.valueForKey(self.UserName) as? String, forKey: self.UserName)
-                
-                let picture = result.valueForKey("picture") as? NSDictionary
-                let data = picture?.valueForKey("data") as? NSDictionary
-                let url = data?.valueForKey("url") as! String
-                
-                let imageData = NSData(contentsOfURL: NSURL(string: url)!)
-                
-                let imageFile = PFFile(data: imageData!)
-                
-                imageFile!.saveInBackgroundWithBlock() { (finished, error) -> Void in
-                    if error != nil {
-                        print("\(error)")
-                    }
-                    PFUser.currentUser()?.setObject(imageFile!, forKey: self.UserProfilePicture)
-                    PFUser.currentUser()?.saveEventually()
-                }
-                
-                //PFUser.currentUser()["name"] = result.valueForKey("name") as? NSString
-                //                    PFUser. = result.valueForKey("email") as? String
-            }
-        })
-    }
+//    static func getUserInformationFromFB() {
+//        let nameRequest = FBSDKGraphRequest(graphPath: "/me?fields=name,picture", parameters: nil, HTTPMethod: "GET")
+//        nameRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
+//            if error != nil {
+//                // Process error
+//                print("Error: \(error)")
+//            } else {
+//                PFUser.currentUser()?.setValue(result.valueForKey(self.UserName) as? String, forKey: self.UserName)
+//                
+//                let picture = result.valueForKey("picture") as? NSDictionary
+//                let data = picture?.valueForKey("data") as? NSDictionary
+//                let url = data?.valueForKey("url") as! String
+//                
+//                let imageData = NSData(contentsOfURL: NSURL(string: url)!)
+//                
+//                let imageFile = PFFile(data: imageData!)
+//                
+//                imageFile!.saveInBackgroundWithBlock() { (finished, error) -> Void in
+//                    if error != nil {
+//                        print("\(error)")
+//                    }
+//                    PFUser.currentUser()?.setObject(imageFile!, forKey: self.UserProfilePicture)
+//                    PFUser.currentUser()?.saveEventually()
+//                }
+//                
+//                //PFUser.currentUser()["name"] = result.valueForKey("name") as? NSString
+//                //                    PFUser. = result.valueForKey("email") as? String
+//            }
+//        })
+//    }
 
     // User Static Functions
 

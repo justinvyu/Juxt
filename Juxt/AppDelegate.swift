@@ -10,9 +10,7 @@ import UIKit
 import FBSDKCoreKit
 import Parse
 import Bolts
-import ParseFacebookUtilsV4
 import FBSDKCoreKit
-import FBSDKLoginKit
 import Mixpanel
     
 //import Realm
@@ -58,9 +56,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
         PFUser.enableRevocableSessionInBackground()
 
-        // Setup Parse Facebook Utils
-        PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
-        
 //        FBSession.openActiveSessionWithPublishPermissions(["publish_actions"], defaultAudience: FBSessionDefaultAudience.Friends, allowLoginUI: true, completionHandler: nil)
         
 //        if PFUser.currentUser() != nil {

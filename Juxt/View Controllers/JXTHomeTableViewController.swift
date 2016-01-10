@@ -14,7 +14,6 @@ import ConvenienceKit
 
 import FBSDKCoreKit
 import FBSDKShareKit
-import ParseFacebookUtilsV4
 
 import MPCoachMarks
 

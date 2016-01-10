@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 import LLSimpleCamera
-import TGCameraViewController
+//import TGCameraViewController
 import Parse
 import ParseUI
 import MPCoachMarks

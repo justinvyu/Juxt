@@ -10,8 +10,6 @@ import UIKit
 import Parse
 import ParseUI
 import FBSDKCoreKit
-import FBSDKLoginKit
-import ParseFacebookUtilsV4
 
 class JXTProfileViewController: UIViewController {
 
